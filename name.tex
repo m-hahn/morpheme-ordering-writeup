@@ -1,0 +1,303 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage{showlabels}
+\usepackage{fullpage}
+\usepackage{pslatex}
+%\usepackage{latexsym}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{bm}
+%\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{url}
+%\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{natbib}
+\usepackage{amssymb}
+\usepackage{lingmacros}
+
+
+%\usepackage{latexsym}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{bm}
+\usepackage{graphicx}
+%\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{url}
+%\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{multirow}
+
+
+\usepackage{linguex}
+\usepackage{lingmacros}
+
+
+\usepackage{hyperref}
+
+\usepackage{tikz-dependency}
+\usepackage{changepage}
+\usepackage{longtable}
+
+
+\newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\Prob}[0]{\mathbb{P}}
+\newcommand{\Ff}[0]{\mathcal{F}}
+
+\usepackage{multirow}
+
+\newcommand{\soft}[1]{}
+\newcommand{\nopreview}[1]{}
+\newcommand\comment[1]{{\color{red}#1}}
+\newcommand\mhahn[1]{{\color{red}(#1)}}
+\newcommand\note[1]{{\color{red}(#1)}}
+\newcommand\jd[1]{{\color{red}(#1)}}
+\newcommand\rljf[1]{{\color{red}(#1)}}
+\newcommand{\key}[1]{\textbf{#1}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\E}{\mathop{\mathbb{E}}}
+
+
+
+\usepackage{amsthm}
+
+\newcommand{\thetad}[0]{{\theta_d}}
+\newcommand{\thetal}[0]{{\theta_{LM}}}
+
+\newcounter{theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{thm}[theorem]{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{defin}[theorem]{Definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+
+
+%\usepackage{linguex}
+%\newcommand{\key}[1]{\textbf{#1}}
+
+
+
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thesection}{S\arabic{section}}
+
+\newcommand{\utterance}{\mathcal{U}}
+\newcommand{\tree}{\mathcal{T}}
+
+
+
+\usepackage{siunitx}
+
+
+
+\usepackage{longtable}
+
+
+
+\frenchspacing
+%\def\baselinestretch{0.975}
+
+%\emnlpfinalcopy
+%\def\emnlppaperid{496}
+
+\title{Morpheme Ordering across Languages reflects optimization for memory efficiency / information locality}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    The order of morphemes in a word shows well-documented tendencies across languages.
+    These have been explained in terms of notions such as semantic scope and relevance in prior work.
+    We propose an interpretation of these universals in terms of memory efficiency in incremental processing.
+    The recently proposed Memory--Surprisal Tradeoff (CITE) provides an architecture-independent formalization of memory efficiency in incremental processing, and it has been proposed that optimization for efficiency of this tradeoff partly accounts for word order patterns in two languages.
+    Efficient memory--surprisal tradeoffs are achieved by orders that display information locality, whereby elements that have high mutual information are closer together.
+    In this work, we examine corpus data from six languages to show that optimizing for tradeoff efficiency mostly predicts morpheme order in verb and noun morphology.
+    
+\end{abstract}
+
+
+
+\section{Introduction}
+
+\section{Morpheme Ordering and Ordering Universals}
+
+Verbs
+
+Nouns
+
+
+\section{Background: Memory--Surprisal Tradeoff and Information Locality}
+
+CITE introduced the Memory--Surprisal Tradoff as an architecture-independent formalization of memory efficiency in incremental processing.
+
+
+We formalize these three observations into postulates intended to provide a simplified picture of what is known about online language comprehension. Consider a listener comprehending a sequence of words $w_1, \dots, w_t, \dots, w_n$, at an arbitrary time $t$.
+\begin{enumerate}
+    \item Comprehension Postulate 1 (Incremental memory). At time $t$, the listener has an incremental \key{memory state} $m_t$ that contains her stored information about previous words. The memory state is characterized by a \key{memory encoding function} $M$ such that $m_t = M(w_{t-1}, m_{t-1})$.
+    \item Comprehension Postulate 2 (Incremental prediction). The listener has a subjective probability distribution at time $t$ over the next word $w_t$ as a function of the memory state $m_t$. This probability distribution is denoted $P(w_t|m_t)$.
+    \item Comprehension Postulate 3 (Linking hypothesis). Processing a word $w_t$ incurs difficulty proportional to the \key{surprisal} of $w_t$ given the memory state $m_t$:
+    \begin{equation}
+    \label{eq:lossy-surp}
+    \text{Difficulty} \propto -\log P(w_t | m_t).
+\end{equation}
+\end{enumerate}
+
+\begin{definition}
+The \key{memory--surprisal tradeoff curve} for a process $W$ is the lowest achievable average surprisal $S_M$ for each value of $H_M$. Let $R$ denote an upper bound on the memory entropy $H_M$; then the memory--surprisal tradeoff curve as a function of $R$ is given by
+\begin{equation}
+    \label{eq:ms-formal}
+    D(R) \equiv \min_{M : H_M \le R} S_M,
+\end{equation}
+where the minimization is over all memory encoding functions $M$ whose entropy $H_M$ is less than or equal to $R$.
+\end{definition}
+
+Our argument will make use of a quantity called \key{mutual information}. Mutual information is the most general measure of statistical association between two random variables. The mutual information between two random variables $X$ and $Y$, conditional on a third random variable $Z$, is defined as:
+\begin{align}
+\label{eq:mi}
+    \operatorname{I}[X:Y|Z] &\equiv \sum_{x,y,z} P(x,y,z) \log \frac{P(x,y|z)}{P(x|z)P(y|z)}. % \text{ bits} \\
+    %\nonumber
+    %&= \operatorname{H}[X|Z] - \operatorname{H}[X|Y,Z] \\
+    %\nonumber
+    %&= \operatorname{H}[Y|Z] - \operatorname{H}[Y|X,Z].
+\end{align}
+Mutual information is always non-negative. It is zero when $X$ and $Y$ are conditionally independent given $Z$, and positive whenever $X$ gives any information that makes the value of $Y$ more predictable, or vice versa. 
+
+We will study the mutual information structure of natural language sentences, and in particular the mutual information between words at certain distances in linear order. We define the notation $I_t$ to mean the mutual information between words at distance $t$ from each other, conditional on the intervening words:
+\begin{equation*}
+    I_t \equiv \operatorname{I}[w_t : w_0 | w_1, \dots, w_{t-1}].
+\end{equation*}
+This quantity, visualized in Figure~\ref{fig:theorem}(a), measures how much predictive information is provided about the current word by the word $t$ steps in the past.
+It is a statistical property of the language, and can be estimated from large-scale text data.
+
+Equipped with this notion of mutual information at a distance, we can now state our theorem:
+\begin{thm}\label{prop:suboptimal}(Information locality bound)
+For any positive integer $T$, let $M$ be a memory encoding function such that
+\begin{equation}
+\label{eq:memory-bound}
+H_M \le \sum_{t=1}^T t I_t.    
+\end{equation}
+Then we have a lower bound on the average surprisal under the memory encoding function $M$:
+\begin{equation}
+\label{eq:surprisal-bound}
+S_M \ge S_\infty + \sum_{t=T+1}^\infty I_t.
+\end{equation}
+\end{thm}
+\section{Methods}
+
+\subsection{Data}
+
+We considered:
+
+- UD data for Japanese, Korean, Turkish, Hungarian, Finnish
+
+- CHILDES data for Sesotho
+
+The Sesotho and Japanese data was previously used by CITE; we reanalyze these data here in a way consistent across all six languages.
+
+
+\paragraph{Verbs}
+
+\paragraph{Nouns}
+
+\paragraph{Japanese Verbs}
+
+\begin{enumerate}
+    \item Root
+    \item Derivation
+    \item Valence
+    \item Voice/Mood
+    \item Politeness
+    \item Negation
+    \item Tense/Finiteness
+\end{enumerate}
+
+\paragraph{Korean Verbs}
+
+\begin{enumerate}
+    \item Root (Valency is not separated in the dataset)
+    \item Derivation
+    \item Honorific -s-
+    \item Tense/Aspect: -ess- for past, -essess- for remote past, -keyss- for future
+    \item Formality -p-
+    \item `Syntactic Mood':
+    Indicative -n-
+    
+    Retrospective -deon-
+    
+    Retrospective -ti-
+    
+    Jussive -s-
+    
+    Future -(eu)l (attributive verbs)
+    
+    \item `Pragmatic Mood'
+    
+    Declarative -ta-, -la-, -ey
+    
+    Interrogative -kka, -ya, -ka
+    
+    Propositive -ta, -ca, -ey
+    
+    Imperative -o, -ela/-ara, -key
+    
+    Intimate -e/-a
+    
+    Causual -ji
+    
+    \item Polite -yo
+    \item Conjunctive endings
+    
+    -go
+    
+    -seo
+    
+    
+\end{enumerate}
+
+\ex.\ag. oa di rek a \\
+\textsc{subject.agreement} \textsc{object.agreement} buy \textsc{indicative} \\
+`(he) is buying (it)'  \citep{demuth1992acquisition} \label{ex:oadireka}
+\bg. o pheh el a \\
+\textsc{subject.agreement} cook \textsc{applicative} \textsc{indicative} \\
+`(he) cooks (food) for (him)'  \citep{demuth1992acquisition}
+\label{ex:ophehela}
+
+
+
+\section{Results}
+
+\section{Relation to previous accounts}
+
+\subsection{Semantic Scope; Syntactic Structure; Historical Development}
+
+We do not see our account as competing with these. Rather, it specifies tendencies for ordering that could be satisfied at different levels of description.
+
+\subsection{Relevance; Proximity; Iconicity}
+
+The relation  between mutual information and relevance
+
+\subsection{Beyond Agglutionation}
+
+\section{Discussion}
+
+
+
+
+\section{Conclusion}
+
+
+\end{document}
+
+
+
+
+
+
