@@ -31,8 +31,8 @@
 \usepackage{multirow}
 
 
-\usepackage{linguex}
-\usepackage{lingmacros}
+%\usepackage{linguex}
+%\usepackage{lingmacros}
 
 
 \usepackage{hyperref}
@@ -203,54 +203,110 @@ We considered:
 The Sesotho and Japanese data was previously used by CITE; we reanalyze these data here in a way consistent across all six languages.
 
 
-\paragraph{Verbs}
+\subsection{Nouns}
 
-\paragraph{Nouns}
+\paragraph{Turkish Nouns}
+
+\paragraph{Hungarian Nouns}
+
+\oaragraph{Finnish Nouns}
+
+
+\subsection{Verbs}
+
+\paragraph{Hungarian Verbs}
+
+\paragraph{Turkish Verbs}
+
+\paragraph{Finnish Verbs}
+
+\paragraph{Sesotho Verbs}
+
+\begin{enumerate}
+    \item Subject agreement: This morpheme encodes agreement with the subject, for person, number, and noun class (the latter only in the 3rd person) \cite[\textsection 395]{doke1967textbook}.
+            The annotation provided by \cite{demuth1992acquisition} distinguishes between ordinary subject agreement prefixes and agreement prefixes used in relative clauses; we distinguish these morpheme types here.
+
+    \item Negation \citep[\textsection 429]{doke1967textbook}
+
+    \item Tense/aspect marker   \citep[\textsection 400--424]{doke1967textbook}
+
+    \item Object agreement or reflexive marker \citep[\textsection 459]{doke1967textbook}.
+    Similar to subject agreement, object agreement denotes person, number, and noun class features of the object.
+\end{enumerate}
+We identified the following suffixes:
+
+% something we might cite at some point (pointers from Beth Levine), about templatic morpheme order in Bantu
+% Hyman2003 in literature.bib
+% Jeffrey Good, Strong Linearity: Three Case Studies Towards a Theory of Morphosyntactic Templatic Constructions (Diss, 2003)
+
+\begin{enumerate}
+\item Semantic derivation: reversive (e.g., `do' $\rightarrow$ `undo') \citep[\textsection 345]{doke1967textbook}
+\item Valence: Common valence-altering suffixes include causative, neuter/stative, applicative, and reciprocal \citep[\textsection 307--338]{doke1967textbook}. See SI for details on their meanings.
+    \item Voice: passive \citep[\textsection 300]{doke1967textbook}
+    \item Tense \citep[\textsection 369]{doke1967textbook}
+    \item Mood \citep[\textsection 386--445]{doke1967textbook}
+    \item Interrogative and relative markers, appended to verbs in certain interrogative and relative clauses \citep[\textsection 160, 271, 320, 714, 793]{doke1967textbook}.
+    %-\textit{ng}.
+    %The interrogative marker -\textit{ng} is an enclitized form of the interrogative `what'.
+    %The relative marker -\textit{ng} is suffixed to verbs in relative clauses.
+\end{enumerate}
+
+
 
 \paragraph{Japanese Verbs}
 
+
 \begin{enumerate}
-    \item Root
-    \item Derivation
-    \item Valence
-    \item Voice/Mood
-    \item Politeness
-    \item Negation
-    \item Tense/Finiteness
+\item \textit{suru}: obligatory suffix after Sino-Japanese words when they are used as verbs
+\item Valence: causative (-\textit{ase}-) (\citet[142]{hasegawa2014japanese}, \citet[Chapter 13]{kaiser2013japanese})
+\item Voice and Mood: passive (-\textit{are}-, -\textit{rare}-) (\citet[152]{hasegawa2014japanese}, \citet[Chapter 12]{kaiser2013japanese}) and potential (-\textit{e}-, -\textit{are}-, -\textit{rare}-) \citep[398]{kaiser2013japanese}
+\item Politeness (-\textit{mas}-) \citep[190]{kaiser2013japanese}.
+\item Mood: desiderative (-\textit{ta}-) \citep[238]{kaiser2013japanese}
+\item Negation (-\textit{n}-)
+\item Tense, Aspect, Mood, and Finiteness: past (-\textit{ta}), future/hortative (-\textit{yoo}) \citep[229]{kaiser2013japanese}, nonfiniteness (-\textit{te}) \citep[186]{kaiser2013japanese}
+%\item Nonfiniteness: the suffix -\textit{te} derives a nonfinite form .
 \end{enumerate}
+
+
 
 \paragraph{Korean Verbs}
 
+We then considered morphemes occurring at least 50 times:
+
 \begin{enumerate}
     \item Root (Valency is not separated in the dataset)
-    \item Derivation
+    \item Derivation:
+    
+    ha (from hada), i (predicative)
+    
     \item Honorific -s-
     \item Tense/Aspect: -ess- for past, -essess- for remote past, -keyss- for future
     \item Formality -p-
-    \item `Syntactic Mood':
-    Indicative -n-
+    \item Mood 1:
     
-    Retrospective -deon-
+    -n-
     
-    Retrospective -ti-
+    -ni-
     
-    Jussive -s-
+    -ri-
     
-    Future -(eu)l (attributive verbs)
+    -deon-
     
     \item `Pragmatic Mood'
     
-    Declarative -ta-, -la-, -ey
+    -da-
     
-    Interrogative -kka, -ya, -ka
+    -ra-
     
-    Propositive -ta, -ca, -ey
+    Interrogative -ka, -lkka, -nya
     
-    Imperative -o, -ela/-ara, -key
+    -ji
     
-    Intimate -e/-a
+    -eo (informal)
     
-    Causual -ji
+    -sida
+    
+    ....
     
     \item Polite -yo
     \item Conjunctive endings
@@ -259,18 +315,27 @@ The Sesotho and Japanese data was previously used by CITE; we reanalyze these da
     
     -seo
     
+    and others
     
 \end{enumerate}
 
-\ex.\ag. oa di rek a \\
-\textsc{subject.agreement} \textsc{object.agreement} buy \textsc{indicative} \\
-`(he) is buying (it)'  \citep{demuth1992acquisition} \label{ex:oadireka}
-\bg. o pheh el a \\
-\textsc{subject.agreement} cook \textsc{applicative} \textsc{indicative} \\
-`(he) cooks (food) for (him)'  \citep{demuth1992acquisition}
-\label{ex:ophehela}
+%\ex.\ag. oa di rek a \\
+%\textsc{subject.agreement} \textsc{object.agreement} buy \textsc{indicative} \\
+%`(he) is buying (it)'  \citep{demuth1992acquisition} \label{ex:oadireka}
+%\bg. o pheh el a \\
+%\textsc{subject.agreement} cook \textsc{applicative} \textsc{indicative} \\
+%`(he) cooks (food) for (him)'  \citep{demuth1992acquisition}
+%\label{ex:ophehela}
 
+\begin{tabular}{llllllllll}
+1    & 3 & 4     & 5   & 6  & 7 & 8 \\
+bara & sy & eots & eum & ni & da  & &  `wished'\\
+wish & Honorific & Past & Formal & Indicative & Indicative \\
+bara& & gess &  & &  eo & yo  &  `will wish' \\
+wish  & &  Assertive && & informal & polite \\
+\end{tabular}
 
+%https://en.wiktionary.org/wiki/%EB%B0%94%EB%9D%BC%EB%8B%A4
 
 \section{Results}
 
@@ -279,6 +344,8 @@ The Sesotho and Japanese data was previously used by CITE; we reanalyze these da
 \subsection{Semantic Scope; Syntactic Structure; Historical Development}
 
 We do not see our account as competing with these. Rather, it specifies tendencies for ordering that could be satisfied at different levels of description.
+
+CARP template in Bantu
 
 \subsection{Relevance; Proximity; Iconicity}
 
