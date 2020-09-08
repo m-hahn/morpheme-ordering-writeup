@@ -116,10 +116,11 @@
 \begin{abstract}
     The order of morphemes in a word shows well-documented tendencies across languages.
     These have been explained in terms of notions such as semantic scope and relevance in prior work.
-    We propose an interpretation of these universals in terms of memory efficiency in incremental processing.
-    The recently proposed Memory--Surprisal Tradeoff (CITE) provides an architecture-independent formalization of memory efficiency in incremental processing, and it has been proposed that optimization for efficiency of this tradeoff partly accounts for word order patterns in two languages.
-    Efficient memory--surprisal tradeoffs are achieved by orders that display information locality, whereby elements that have high mutual information are closer together.
-    In this work, we examine corpus data from six languages to show that optimizing for tradeoff efficiency mostly predicts morpheme order in verb and noun morphology.
+A recent theory (CITE) argues that word and morpheme order in language optimizes a tradeoff between Memory and surprisal, and provided initial evidence from twoi languages that morpheme order can partly be explained by optimization for this treadeoff.
+    %Efficient memory--surprisal tradeoffs are achieved by orders that display information locality, whereby elements that have high mutual information are closer together.
+    In this work, we test this idea more extensively using data from four additional agglutinative languages with significant amounts of morphology.
+    
+%    In this work, we examine corpus data from four languages to show that optimizing for tradeoff efficiency mostly predicts morpheme order in verb and noun morphology.
     
 \end{abstract}
 
@@ -132,18 +133,26 @@ Across languages, words are composed of morphemes, commonly defined as the small
 The order of morphemes within a word follows well-documented cross-linguistic tendencies, for instance, plural markers tend to be closer to noun stems than case markers.
 Different explanations have been proposed for these universal tendencies.
 
-One family of explanations holds that those affixes are closest to the root that are most relevant to the root.
+One family of explanations holds that those affixes are closest to the root that are most relevant to the root (CITE).
+Other explanations suggest that morphemes are ordered based on (TODO CITE).
 
-Scope, Syntax, History
+A recent theory proposes that ordering universals in language can be understood as arising from optimization of processing effort under memory limitations (CITE).
+Formally, they introduced the notion of a memory-surprisal tradeoff: Depending on how many memory resources a comprehender invests, they can achieve different levels of surprisal.
+(CITE) hypothesize that order of words and morphemes in language optimizes this tradeoff.
+Optimizing the memory-surprisal tradeoff amounts to putting elements together when they predict each other strongly, as measured by mutual information.
+In a case study, CITE apply this to morpheme ordering in Japanese and Sesotho, finding that optimization could partly reproduce morpheme ordering in these languages.
+They also suggested that mutual information formalizes Bybee's notion of relevance.
 
-Another family of explanations holds that morpheme ordering is to be explained diachronically, and that morpheme order reflects the order of independent words in earlier stages of a language.
 
-- Relevance, Proximity Principle, Iconicity
-
-
-In this work, we study a principle that unifies some of these ideas and is grounded in incremeanl processing and memory.
-
+In this work, we examine this theory on a broader basis by considering data from four additional languages (Korean, Turkish, Hungarian, Finnish).
 We focus on the case where words are composed of a stem and some number of affixes that are concatenated.
+
+
+
+
+%Scope, Syntax, History
+%Another family of explanations holds that morpheme ordering is to be explained diachronically, and that morpheme order reflects the order of independent words in earlier stages of a language.
+%- Relevance, Proximity Principle, Iconicity
 
 
 
@@ -403,6 +412,8 @@ wish  & &  Assertive && & informal & polite \\
 \section{Relation to previous accounts}
 
 \subsection{Semantic Scope; Syntactic Structure; Historical Development}
+
+TODO collect citations
 
 We do not see our account as competing with these. Rather, it specifies tendencies for ordering that could be satisfied at different levels of description.
 
