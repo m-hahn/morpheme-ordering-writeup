@@ -135,7 +135,6 @@ Morphemes can take different shapes.
 In many cases, words can be segmented into a sequence of morphemes, as in the English word runners (root run-, derivation -er-, plural -s).
 The order of morphemes within a word follows well-documented cross-linguistic tendencies, for instance, plural markers tend to be closer to noun stems than case markers \citep[112]{greenberg1963universals}.
 These tendencies have been explained in terms of the relative scope of different morphemes  \citep{givon1971historical,venneman1973explanation,baker1985the,rice2000morpheme} and the strength of their semantic association with the root \citep{bybee-morphology-1985}.
-A challenge of these accounts is that 
 %One family of explanations holds that those affixes are closest to the root that are most relevant to the root \citep{bybee-morphology-1985}.
 %Other explanations suggest that morphemes are ordered based on (TODO CITE).
 
@@ -144,13 +143,13 @@ Formally, they introduced the notion of a memory-surprisal tradeoff: Depending o
 (CITE) hypothesize that order of words and morphemes in language optimizes this tradeoff.
 Optimizing the memory-surprisal tradeoff amounts to putting elements together when they predict each other strongly, as measured by mutual information.
 In a case study, CITE apply this to morpheme ordering in Japanese and Sesotho, finding that optimization could partly reproduce morpheme ordering in these languages.
-They also suggested that mutual information formalizes Bybee's notion of relevance.
+They also suggested that mutual information formalizes previous notions of strength of semantic association, such as \cite{bybee-morphology-1985}'s notion of \textit{relevance}.
 
 
 In this work, we examine this theory on a broader basis by considering data from four additional languages.
 We focus on languages where words tend to have multiple morphemes and these are mostly realized separately. Such languages are referred to as agglutinative (Greenberg 1954).
 We obtained data from four languages (Korean, Turkish, Hungarian, Finnish).
-Whereas \citep{Hahn2020modeling} only considered verb inflection, we also consider noun inflection across three languages.
+Whereas \cite{Hahn2020modeling} only considered verb inflection, we also consider noun inflection across three languages.
 
 
 %Greenberg 1963:  "the expression of number almost always comes between the noun base and the expression of case" (Greenberg 1963:112)
@@ -162,17 +161,21 @@ Whereas \citep{Hahn2020modeling} only considered verb inflection, we also consid
 
 
 
-Bybee on explanation:
-- regarding the historical explanation (Givon 1971, Vennemann 1973):
-Morphology is not always fossilizes syntax (Bybee and Brewer 1980, Bybee 1985 p. 39--40)
+%Bybee on explanation:
+%- regarding the historical explanation (Givon 1971, Vennemann 1973):
+%Morphology is not always fossilizes syntax (Bybee and Brewer 1980, Bybee 1985 p. 39--40)
 
 
 \section{Morpheme Ordering and Ordering Universals}
 
+In this section, we introduce some general crosslinguistic tendencies in morpheme ordering, before discussing data from the six languages in Section XX.
+
+\paragraph{Nouns}
 Nouns commonly mark number and case.
 For nouns, \citep[112]{greenberg1963universals} Universal 39 states that number affixes are closer to the stem than case affixes, if they appear on the same side.
 In some languages, possession is also marked on the noun.
 
+\paragraph{Verbs}
 Verbs commonly mark a larger number of inflection categories.
 Based on data from several dozens of languages, \citep{bybee-morphology-1985} proposes the following ordering of verb affixes:
 \begin{quote}
@@ -190,9 +193,6 @@ verb stem & valence & voice & aspect & tense& mood & modality & subj. person & s
 While these are particularly common types of affixes, there are further types.
 Examples are polarity (negation), evidential (based on what evidence a speaker makes an assertion), and formality.
 
-Verbs
-
-Nouns
 
 We focus on inflection, except in those cases where derivational affixes are clearly marked in available data.
 Inflectional suffixes are generally outside of derivational affixes
@@ -251,11 +251,11 @@ S_M \ge S_\infty + \sum_{t=T+1}^\infty I_t.
 
 A key consequence of this theorem is that it implies information locality:
 Orderings optimize this tradeoff when elements with high mutual information are closer together.
-
-
-Information locality was previous derived by \citet{futrell2020lossy}
-
+A similar notion of information locality was previous derived by \citet{futrell2020lossy} for a specific family of memory representations $M$.
 Information locality has had success as a predictor of word order \citep{futrell2019information}, in particular for universals of the order inside noun phrases \citep{culbertson2020from,hahn-information-theoretic-2018,DBLP:conf/acl/FutrellDS20}.
+
+\citet{Hahn2020modeling} argue that information locality derives a range of locality principles proposed in the linguistic literature, including \cite{bybee-morphology-1985}'s idea that morphemes are closer together when they are more relevant to each other.
+\mhahn{say more about relevance}
 
 \section{Methods}
 
