@@ -73,8 +73,8 @@
 
 \usepackage{amsthm}
 
-\newcommand{\thetad}[0]{{\theta_d}}
-\newcommand{\thetal}[0]{{\theta_{LM}}}
+\newcommand{\thetad}[0]{{\theta-d}}
+\newcommand{\thetal}[0]{{\theta-{LM}}}
 
 \newcounter{theorem}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -208,20 +208,20 @@ Inflectional suffixes are generally outside of derivational affixes
 \citet{Hahn2020modeling} introduced the Memory--Surprisal Tradoff as a cognitive account of the order of words and morphemes in human language, based on a formalization of memory efficiency in incremental processing.
 
 The memory-surprisal tradeoff links information-theoretic models of memory limitations with surprisal theory.
-Surprisal theory \citep{hale2001probabilistic, levy2008expectation} states that the processing effort on a word $w_t$ in context $w_1 ... w_{t-1}$ is proportional to its surprisal
+Surprisal theory \citep{hale2001probabilistic, levy2008expectation} states that the processing effort on a word $w_t$ in context $w-1 ... w_{t-1}$ is proportional to its surprisal
      \begin{equation}   \label{eq:true-surp}
-    \text{Difficulty} \propto -\log P(w_t | w_1\dots w_{t-1}).
+    \text{Difficulty} \propto -\log P(w_t | w-1\dots w_{t-1}).
 \end{equation}
 Surprisal as estimated by corpus-based methods is a successful predictor of reading time on naturalistic text \citep{smith2013effect,goodkind-predictive-2018,frank2019interaction,aurnhammer2019evaluating,wilcox2020predictive}.
 This effect can be explained in terms of mechanisms such as preactivation and integration~\citep{kuperberg2016we}.
-However, due to limitations in human memory, human expectations in reality do not reflect the true context $w_1\dots w_{t-1}$, but some memory representation $m_t$:
+However, due to limitations in human memory, human expectations in reality do not reflect the true context $w-1\dots w_{t-1}$, but some memory representation $m_t$:
 \begin{equation}   \label{eq:lossy-surp}
     \text{Difficulty} \propto -\log P(w_t | m_t).
 \end{equation}
 \citet{Hahn2020modeling} note that there is a tradeoff between average surprisal and memory capacity:
 The more information a listener stores in $m_t$, the lower their surprisal will be on average.
 This is because higher precision of memory leads to more precise expectations, which will achiever lower surprisal on average.
-More formally, given a function $M$ encoding contexts $w_1\dots w_{t-1}$ into memory representations $m_t$, there is a tradeoff between, on the one hand, the average surprisal $S_M$, obtained by averaging $-\log P(w_t | m_t)$ across the words in a text, and the memory capacity $H_M$, formalized as the average number of bits required to encode $m_t$.
+More formally, given a function $M$ encoding contexts $w_1\dots w_{t-1}$ into memory representations $m_t$, there is a tradeoff between, on the one hand, the average surprisal $S_M$, obtained by averaging $_\log P(w_t | m_t)$ across the words in a text, and the memory capacity $H-M$, formalized as the average number of bits required to encode $m_t$.
 
 
 \citet{Hahn2020modeling} prove a theorem that provides a method of estimating the memory-surprisal tradeoff from corpus data.
@@ -229,7 +229,7 @@ This theorem is based on \key{mutual information}, which quantifies the amount o
 If $X, Z, Y$ are random variables, then the mutual information of $X$ and $Y$, conditioned on $Z$, is defined to be:
 \begin{align}
 \label{eq:mi}
-    \operatorname{I}[X:Y|Z] &\equiv \sum_{x,y,z} P(x,y,z) \log \frac{P(x,y|z)}{P(x|z)P(y|z)}. % \text{ bits} \\
+    \operatorname{I}[X:Y|Z] &\equiv \sum-{x,y,z} P(x,y,z) \log \frac{P(x,y|z)}{P(x|z)P(y|z)}. % \text{ bits} \\
     %\nonumber
     %&= \operatorname{H}[X|Z] - \operatorname{H}[X|Y,Z] \\
     %\nonumber
@@ -237,19 +237,19 @@ If $X, Z, Y$ are random variables, then the mutual information of $X$ and $Y$, c
 \end{align}
 The key quantity derived from this is the mutual information between elements (such as morphemes) that are some distance $t$, conditioned on the intervening elements:
 \begin{equation*}
-    I_t \equiv \operatorname{I}[w_t : w_0 | w_1, \dots, w_{t-1}].
+    I-t \equiv \operatorname{I}[w_t : w-0 | w-1, \dots, w_{t-1}].
 \end{equation*}
-Based on this notion, \citet{Hahn2020modeling}  prove the following bound on the memory-surprisal tradeoff ($S_\infty$ is the average surprisal that would be achieved with perfectly veridical memory representations):
+Based on this notion, \citet{Hahn2020modeling}  prove the following bound on the memory-surprisal tradeoff ($S-\infty$ is the average surprisal that would be achieved with perfectly veridical memory representations):
 \begin{thm}\label{prop:suboptimal}(Information locality bound, \citet{Hahn2020modeling})
 For any positive integer $T$, let $M$ be a memory encoding function such that
 \begin{equation}
 \label{eq:memory-bound}
-H_M \le \sum_{t=1}^T t I_t.
+H-M \le \sum-{t=1}^T t I-t.
 \end{equation}
 Then we have a lower bound on the average surprisal under the memory encoding function $M$:
 \begin{equation}
 \label{eq:surprisal-bound}
-S_M \ge S_\infty + \sum_{t=T+1}^\infty I_t.
+S-M \ge S-\infty + \sum-{t=T+1}^\infty I-t.
 \end{equation}
 \end{thm}
 
@@ -440,22 +440,6 @@ TODO
 %\label{ex:ophehela}
 
 
-For SI Appendix:
-
-Here, we explain how our segmentation corresponds to the speech style system described by \citep[4.3.2]{yeon2010korean}
-
-\korean{소}
-
-\begin{tabular}{l|lllllll}
-            & Statement & Question  & Command    & Proposal    \\ \hline
-Formal      &  -p-ni-da & -p-ni-kka & -si-p-siyo & -si-p-sida \\
-Polite      &  \multicolumn{4}{c}{-a/eo/yo} \\
-Semi-Formal &  -o/so    &           & -o         & -p-sida \\
-Familiar    &  -ne      & -na/neunja & -je       & -se     \\
-Intimate    &  \multicolumn{4}{c}{-a/eo} \\
-Plain       &  -da      &  -(neu)nya & -ra       & -sa \\
-\end{tabular}
-
 Examples:
 \begin{tabular}{llllllllll}
 1    & 3 & 4     & 5   & 6  & 7 & 8 \\
@@ -477,7 +461,7 @@ wish  & &  Assertive && & informal & polite \\
     \includegraphics[width=0.4\textwidth]{figures/Turkish-suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     \includegraphics[width=0.4\textwidth]{figures/Turkish-suffixes-byMorphemes-auc-hist-heldout-Nouns-Coarse-FineSurprisal-optimized.pdf}
     \caption{Caption}
-    \label{fig:my_label}
+    \label{fig:my-label}
 \end{figure}
 
 \section{Discussion}
@@ -566,6 +550,188 @@ non-concatenative morphology (in Arabic, k-t-b `to write' forms katab- `wrote'. 
 
 \bibliography{literature}
 \bibliographystyle{natbib}
+\appendix
+
+\section{Appendix}
+
+
+
+\subsection{Korean Verb Suffixes}
+
+Korean verb morphology is very complex, and there is no generally agreed-upon description in terms of morphemes and slots.
+We extracted suffixes based on the annotation found in the corpus and the linguistic literature on Korean \citep[4.1.2]{yeon2010korean}.
+Our segmentation is more fine-grained than the annotation found in the corpus, but it also abstracts away more consistently from allomorphy.
+We then partitioned the resulting morphemes into slots that make it possible to consistently describe the ordering of almost all forms encountered in the corpus.
+
+
+We identified the following slots:
+
+\begin{enumerate}
+    \item Root (Valency is not separated in the dataset)
+    \item Derivation:
+    
+    ha (from hada, \citep[4.1.2]{yeon2010korean}), i (predicative, \citep[4.1.4]{yeon2010korean})
+    
+    \item Honorific -s- \citep[4.3.2, 4.4.1]{yeon2010korean}
+    \item Tense/Aspect: -ess- for past \citep[4.5.1.1]{yeon2010korean}, -essess- for remote past \citep[4.5.1.2]{yeon2010korean}, -keyss- for future \citep[4.5.2.1]{yeon2010korean}
+    \item Formality -p- \citep[4.3.2]{yeon2010korean}
+    \item Mood 1:
+    
+    -n-
+    
+    -ni- \citep[4.3.2]{yeon2010korean}
+    
+    -ri-
+    
+    -deon-
+    
+    \item `Pragmatic Mood'
+    
+    -da- \citep[4.3.2]{yeon2010korean}
+    
+    -ra- 
+    
+    Interrogative -ka, -lkka, -nya
+    
+    -ji \citep[4.2.2-3]{yeon2010korean}
+    
+    -eo (informal)
+    
+    -sida \citep[4.3.2]{yeon2010korean}
+    
+    ....
+    
+    \item Polite -yo
+    \item Conjunctive endings
+    
+    -go
+    
+    -seo
+    
+    and others
+    
+\end{enumerate}
+
+
+We show morphemes occurring at least 50 times in slots 1-8 in Figure~\ref{tab:korean-frequent-morphemes}.
+
+
+Frequent morphemes:
+\begin{table}
+\begin{tabular}{llllllllll}
+Slot & Identifier in our code & Short & Frequency & Description & Citation \\ \hline\hline
+Derivation & DERIVATION-adj-\korean{하} & HA$_2$ &	 68 & \citep[4.1.2]{yeon2010korean}\\
+& DERIVATION-predicative-i & I$_2$ &	 3947 & \citep[4.1.4]{yeon2010korean} \\ \hline
+Honorific & HONORIFIC-honorific-s 	& SI$_3$ & 99 & \citep[4.3.2, 4.4.1]{yeon2010korean}\\\hline
+Tense/Aspect &TENSE/ASPECT-remote-past-\korean{었었} 	& ESSESS$_4$ &  56& \citep[4.5.1.2]{yeon2010korean} \\
+&TENSE/ASPECT-assertive/strong-will-get 	& GET$_4$ & 355 & \citep[4.5.2.1]{yeon2010korean}\\
+&TENSE/ASPECT-past &ESS$_4$ &	 9720 & \citep[4.5.1.1]{yeon2010korean}\\\hline
+Formality & FORMALITY-formal-polite-p &P$_5$ &	 1761 & \citep[4.3.2]{yeon2010korean}\\\hline
+Mood 1&SYNTACTICMOOD-I-guess-ri & RI$_6$ &	 70 \\
+&SYNTACTICMOOD-formal-polite-ni 	&NI$_6$ & 1700 & \citep[4.3.2]{yeon2010korean}\\
+&SYNTACTICMOOD-indicative-n 	&N$_6$ &5069 \\\hline
+Mood 2&PRAGMATICMOOD-hortative-formal-polite-sida & SIDA$_7$ & 	 51 & Hortative, formal, polite \\
+& PRAGMATICMOOD-indicative-informal-\korean{어} 	& EO$_7$ & 62 & Indicative, informal\\
+& PRAGMATICMOOD-hortative-formal-nonpolite-\korean{자} & JA$_7$&	 163 & Hortative, formal, nonpolite \\
+& PRAGMATICMOOD-declarative-haoche-\korean{소} &SO$_7$  &	 194 & Declarative, informal\\
+& PRAGMATICMOOD-interrogative-lkka & LKKA$_7$&	 200 & Interrogative \\
+& ?????-ef-\korean{오} & O$_7$ &	 226 \\
+& PRAGMATICMOOD-ji & JI$_7$ &	 260 & \citep[4.2.2-3]{yeon2010korean}\\
+& PRAGMATICMOOD-interrogative-ka 	& KA$_7$ & 485 & Interrogative & \\
+& PRAGMATICMOOD-ra &RA$_7$ &	 959 & & \\
+& PRAGMATICMOOD-declarative-da & DA$_7$ &	 23035 & Declarative & \citep[4.3.2]{yeon2010korean}\\\hline
+Polite & POLITE-polite-\korean{요} & YO$_8$&	 267 \\
+\end{tabular}
+\caption{Frequent Korean verb suffixes in slots 1-8.}\label{tab:korean-frequent-morphemes}
+\end{table}
+
+
+
+
+Next, we explain how our segmentation corresponds to commonly described paradigms.
+First, in Table~\ref{tab:korean-styles}, we describe the correspondence to the speech style system described by \citep[4.3.2]{yeon2010korean}.
+
+
+
+\begin{table}
+\begin{tabular}{l||l|l|l|llll}
+            & Statement & Question  & Command    & Proposal    \\ \hline\hline
+Formal      &  \korean{ㅂ니다} & \korean{ㅂ니까} & \korean{지-ㅂ-지오} & \korean{지-ㅂ-지다} \\ 
+      &  -mnida & -mnikka  & -sipsio & -sipsida  \\ 
+      &  -P$_5$-NI$_6$-DA$_7$ & -P$_5$-NI$_6$-KKA$_7$  & -SI-P$_5$-SIO$_7$ & -SI$_3$-P$_5$-SIDA$_7$ \\ \hline
+Polite      &  \multicolumn{4}{c}{\korean{아/어/요}}  \\
+      &  \multicolumn{4}{c}{-a/eo/yo}  \\
+            & \multicolumn{4}{c}{-A/EO/YO} \\ \hline
+Semi-Formal & \korean{오/조}   &           &   \korean{오}       &  \korean{-ㅂ-지다} \\
+&  -o/so   &           & -o        & -p-sida \\
+ &  -O$_7$/-SO   &           & -O$_7$    & -P$_5$-SIDA$_7$ \\\hline
+Familiar    &    \korean{네}    &  \korean{나/는자} &  \korean{게}      &    \korean{세} \\
+            & -ne                  & -na/neunja & -ge & -se \\ 
+            & -NE$_7$                  & -NA/-NEUNJA$_7$ & -GE & -SE \\ \hline
+Intimate      &  \multicolumn{4}{c}{\korean{아/어}}  \\
+      &  \multicolumn{4}{c}{-a/eo}  \\
+            & \multicolumn{4}{c}{-A/EO$_7$} \\ \hline
+Plain       &   \korean{다}     &  \korean{(느)냐} &  \korean{라}     &  \korean{자}\\
+            &  -da    &  -(neu)nya & -ra      & -ja \\
+            & -DA$_7$    &   -NYA$_7$          & -RA$_7$      & -JA$_7$\\
+\end{tabular}
+\caption{Correspondence between our morpheme segmentation and the speech style system described by \citep[4.3.2]{yeon2010korean}.}\label{tab:korean-styles}
+\end{table}
+
+Second, in Table~\ref{tab:korean-hada}, we show a paradigm for a verb \korean{하다} \texttt{https://en.wiktionary.org/wiki/\korean{하다}}
+We only show the forms without the honorific; forms with honorific are created by placing -SI$_3$ into the appropriate slot.
+
+\begin{table}
+\begin{tabular}{llllllllll}
+           &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
+\multirow{6}{*}{Indicative} & \multirow{3}{*}{Non-past} & \korean{한다} & \korean{해}  & \korean{해요}  & \korean{합니다}  \\
+           &          & handa & hae & haeyo &  hamnida \\
+           &          & -N-DA & -- & -YO$_8$ &  -P$_5$-NI$_6$-DA$_7$ \\ \hline
+           & \multirow{3}{*}{Past}     & \korean{했다}  & \korean{했어} & \korean{했어요}   & \korean{했습니다}  \\
+           &      & haet-da &  haesseo &  haesseoyo  & haetseumnida \\
+           &      & -ESS$_4$-DA &  -ESS$_4$-EO &  -ESS$_4$-EO-YO$_8$  & -ESS$_4$-P$_5$-NI$_6$-DA$_7$ \\ \hline
+\multirow{6}{*}{Interrogative} & \multirow{3}{*}{Non-past} & \korean{하느냐} & \korean{해}  & \korean{해요}  & \korean{합니까} \\
+ &  & haneunya &  hae &  haeyo & hamnikka\\
+ &  & -NEUNYA$_7$ &  -- &  -YO$_8$ & -P$_5$-NIKKA$_7$ \\ \hline
+              & \multirow{3}{*}{Past} & \korean{했느냐} & \korean{했어} & \korean{했어요} & \korean{했습니까} \\
+              &  & ha-n-neunya &  hae-sseo &  hae-sseo-yo &  haetseumnikka\\
+              &  & -ESS$_4$-NEUNYA$_7$ &  -ESS$_4$ &  -ESS$_4$-YO &  -ESS$_4$-P$_5$-NIKKA$_7$\\ \hline
+Hortative   && \korean{하자}  & \korean{해}  & \korean{해요}  & \korean{합시다}  \\
+   && haja &  hae &  haeyo & hapsida \\
+   && -JA$_7$ &  -- &  -YO$_8$ & -P$_5$-SIDA$_7$ \\ \hline
+Imperative  && \korean{해라, 하여라}  & \korean{해}  & \korean{해요}  & \korean{합시오}  \\
+  && haera, hayeora &  hae &  haeyo &  hapsio \\
+  && -RA$_7$, -YEORA$_7$ &-- & -YO$_8$ & -P$_5$-SIO \\ \hline
+Assertive   && \korean{하겠다}  & \korean{하겠어}  & \korean{하겠어요}  & \korean{하겠습니다}  \\
+Assertive   &&  hagetda & hagesseo &  hagesseoyo & hagetseumnida \\
+Assertive   &&  -GESS$_4$-DA$_7$ & -GESS$_4$-EO$_7$ &  -GESS$_4$-EO$_7$-YO$_8$ & GESS$_4$-P$_5$-NI$_6$-DA$_7$ \\ \hline
+Cause/Reason && \korean{해} & \korean{해서, 하여서} & \korean{하니} & \korean{하니까} \\
+&& hae & haeseo, hayeoseo & hani & hanikka \\ 
+&& -EO/A??? & -SEO$_9$, -YEOSEO$_9$ & -NI$_9$ & -NIKKA$_9$ \\ \hline
+Contrast && \korean{하지만} & \korean{하는데} & \korean{하더니} \\
+ && hajiman & haneunde & haedoni & \\ 
+ && -JIMAN$_9$ & -NEUNDE$_9$ & -DEONI$_9$ & \\ \hline
+Conjunction && \korean{하고} \\
+ && hago \\ 
+&& -GO$_9$ \\ \hline
+Condition && \korean{하면} & \korean{해야, 하여야} \\
+&& hamyeon & haeya, hayeoya \\
+&& MYEON$_9$ & YA$_9$, YEOYA$_9$ \\ \hline
+Motive && \korean{하려고} \\
+ && haryeogo \\
+&& -RYEOGO$_9$
+\end{tabular}
+\caption{Correspondence between our morpheme segmentation and the paradigm of \textit{hada} `to do' as described by Wiktionary (\texttt{https://en.wiktionary.org/wiki/\korean{하다}}, retrieved September 16, 2020).}\label{tab:korean-hada}
+\end{table}
+
+
+\begin{longtable}{lllll}
+NOMINALIZER-future-determiner-\korean{을} & EUL &	 128 \\
+NOMINALIZER-topic?past-determiner-\korean{은} & EUN&	 129 \\
+NOMINALIZER-nominalizer-informal-nonpolite-gi & GI &	 151 \\
+NOMINALIZER-nominalizer-formal-nonpolite-m 	& M & 216 \\
+\end{longtable}
+
 
 \end{document}
 
