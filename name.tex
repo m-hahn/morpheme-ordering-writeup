@@ -17,6 +17,11 @@
 \usepackage{amssymb}
 \usepackage{lingmacros}
 
+\usepackage{CJKutf8}
+\newcommand{\korean}[1]{\begin{CJK}{UTF8}{mj}#1\end{CJK}}
+
+
+%\usepackage{xeCJK}
 
 \usepackage{natbib}
 \bibliographystyle{unsrtnat}
@@ -126,7 +131,6 @@ A recent theory (CITE) argues that word and morpheme order in language optimizes
 %    In this work, we examine corpus data from four languages to show that optimizing for tradeoff efficiency mostly predicts morpheme order in verb and noun morphology.
     
 \end{abstract}
-
 
 
 \section{Introduction}
@@ -439,6 +443,8 @@ TODO
 For SI Appendix:
 
 Here, we explain how our segmentation corresponds to the speech style system described by \citep[4.3.2]{yeon2010korean}
+
+\korean{소}
 
 \begin{tabular}{l|lllllll}
             & Statement & Question  & Command    & Proposal    \\ \hline
