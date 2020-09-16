@@ -17,6 +17,7 @@
 \usepackage{amssymb}
 \usepackage{lingmacros}
 
+
 \usepackage{natbib}
 \bibliographystyle{unsrtnat}
 
@@ -180,7 +181,7 @@ Verbs commonly mark a larger number of inflection categories.
 Based on data from several dozens of languages, \citep{bybee-morphology-1985} proposes the following ordering of verb affixes:
 \begin{quote}
 \begin{tabular}{llllllllllllllllllllllllll}
-verb stem & valence & voice & aspect & tense& mood & modality & subj. person & subj.number
+verb stem & valence & voice & aspect & tense& mood & subject agreement
 \end{tabular}
 \end{quote}
 \textit{Valence} affixes change the number of arguments; for instance, causatives add an argument (TODO example).
@@ -328,6 +329,8 @@ The Sesotho and Japanese data was previously used by CITE; we reanalyze these da
 \end{enumerate}
 
 \paragraph{Sesotho Verbs}
+We describe Sesotho verb affixes following \cite{Hahn2020modeling}.
+who described these based on \citep{doke1967textbook, guma1971outline, demuth1992acquisition}
 
 \begin{enumerate}
     \item Subject agreement: This morpheme encodes agreement with the subject, for person, number, and noun class (the latter only in the 3rd person) \cite[\textsection 395]{doke1967textbook}.
@@ -342,36 +345,28 @@ The Sesotho and Japanese data was previously used by CITE; we reanalyze these da
 \end{enumerate}
 We identified the following suffixes:
 
-% something we might cite at some point (pointers from Beth Levine), about templatic morpheme order in Bantu
-% Hyman2003 in literature.bib
-% Jeffrey Good, Strong Linearity: Three Case Studies Towards a Theory of Morphosyntactic Templatic Constructions (Diss, 2003)
-
 \begin{enumerate}
-\item Semantic derivation: reversive (e.g., `do' $\rightarrow$ `undo') \citep[\textsection 345]{doke1967textbook}
-\item Valence: Common valence-altering suffixes include causative, neuter/stative, applicative, and reciprocal \citep[\textsection 307--338]{doke1967textbook}. See SI for details on their meanings.
-    \item Voice: passive \citep[\textsection 300]{doke1967textbook}
-    \item Tense \citep[\textsection 369]{doke1967textbook}
-    \item Mood \citep[\textsection 386--445]{doke1967textbook}
-    \item Interrogative and relative markers, appended to verbs in certain interrogative and relative clauses \citep[\textsection 160, 271, 320, 714, 793]{doke1967textbook}.
-    %-\textit{ng}.
-    %The interrogative marker -\textit{ng} is an enclitized form of the interrogative `what'.
-    %The relative marker -\textit{ng} is suffixed to verbs in relative clauses.
+\item Semantic derivation: reversive (e.g., `do' $\rightarrow$ `undo')
+\item Valence: (e.g., causative, neuter/stative, applicative, and reciprocal)
+    \item Voice: passive
+    \item Tense
+    \item Mood
+    \item Interrogative and relative markers
 \end{enumerate}
 
 
 
 \paragraph{Japanese Verbs}
-
+We describe Japanese verb suffixes following \citep{Hahn2020modeling}, who described these based on \citep{kaiser2013japanese,hasegawa2014japanese}.
 
 \begin{enumerate}
 \item \textit{suru}: obligatory suffix after Sino-Japanese words when they are used as verbs
-\item Valence: causative (-\textit{ase}-) (\citet[142]{hasegawa2014japanese}, \citet[Chapter 13]{kaiser2013japanese})
-\item Voice and Mood: passive (-\textit{are}-, -\textit{rare}-) (\citet[152]{hasegawa2014japanese}, \citet[Chapter 12]{kaiser2013japanese}) and potential (-\textit{e}-, -\textit{are}-, -\textit{rare}-) \citep[398]{kaiser2013japanese}
-\item Politeness (-\textit{mas}-) \citep[190]{kaiser2013japanese}.
-\item Mood: desiderative (-\textit{ta}-) \citep[238]{kaiser2013japanese}
+\item Valence: causative (-\textit{ase}-)
+\item Voice and Mood: passive (-\textit{are}-, -\textit{rare}-) and potential (-\textit{e}-, -\textit{are}-, -\textit{rare}-)
+\item Politeness (-\textit{mas}-)
+\item Mood: desiderative (-\textit{ta}-)
 \item Negation (-\textit{n}-)
-\item Tense, Aspect, Mood, and Finiteness: past (-\textit{ta}), future/hortative (-\textit{yoo}) \citep[229]{kaiser2013japanese}, nonfiniteness (-\textit{te}) \citep[186]{kaiser2013japanese}
-%\item Nonfiniteness: the suffix -\textit{te} derives a nonfinite form .
+\item Tense, Aspect, Mood, and Finiteness: past (-\textit{ta}), future/hortative (-\textit{yoo}) \citep[229]{kaiser2013japanese}, nonfiniteness (-\textit{te})
 \end{enumerate}
 
 
@@ -380,20 +375,22 @@ We identified the following suffixes:
 
 We then considered morphemes occurring at least 50 times:
 
+\citep{yeon2010korean}
+
 \begin{enumerate}
     \item Root (Valency is not separated in the dataset)
     \item Derivation:
     
-    ha (from hada), i (predicative)
+    ha (from hada, \citep[4.1.2]{yeon2010korean}), i (predicative, \citep[4.1.4]{yeon2010korean})
     
-    \item Honorific -s-
-    \item Tense/Aspect: -ess- for past, -essess- for remote past, -keyss- for future
-    \item Formality -p-
+    \item Honorific -s- \citep[4.3.2, 4.4.1]{yeon2010korean}
+    \item Tense/Aspect: -ess- for past \citep[4.5.1.1]{yeon2010korean}, -essess- for remote past \citep[4.5.1.2]{yeon2010korean}, -keyss- for future \citep[4.5.2.1]{yeon2010korean}
+    \item Formality -p- \citep[4.3.2]{yeon2010korean}
     \item Mood 1:
     
     -n-
     
-    -ni-
+    -ni- \citep[4.3.2]{yeon2010korean}
     
     -ri-
     
@@ -401,17 +398,17 @@ We then considered morphemes occurring at least 50 times:
     
     \item `Pragmatic Mood'
     
-    -da-
+    -da- \citep[4.3.2]{yeon2010korean}
     
-    -ra-
+    -ra- 
     
     Interrogative -ka, -lkka, -nya
     
-    -ji
+    -ji \citep[4.2.2-3]{yeon2010korean}
     
     -eo (informal)
     
-    -sida
+    -sida \citep[4.3.2]{yeon2010korean}
     
     ....
     
@@ -426,6 +423,10 @@ We then considered morphemes occurring at least 50 times:
     
 \end{enumerate}
 
+TODO 
+
+- Yeon 4.4.2.2 kkeo object honorific % 꺼
+
 %\ex.\ag. oa di rek a \\
 %\textsc{subject.agreement} \textsc{object.agreement} buy \textsc{indicative} \\
 %`(he) is buying (it)'  \citep{demuth1992acquisition} \label{ex:oadireka}
@@ -434,6 +435,22 @@ We then considered morphemes occurring at least 50 times:
 %`(he) cooks (food) for (him)'  \citep{demuth1992acquisition}
 %\label{ex:ophehela}
 
+
+For SI Appendix:
+
+Here, we explain how our segmentation corresponds to the speech style system described by \citep[4.3.2]{yeon2010korean}
+
+\begin{tabular}{l|lllllll}
+            & Statement & Question  & Command    & Proposal    \\ \hline
+Formal      &  -p-ni-da & -p-ni-kka & -si-p-siyo & -si-p-sida \\
+Polite      &  \multicolumn{4}{c}{-a/eo/yo} \\
+Semi-Formal &  -o/so    &           & -o         & -p-sida \\
+Familiar    &  -ne      & -na/neunja & -je       & -se     \\
+Intimate    &  \multicolumn{4}{c}{-a/eo} \\
+Plain       &  -da      &  -(neu)nya & -ra       & -sa \\
+\end{tabular}
+
+Examples:
 \begin{tabular}{llllllllll}
 1    & 3 & 4     & 5   & 6  & 7 & 8 \\
 bara & sy & eots & eum & ni & da  & &  `wished'\\
@@ -445,6 +462,17 @@ wish  & &  Assertive && & informal & polite \\
 %https://en.wiktionary.org/wiki/%EB%B0%94%EB%9D%BC%EB%8B%A4
 
 \section{Results}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/Hungarian-suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+    \includegraphics[width=0.4\textwidth]{figures/Hungarian-suffixes-byMorphemes-auc-hist-heldout-Nouns-Coarse-FineSurprisal-optimized.pdf}
+    
+    \includegraphics[width=0.4\textwidth]{figures/Turkish-suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+    \includegraphics[width=0.4\textwidth]{figures/Turkish-suffixes-byMorphemes-auc-hist-heldout-Nouns-Coarse-FineSurprisal-optimized.pdf}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
 
 \section{Discussion}
 
