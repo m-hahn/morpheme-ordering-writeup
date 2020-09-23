@@ -221,12 +221,12 @@ Surprisal as estimated by corpus-based methods is a successful predictor of read
 This effect can be explained in terms of mechanisms such as preactivation and integration~\citep{kuperberg2016we}.
 However, due to limitations in human memory, human expectations in reality do not reflect the true context $w-1\dots w_{t-1}$, but some memory representation $m\_t$:
 \begin{equation}   \label{eq:lossy-surp}
-    \text{Difficulty} \propto -\log P(w_t , m_t).
+    \text{Difficulty} \propto -\log P(w_t | m_t).
 \end{equation}
 \citet{Hahn2020modeling} note that there is a tradeoff between average surprisal and memory capacity:
 The more information a listener stores in $m\_t$, the lower their surprisal will be on average.
 This is because higher precision of memory leads to more precise expectations, which will achiever lower surprisal on average.
-More formally, given a function $M$ encoding contexts $w_1\dots w_{t-1}$ into memory representations $m\_t$, there is a tradeoff between, on the one hand, the average surprisal $S\_M$, obtained by averaging $\log P(w_t , m\_t)$ across the words in a text, and the memory capacity $H-M$, formalized as the average number of bits required to encode $m\_t$.
+More formally, given a function $M$ encoding contexts $w_1\dots w_{t_1}$ into memory representations $m_t$, there is a tradeoff between, on the one hand, the average surprisal $S\_M$, obtained by averaging $\log P(w_t , m_t)$ across the words in a text, and the memory capacity $H_M$, formalized as the average number of bits required to encode $m_t$.
 
 
 \citet{Hahn2020modeling} prove a theorem that provides a method of estimating the memory-surprisal tradeoff from corpus data.
@@ -234,7 +234,7 @@ This theorem is based on \key{mutual information}, which quantifies the amount o
 If $X, Z, Y$ are random variables, then the mutual information of $X$ and $Y$, conditioned on $Z$, is defined to be:
 \begin{align}
 \label{eq:mi}
-    \operatorname{I}[X:Y,Z] &\equiv \sum-{x,y,z} P(x,y,z) \log \frac{P(x,y,z)}{P(x,z)P(y,z)}. % \text{ bits} \\
+    \operatorname{I}[X:Y,Z] &\equiv \sum_{x,y,z} P(x,y,z) \log \frac{P(x,y,z)}{P(x,z)P(y,z)}. % \text{ bits} \\
     %\nonumber
     %&= \operatorname{H}[X,Z] - \operatorname{H}[X,Y,Z] \\
     %\nonumber
@@ -242,19 +242,19 @@ If $X, Z, Y$ are random variables, then the mutual information of $X$ and $Y$, c
 \end{align}
 The key quantity derived from this is the mutual information between elements (such as morphemes) that are some distance $t$, conditioned on the intervening elements:
 \begin{equation*}
-    I-t \equiv \operatorname{I}[w_t : w_0 , w_1, \dots, w_{t-1}].
+    I_t \equiv \operatorname{I}[w_t : w_0 , w_1, \dots, w_{t-1}].
 \end{equation*}
-Based on this notion, \citet{Hahn2020modeling}  prove the following bound on the memory-surprisal tradeoff ($S-\infty$ is the average surprisal that would be achieved with perfectly veridical memory representations):
+Based on this notion, \citet{Hahn2020modeling}  prove the following bound on the memory-surprisal tradeoff ($S_\infty$ is the average surprisal that would be achieved with perfectly veridical memory representations):
 \begin{thm}\label{prop:suboptimal}(Information locality bound, \citet{Hahn2020modeling})
 For any positive integer $T$, let $M$ be a memory encoding function such that
 \begin{equation}
 \label{eq:memory-bound}
-H-M \le \sum-{t=1}^T t I-t.
+H_M \le \sum_{t=1}^T t I_t.
 \end{equation}
 Then we have a lower bound on the average surprisal under the memory encoding function $M$:
 \begin{equation}
 \label{eq:surprisal-bound}
-S-M \ge S-\infty + \sum-{t=T+1}^\infty I-t.
+S_M \ge S_\infty + \sum_{t=T+1}^\infty I_t.
 \end{equation}
 \end{thm}
 
@@ -382,122 +382,6 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
     \item Clitic
 \end{enumerate}
 
-\paragraph{Sesotho Verbs}
-We describe Sesotho verb affixes following \cite{Hahn2020modeling}.
-who described these based on \citep{doke1967textbook, guma1971outline, demuth1992acquisition}
-
-\begin{enumerate}
-    \item Subject agreement: This morpheme encodes agreement with the subject, for person, number, and noun class (the latter only in the 3rd person) \cite[\textsection 395]{doke1967textbook}.
-            The annotation provided by \cite{demuth1992acquisition} distinguishes between ordinary subject agreement prefixes and agreement prefixes used in relative clauses; we distinguish these morpheme types here.
-
-    \item Negation \citep[\textsection 429]{doke1967textbook}
-
-    \item Tense/aspect marker   \citep[\textsection 400--424]{doke1967textbook}
-
-    \item Object agreement or reflexive marker \citep[\textsection 459]{doke1967textbook}.
-    Similar to subject agreement, object agreement denotes person, number, and noun class features of the object.
-\end{enumerate}
-We identified the following suffixes:
-
-\begin{enumerate}
-\item Semantic derivation: reversive (e.g., `do' $\rightarrow$ `undo')
-\item Valence: (e.g., causative, neuter/stative, applicative, and reciprocal)
-    \item Voice: passive
-    \item Tense
-    \item Mood
-    \item Interrogative and relative markers
-\end{enumerate}
-
-
-
-\paragraph{Japanese Verbs}
-We describe Japanese verb suffixes following \citep{Hahn2020modeling}, who described these based on \citep{kaiser2013japanese,hasegawa2014japanese}.
-
-\begin{enumerate}
-\item \textit{suru}: obligatory suffix after Sino-Japanese words when they are used as verbs
-\item Valence: causative (-\textit{ase}-)
-\item Voice and Mood: passive (-\textit{are}-, -\textit{rare}-) and potential (-\textit{e}-, -\textit{are}-, -\textit{rare}-)
-\item Politeness (-\textit{mas}-)
-\item Mood: desiderative (-\textit{ta}-)
-\item Negation (-\textit{n}-)
-\item Tense, Aspect, Mood, and Finiteness: past (-\textit{ta}), future/hortative (-\textit{yoo}) \citep[229]{kaiser2013japanese}, nonfiniteness (-\textit{te})
-\end{enumerate}
-
-
-
-\paragraph{Korean Verbs}
-
-We then considered morphemes occurring at least 50 times:
-
-\citep{yeon2010korean}
-
-\begin{enumerate}
-    \item Root (Valency is not separated in the dataset)
-    \item Derivation:
-    
-    ha (from hada, \citep[4.1.2]{yeon2010korean}), i (predicative, \citep[4.1.4]{yeon2010korean})
-    
-    \item Honorific -s- \citep[4.3.2, 4.4.1]{yeon2010korean}
-    \item Tense/Aspect: -ess- for past \citep[4.5.1.1]{yeon2010korean}, -essess- for remote past \citep[4.5.1.2]{yeon2010korean}, -keyss- for future \citep[4.5.2.1]{yeon2010korean}
-    \item Formality -p- \citep[4.3.2]{yeon2010korean}
-    \item Mood 1:
-    
-    -n-
-    
-    -ni- \citep[4.3.2]{yeon2010korean}
-    
-    -ri-
-    
-    -deon-
-    
-    \item `Pragmatic Mood'
-    
-    -da- \citep[4.3.2]{yeon2010korean}
-    
-    -ra- 
-    
-    Interrogative -ka, -lkka, -nya
-    
-    -ji \citep[4.2.2-3]{yeon2010korean}
-    
-    -eo (informal)
-    
-    -sida \citep[4.3.2]{yeon2010korean}
-    
-    ....
-    
-    \item Polite -yo
-    \item Conjunctive endings
-    
-    -go
-    
-    -seo
-    
-    and others
-    
-\end{enumerate}
-
-TODO 
-
-- Yeon 4.4.2.2 kkeo object honorific % 꺼
-
-%\ex.\ag. oa di rek a \\
-%\textsc{subject.agreement} \textsc{object.agreement} buy \textsc{indicative} \\
-%`(he) is buying (it)'  \citep{demuth1992acquisition} \label{ex:oadireka}
-%\bg. o pheh el a \\
-%\textsc{subject.agreement} cook \textsc{applicative} \textsc{indicative} \\
-%`(he) cooks (food) for (him)'  \citep{demuth1992acquisition}
-%\label{ex:ophehela}
-
-
-Examples:
-\begin{tabular}{llllllllll}
-1    & 3 & 4     & 5   & 6  & 7 & 8 \\
-bara & sy & eots & eum & ni & da  & &  `wished'\\
-wish & Honorific & Past & Formal & Indicative & Indicative \\
-bara& & gess &  & &  eo & yo  &  `will wish' \\
-wish  & &  Assertive && & informal & polite \\
-\end{tabular}
 
 %https://en.wiktionary.org/wiki/%EB%B0%94%EB%9D%BC%EB%8B%A4
 
@@ -508,7 +392,17 @@ wish  & &  Assertive && & informal & polite \\
     \centering
     \includegraphics[width=0.4\textwidth]{figures/turkish_verbs/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     \includegraphics[width=0.4\textwidth]{figures/hungarian_verbs/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
-    \caption{Caption}
+    \includegraphics[width=0.4\textwidth]{figures/korean/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+    \caption{Verb Suffixes}
+    \label{fig:my-label}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/turkish_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+    \includegraphics[width=0.4\textwidth]{figures/hungarian_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+    \caption{Noun Suffixes}
     \label{fig:my-label}
 \end{figure}
 
@@ -525,6 +419,7 @@ wish  & &  Assertive && & informal & polite \\
               minimum height=0.65cm, inner sep=0},
   % common options for the circles:
   ball/.style = {circle, draw, align=center, anchor=north, inner sep=0}]
+  \node[rectangle,text width=1.2cm,anchor=base] (A1) at (1,-0.3) {Real};
 \node[rectangle,text width=1.2cm,anchor=base] (A1) at (1,-1) {VAL};
 \node[rectangle,text width=1.2cm,anchor=base] (A2) at (1,-1.5) {VOICE};
 \node[rectangle,text width=1.2cm,anchor=base] (A3) at (1,-2) {POLAR};
@@ -538,6 +433,7 @@ wish  & &  Assertive && & informal & polite \\
 \node[rectangle,text width=1.2cm,anchor=base] (A11) at (1,-6) {Gen};
 \node[rectangle,text width=1.2cm,anchor=base] (A12) at (1,-6.5) {Numpers};
 
+\node[rectangle,text width=0.9cm,anchor=base] (B1) at (4,-0.3) {Optimized};
 \node[rectangle,text width=0.9cm,anchor=base] (B1) at (4,-1) {VAL};
 \node[rectangle,text width=0.9cm,anchor=base] (B2) at (4,-1.5) {VOICE};
 \node[rectangle,text width=0.9cm,anchor=base] (B3) at (4,-2) {POLAR};
@@ -673,6 +569,82 @@ Korean verb morphology is very complex, and there is no generally agreed-upon de
 We extracted suffixes based on the annotation found in the corpus and the linguistic literature on Korean \citep[4.1.2]{yeon2010korean}.
 Our segmentation is more fine-grained than the annotation found in the corpus, but it also abstracts away more consistently from allomorphy.
 We then partitioned the resulting morphemes into slots that make it possible to consistently describe the ordering of almost all forms encountered in the corpus.
+
+
+
+\paragraph{Korean Verbs}
+
+We then considered morphemes occurring at least 50 times:
+
+\citep{yeon2010korean}
+
+\begin{enumerate}
+    \item Root (Valency is not separated in the dataset)
+    \item Derivation:
+    
+    ha (from hada, \citep[4.1.2]{yeon2010korean}), i (predicative, \citep[4.1.4]{yeon2010korean})
+    
+    \item Honorific -s- \citep[4.3.2, 4.4.1]{yeon2010korean}
+    \item Tense/Aspect: -ess- for past \citep[4.5.1.1]{yeon2010korean}, -essess- for remote past \citep[4.5.1.2]{yeon2010korean}, -keyss- for future \citep[4.5.2.1]{yeon2010korean}
+    \item Formality -p- \citep[4.3.2]{yeon2010korean}
+    \item Mood 1:
+    
+    -n-
+    
+    -ni- \citep[4.3.2]{yeon2010korean}
+    
+    -ri-
+    
+    -deon-
+    
+    \item `Pragmatic Mood'
+    
+    -da- \citep[4.3.2]{yeon2010korean}
+    
+    -ra- 
+    
+    Interrogative -ka, -lkka, -nya
+    
+    -ji \citep[4.2.2-3]{yeon2010korean}
+    
+    -eo (informal)
+    
+    -sida \citep[4.3.2]{yeon2010korean}
+    
+    ....
+    
+    \item Polite -yo
+    \item Conjunctive endings
+    
+    -go
+    
+    -seo
+    
+    and others
+    
+\end{enumerate}
+
+TODO 
+
+- Yeon 4.4.2.2 kkeo object honorific % 꺼
+
+%\ex.\ag. oa di rek a \\
+%\textsc{subject.agreement} \textsc{object.agreement} buy \textsc{indicative} \\
+%`(he) is buying (it)'  \citep{demuth1992acquisition} \label{ex:oadireka}
+%\bg. o pheh el a \\
+%\textsc{subject.agreement} cook \textsc{applicative} \textsc{indicative} \\
+%`(he) cooks (food) for (him)'  \citep{demuth1992acquisition}
+%\label{ex:ophehela}
+
+
+Examples:
+\begin{tabular}{llllllllll}
+1    & 3 & 4     & 5   & 6  & 7 & 8 \\
+bara & sy & eots & eum & ni & da  & &  `wished'\\
+wish & Honorific & Past & Formal & Indicative & Indicative \\
+bara& & gess &  & &  eo & yo  &  `will wish' \\
+wish  & &  Assertive && & informal & polite \\
+\end{tabular}
 
 
 We identified the following slots:
@@ -1102,6 +1074,50 @@ Agreement (Obj+Subj)         & EK & 1sg indefinite present\\
     \caption{Hungarian verb suffixes}
     \label{tab:my_label}
 \end{table}
+
+\section{Sesotho}
+
+\paragraph{Sesotho Verbs}
+We describe Sesotho verb affixes following \cite{Hahn2020modeling}.
+who described these based on \citep{doke1967textbook, guma1971outline, demuth1992acquisition}
+
+\begin{enumerate}
+    \item Subject agreement: This morpheme encodes agreement with the subject, for person, number, and noun class (the latter only in the 3rd person) \cite[\textsection 395]{doke1967textbook}.
+            The annotation provided by \cite{demuth1992acquisition} distinguishes between ordinary subject agreement prefixes and agreement prefixes used in relative clauses; we distinguish these morpheme types here.
+
+    \item Negation \citep[\textsection 429]{doke1967textbook}
+
+    \item Tense/aspect marker   \citep[\textsection 400--424]{doke1967textbook}
+
+    \item Object agreement or reflexive marker \citep[\textsection 459]{doke1967textbook}.
+    Similar to subject agreement, object agreement denotes person, number, and noun class features of the object.
+\end{enumerate}
+We identified the following suffixes:
+
+\begin{enumerate}
+\item Semantic derivation: reversive (e.g., `do' $\rightarrow$ `undo')
+\item Valence: (e.g., causative, neuter/stative, applicative, and reciprocal)
+    \item Voice: passive
+    \item Tense
+    \item Mood
+    \item Interrogative and relative markers
+\end{enumerate}
+
+\section{Japanese}
+
+\paragraph{Japanese Verbs}
+We describe Japanese verb suffixes following \citep{Hahn2020modeling}, who described these based on \citep{kaiser2013japanese,hasegawa2014japanese}.
+
+\begin{enumerate}
+\item \textit{suru}: obligatory suffix after Sino-Japanese words when they are used as verbs
+\item Valence: causative (-\textit{ase}-)
+\item Voice and Mood: passive (-\textit{are}-, -\textit{rare}-) and potential (-\textit{e}-, -\textit{are}-, -\textit{rare}-)
+\item Politeness (-\textit{mas}-)
+\item Mood: desiderative (-\textit{ta}-)
+\item Negation (-\textit{n}-)
+\item Tense, Aspect, Mood, and Finiteness: past (-\textit{ta}), future/hortative (-\textit{yoo}) \citep[229]{kaiser2013japanese}, nonfiniteness (-\textit{te})
+\end{enumerate}
+
 
 
 \end{document}
