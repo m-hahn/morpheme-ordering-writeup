@@ -9,3 +9,5 @@ cp ~/morpheme-ordering/utils/turkish_verbs/analyze/suffixes-byMorphemes-auc-hist
 cp ~/morpheme-ordering/utils/hungarian_verbs/analyze/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf figures/hungarian_verbs/
 cp ~/morpheme-ordering/utils/finnish_verbs/analyze/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf figures/finnish_verbs/
 cp ~/morpheme-ordering/utils/korean/analyze/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf figures/korean/
+cp ~/morpheme-ordering/utils/turkish_michael/visualize/comparison.tex figures/turkish_verbs/
+
