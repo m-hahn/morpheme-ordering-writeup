@@ -20,6 +20,10 @@
 \usepackage{CJKutf8}
 \newcommand{\korean}[1]{\begin{CJK}{UTF8}{mj}#1\end{CJK}}
 
+\usepackage{tikz}
+
+
+\usepackage{colortbl}
 
 %\usepackage{xeCJK}
 
@@ -60,6 +64,7 @@
 \newcommand{\nopreview}[1]{}
 \newcommand\comment[1]{{\color{red}#1}}
 \newcommand\mhahn[1]{{\color{red}(#1)}}
+\newcommand\becky[1]{{\color{blue}(#1)}}
 \newcommand\note[1]{{\color{red}(#1)}}
 \newcommand\jd[1]{{\color{red}(#1)}}
 \newcommand\rljf[1]{{\color{red}(#1)}}
@@ -266,13 +271,17 @@ Information locality has had success as a predictor of word order \citep{futrell
 
 \subsection{Data} % TODO: Becky
 % why agglutinative?
-We considered:
 
-- UD data for Japanese, Korean, Turkish, Hungarian, Finnish
+We are interested in analyzing languages in which words have easily separable morphemes and have a tendency to have more than two morphemes per word, because that allows us to vary morphemes distances. As such, we considered agglutinative languages that have morpheme-segmented corpora available. The language sample includes Universal Dependencies (UD) corpora for Japanese, Korean, Turkish, Hungarian, and Finnish (CITE). In addition, we use the Child Language Data Exchange System (CHILDES) Sesotho corpus (CITE). 
 
-- CHILDES data for Sesotho
+The Korean, Japanese, and Sesotho corpora have words segmented into the grapheme representations of their morphemes. However, the Turkish, Hungarian, and Finnish corpora do not segment the words into morphemes, but rather include a list of features (such as person, number, voice, etc.) present in each word. We built segmenters to reconstruct the order of morphemes in each word from those feature labels \becky{TODO: see Appendix?} \mhahn{Yes, I think we can explain in the main paper what data we collected in linguistic terms (e.g. finite verb forms, what we did with auxiliaries), and in the appendix discuss what steps were needed to do this. The technical details don't have to be 100\% there since the code will be available to the reviewers and readers.}.
 
 The Sesotho and Japanese data was previously used by CITE; we reanalyze these data here in a way consistent across all six languages.
+
+\begin{itemize}
+    \item Grapheme, label, phoneme for Korean
+    \item Fine versus coarse for Turkish, Hungarian, Finnish
+\end{itemize}
 
 
 \subsection{Nouns}
@@ -289,7 +298,7 @@ The Sesotho and Japanese data was previously used by CITE; we reanalyze these da
 \begin{enumerate}
     \item Number
     \item Possessor person
-    \item Possessor number
+    \item Possessor number \becky{Missing in citation}
     \item Case 
 \end{enumerate}
 
@@ -303,12 +312,34 @@ The Sesotho and Japanese data was previously used by CITE; we reanalyze these da
 
 \subsection{Verbs}
 
-\paragraph{Hungarian Verbs}
+\begin{table}[]
+    \centering
+\begin{tabular}{l||l|l|l|l|l|l|llll}
+                    & Turkish & Hungarian & Finnish  & Sesotho Pref.     & Ses Suff. & Japanese & Korean\\ \hline\hline
+Derivation          &  &         &          &               & Reversive & suru    & ha,i\\ \hline
+Valence             &  Causative &         &           & Object marker & Valence & Causative\\ \hline
+Voice               & Passive & Passive    & Passive     &               & Passive & Passive\\ \hline
+TAM, Pol.           & Negation  &   Potential  &   Tense/Asp &    Negation &  Politeness &      Potential        & Formality\\
+                    & Potential & Tense        &    Mood     &     Tense   &    Mood     &   Honorific  &  Mood I         \\
+                    &   TAM1    &          &                &         &                  & Tense/Aspect &  Mood II\\
+                    & lar       &          &           &  & & Negation \\
+                    & TAM2         &           &               &          &             &  \\ \hline
+Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
+\textit{Other}               & Formality          & Clitic    &              & Int/Rel &      &        & Politeness \\
+                    &           &     &              &  &          &    & Conj \\
+\end{tabular}
+    \caption{Morpheme order across the six languages in our sample, matched with the universal order described by \cite{bybee-morphology-1985}.}
+    \label{tab:my_label}
+\end{table}
+
+
+
+\paragraph{Hungarian Verbs} \url{https://cl.lingfil.uu.se/~bea/publ/megyesi-hungarian.pdf}
 \begin{enumerate}
-    \item Voice
-    \item Tense 
+    \item Voice \becky{Missing in citation}
     \item Mood
-    \item Definiteness, person, and number
+    \item Tense \mhahn{Potential mood appears in front of Tense, so I changed from Tense--Mood to Mood -- Tense as the order here.}
+    \item Definiteness, person, and number: This suffix indicates the definiteness or indefiniteness of the direct object of the verb, as well as the person and number of the subject performing the verb. 
 \end{enumerate}
 
 \paragraph{Turkish Verbs}
@@ -322,6 +353,25 @@ The Sesotho and Japanese data was previously used by CITE; we reanalyze these da
     \item Person and Number
     \item Formality
 \end{enumerate}
+
+\mhahn{I've changed this to the following}
+\begin{enumerate}
+    \item Valence (Causative -tir-)
+    \item Voice (Passive -il-)
+    \item Negation / polarity (Negation -ma-)
+    \item Mood (Potential -bil-)
+    \item TAM1: Tense, Aspect, Mood, Evidential
+    \item 3rd Plural (-lar-)
+    \item TAM2: Tense, Aspect, Mood, Evidential
+    \item Subject agreement (incorporating TAM information)
+    \item Formality (polite -makta-)
+    \item Genitive (-dir-)
+    \item Verbal Noun (-mak)
+    \item Possessive agreement
+\end{enumerate}
+
+
+
 
 \paragraph{Finnish Verbs}
 \begin{enumerate}
@@ -453,6 +503,7 @@ wish  & &  Assertive && & informal & polite \\
 
 \section{Results}
 
+
 \begin{figure}
     \centering
     \includegraphics[width=0.4\textwidth]{figures/Hungarian-suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
@@ -464,11 +515,70 @@ wish  & &  Assertive && & informal & polite \\
     \label{fig:my-label}
 \end{figure}
 
+
+\begin{table}[]
+    \centering
+    Turkish
+    
+
+    
+\begin{tikzpicture}[%
+  % common options for blocks:
+  block/.style = {draw, fill=blue!30, align=center, anchor=west,
+              minimum height=0.65cm, inner sep=0},
+  % common options for the circles:
+  ball/.style = {circle, draw, align=center, anchor=north, inner sep=0}]
+\node[rectangle,text width=1.2cm,anchor=base] (A1) at (1,-1) {VAL};
+\node[rectangle,text width=1.2cm,anchor=base] (A2) at (1,-1.5) {VOICE};
+\node[rectangle,text width=1.2cm,anchor=base] (A3) at (1,-2) {POLAR};
+\node[rectangle,text width=1.2cm,anchor=base] (A4) at (1,-2.5) {POLITE};
+\node[rectangle,text width=1.2cm,anchor=base] (A5) at (1,-3) {MOOD};
+\node[rectangle,text width=1.2cm,anchor=base] (A6) at (1,-3.5) {TAM1};
+\node[rectangle,text width=1.2cm,anchor=base] (A7) at (1,-4) {3PL};
+\node[rectangle,text width=1.2cm,anchor=base] (A8) at (1,-4.5) {TAM2};
+\node[rectangle,text width=1.2cm,anchor=base] (A9) at (1,-5) {Vnoun};
+\node[rectangle,text width=1.2cm,anchor=base] (A10) at (1,-5.5) {Agr};
+\node[rectangle,text width=1.2cm,anchor=base] (A11) at (1,-6) {Gen};
+\node[rectangle,text width=1.2cm,anchor=base] (A12) at (1,-6.5) {Numpers};
+
+\node[rectangle,text width=0.9cm,anchor=base] (B1) at (4,-1) {VAL};
+\node[rectangle,text width=0.9cm,anchor=base] (B2) at (4,-1.5) {VOICE};
+\node[rectangle,text width=0.9cm,anchor=base] (B3) at (4,-2) {POLAR};
+\node[rectangle,text width=0.9cm,anchor=base] (B4) at (4,-2.5) {POLITE};
+\node[rectangle,text width=0.3cm,anchor=base] (B5) at (4,-3) {TAM1};
+\node[rectangle,text width=0.3cm,anchor=base] (B6) at (4,-3.5) {TAM2};
+\node[rectangle,text width=0.3cm,anchor=base] (B7) at (4,-4) {3PL};
+\node[rectangle,text width=0.3cm,anchor=base] (B8) at (4,-4.5) {Gen};
+\node[rectangle,text width=0.3cm,anchor=base] (B9) at (4,-5) {Vnoun};
+\node[rectangle,text width=0.3cm,anchor=base] (B10) at (4,-5.5) {NUMPERS};
+\node[rectangle,text width=0.3cm,anchor=base] (B11) at (4,-6) {MOOD};
+\node[rectangle,text width=0.3cm,anchor=base] (B12) at (4,-6.5) {Agr};
+
+\draw[->] (A1.east) to (B1.west);
+\draw[->] (A2.east) to  (B2.west);
+\draw[->] (A3.east) to  (B3.west);
+\draw[->] (A4.east) to (B4.west);
+\draw[->] (A5.east) to  (B11.west);
+\draw[->] (A6.east) to (B5.west);
+\draw[->] (A7.east) to  (B7.west);
+\draw[->] (A8.east) to  (B6.west);
+\draw[->] (A9.east) to (B9.west);
+\draw[->] (A10.east) to (B12.west);
+\draw[->] (A11.east) to (B8.west);
+\draw[->] (A12.east) to (B10.west);
+\end{tikzpicture}
+    \caption{Real and optimized ordering \mhahn{TODO I'll write a script to generate these pictures for all languages}}
+    \label{tab:my_label}
+\end{table}
+
+
+
+
 \section{Discussion}
 
 We have examined morpheme order in nouns and verbs in six languages, testing the recently propiosed Efficient Tradeoff Hypothesis \citep{hahn2020modeling} as an explanatory account of morpheme ordering.
 We compared actual morpheme orderings to other possible orderings and to orderings optimized for efficiency of the memory-surprisal tradeoff.
-In most cases, we found that the real ordering provided almost more efficient tradeoffs than most alternative orderings.
+In most cases, we found that the real ordering provided almost more efficient tradeoffs than most alternative orderings. \becky{Why does this say ``almost more efficient"?}
 More importantly, we found that the real orderings match the optimal orderings in many respects.
 Ordering forms found in a corpus according according to real or optimized orderings yields the same orders in XXX of cases.
 In some cases, particlarly for noun inflection, match between real and optimized orderings is perfect.
@@ -480,7 +590,11 @@ In some cases, particlarly for noun inflection, match between real and optimized
 In this section, we discuss the linguistic literature on morpheme ordering.
 
 \paragraph{Meaning and Scope}
+As mentioned in section \becky{cite S2}, Bybee proposes a concept of \textit{semantic relevance}, which is the degree to which one morpheme affects the semantic content of the other \becky{cite bybee}. She hypothesizes that morphemes that are more highly relevant to each other should be closer to each other, and therefore proposes a universal ordering of verbal inflectional morphemes. For example, attaching a causative marker to a root meaning "to die" produces a verb form meaning "to kill." Since the causative greatly changes the semantic content of the original root, the causative is highly relevant to the root. 
 
+\becky{Format Korean example of juk-da ``to kill" and juk-i-da ``to die"}
+
+Bybee did not provide a way to computationally measure semantic relevance. However, our optimized orders of Turkish and Hungarian \becky{Are there other languages?} perfectly match Bybee's proposed universal verbal inflection order \becky{need a figure comparing optimized order to Bybee's order}. This suggests that high mutual information generally correlates with semantic relevance. 
 
 Besides Bybee's account in terms of relevance, there are also accounts focusing on semantic scope \citep{rice2000morpheme}.
 
@@ -618,30 +732,30 @@ We show morphemes occurring at least 50 times in slots 1-8 in Figure~\ref{tab:ko
 
 Frequent morphemes:
 \begin{table}
-\resizebox{\textwidth}{!}{
+\resizebox{1.2\textwidth}{!}{
 \begin{tabular}{llllllllll}
-Slot & Identifier in our code & Short & Frequency & Description & Citation \\ \hline\hline
-Derivation & adj-\korean{하} & HA$_2$ &	 68 & & \citep[4.1.2]{yeon2010korean}\\
-& predicative-i & I$_2$ &	 3947 && \citep[4.1.4]{yeon2010korean} \\ \hline
-Honorific & honorific-s 	& SI$_3$ & 99 & &\citep[4.3.2, 4.4.1]{yeon2010korean}\\\hline
-Tense/Aspect & remote-past-\korean{었었} 	& ESSESS$_4$ &  56&& \citep[4.5.1.2]{yeon2010korean} \\
-&assertive/strong-will-get 	& GET$_4$ & 355 && \citep[4.5.2.1]{yeon2010korean}\\
-&past &ESS$_4$ &	 9720 && \citep[4.5.1.1]{yeon2010korean}\\\hline
-Formality & formal-polite-p &P$_5$ &	 1761 & &\citep[4.3.2]{yeon2010korean}\\\hline
-Mood 1&I-guess-ri & RI$_6$ &	 70 \\
-&formal-polite-ni 	&NI$_6$ & 1700 && \citep[4.3.2]{yeon2010korean}\\
-&indicative-n 	&N$_6$ &5069 & TODO  \\\hline
-Mood 2&hortative-formal-polite-sida & SIDA$_7$ & 	 51 & Hortative, formal, polite \\
-& indicative-informal-\korean{어} 	& EO$_7$ & 62 & Indicative, informal\\
-& hortative-formal-nonpolite-\korean{자} & JA$_7$&	 163 & Hortative, formal, nonpolite & \citep[4.3.6.3]{yeon2010korean}\\
-& declarative-haoche-\korean{소} &SO$_7$  &	 194 & Declarative, informal\\
-& interrogative-lkka & LKKA$_7$&	 200 & Interrogative & \citep[8.9]{yeon2010korean} \\
-& semiformal-\korean{오} & O$_7$ &	 226 & See Table~\ref{tab:korean-styles} \\
+Slot & Morphs & Short & Freq. & Description & Citation \\ \hline\hline
+Derivation & \korean{하} & HA$_2$ &	 68 & & \citep[4.1.2]{yeon2010korean}\\
+& i & I$_2$ &	 3947 && \citep[4.1.4]{yeon2010korean} \\ \hline
+Honorific & si 	& SI$_3$ & 99 & &\citep[4.3.2, 4.4.1]{yeon2010korean}\\\hline
+Tense/Asp. & \korean{었었} 	& ESSESS$_4$ &  56&& \citep[4.5.1.2]{yeon2010korean} \\
+&get 	& GET$_4$ & 355 & assertive & \citep[4.5.2.1]{yeon2010korean}\\
+& &ESS$_4$ &	 9720 & past& \citep[4.5.1.1]{yeon2010korean}\\\hline
+Formality & p &P$_5$ &	 1761 & formal-polite &\citep[4.3.2]{yeon2010korean}\\\hline
+Mood 1&ri & RI$_6$ &	 70 & I-guess-\\
+&ni 	&NI$_6$ & 1700 && \citep[4.3.2]{yeon2010korean}\\
+&n 	&N$_6$ &5069 & TODO  \\\hline
+Mood 2&sida & SIDA$_7$ & 	 51 & Hortative, formal, polite \\
+& \korean{어} 	& EO$_7$ & 62 & Indicative, informal\\
+& \korean{자} & JA$_7$&	 163 & Hortative, formal, nonpolite & \citep[4.3.6.3]{yeon2010korean}\\
+& \korean{소} &SO$_7$  &	 194 & See Table~\ref{tab:korean-styles} \\
+& lkka & LKKA$_7$&	 200 & Interrogative & \citep[8.9]{yeon2010korean} \\
+& \korean{오} & O$_7$ &	 226 & See Table~\ref{tab:korean-styles} \\
 & ji & JI$_7$ &	 260 &    & \citep[4.2.2-3]{yeon2010korean}\\
-& interrogative-ka 	& KA$_7$ & 485 & Interrogative & \citep[4.3.4, p. 175; p. 183]{yeon2010korean} \\
+& ka 	& KA$_7$ & 485 & Interrogative & \citep[4.3.4, p. 175; p. 183]{yeon2010korean} \\
 & ra &RA$_7$ \korean{라} &	 959 & plain style command & \citep[4.3.6.4]{yeon2010korean} \\
-& declarative-da & DA$_7$ &	 23035 & Declarative & \citep[4.3.2]{yeon2010korean} &  \\\hline
-Polite & POLITE-polite-\korean{요} & YO$_8$&	 267 & See Table~\ref{tab:korean-styles} \\
+& da & DA$_7$ &	 23035 & Declarative & \citep[4.3.2]{yeon2010korean} &  \\\hline
+Polite & \korean{요} & YO$_8$&	 267 & See Table~\ref{tab:korean-styles} \\
 \end{tabular}
 }
 \caption{Frequent Korean verb suffixes in slots 1-8.}\label{tab:korean-frequent-morphemes}
@@ -664,12 +778,12 @@ Formal      &  \korean{ㅂ니다} & \korean{ㅂ니까} & \korean{지-ㅂ-지오}
 Polite      &  \multicolumn{4}{c}{\korean{아/어/요}}  \\
       &  \multicolumn{4}{c}{-a/eo/yo}  \\
             & \multicolumn{4}{c}{-A/EO/YO} \\ \hline
-Semi-Formal & \korean{오/조}   &           &   \korean{오}       &  \korean{-ㅂ-지다} \\
+Semi-Formal & \korean{오/소}   &           &   \korean{오}       &  \korean{-ㅂ-지다} \\
 &  -o/so   &           & -o        & -p-sida \\
- &  -O$_7$/-SO   &           & -O$_7$    & -P$_5$-SIDA$_7$ \\\hline
-Familiar    &    \korean{네}    &  \korean{나/는자} &  \korean{게}      &    \korean{세} \\
-            & -ne                  & -na/neunja & -ge & -se \\ 
-            & -NE$_7$                  & -NA/-NEUNJA$_7$ & -GE & -SE \\ \hline
+ &  -O$_7$/-SO$_7$   &           & -O$_7$    & -P$_5$-SIDA$_7$ \\\hline
+Familiar    &    \korean{네}    &  \korean{나/는가} &  \korean{게}      &    \korean{세} \\
+            & -ne                  & -na/neunka & -ge & -se \\ 
+            & -NE$_7$                  & -NA$_7$/-NEUNKA$_7$ & -GE$_9$ & \textcolor{red}{-SE} \\ \hline
 Intimate      &  \multicolumn{4}{c}{\korean{아/어}}  \\
       &  \multicolumn{4}{c}{-a/eo}  \\
             & \multicolumn{4}{c}{-A/EO$_7$} \\ \hline
@@ -688,28 +802,59 @@ We only show the forms without the honorific; forms with honorific are created b
            &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
 \multirow{6}{*}{Indicative} & \multirow{3}{*}{Non-past} & \korean{한다} & \korean{해}  & \korean{해요}  & \korean{합니다}  \\
            &          & handa & hae & haeyo &  hamnida \\
-           &          & -N-DA & -- & -YO$_8$ &  -P$_5$-NI$_6$-DA$_7$ \\ \hline
+           &          & -N$_6$-DA$_7$ & -EO$_7$ & -EO$_7$-YO$_8$ &  -P$_5$-NI$_6$-DA$_7$ \\
+           &          & \korean{하+ㄴ다}  & \korean{하+어}    & \korean{하+어+요} & \korean{하+ㅂ니다} \\
+            &          &  px+ef        &   pvg+ecs        & pvg+ef+jxf & pvg+ef\\
+           \hline
            & \multirow{3}{*}{Past}     & \korean{했다}  & \korean{했어} & \korean{했어요}   & \korean{했습니다}  \\
            &      & haet-da &  haesseo &  haesseoyo  & haetseumnida \\
-           &      & -ESS$_4$-DA &  -ESS$_4$-EO &  -ESS$_4$-EO-YO$_8$  & -ESS$_4$-P$_5$-NI$_6$-DA$_7$ \\ \hline
+           &      & -ESS$_4$-DA &  -ESS$_4$-EO$_7$ &  -ESS$_4$-EO$_7$-YO$_8$  & -ESS$_4$-P$_5$-NI$_6$-DA$_7$ \\
+           &      &  \korean{하+었+다}  &  \korean{하+었+어} & \korean{하+었+어+요} & \korean{하+었+습니다}  \\
+           &      &  ncpa+xsv+ep+ef   & px+ep+ef   &   px+ep+ef+jxf &     pvg+ep+ef\\
+           \hline
 \multirow{6}{*}{Interrogative} & \multirow{3}{*}{Non-past} & \korean{하느냐} & \korean{해}  & \korean{해요}  & \korean{합니까} \\
  &  & haneunya &  hae &  haeyo & hamnikka\\
- &  & -NEUNYA$_7$ &  -- &  -YO$_8$ & -P$_5$-NIKKA$_7$ \\ \hline
+ &  & -NEUNYA$_7$ &  -EO$_7$ &  -EO$_7$-YO$_8$ & -P$_5$-NIKKA$_7$ \\
+               && \korean{하+느냐} & & & \korean{하+ㅂ니까}    \\
+              && px+ef & & & px+ef \\
+ \hline
               & \multirow{3}{*}{Past} & \korean{했느냐} & \korean{했어} & \korean{했어요} & \korean{했습니까} \\
               &  & ha-n-neunya &  hae-sseo &  hae-sseo-yo &  haetseumnikka\\
-              &  & -ESS$_4$-NEUNYA$_7$ &  -ESS$_4$ &  -ESS$_4$-YO &  -ESS$_4$-P$_5$-NIKKA$_7$\\ \hline
+              &  & -ESS$_4$-NEUNYA$_7$ &  -ESS$_4$-EO$_7$ &  -ESS$_4$-EO$_7$+YO$_8$ &  -ESS$_4$-P$_5$-NIKKA$_7$\\
+              &  &  \korean{하+었+느냐}  & \korean{하+었+어} & \korean{하+었+어+요} & \korean{하+었+습니까} \\
+              &  & +ep+ef  & +ep+ef            & px+ep+ef+jxf & pvg+ep+ef \\
+              \hline
 Hortative   && \korean{하자}  & \korean{해}  & \korean{해요}  & \korean{합시다}  \\
    && haja &  hae &  haeyo & hapsida \\
-   && -JA$_7$ &  -- &  -YO$_8$ & -P$_5$-SIDA$_7$ \\ \hline
+   && -JA$_7$ &  -EO$_7$ &  -EO$_7$-YO$_8$ & -P$_5$-SIDA$_7$ \\
+   && \korean{+자} && \korean{하+어+요} & \korean{하+ㅂ시다}\\
+   && +ef  && pvg+ef+jxf & ef \\
+   \hline
 Imperative  && \korean{해라, 하여라}  & \korean{해}  & \korean{해요}  & \korean{합시오}  \\
   && haera, hayeora &  hae &  haeyo &  hapsio \\
-  && -RA$_7$, -YEORA$_7$ &-- & -YO$_8$ & -P$_5$-SIO \\ \hline
+  && -EORA$_7$ & -EO$_7$ & -EO$_7$-YO$_8$ & -P$_5$-SIO \\
+  && \korean{하+어라}, \korean{하+어라}  &  &    & \korean{+ㅂ시오} \\
+  && pvg+ef,  pvg+ef                     &  &    &  +ef\\
+  \hline
 Assertive   && \korean{하겠다}  & \korean{하겠어}  & \korean{하겠어요}  & \korean{하겠습니다}  \\
-Assertive   &&  hagetda & hagesseo &  hagesseoyo & hagetseumnida \\
-Assertive   &&  -GESS$_4$-DA$_7$ & -GESS$_4$-EO$_7$ &  -GESS$_4$-EO$_7$-YO$_8$ & GESS$_4$-P$_5$-NI$_6$-DA$_7$ \\ \hline
+   &&  hagetda & hagesseo &  hagesseoyo & hagetseumnida \\
+   &&  -GESS$_4$-DA$_7$ & -GESS$_4$-EO$_7$ &  -GESS$_4$-EO$_7$-YO$_8$ & GESS$_4$-P$_5$-NI$_6$-DA$_7$ \\
+&& \korean{하+겠+다}  & \korean{하+겠+어}   & \korean{하+겠+어+요} & \korean{하+겠+습니다}\\
+&&  px+ep+ef          & pvg+ep+ef   & pvg+ep+ef+jxf & pvg+ep+ef\\
+\hline
+\end{tabular}
+	\caption{Correspondence between our morpheme segmentation and the paradigm of \textit{hada} `to do' as described by Wiktionary (retrieved September 16, 2020).}\label{tab:korean-hada}
+\end{table}
+
+\begin{table}
+\begin{tabular}{llllllllll}
+           &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
 Cause/Reason && \korean{해} & \korean{해서, 하여서} & \korean{하니} & \korean{하니까} \\
 && hae & haeseo, hayeoseo & hani & hanikka \\ 
-&& -EO/A??? & -SEO$_9$, -YEOSEO$_9$ & -NI$_9$ & -NIKKA$_9$ \\ \hline
+&& -EO$_7$ & -EOSEO$_9$ & -NI$_9$ & -NIKKA$_9$ \\
+&& &\korean{하+어서, 하+어서} & \korean{하+니} & \korean{하+니까} \\
+&& & pvg+ecs, xsm+ecs         & pvg+ecs & xsm+ef \\
+\hline
 Contrast && \korean{하지만} & \korean{하는데} & \korean{하더니} \\
  && hajiman & haneunde & haedoni & \\ 
  && -JIMAN$_9$ & -NEUNDE$_9$ & -DEONI$_9$ & \\ \hline
@@ -718,7 +863,7 @@ Conjunction && \korean{하고} \\
 && -GO$_9$ \\ \hline
 Condition && \korean{하면} & \korean{해야, 하여야} \\
 && hamyeon & haeya, hayeoya \\
-&& MYEON$_9$ & YA$_9$, YEOYA$_9$ \\ \hline
+&& MYEON$_9$ & EOYA$_9$ \\ \hline
 Motive && \korean{하려고} \\
  && haryeogo \\
 && -RYEOGO$_9$
@@ -727,187 +872,73 @@ Motive && \korean{하려고} \\
 \end{table}
 
 
+%itda \url{https://en.wiktionary.org/wiki/%EC%9E%88%EB%8B%A4#Korean}
 
 \begin{table}[]
     \centering
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{llllll}
-    \korean{따라}	&	\korean{따르+아}	&	pvg+ecs	&	CONNECTOR-infinitive-a/eo	&	6154 \\
-\korean{있었다}	&	\korean{있+었+다}	&	paa+ep+ef	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	4385 \\
-\korean{것이다}	&	\korean{것+이+다}	&	nbn+jp+ef	&	DERIVATION-predicative-i+PRAGMATICMOOD-declarative-da	&	3922 \\
-\korean{있다}	&	\korean{있+다}	&	paa+ef	&	PRAGMATICMOOD-declarative-da	&	2871 \\
-\korean{한다}	&	\korean{하+ㄴ다}	&	px+ef	&	SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da	&	2835 \\
-\korean{않고}	&	\korean{않+고}	&	px+ecc	&	CONNECTOR-go	&	1898 \\
-\korean{크게}	&	\korean{크+게}	&	paa+ecs	&	CONNECTOR-so-that-ge	&	1369 \\
-\korean{시작했다}	&	\korean{시작+하+었+다}	&	ncpa+xsv+ep+ef	&	DERIVATION-verb-\korean{하}+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	1232 \\
-\korean{보면}	&	\korean{보+면}	&	pvg+ecs	&	CONNECTOR-conditional-myeon	&	1133 \\
-\korean{생각해}	&	\korean{생각+하+어}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-infinitive-a/eo	&	1106 \\
-\korean{있어서}	&	\korean{있+어서}	&	paa+ecs	&	CONNECTOR-conjunctive-aseo	&	871 \\
-\korean{하지}	&	\korean{하+지}	&	pvg+ecx	&	CONNECTOR-ecx-ji	&	864 \\
-\korean{것이었다}	&	\korean{것+이+었+다}	&	nbn+jp+ep+ef	&	DERIVATION-predicative-i+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	851 \\
-\korean{있습니다}	&	\korean{있+습니다}	&	px+ef	&	FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	603 \\
-\korean{의미한다}	&	\korean{의미+하+ㄴ다}	&	ncpa+xsv+ef	&	DERIVATION-verb-\korean{하}+SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da	&	590 \\
-\korean{것입니다}	&	\korean{것+이+ㅂ니다}	&	nbn+jp+ef	&	DERIVATION-predicative-i+FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	556 \\
-\korean{시작되었다}	&	\korean{시작+되+었+다}	&	ncpa+xsv+ep+ef	&	DERIVATION-denominal-\korean{되}+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	500 \\
-\korean{불구하고}	&	\korean{불구+하+고}	&	ncpa+xsv+ecs	&	DERIVATION-verb-\korean{하}+CONNECTOR-go	&	481 \\
-\korean{포함되어}	&	\korean{포함+되+어}	&	ncpa+xsv+ecx	&	DERIVATION-denominal-\korean{되}+CONNECTOR-infinitive-a/eo	&	440 \\
-\korean{아니라}	&	\korean{아니+라}	&	paa+ecs	&	PRAGMATICMOOD-ra	&	394 \\
-\korean{같이}	&	\korean{같+이}	&	paa+ecs	&	CONNECTOR-connector-i	&	384 \\
-\korean{생각된다}	&	\korean{생각+되+ㄴ다}	&	ncpa+xsv+ef	&	DERIVATION-denominal-\korean{되}+SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da	&	348 \\
-\korean{있어야}	&	\korean{있+어야}	&	paa+ecx	&	CONNECTOR-conjunctive-aya	&	305 \\
-\korean{중요하다}	&	\korean{중요+하+다}	&	ncps+xsm+ef	&	DERIVATION-adj-\korean{하}+PRAGMATICMOOD-declarative-da	&	251 \\
-\korean{생각하게}	&	\korean{생각+하+게}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-so-that-ge	&	239 \\
-\korean{있다고}	&	\korean{있+다고}	&	px+ecs	&	PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	232 \\
-\korean{있지만}	&	\korean{있+지만}	&	paa+ecs	&	CONNECTOR-but-jiman	&	228 \\
-\korean{존재하지}	&	\korean{존재+하+지}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-ecx-ji	&	220 \\
-\korean{것이라고}	&	\korean{것+이+라+고}	&	nbn+jp+ef+jcr	&	DERIVATION-predicative-i+PRAGMATICMOOD-ra+CONNECTOR-go	&	179 \\
-\korean{한다고}	&	\korean{하+ㄴ다고}	&	px+ecs	&	SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	164 \\
-\korean{있도록}	&	\korean{있+도록}	&	paa+ecs	&	CONNECTOR-in-order-to-dorok	&	158 \\
-\korean{있는데}	&	\korean{있+는데}	&	px+ecs	&	CONNECTOR-informal-nonpolite-contrast-neunde	&	155 \\
-\korean{것인가}	&	\korean{것+이+ㄴ가}	&	nbn+jp+ef	&	DERIVATION-predicative-i+PRAGMATICMOOD-interrogative-(neu)nka	&	150 \\
-\korean{사용되고}	&	\korean{사용+되+고}	&	ncpa+xsv+ecx	&	DERIVATION-denominal-\korean{되}+CONNECTOR-go	&	150 \\
-\korean{있었다고}	&	\korean{있+었+다+고}	&	paa+ep+ef+jcr	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	147 \\
-\korean{보자}	&	\korean{보+자}	&	px+ef	&	PRAGMATICMOOD-hortative-formal-nonpolite-\korean{자}	&	139 \\
-\korean{있으며}	&	\korean{있+으며}	&	px+ecs	&	CONNECTOR-as/while-myeo	&	134 \\
-\korean{본다면}	&	\korean{보+ㄴ다면}	&	pvg+ecs	&	CONNECTOR-conditional-\korean{ㄴ다면}	&	130 \\
-\korean{해도}	&	\korean{하+어도}	&	pvg+ecs	&	CONNECTOR-even-if/although-eodo	&	129 \\
-\korean{나서}	&	\korean{나+서}	&	px+ecs	&	CONNECTOR-conjunctive-seo	&	124 \\
-\korean{하면서}	&	\korean{하+면서}	&	px+ecs	&	CONNECTOR-conjunctive-meyonseo	&	124 \\
-\korean{이용하면}	&	\korean{이용+하+면}	&	ncpa+xsv+ecs	&	DERIVATION-verb-\korean{하}+CONNECTOR-conditional-myeon	&	124 \\
-\korean{있었고}	&	\korean{있+었+고}	&	px+ep+ecc	&	TENSE/ASPECT-past+CONNECTOR-go	&	121 \\
-\korean{했지만}	&	\korean{하+었+지만}	&	pvg+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-but-jiman	&	118 \\
-\korean{노력해야}	&	\korean{노력+하+어야}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-conjunctive-aya	&	118 \\
-\korean{하겠다}	&	\korean{하+겠+다}	&	pvg+ep+ef	&	TENSE/ASPECT-assertive/strong-will-get+PRAGMATICMOOD-declarative-da	&	116 \\
-\korean{있었는데}	&	\korean{있+었+는데}	&	paa+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-informal-nonpolite-contrast-neunde	&	115 \\
-\korean{계속해서}	&	\korean{계속+하+어서}	&	ncpa+xsv+ecs	&	DERIVATION-verb-\korean{하}+CONNECTOR-conjunctive-aseo	&	104 \\
-\korean{실현되지}	&	\korean{실현+되+지}	&	ncpa+xsv+ecx	&	DERIVATION-denominal-\korean{되}+CONNECTOR-ecx-ji	&	103 \\
-\korean{분명해진다}	&	\korean{분명+하+어}	&	ncps+xsm+ecx	&	DERIVATION-adj-\korean{하}+CONNECTOR-infinitive-a/eo	&	97 \\
-\end{tabular}
-}
-    \caption{Caption}
-    \label{tab:my_label}
-\end{table}
-
-
-\begin{table}[]
-    \centering
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{llllllllllllllllll}
-\korean{있었다}	&	\korean{있+었+다}	&	px+ep+ef	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	4385 \\
-\korean{것이다}	&	\korean{것+이+다}	&	nbn+jp+ef	&	DERIVATION-predicative-i+PRAGMATICMOOD-declarative-da	&	3922 \\
-\korean{있다}	&	\korean{있+다}	&	pvg+ef	&	PRAGMATICMOOD-declarative-da	&	2871 \\
-\korean{한다}	&	\korean{하+ㄴ다}	&	pvg+ef	&	SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da	&	2835 \\
-\korean{시작했다}	&	\korean{시작+하+었+다}	&	ncpa+xsv+ep+ef	&	DERIVATION-verb-\korean{하}+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	1232 \\
-\korean{생각해}	&	\korean{생각+하+어}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-infinitive-a/eo	&	1106 \\
-\korean{것이었다}	&	\korean{것+이+었+다}	&	nbn+jp+ep+ef	&	DERIVATION-predicative-i+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	851 \\
-\korean{있습니다}	&	\korean{있+습니다}	&	px+ef	&	FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	603 \\
-\korean{의미한다}	&	\korean{의미+하+ㄴ다}	&	ncpa+xsv+ef	&	DERIVATION-verb-\korean{하}+SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da	&	590 \\
-\korean{것입니다}	&	\korean{것+이+ㅂ니다}	&	nbn+jp+ef	&	DERIVATION-predicative-i+FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	556 \\
-\korean{시작되었다}	&	\korean{시작+되+었+다}	&	ncpa+xsv+ep+ef	&	DERIVATION-denominal-\korean{되}+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	500 \\
-\korean{불구하고}	&	\korean{불구+하+고}	&	ncpa+xsv+ecs	&	DERIVATION-verb-\korean{하}+CONNECTOR-go	&	481 \\
-\korean{포함되어}	&	\korean{포함+되+어}	&	ncpa+xsv+ecx	&	DERIVATION-denominal-\korean{되}+CONNECTOR-infinitive-a/eo	&	440 \\
-\korean{아니라}	&	\korean{아니+라}	&	paa+ecs	&	PRAGMATICMOOD-ra	&	394 \\
-\korean{생각된다}	&	\korean{생각+되+ㄴ다}	&	ncpa+xsv+ef	&	DERIVATION-denominal-\korean{되}+SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da	&	348 \\
-\korean{중요하다}	&	\korean{중요+하+다}	&	ncps+xsm+ef	&	DERIVATION-adj-\korean{하}+PRAGMATICMOOD-declarative-da	&	251 \\
-\korean{생각하게}	&	\korean{생각+하+게}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-so-that-ge	&	239 \\
-\korean{있다고}	&	\korean{있+다+고}	&	px+ef+jcr	&	PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	232 \\
-\korean{존재하지}	&	\korean{존재+하+지}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-ecx-ji	&	220 \\
-\korean{것이라고}	&	\korean{것+이+라+고}	&	nbn+jp+ef+jcr	&	DERIVATION-predicative-i+PRAGMATICMOOD-ra+CONNECTOR-go	&	179 \\
-\korean{한다고}	&	\korean{하+ㄴ다고}	&	pvg+ecs	&	SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	164 \\
-\korean{것인가}	&	\korean{것+이+ㄴ가}	&	nbn+jp+ef	&	DERIVATION-predicative-i+PRAGMATICMOOD-interrogative-(neu)nka	&	150 \\
-\korean{사용되고}	&	\korean{사용+되+고}	&	ncpa+xsv+ecx	&	DERIVATION-denominal-\korean{되}+CONNECTOR-go	&	150 \\
-\korean{있었다고}	&	\korean{있+었+다+고}	&	paa+ep+ef+jcr	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	147 \\
-\korean{보자}	&	\korean{보+자}	&	px+ef	&	PRAGMATICMOOD-hortative-formal-nonpolite-\korean{자}	&	139 \\
-\korean{비교하면}	&	\korean{비교+하+면}	&	ncpa+xsv+ecs	&	DERIVATION-verb-\korean{하}+CONNECTOR-conditional-myeon	&	124 \\
-\korean{있었고}	&	\korean{있+었+고}	&	px+ep+ecc	&	TENSE/ASPECT-past+CONNECTOR-go	&	121 \\
-\korean{사용해야}	&	\korean{사용+하+어야}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-conjunctive-aya	&	118 \\
-\korean{했지만}	&	\korean{하+었+지만}	&	pvg+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-but-jiman	&	118 \\
-\korean{하겠다}	&	\korean{하+겠+다}	&	pvg+ep+ef	&	TENSE/ASPECT-assertive/strong-will-get+PRAGMATICMOOD-declarative-da	&	116 \\
-\korean{있었는데}	&	\korean{있+었+는데}	&	paa+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-informal-nonpolite-contrast-neunde	&	115 \\
-\korean{계속해서}	&	\korean{계속+하+어서}	&	ncpa+xsv+ecs	&	DERIVATION-verb-\korean{하}+CONNECTOR-conjunctive-aseo	&	104 \\
-\korean{해결되지}	&	\korean{해결+되+지}	&	ncpa+xsv+ecx	&	DERIVATION-denominal-\korean{되}+CONNECTOR-ecx-ji	&	103 \\
-\korean{분명해진다}	&	\korean{분명+하+어}	&	ncps+xsm+ecx	&	DERIVATION-adj-\korean{하}+CONNECTOR-infinitive-a/eo	&	97 \\
-\korean{불과했다}	&	\korean{불과+하+었+다}	&	ncps+xsm+ep+ef	&	DERIVATION-adj-\korean{하}+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	96 \\
-\korean{있는가}	&	\korean{있+는가}	&	paa+ef	&	PRAGMATICMOOD-interrogative-(neu)nka	&	96 \\
-\korean{있었습니다}	&	\korean{있+었+습니다}	&	px+ep+ef	&	TENSE/ASPECT-past+FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	93 \\
-\korean{했으나}	&	\korean{하+었+으나}	&	pvg+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-but-na	&	92 \\
-\korean{있었으며}	&	\korean{있+었+으며}	&	px+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-as/while-myeo	&	91 \\
-	    \korean{것이오}	&	\korean{것+이+오}	&	nbn+jp+ef	&	DERIVATION-predicative-i+PRAGMATICMOOD-semiformal-\korean{오}	&	90 \\
-\korean{하오}	&	\korean{하+오}	&	pvg+ef	&	PRAGMATICMOOD-semiformal-\korean{오}	&	88 \\
-\korean{있소}	&	\korean{있+소}	&	paa+ef	&	PRAGMATICMOOD-declarative-haoche-\korean{소}	&	86 \\
-\korean{것이라}	&	\korean{것+이+라}	&	nbn+jp+ef	&	DERIVATION-predicative-i+PRAGMATICMOOD-ra	&	81 \\
-\korean{했소}	&	\korean{하+었+소}	&	pvg+ep+ef	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-haoche-\korean{소}	&	79 \\
-\korean{있음을}	&	\korean{있+ㅁ+을}	&	paa+etn+jco	&	NOMINALIZER-nominalizer-formal-nonpolite-m+NOMINALIZER-future-determiner-\korean{을}	&	70 \\
-\korean{있을까}	&	\korean{있+ㄹ까}	&	paa+ef	&	PRAGMATICMOOD-interrogative-lkka	&	70 \\
-	    \korean{야기시켰다}	&	\korean{야기+시키+었+다}	&	ncpa+xsv+ep+ef	&	DERIVATION-\korean{시키}+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	68 \\
-	    \korean{발전시켜}	&	\korean{발전+시키+어}	&	ncpa+xsv+ecx	&	DERIVATION-\korean{시키}+CONNECTOR-infinitive-a/eo	&	67 \\
-	    \korean{효과적이다}	&	\korean{효과+적+이+다}	&	ncn+xsn+jp+ef	&	DERIVATION-\korean{적}+DERIVATION-predicative-i+PRAGMATICMOOD-declarative-da	&	61 \\
-\korean{필요하지}	&	\korean{필요+하+지}	&	ncps+xsm+ecx	&	DERIVATION-adj-\korean{하}+CONNECTOR-ecx-ji	&	61 \\
+    \begin{tabular}{llllllllllllllllllllllllllllllllll}
+           &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
+    \multirow{6}{*}{Indicative}         & Non-past  & \korean{있다} & \korean{있어} & \korean{있어요} & \korean{있습니다} \\
+         &  &  \korean{있+다} & \korean{있+어} & \korean{있+어+요} & \korean{있+습니다}\\
+         &  &  -DA            & -EO            & -EO-YO            & -P-NI-DA \\
+         &  & +ef & +ef & +ef+jxf & +ef \\
+         \hline
+ & Past & \korean{있었다} & \korean{있었어} & \korean{있었어요} & \korean{있었습니다} \\
+         &  & \korean{있+었+다} & \korean{있+었+어} & \korean{있+었+어+요} & \korean{있+었+습니다}\\
+         && -ESS-DA            & ESS-EO             & ESS-EO-YO & -ESS-P-NI-DA \\
+         &  & +ep+ef & +ep+ef & +ep+ef+jxf & +ep+ef \\
+         \hline
+\multirow{6}{*}{Interrogative} & Non-past  & \korean{있느냐} & \korean{있어} & \korean{있어요} & \korean{있습니까} \\
+&& -NEUNYA & -EO & -EO-YO & -P-NIKKA \\
+         &  & \korean{있+느냐} & \korean{있+어} & \korean{있+어+요} & \korean{있+습니까}\\
+         &  & +ef              & +ef  & +ef+jxf & +ef\\
+         \hline
+         & Past & \korean{있었느냐} & \korean{있었어} & \korean{있었어요} & \korean{있었습니까} \\
+         && -ESS-NEUNYA & -ESS-EO & -ESS-EO-YO & -ESS-P-NIKKA \\
+         &  & \korean{있+었+느냐} & \korean{있+었+어} & \korean{있+었+어+요}\\
+         &  & +ep+ef & paa+ep+ef &  paa+ep+ef+jxf\\
+         \hline
+\multirow{3}{*}{Assertive} &  & \korean{있겠다} & \korean{있겠어} & \korean{있겠어요} & \korean{있겠습니다} \\
+&& -GESS-DA & -GESS-EO & -GESS-EO-YO & -GESS-P-NI-DA \\
+         &  & \korean{있+겠+다} & \korean{} & \korean{있+겠+어+요} & \korean{있+겠+습니다}\\
+         &  & +ep+f             &           & paa+ep+ef+jxf & paa+ep+ef\\
     \end{tabular}
-    }
-    \caption{Caption}
+    \caption{Conjugation of itda}
     \label{tab:my_label}
 \end{table}
 
 \begin{table}[]
     \centering
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{lllllllllllllllllll}
-\korean{있었다}	&	\korean{있+었+다}	&	paa+ep+ef	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	4385 \\
-\korean{있다}	&	\korean{있+다}	&	paa+ef	&	PRAGMATICMOOD-declarative-da	&	2871 \\
-\korean{한다}	&	\korean{하+ㄴ다}	&	pvg+ef	&	SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da	&	2835 \\
-\korean{있습니다}	&	\korean{있+습니다}	&	paa+ef	&	FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	603 \\
-\korean{아니라}	&	\korean{아니+라}	&	paa+ecs	&	PRAGMATICMOOD-ra	&	394 \\
-\korean{있다고}	&	\korean{있+다+고}	&	paa+ef+jcr	&	PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	232 \\
-\korean{한다고}	&	\korean{하+ㄴ다+고}	&	px+ef+jcr	&	SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	164 \\
-\korean{있었다고}	&	\korean{있+었+다+고}	&	paa+ep+ef+jcr	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	147 \\
-\korean{보자}	&	\korean{보+자}	&	px+ef	&	PRAGMATICMOOD-hortative-formal-nonpolite-\korean{자}	&	139 \\
-\korean{있었고}	&	\korean{있+었+고}	&	paa+ep+ecc	&	TENSE/ASPECT-past+CONNECTOR-go	&	121 \\
-\korean{했지만}	&	\korean{하+었+지만}	&	pvg+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-but-jiman	&	118 \\
-\korean{하겠다}	&	\korean{하+겠+다}	&	pvg+ep+ef	&	TENSE/ASPECT-assertive/strong-will-get+PRAGMATICMOOD-declarative-da	&	116 \\
-\korean{있었는데}	&	\korean{있+었+는데}	&	paa+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-informal-nonpolite-contrast-neunde	&	115 \\
-\korean{있는가}	&	\korean{있+는가}	&	paa+ef	&	PRAGMATICMOOD-interrogative-(neu)nka	&	96 \\
-\korean{있었습니다}	&	\korean{있+었+습니다}	&	paa+ep+ef	&	TENSE/ASPECT-past+FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	93 \\
-\korean{했으나}	&	\korean{하+었+으나}	&	pvg+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-but-na	&	92 \\
-\korean{있었으며}	&	\korean{있+었+으며}	&	px+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-as/while-myeo	&	91 \\
-\korean{하오}	&	\korean{하+오}	&	px+ef	&	PRAGMATICMOOD-semiformal-\korean{오}	&	88 \\
-	    \korean{있소}	&	\korean{있+소}	&	px+ef	&	PRAGMATICMOOD-declarative-haoche-\korean{소}	&	86 \\
-\korean{했소}	&	\korean{하+었+소}	&	pvg+ep+ef	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-haoche-\korean{소}	&	79 \\
-\korean{있을까}	&	\korean{있+ㄹ까}	&	paa+ef	&	PRAGMATICMOOD-interrogative-lkka	&	70 \\
-	    \korean{있음을}	&	\korean{있+ㅁ+을}	&	px+etn+jco	&	NOMINALIZER-nominalizer-formal-nonpolite-m+NOMINALIZER-future-determiner-\korean{을}	&	70 \\
-\korean{아니라고}	&	\korean{아니+라+고}	&	paa+ef+jcr	&	PRAGMATICMOOD-ra+CONNECTOR-go	&	58 \\
-	    \korean{하다가}	&	\korean{하+다가}	&	pvg+ecs	&	PRAGMATICMOOD-declarative-da+CONNECTOR-\korean{가}	&	56 \\
-\korean{보기로}	&	\korean{보+기+로}	&	px+etn+jca	&	NOMINALIZER-nominalizer-informal-nonpolite-gi+CONNECTOR-ro	&	52 \\
-\korean{있다면}	&	\korean{있+다면}	&	paa+ecs	&	PRAGMATICMOOD-declarative-da+CONNECTOR-conditional-myeon	&	50 \\
-\korean{합시다}	&	\korean{하+ㅂ시다}	&	pvg+ef	&	FORMALITY-formal-polite-p+PRAGMATICMOOD-hortative-formal-polite-sida	&	49 \\
-\korean{하겠습니다}	&	\korean{하+겠+습니다}	&	px+ep+ef	&	TENSE/ASPECT-assertive/strong-will-get+FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	41 \\
-\korean{있으리라}	&	\korean{있+으리라}	&	paa+ef	&	SYNTACTICMOOD-I-guess-ri+PRAGMATICMOOD-ra	&	41 \\
-\korean{있었으며}	&	\korean{있+었+으며}	&	px+ep+ecc	&	TENSE/ASPECT-past+CONNECTOR-\korean{며}	&	37 \\
-	    \korean{있어서는}	&	\korean{있+어서+는}	&	paa+ecs+jxt	&	CONNECTOR-conjunctive-aseo+NOMINALIZER-topic?past-determiner-\korean{은}	&	36 \\
-\korean{있겠습니까}	&	\korean{있+겠+습니까}	&	paa+ep+ef	&	TENSE/ASPECT-assertive/strong-will-get+FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-interrogative-ka	&	35 \\
-\korean{있는지}	&	\korean{있+는지}	&	paa+ecs	&	SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-ji	&	33 \\
-\korean{해라}	&	\korean{하+어라}	&	px+ef	&	PRAGMATICMOOD-imperative-eora/ara	&	33 \\
-\korean{있었을까}	&	\korean{있+었+ㄹ까}	&	paa+ep+ef	&	TENSE/ASPECT-past+PRAGMATICMOOD-interrogative-lkka	&	32 \\
-\korean{있기도}	&	\korean{있+기+도}	&	px+etn+jxc	&	NOMINALIZER-nominalizer-informal-nonpolite-gi+CONNECTOR-do	&	30 \\
-	    \korean{있지요}	&	\korean{있+지+요}	&	paa+ef+jxf	&	PRAGMATICMOOD-ji+POLITE-polite-\korean{요}	&	29 \\
-\korean{됨으로써}	&	\korean{되+ㅁ+으로써}	&	px+etn+jca	&	NOMINALIZER-nominalizer-formal-nonpolite-m+CONNECTOR-rosseo	&	27 \\
-\korean{되었는지}	&	\korean{되+었+는지}	&	pvg+ep+ecs	&	TENSE/ASPECT-past+SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-ji	&	26 \\
-\korean{있겠지만}	&	\korean{있+겠+지만}	&	paa+ep+ecs	&	TENSE/ASPECT-assertive/strong-will-get+CONNECTOR-but-jiman	&	25 \\
-	    \korean{들어갔다가}	&	\korean{가+ㅆ+다가}	&	px+ep+ecs	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da+CONNECTOR-\korean{가}	&	24 \\
-\korean{시대라고}	&	\korean{시대+라고}	&	ncn+jcr	&	PRAGMATICMOOD-jcr-rago	&	24 \\
-\korean{없었다면}	&	\korean{없+었+다면}	&	paa+ep+ecs	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da+CONNECTOR-conditional-myeon	&	23 \\
-\korean{말했듯이}	&	\korean{말하+었+듯이}	&	pvg+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-deusi	&	23 \\
-\korean{있어서도}	&	\korean{있+어서+도}	&	paa+ecs+jxc	&	CONNECTOR-conjunctive-aseo+CONNECTOR-do	&	21 \\
-	    \korean{있었으므로}	&	\korean{있+었+으므로}	&	paa+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-\korean{므로}	&	20 \\
-\korean{않았는가}	&	\korean{않+았+는가}	&	px+ep+ef	&	TENSE/ASPECT-past+PRAGMATICMOOD-interrogative-(neu)nka	&	20 \\
-\korean{했었다}	&	\korean{하+었었+다}	&	pvg+ep+ef	&	TENSE/ASPECT-remote-past-\korean{었었}+PRAGMATICMOOD-declarative-da	&	19 \\
-\korean{있겠는가}	&	\korean{있+겠+는가}	&	paa+ep+ef	&	TENSE/ASPECT-assertive/strong-will-get+PRAGMATICMOOD-interrogative-(neu)nka	&	18 \\
-\korean{주셨다}	&	\korean{주+셨+다}	&	px+ep+ef	&	HONORIFIC-honorific-s+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	18 \\
+    \begin{tabular}{llllllllllllllllllllllllll}
+           &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
+\multirow{2}{*}{Indicative} & Non-past & \korean{하신다} & \korean{하셔} & \korean{하세요, 하셔요} & \korean{하십니다} \\
+                           && -SI-N-DA & SI-EO & SI-EO-YO & SI-P-NI-DA \\
+&& \korean{하+시+ㄴ다}       &   --   &    \korean{하+시+어+요}             &  \korean{하+시+ㅂ니다}        \\
+\hline
+&& \korean{하셨다} & \korean{하셨어} & \korean{하셨어요} & \korean{하셨습니다} \\
+&& SI-ESS-DA & SI-ESS-EO & SI-ESS-EO-YO & SI-ESS-P-NI-DA \\
+& & \korean{하+셨+다}       &  --    &        --        &  \korean{하+셨+습니다}       \\
+\hline
+\multirow{2}{*}{Interrogative} & Non-past & \korean{하시느냐} & \korean{하셔} & \korean{하세요, 하셔요} & \korean{하십니까} \\
+&& SI-NEUNYA & SI-EO & SI-EO-YO & SI-P-NIKKA \\
+& &   --     &   --   &   \korean{하+시+어+요}             &  --        \\
+\hline
+& Past & \korean{하셨느냐} & \korean{하셨어} & \korean{하셨어요} & \korean{하셨습니까} \\
+&      & SI-ESS-NEUNYA & SI-ESS-EO          & SI-ESS-EO-YO & SI-ESS-P-NIKKA \\
+& &        &      &                &          \\
+\hline
+\multirow{2}{*}{Imperative} && \korean{하시라} & \korean{하셔} & \korean{하세요} & \korean{하십시오} \\
+&& -SI-RA & -SI-EO & -SI-EO-YO & -SI-P-SIO \\
+&        &      & \korean{하+시+어+}               &   \korean{하+십시오}       \\
+\hline
+\multirow{2}{*}{Assertive} & & \korean{하시겠다} & \korean{하시겠어} & \korean{하시겠어요} & \korean{하시겠습니다} \\
+&        &  -SI-GESS-DA     &  -SI-GESS-EO              &  -SI-GESS-EO-YO & -SI-GESS-P-NI-DA        \\
+&& -- & -- & -- & -- \\
     \end{tabular}
-    }
-    \caption{Caption}
+    \caption{Korean conjugation (hada) with honorific.}
     \label{tab:my_label}
 \end{table}
+
 
 \begin{longtable}{lllll}
 NOMINALIZER-future-determiner-\korean{을} & EUL &	 128 \\
@@ -949,18 +980,27 @@ NOMINALIZER-nominalizer-formal-nonpolite-m 	& M & 216 \\
 \begin{table}
 \begin{tabular}{llllllll}
 \hline
-Voice \\
+Valence &   & Causative\\
 \hline
-Negation  & MA & Negation & \\
+Voice &   & Passive\\
 \hline
-Mood      & AR & Aorist, nonpast, direct \\
+Polite &   & \\
+\hline
+Polarity  & MA & Negation & \\
+\hline
+Mood \\
+\hline
+TAM1      & AR & Aorist, nonpast, direct \\
           & IYOR & Imperfective, direct & Aspect=Prog\\
           & ACAK & Prospective, nopast, direct\\
           & MIS1  & Perfective, indirect \\
           & TI & Perfective, past, direct \\
-          \hline
-3rd Plural& LAR & 3rd Plural\\ \hline
-Mood      & MUS2 & Aorist/Imperfective, indirect \\
+\hline
+V Noun &  \\
+\hline
+3rd Plural& LAR & 3rd Plural\\
+\hline
+TAM2      & MUS2 & Aorist/Imperfective, indirect \\
           & DU & imperfective, past, direct \\
 \hline
 Agreement & IM & 1st singular\\
@@ -968,626 +1008,16 @@ Agreement & IM & 1st singular\\
           & IZ  & 1st plural\\
           & SINIZ & 2nd plural \\
           & K     & 1st plural, past direct \\
-          \hline
-Formality \\
+\hline
+Poss Num/Pers & \\
+\hline
+Gen & \\
 \hline
 \end{tabular}
 \caption{Suffixes in Turkish}
 \end{table}
 
 
-
-
-%
-%
-%
-%\begin{table}[]
-%    \centering
-%    \resizebox{\textwidth}{!}{
-%    \begin{tabular}{llllllllllllllllllll}
-%Neg+TAM1\_MIS1+3PL\_LAR	&	yazmamışlar	&	yaz	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Plur,Person=3,Polarity=Neg,Tense=Past	&	1  \\
-%Cau+Pot+Neg+TAM1\_IYOR+Agr\_IM	&	kaldıramıyorum	&	kal	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+Pot+Neg+TAM1\_IYOR+Agr\_IM	&	sürdüremiyorum	&	sür	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+Vnoun+Sing1	&	doldurmam	&	dol	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=1,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Cau	&	1  \\
-%Cau+Vnoun+Sing1	&	seğirtmelerim	&	seğir	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=1,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Cau	&	1  \\
-%Cau+TAM1\_IYOR+3PL\_LAR	&	dalgalandırıyorlar	&	dalgalan	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+TAM1\_IYOR+3PL\_LAR	&	belirtiyorlar	&	belir	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Cau	&	1  \\
-%TAM1\_IYOR+TAM2\_MIS2+Agr\_IM	&	kalkıyormuşum	&	kalk	&	Aspect=Prog,Evident=Nfh,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%TAM1\_IYOR+TAM2\_MIS2+Agr\_IM	&	yapıyormuşum	&	yap	&	Aspect=Prog,Evident=Nfh,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%Pot+Neg+Vnoun	&	edememe	&	et	&	Aspect=Perf,Case=Nom,Mood=Pot,Polarity=Neg,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Pot+Neg+Vnoun	&	satamamaktan	&	sat	&	Aspect=Perf,Case=Abl,Mood=Pot,Polarity=Neg,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Pass+TAM1\_IYOR+Agr\_SIN	&	üzülüyorsun	&	üz	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Pass	&	1  \\
-%Pass+TAM1\_IYOR+Agr\_SIN	&	yükleniyorsun	&	yükle	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Pass	&	1  \\
-%Neg+TAM1\_IYOR+Agr\_SIN	&	düşünmüyorsun	&	düşün	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=2,Polarity=Neg,Polite=Infm,Tense=Pres	&	1  \\
-%Neg+TAM1\_IYOR+Agr\_SIN	&	anlamıyorsun	&	anla	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=2,Polarity=Neg,Polite=Infm,Tense=Pres	&	1  \\
-%Pot+TAM1\_AR+Agr\_SINIZ	&	bulabilirsiniz	&	bul	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=2,Polarity=Pos,Tense=Pres	&	1  \\
-%Pot+TAM1\_AR+Agr\_SINIZ	&	duyabilirsiniz	&	duy	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=2,Polarity=Pos,Tense=Pres	&	1  \\
-%Pass+Neg+TAM1\_IYOR+Agr\_IM	&	sürüklenmiyorum	&	sürükle	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Pres,Voice=Pass	&	1  \\
-%Pass+Neg+TAM1\_IYOR+Agr\_IM	&	katılmıyorum	&	kat	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Pres,Voice=Pass	&	1  \\
-%Cau+Pass+TAM1\_IYOR+TAM2\_DU	&	dolduruluyordu	&	dol	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Past,Voice=CauPass	&	1  \\
-%Cau+Pass+TAM1\_IYOR+TAM2\_DU	&	belirtiliyordu	&	belir	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Past,Voice=CauPass	&	1  \\
-%Cau+TAM1\_ACAK+Agr\_IZ	&	sürdürelim	&	sür	&	Aspect=Perf,Mood=Opt,Number=Plur,Person=1,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+TAM1\_ACAK+Agr\_IZ	&	saldıralım	&	sal	&	Aspect=Perf,Mood=Opt,Number=Plur,Person=1,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%TAM1\_MIS1+Agr\_IM+Gen	&	girmişimdir	&	gir	&	Aspect=Perf,Evident=Nfh,Mood=Gen,Number=Sing,Person=1,Polarity=Pos,Tense=Past	&	1  \\
-%TAM1\_MIS1+Agr\_IM+Gen	&	aktarmışımdır	&	aktar	&	Aspect=Perf,Evident=Nfh,Mood=Gen,Number=Sing,Person=1,Polarity=Pos,Tense=Past	&	1  \\
-%TAM1\_AR+3PL\_LAR+TAM2\_MIS2	&	bulurlarmış	&	bul	&	Aspect=Hab,Evident=Nfh,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Past	&	1  \\
-%TAM1\_AR+3PL\_LAR+TAM2\_MIS2	&	derlermiş	&	de	&	Aspect=Hab,Evident=Nfh,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Past	&	1  \\
-%Cau+TAM1\_TI+Agr\_K	&	bastırdık	&	bas	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Past,Voice=Cau	&	1  \\
-%Cau+TAM1\_TI+Agr\_K	&	kolaylaştırdık	&	kolaylaş	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Past,Voice=Cau	&	1  \\
-%Pass+TAM1\_IYOR+Form+Gen	&	yorumlanmaktadır	&	yorumla	&	Aspect=Prog,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Polite=Form,Tense=Pres,Voice=Pass	&	1  \\
-%Pass+TAM1\_IYOR+Form+Gen	&	istenmektedir	&	iste	&	Aspect=Prog,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Polite=Form,Tense=Pres,Voice=Pass	&	1  \\
-%Pass+Pot+TAM1\_IYOR	&	bağlanabiliyor	&	bağla	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Pass	&	1  \\
-%Pass+Pot+TAM1\_IYOR	&	avlanabiliyor	&	avla	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Pass	&	1  \\
-%Neg+TAM1\_IYOR+3PL\_LAR+TAM2\_DU	&	duymuyorlardı	&	duy	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=3,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Neg+TAM1\_IYOR+3PL\_LAR+TAM2\_DU	&	etmiyorlardı	&	et	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=3,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Cau+Vnoun+Plur3	&	yatıştırmalarıyla	&	yatış	&	Aspect=Perf,Case=Ins,Mood=Ind,Number[psor]=Plur,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Cau	&	1  \\
-%Cau+Vnoun+Plur3	&	bildirmeleri	&	bil	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Plur,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Cau	&	1  \\
-%Pot+Neg+TAM1\_IYOR+3PL\_LAR+TAM2\_DU	&	buluşamıyorlardı	&	buluş	&	Aspect=Prog,Mood=Pot,Number=Plur,Person=3,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Pot+Neg+TAM1\_IYOR+3PL\_LAR+TAM2\_DU	&	bulamıyorlardı	&	bul	&	Aspect=Prog,Mood=Pot,Number=Plur,Person=3,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Pot+TAM1\_TI+Agr\_IM	&	gidebildim	&	git	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=1,Polarity=Pos,Tense=Past	&	1  \\
-%Pot+TAM1\_TI+Agr\_IM	&	bahsedebildim	&	bahset	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=1,Polarity=Pos,Tense=Past	&	1  \\
-%Cau+Pot+Neg+TAM1\_TI+Agr\_IM	&	konduramadım	&	kon	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Tense=Past,Voice=Cau	&	1  \\
-%Cau+Pot+Neg+TAM1\_TI+Agr\_IM	&	uzaklaştıramadım	&	uzaklaş	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Tense=Past,Voice=Cau	&	1  \\
-%Pot+Neg+TAM1\_AR+Agr\_IZ	&	edemeyiz	&	et	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=1,Polarity=Neg,Tense=Pres	&	2  \\
-%Cau+TAM1\_IYOR+Form	&	oluşturmakta	&	oluş	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Form,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+TAM1\_IYOR+Form	&	uydurmakta	&	uy	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Form,Tense=Pres,Voice=Cau	&	1  \\
-%Vnoun+Plur2	&	bilmenizi	&	bil	&	Aspect=Perf,Case=Acc,Mood=Ind,Number[psor]=Plur,Person[psor]=2,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Vnoun+Plur2	&	hatırlamanız	&	hatırla	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Plur,Person[psor]=2,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Cau+Pot+Neg+TAM1\_IYOR+TAM2\_DU	&	yediremiyordu	&	ye	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Past,Voice=Cau	&	1  \\
-%Cau+Pot+Neg+TAM1\_IYOR+TAM2\_DU	&	yatıştıramıyordu	&	yatış	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Past,Voice=Cau	&	1  \\
-%Cau+TAM1\_MIS1+3PL\_LAR	&	doldurmuşlar	&	dol	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Past,Voice=Cau	&	1  \\
-%Cau+TAM1\_MIS1+3PL\_LAR	&	çektirmişler	&	çek	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Past,Voice=Cau	&	1  \\
-%Pot+TAM1\_TI	&	başarabildi	&	başar	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Tense=Past	&	1  \\
-%Pot+TAM1\_TI	&	olabildi	&	ol	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Tense=Past	&	1  \\
-%Pass+Neg+TAM1\_TI	&	edilmedi	&	et	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Past,Voice=Pass	&	1  \\
-%Pass+Neg+TAM1\_TI	&	katılmadı	&	kat	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Past,Voice=Pass	&	1  \\
-%Pass+Neg+TAM1\_TI	&	gönderilmedi	&	gönder	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Past,Voice=Pass	&	1  \\
-%Cau+Neg+TAM1\_AR	&	çektirmez	&	çek	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+Neg+TAM1\_AR	&	mekanlaştırmaz	&	mekanlaş	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+Neg+TAM1\_AR	&	değiştirmez	&	değiş	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Pres,Voice=Cau	&	1  \\
-%Pass+Neg+TAM1\_MIS1	&	edilmemiş	&	et	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Past,Voice=Pass	&	1  \\
-%Pass+Neg+TAM1\_MIS1	&	yaratılmamış	&	yarat	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Past,Voice=Pass	&	1  \\
-%Pass+Neg+TAM1\_MIS1	&	çevrilmemiş	&	çevir	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Past,Voice=Pass	&	1  \\
-%Pot+Neg+TAM1\_IYOR+TAM2\_DU	&	hazmedemiyordu	&	hazmet	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Pot+Neg+TAM1\_IYOR+TAM2\_DU	&	alamıyordu	&	al	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Pot+Neg+TAM1\_IYOR+TAM2\_DU	&	kapamıyordu	&	kap	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Pot+Neg+TAM1\_TI+Agr\_K	&	tanıyamadık	&	tanı	&	Aspect=Perf,Mood=Pot,Number=Plur,Person=1,Polarity=Neg,Tense=Past	&	1  \\
-%Pot+Neg+TAM1\_TI+Agr\_K	&	çıkaramadık	&	çıkar	&	Aspect=Perf,Mood=Pot,Number=Plur,Person=1,Polarity=Neg,Tense=Past	&	1  \\
-%    \end{tabular}
-%    }
-%    \caption{Caption}
-%    \label{tab:my_label}
-%\end{table}
-%
-%
-%
-%
-%
-%\begin{table}[]
-%    \centering
-%    \resizebox{\textwidth}{!}{
-%    \begin{tabular}{llllllllllllllllllll}
-%Pot+Neg+TAM1\_TI+Agr\_K	&	varamadık	&	var	&	Aspect=Perf,Mood=Pot,Number=Plur,Person=1,Polarity=Neg,Tense=Past	&	1  \\
-%Cau+Pot+TAM1\_AR	&	oluşturabilir	&	oluş	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+Pot+TAM1\_AR	&	değiştirebilir	&	değiş	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+Pot+TAM1\_AR	&	dayatabilir	&	daya	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+TAM1\_AR+3PL\_LAR	&	üretirler	&	üre	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+TAM1\_AR+3PL\_LAR	&	sıkıştırırlarsa	&	sıkış	&	Aspect=Hab,Mood=Cnd,Number=Plur,Person=3,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+TAM1\_AR+3PL\_LAR	&	bıktırırlar	&	bık	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Pot+TAM1\_AR+Agr\_SIN	&	içebilirsin	&	iç	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=2,Polarity=Pos,Tense=Pres	&	1  \\
-%Pot+TAM1\_AR+Agr\_SIN	&	görebilirsin	&	gör	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=2,Polarity=Pos,Tense=Pres	&	1  \\
-%Pot+TAM1\_AR+Agr\_SIN	&	yiyebilirsin	&	ye	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=2,Polarity=Pos,Tense=Pres	&	1  \\
-%TAM1\_IYOR+TAM2\_DU+Agr\_SINIZ	&	diyordunuz	&	de	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=2,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%TAM1\_IYOR+TAM2\_DU+Agr\_SINIZ	&	çalışıyordunuz	&	çalış	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=2,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%TAM1\_IYOR+TAM2\_DU+Agr\_SINIZ	&	alıyordunuz	&	al	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=2,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%Cau+Vnoun+Sing3	&	durdurmasını	&	dur	&	Aspect=Perf,Case=Acc,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Cau	&	1  \\
-%Cau+Vnoun+Sing3	&	sınırlandırması	&	sınırlan	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Cau	&	1  \\
-%Cau+Vnoun+Sing3	&	sağlamlaştırmasıyla	&	sağlamlaş	&	Aspect=Perf,Case=Ins,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Cau	&	1  \\
-%Pot+Neg+TAM1\_TI+Agr\_SINIZ	&	kavuşamadınız	&	kavuş	&	Aspect=Perf,Mood=Pot,Number=Plur,Person=2,Polarity=Neg,Tense=Past	&	1  \\
-%Pot+Neg+TAM1\_TI+Agr\_SINIZ	&	duyamadınız	&	duy	&	Aspect=Perf,Mood=Pot,Number=Plur,Person=2,Polarity=Neg,Tense=Past	&	1  \\
-%Pot+Neg+TAM1\_TI+Agr\_SINIZ	&	geçiremediniz	&	geçir	&	Aspect=Perf,Mood=Pot,Number=Plur,Person=2,Polarity=Neg,Tense=Past	&	1  \\
-%Cau+Pass+TAM1\_AR	&	kapatılır	&	kapa	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=CauPass	&	2  \\
-%Cau+Pass+TAM1\_AR	&	gerçekleştirilir	&	gerçekleş	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=CauPass	&	1  \\
-%Cau+Pass+Neg	&	indirilmeyen	&	in	&	Aspect=Perf,Mood=Ind,Polarity=Neg,Tense=Pres,VerbForm=Part,Voice=CauPass	&	1  \\
-%Cau+Pass+Neg	&	doldurulmamış	&	dol	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Polarity=Neg,Tense=Past,VerbForm=Part,Voice=CauPass	&	1  \\
-%Cau+Pass+Neg	&	kaldırılmaksızın	&	kal	&	Aspect=Perf,Mood=Ind,Polarity=Neg,Tense=Pres,VerbForm=Conv,Voice=CauPass	&	1  \\
-%Pot+Neg+TAM1\_IYOR+Agr\_SIN	&	dayanamıyorsun	&	dayan	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=2,Polarity=Neg,Polite=Infm,Tense=Pres	&	1  \\
-%Pot+Neg+TAM1\_IYOR+Agr\_SIN	&	yapamıyorsun	&	yap	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=2,Polarity=Neg,Polite=Infm,Tense=Pres	&	1  \\
-%Pot+Neg+TAM1\_IYOR+Agr\_SIN	&	satamıyorsun	&	sat	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=2,Polarity=Neg,Polite=Infm,Tense=Pres	&	1  \\
-%Cau+Pot+Vnoun	&	oturtabilmek	&	otur	&	Aspect=Perf,Case=Nom,Mood=Pot,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Cau	&	1  \\
-%Cau+Pot+Vnoun	&	tutturabilmek	&	tut	&	Aspect=Perf,Case=Nom,Mood=Pot,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Cau	&	1  \\
-%Cau+Pot+Vnoun	&	sürdürebilmek	&	sür	&	Aspect=Perf,Case=Nom,Mood=Pot,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Cau	&	1  \\
-%Pot+Neg+Vnoun+Sing3	&	evleşememesine	&	evleş	&	Aspect=Perf,Case=Dat,Mood=Pot,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Pot+Neg+Vnoun+Sing3	&	bulamaması	&	bul	&	Aspect=Perf,Case=Nom,Mood=Pot,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Pot+Neg+Vnoun+Sing3	&	anlayamaması	&	anla	&	Aspect=Perf,Case=Nom,Mood=Pot,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Cau+TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	gezdiriyordum	&	gez	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Past,Voice=Cau	&	1  \\
-%Cau+TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	sıkılaştırıyordum	&	sıkılaş	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Past,Voice=Cau	&	1  \\
-%Cau+TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	koşturuyordum	&	koş	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Past,Voice=Cau	&	1  \\
-%Cau+Neg+TAM1\_TI+Agr\_K	&	doldurmadık	&	dol	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=1,Polarity=Neg,Tense=Past,Voice=Cau	&	1  \\
-%Cau+Neg+TAM1\_TI+Agr\_K	&	kaldırmadık	&	kal	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=1,Polarity=Neg,Tense=Past,Voice=Cau	&	1  \\
-%Cau+Neg+TAM1\_TI+Agr\_K	&	aldırmadık	&	al	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=1,Polarity=Neg,Tense=Past,Voice=Cau	&	1  \\
-%Pot+Vnoun+Sing3	&	olabilmesi	&	ol	&	Aspect=Perf,Case=Nom,Mood=Pot,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Pot+Vnoun+Sing3	&	götürebilmesi	&	götür	&	Aspect=Perf,Case=Nom,Mood=Pot,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Pot+Vnoun+Sing3	&	yanaşabilmesi	&	yanaş	&	Aspect=Perf,Case=Nom,Mood=Pot,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Cau+TAM1\_AR+Agr\_IZ	&	doldururuz	&	dol	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+TAM1\_AR+Agr\_IZ	&	yaptırırız	&	yap	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+TAM1\_AR+Agr\_IZ	&	ulaştırırız	&	ulaş	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Pass+TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	üzülüyordum	&	üz	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Past,Voice=Pass	&	1  \\
-%Pass+TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	yuvarlanıyordum	&	yuvarla	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Past,Voice=Pass	&	1  \\
-%Pass+TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	ediliyordum	&	et	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Past,Voice=Pass	&	1  \\
-%Pass+Neg+TAM1\_IYOR+TAM2\_DU	&	edilmiyordu	&	et	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Past,Voice=Pass	&	1  \\
-%Pass+Neg+TAM1\_IYOR+TAM2\_DU	&	olunmuyordu	&	ol	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Past,Voice=Pass	&	1  \\
-%Pass+Neg+TAM1\_IYOR+TAM2\_DU	&	bulunmuyordu	&	bul	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Past,Voice=Pass	&	1  \\
-%Cau+Neg+TAM1\_ACAK+Agr\_SIN	&	yerleştirme	&	yerleş	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=2,Polarity=Neg,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+Neg+TAM1\_ACAK+Agr\_SIN	&	aldırma	&	al	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=2,Polarity=Neg,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+Neg+TAM1\_ACAK+Agr\_SIN	&	söyletme	&	söyle	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=2,Polarity=Neg,Tense=Pres,Voice=Cau	&	1  \\
-%Pot+Neg+TAM1\_AR+Agr\_SIN	&	beceremezsin	&	becer	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=2,Polarity=Neg,Tense=Pres	&	1  \\
-%Pot+Neg+TAM1\_AR+Agr\_SIN	&	olamazsın	&	ol	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=2,Polarity=Neg,Tense=Pres	&	1  \\
-%Pot+Neg+TAM1\_AR+Agr\_SIN	&	yapamazsin	&	yap	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=2,Polarity=Neg,Tense=Pres	&	1  \\
-%Cau+Pass+TAM1\_MIS1+Gen	&	sıkıştırılmıştır	&	sıkış	&	Aspect=Perf,Evident=Nfh,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=CauPass	&	1  \\
-%Cau+Pass+TAM1\_MIS1+Gen	&	üretilmiştir	&	üre	&	Aspect=Perf,Evident=Nfh,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=CauPass	&	1  \\
-%Cau+Pass+TAM1\_MIS1+Gen	&	kıymetlendirilmiştir	&	kıymetlen	&	Aspect=Perf,Evident=Nfh,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=CauPass	&	1  \\
-%TAM1\_MIS1+Agr\_IM	&	yanılmışım	&	yanıl	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Past	&	1  \\
-%TAM1\_MIS1+Agr\_IM	&	doğmuşum	&	doğ	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Past	&	1  \\
-%TAM1\_MIS1+Agr\_IM	&	yazmışım	&	yaz	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Past	&	1  \\
-%Pass+TAM1\_IYOR+Agr\_IM	&	izleniyorum	&	izle	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Pass	&	1  \\
-%Pass+TAM1\_IYOR+Agr\_IM	&	boğuluyorum	&	boğ	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Pass	&	1  \\
-%Pass+TAM1\_IYOR+Agr\_IM	&	inceleniyorum	&	incele	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Pass	&	1  \\
-%Cau+Pot+Neg	&	uyandıramadığına	&	uyan	&	Aspect=Perf,Case=Dat,Mood=Pot,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Past,VerbForm=Part,Voice=Cau	&	1  \\
-%Cau+Pot+Neg	&	yürütemeyeceğim	&	yürü	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Tense=Fut,Voice=Cau	&	1  \\
-%Cau+Pot+Neg	&	yaptıramadığını	&	yap	&	Aspect=Perf,Case=Acc,Mood=Pot,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Past,VerbForm=Part,Voice=Cau	&	1  \\
-%Pot+Neg+TAM1\_AR+3PL\_LAR	&	bulamazlar	&	bul	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=3,Polarity=Neg,Tense=Pres	&	1  \\
-%Pot+Neg+TAM1\_AR+3PL\_LAR	&	beceremezler	&	becer	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=3,Polarity=Neg,Tense=Pres	&	1  \\
-%Pot+Neg+TAM1\_AR+3PL\_LAR	&	hissedemezler	&	hisset	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=3,Polarity=Neg,Tense=Pres	&	1  \\
-%TAM1\_MIS1+Agr\_SIN	&	unutmuşsun	&	unut	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Tense=Past	&	1  \\
-%TAM1\_MIS1+Agr\_SIN	&	bulmuşsun	&	bul	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Tense=Past	&	1  \\
-%TAM1\_MIS1+Agr\_SIN	&	içmişsin	&	iç	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Tense=Past	&	1  \\
-%TAM1\_MIS1+Agr\_IZ	&	kalmışız	&	kal	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Past	&	1  \\
-%TAM1\_MIS1+Agr\_IZ	&	almışız	&	al	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Past	&	1  \\
-%TAM1\_MIS1+Agr\_IZ	&	bellemişiz	&	belle	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Past	&	1  \\
-%    \end{tabular}
-%    }
-%    \caption{Caption}
-%    \label{tab:my_label}
-%\end{table}
-%
-%
-%
-%
-%
-%\begin{table}[]
-%    \centering
-%    \resizebox{\textwidth}{!}{
-%    \begin{tabular}{llllllllllllllllllll}
-%TAM1\_IYOR+TAM2\_DU+Agr\_SIN	&	kolluyordun	&	kolla	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%TAM1\_IYOR+TAM2\_DU+Agr\_SIN	&	biliyordun	&	bil	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%TAM1\_IYOR+TAM2\_DU+Agr\_SIN	&	duruyordun	&	dur	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%Neg+TAM1\_AR+Agr\_IZ	&	saymazsak	&	say	&	Aspect=Hab,Mood=Cnd,Number=Plur,Person=1,Polarity=Neg,Tense=Pres	&	1  \\
-%Neg+TAM1\_AR+Agr\_IZ	&	sapmayız	&	sap	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=1,Polarity=Neg,Tense=Pres	&	1  \\
-%Neg+TAM1\_AR+Agr\_IZ	&	kalmayız	&	kal	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=1,Polarity=Neg,Tense=Pres	&	1  \\
-%Pot+TAM1\_IYOR	&	anlayabiliyor	&	anla	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres	&	1  \\
-%Pot+TAM1\_IYOR	&	konuşabiliyor	&	konuş	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres	&	1  \\
-%Pot+TAM1\_IYOR	&	olabiliyor	&	ol	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres	&	1  \\
-%Neg+TAM1\_TI+Agr\_SIN	&	denemedin	&	dene	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=2,Polarity=Neg,Tense=Past	&	1  \\
-%Neg+TAM1\_TI+Agr\_SIN	&	bakmadın	&	bak	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=2,Polarity=Neg,Tense=Past	&	1  \\
-%Neg+TAM1\_TI+Agr\_SIN	&	yanaşmadın	&	yanaş	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=2,Polarity=Neg,Tense=Past	&	1  \\
-%Neg+TAM1\_AR+Agr\_SINIZ	&	keşfedemezseniz	&	keşfet	&	Aspect=Hab,Mood=CndPot,Number=Plur,Person=2,Polarity=Neg,Tense=Pres	&	1  \\
-%Neg+TAM1\_AR+Agr\_SINIZ	&	şarlamazsanız	&	şarla	&	Aspect=Hab,Mood=Cnd,Number=Plur,Person=2,Polarity=Neg,Tense=Pres	&	1  \\
-%Neg+TAM1\_AR+Agr\_SINIZ	&	çekmezsiniz	&	çek	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=2,Polarity=Neg,Tense=Pres	&	1  \\
-%Cau+Pass+TAM1\_IYOR	&	genişletiliyor	&	genişle	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=CauPass	&	2  \\
-%Cau+Pass+TAM1\_IYOR	&	büyütülüyor	&	büyü	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=CauPass	&	1  \\
-%Cau+Pass+TAM1\_IYOR	&	sınırlandırılıyor	&	sınırlan	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=CauPass	&	1  \\
-%Pass+TAM1\_TI+Agr\_K	&	uyarıldık	&	uyar	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Past,Voice=Pass	&	1  \\
-%Pass+TAM1\_TI+Agr\_K	&	edildik	&	et	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Past,Voice=Pass	&	1  \\
-%Pass+TAM1\_TI+Agr\_K	&	hazırlandık	&	hazırla	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Past,Voice=Pass	&	1  \\
-%Pass+Neg+TAM1\_IYOR	&	satılmıyor	&	sat	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Pres,Voice=Pass	&	1  \\
-%Pass+Neg+TAM1\_IYOR	&	duyulmuyor	&	duy	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Pres,Voice=Pass	&	1  \\
-%Pass+Neg+TAM1\_IYOR	&	beklenmiyor	&	bekle	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Pres,Voice=Pass	&	1  \\
-%Neg+TAM1\_ACAK+3PL\_LAR	&	olmasalar	&	ol	&	Aspect=Perf,Mood=Cnd,Number=Plur,Person=3,Polarity=Neg,Tense=Pres	&	1  \\
-%Neg+TAM1\_ACAK+3PL\_LAR	&	değiller	&	değil	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=3,Polarity=Neg,Tense=Pres	&	1  \\
-%Neg+TAM1\_ACAK+3PL\_LAR	&	anlamasalar	&	anla	&	Aspect=Perf,Mood=Cnd,Number=Plur,Person=3,Polarity=Neg,Tense=Pres	&	1  \\
-%Pass+Neg+TAM1\_AR	&	inanılmaz	&	inan	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Pres,Voice=Pass	&	1  \\
-%Pass+Neg+TAM1\_AR	&	tartışılmaz	&	tartış	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Pres,Voice=Pass	&	1  \\
-%Pass+Neg+TAM1\_AR	&	atılmaz	&	at	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Pres,Voice=Pass	&	1  \\
-%Pot+Neg+TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	geçemiyordum	&	geç	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Past	&	2  \\
-%Pot+Neg+TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	varamıyordum	&	var	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Pot+Neg+TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	bulamıyordum	&	bul	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Pot+Neg+TAM1\_AR+Agr\_SINIZ	&	geçemezsiniz	&	geç	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=2,Polarity=Neg,Tense=Pres	&	1  \\
-%Pot+Neg+TAM1\_AR+Agr\_SINIZ	&	kuramazsınız	&	kur	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=2,Polarity=Neg,Tense=Pres	&	1  \\
-%Pot+Neg+TAM1\_AR+Agr\_SINIZ	&	bırakamazsınız	&	bırak	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=2,Polarity=Neg,Tense=Pres	&	1  \\
-%Cau+Pass+TAM1\_MIS1	&	kapatılmış	&	kapa	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=CauPass	&	1  \\
-%Cau+Pass+TAM1\_MIS1	&	yerleştirilmiş	&	yerleş	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=CauPass	&	1  \\
-%Cau+Pass+TAM1\_MIS1	&	türetilmiş	&	türe	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=CauPass	&	1  \\
-%Pot+TAM1\_AR+3PL\_LAR	&	bulabilirler	&	bul	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=3,Polarity=Pos,Tense=Pres	&	1  \\
-%Pot+TAM1\_AR+3PL\_LAR	&	sunabilirler	&	sun	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=3,Polarity=Pos,Tense=Pres	&	1  \\
-%Pot+TAM1\_AR+3PL\_LAR	&	gidebilirler	&	git	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=3,Polarity=Pos,Tense=Pres	&	1  \\
-%Cau+Pot	&	ulaştırabildiği	&	ulaş	&	Aspect=Perf,Mood=Pot,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Past,VerbForm=Part,Voice=Cau	&	1  \\
-%Cau+Pot	&	değiştirebileceğimizi	&	değiş	&	Aspect=Perf,Case=Acc,Mood=Pot,Number[psor]=Plur,Person[psor]=1,Polarity=Pos,Tense=Fut,VerbForm=Part,Voice=Cau	&	1  \\
-%Cau+Pot	&	kandırabileceğim	&	kan	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=1,Polarity=Pos,Tense=Fut,Voice=Cau	&	1  \\
-%Neg+TAM1\_TI+Agr\_SINIZ	&	istemediniz	&	iste	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=2,Polarity=Neg,Tense=Past	&	1  \\
-%Neg+TAM1\_TI+Agr\_SINIZ	&	asmadınız	&	as	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=2,Polarity=Neg,Tense=Past	&	1  \\
-%Neg+TAM1\_TI+Agr\_SINIZ	&	tanışmadınız	&	tanış	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=2,Polarity=Neg,Tense=Past	&	1  \\
-%Neg+TAM1\_AR+3PL\_LAR	&	sormazlar	&	sor	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=3,Polarity=Neg,Tense=Pres	&	1  \\
-%Neg+TAM1\_AR+3PL\_LAR	&	doğmazlar	&	doğ	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=3,Polarity=Neg,Tense=Pres	&	1  \\
-%Neg+TAM1\_AR+3PL\_LAR	&	etmezler	&	et	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=3,Polarity=Neg,Tense=Pres	&	1  \\
-%TAM1\_ACAK+3PL\_LAR	&	etseler	&	et	&	Aspect=Perf,Mood=Cnd,Number=Plur,Person=3,Polarity=Pos,Tense=Pres	&	1  \\
-%TAM1\_ACAK+3PL\_LAR	&	bilsinler	&	bil	&	Aspect=Perf,Mood=Imp,Number=Plur,Person=3,Polarity=Pos,Tense=Pres	&	1  \\
-%TAM1\_ACAK+3PL\_LAR	&	isteseler	&	iste	&	Aspect=Perf,Mood=Cnd,Number=Plur,Person=3,Polarity=Pos,Tense=Pres	&	1  \\
-%Cau+Neg	&	gerçekleştirmeyen	&	gerçekleş	&	Aspect=Perf,Mood=Ind,Polarity=Neg,Tense=Pres,VerbForm=Part,Voice=Cau	&	1  \\
-%Cau+Neg	&	kararlaştırmadan	&	kararlaş	&	Aspect=Perf,Mood=Ind,Polarity=Neg,Tense=Pres,VerbForm=Conv,Voice=Cau	&	1  \\
-%Cau+Neg	&	diretmemiştim	&	dire	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Tense=Pqp,Voice=Cau	&	1  \\
-%Cau+Pass+TAM1\_ACAK	&	kaldırılsın	&	kal	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=CauPass	&	3  \\
-%Cau+Pass+TAM1\_ACAK	&	uzatılsın	&	uza	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=CauPass	&	1  \\
-%Cau+Pass+TAM1\_ACAK	&	kazandırılsın	&	kazan	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=CauPass	&	1  \\
-%Neg+TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	susmuyordum	&	sus	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Neg+TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	anlamıyordum	&	anla	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Neg+TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	bilmiyordum	&	bil	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Cau+TAM1\_ACAK	&	patlata	&	patla	&	Aspect=Perf,Mood=Opt,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Cau	&	2  \\
-%Cau+TAM1\_ACAK	&	aksatsa	&	aksa	&	Aspect=Perf,Mood=Cnd,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+TAM1\_ACAK	&	uzatsa	&	uza	&	Aspect=Perf,Mood=Cnd,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Neg+TAM1\_IYOR+Agr\_IZ	&	istemiyoruz	&	iste	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=1,Polarity=Neg,Polite=Infm,Tense=Pres	&	2  \\
-%Neg+TAM1\_IYOR+Agr\_IZ	&	hatırlamıyoruz	&	hatırla	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=1,Polarity=Neg,Polite=Infm,Tense=Pres	&	1  \\
-%Neg+TAM1\_IYOR+Agr\_IZ	&	bilmiyoruz	&	bil	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=1,Polarity=Neg,Polite=Infm,Tense=Pres	&	1  \\
-%Pass+Pot+Neg	&	toparlanamayacak	&	toparla	&	Aspect=Perf,Mood=Pot,Polarity=Neg,Tense=Fut,VerbForm=Part,Voice=Pass	&	1  \\
-%Pass+Pot+Neg	&	katılamayacak	&	kat	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Tense=Fut,Voice=Pass	&	1  \\
-%Pass+Pot+Neg	&	okunamayan	&	oku	&	Aspect=Perf,Mood=Pot,Polarity=Neg,Tense=Pres,VerbForm=Part,Voice=Pass	&	1  \\
-%TAM1\_AR+TAM2\_MIS2	&	olurmuş	&	ol	&	Aspect=Hab,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past	&	2  \\
-%TAM1\_AR+TAM2\_MIS2	&	severmiş	&	sev	&	Aspect=Hab,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past	&	1  \\
-%TAM1\_AR+TAM2\_MIS2	&	bitermiş	&	bit	&	Aspect=Hab,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past	&	1  \\
-%TAM1\_IYOR+TAM2\_MIS2	&	oluyormuş	&	ol	&	Aspect=Prog,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Past	&	2  \\
-%TAM1\_IYOR+TAM2\_MIS2	&	bakıyormuş	&	bak	&	Aspect=Prog,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%TAM1\_IYOR+TAM2\_MIS2	&	ediyormuş	&	et	&	Aspect=Prog,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%Neg+TAM1\_TI+Agr\_K	&	etmedik	&	et	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=1,Polarity=Neg,Tense=Past	&	2  \\
-%Neg+TAM1\_TI+Agr\_K	&	kullanmadık	&	kullan	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=1,Polarity=Neg,Tense=Past	&	1  \\
-%Neg+TAM1\_TI+Agr\_K	&	sormadık	&	sor	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=1,Polarity=Neg,Tense=Past	&	1  \\
-%Cau+TAM1\_TI+3PL\_LAR	&	kapattılar	&	kapa	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Past,Voice=Cau	&	2  \\
-%Cau+TAM1\_TI+3PL\_LAR	&	belirttiler	&	belir	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Past,Voice=Cau	&	1  \\
-%Cau+TAM1\_TI+3PL\_LAR	&	çıkarttılar	&	çıkar	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Past,Voice=Cau	&	1  \\
-%Cau+TAM1\_ACAK+Agr\_SIN	&	yerleştir	&	yerleş	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=2,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+TAM1\_ACAK+Agr\_SIN	&	bastır	&	bas	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=2,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+TAM1\_ACAK+Agr\_SIN	&	yetiştir	&	yetiş	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=2,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%    \end{tabular}
-%    }
-%    \caption{Caption}
-%    \label{tab:my_label}
-%\end{table}
-%
-%
-%
-%
-%
-%\begin{table}[]
-%    \centering
-%    \resizebox{\textwidth}{!}{
-%    \begin{tabular}{llllllllllllllllllll}
-%Vnoun+Sing2	&	yaratman	&	yarat	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=2,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Vnoun+Sing2	&	bunalman	&	bunal	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=2,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Vnoun+Sing2	&	gitmen	&	git	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=2,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Pass+Neg+Vnoun+Sing3	&	verilmemesinin	&	ver	&	Aspect=Perf,Case=Gen,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Pres,VerbForm=Vnoun,Voice=Pass	&	1  \\
-%Pass+Neg+Vnoun+Sing3	&	verilmemesi	&	ver	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Pres,VerbForm=Vnoun,Voice=Pass	&	1  \\
-%Pass+Neg+Vnoun+Sing3	&	asılmaması	&	as	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Pres,VerbForm=Vnoun,Voice=Pass	&	1  \\
-%Pot+Neg+TAM1\_TI	&	inanamadı	&	inan	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Tense=Past	&	2  \\
-%Pot+Neg+TAM1\_TI	&	unutamadı	&	unut	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Tense=Past	&	1  \\
-%Pot+Neg+TAM1\_TI	&	gelişemedi	&	geliş	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Tense=Past	&	1  \\
-%Neg+TAM1\_IYOR+3PL\_LAR	&	vermiyorlar	&	ver	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=3,Polarity=Neg,Polite=Infm,Tense=Pres	&	2  \\
-%Neg+TAM1\_IYOR+3PL\_LAR	&	onamıyorlarsa	&	ona	&	Aspect=Prog,Mood=Cnd,Number=Plur,Person=3,Polarity=Neg,Polite=Infm,Tense=Pres	&	1  \\
-%Neg+TAM1\_IYOR+3PL\_LAR	&	görmüyorlar	&	gör	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=3,Polarity=Neg,Polite=Infm,Tense=Pres	&	1  \\
-%Cau+Pass+Vnoun	&	kapatılmaya	&	kapa	&	Aspect=Perf,Case=Dat,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=CauPass	&	2  \\
-%Cau+Pass+Vnoun	&	yetiştirilmeye	&	yetiş	&	Aspect=Perf,Case=Dat,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=CauPass	&	1  \\
-%Cau+Pass+Vnoun	&	ulaştırılmak	&	ulaş	&	Aspect=Perf,Case=Nom,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=CauPass	&	1  \\
-%Pass+TAM1\_TI+Agr\_IM	&	kapıldım	&	kap	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Past,Voice=Pass	&	2  \\
-%Pass+TAM1\_TI+Agr\_IM	&	sarıldım	&	sar	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Past,Voice=Pass	&	2  \\
-%Pass+TAM1\_TI+Agr\_IM	&	etkilendim	&	etkile	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Past,Voice=Pass	&	1  \\
-%Cau+TAM1\_IYOR+TAM2\_DU	&	tıkıştırıyordu	&	tıkış	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Past,Voice=Cau	&	1  \\
-%Cau+TAM1\_IYOR+TAM2\_DU	&	azaltıyordu	&	azal	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Past,Voice=Cau	&	1  \\
-%Cau+TAM1\_IYOR+TAM2\_DU	&	düşündürtüyordu	&	düşün	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Past,Voice=Cau	&	1  \\
-%TAM1\_IYOR+Form+Gen	&	kapsamaktadır	&	kapsa	&	Aspect=Prog,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Polite=Form,Tense=Pres	&	2  \\
-%TAM1\_IYOR+Form+Gen	&	etmektedir	&	et	&	Aspect=Prog,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Polite=Form,Tense=Pres	&	1  \\
-%TAM1\_IYOR+Form+Gen	&	dayanmaktadır	&	dayan	&	Aspect=Prog,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Polite=Form,Tense=Pres	&	1  \\
-%Pot+TAM1\_AR+Agr\_IZ	&	edebiliriz	&	et	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=1,Polarity=Pos,Tense=Pres	&	2  \\
-%Pot+TAM1\_AR+Agr\_IZ	&	diyebiliriz	&	de	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=1,Polarity=Pos,Tense=Pres	&	2  \\
-%Pot+TAM1\_AR+Agr\_IZ	&	gözlemleyebiliriz	&	gözlemle	&	Aspect=Hab,Mood=Pot,Number=Plur,Person=1,Polarity=Pos,Tense=Pres	&	1  \\
-%TAM1\_IYOR+TAM2\_DU+Agr\_K	&	ilerliyorduk	&	ilerle	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%TAM1\_IYOR+TAM2\_DU+Agr\_K	&	başlıyorduk	&	başla	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%TAM1\_IYOR+TAM2\_DU+Agr\_K	&	içiyorduk	&	iç	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%Cau+TAM1\_MIS1	&	kanatmış	&	kana	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Cau	&	1  \\
-%Cau+TAM1\_MIS1	&	kaldırmış	&	kal	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Cau	&	1  \\
-%Cau+TAM1\_MIS1	&	çoğaltmış	&	çoğal	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Cau	&	1  \\
-%Pot+TAM1\_AR+Agr\_IM	&	olabilirim	&	ol	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=1,Polarity=Pos,Tense=Pres	&	3  \\
-%Pot+TAM1\_AR+Agr\_IM	&	yapabilirim	&	yap	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=1,Polarity=Pos,Tense=Pres	&	2  \\
-%Pot+TAM1\_AR+Agr\_IM	&	dayanabilirim	&	dayan	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=1,Polarity=Pos,Tense=Pres	&	1  \\
-%Cau+TAM1\_TI+Agr\_IM	&	bastırdım	&	bas	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Past,Voice=Cau	&	1  \\
-%Cau+TAM1\_TI+Agr\_IM	&	ulaştırdım	&	ulaş	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Past,Voice=Cau	&	1  \\
-%Cau+TAM1\_TI+Agr\_IM	&	söndürdüm	&	sön	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Past,Voice=Cau	&	1  \\
-%Pass+TAM1\_MIS1+Gen	&	yayınlanmıştır	&	yayınla	&	Aspect=Perf,Evident=Nfh,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Pass	&	1  \\
-%Pass+TAM1\_MIS1+Gen	&	yaratılmıştır	&	yarat	&	Aspect=Perf,Evident=Nfh,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Pass	&	1  \\
-%Pass+TAM1\_MIS1+Gen	&	yadsınmıştır	&	yadsı	&	Aspect=Perf,Evident=Nfh,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Pass	&	1  \\
-%Neg+Vnoun	&	ödememe	&	öde	&	Aspect=Perf,Case=Nom,Mood=Ind,Polarity=Neg,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Neg+Vnoun	&	çekmemek	&	çek	&	Aspect=Perf,Case=Nom,Mood=Ind,Polarity=Neg,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Neg+Vnoun	&	çıkmamaya	&	çık	&	Aspect=Perf,Case=Dat,Mood=Ind,Polarity=Neg,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Neg+TAM1\_ACAK+Agr\_IZ	&	yemeyelim	&	ye	&	Aspect=Perf,Mood=Opt,Number=Plur,Person=1,Polarity=Neg,Tense=Pres	&	2  \\
-%Neg+TAM1\_ACAK+Agr\_IZ	&	etmeyelim	&	et	&	Aspect=Perf,Mood=Opt,Number=Plur,Person=1,Polarity=Neg,Tense=Pres	&	1  \\
-%Neg+TAM1\_ACAK+Agr\_IZ	&	yazmayalım	&	yaz	&	Aspect=Perf,Mood=Opt,Number=Plur,Person=1,Polarity=Neg,Tense=Pres	&	1  \\
-%Pot+Neg+TAM1\_AR	&	anlaşamaz	&	anlaş	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Tense=Pres	&	1  \\
-%Pot+Neg+TAM1\_AR	&	unutamaz	&	unut	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Tense=Pres	&	1  \\
-%Pot+Neg+TAM1\_AR	&	bulamaz	&	bul	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Tense=Pres	&	1  \\
-%Vnoun+Plur1	&	almamız	&	al	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Plur,Person[psor]=1,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Vnoun+Plur1	&	edinmemizde	&	edin	&	Aspect=Perf,Case=Loc,Mood=Ind,Number[psor]=Plur,Person[psor]=1,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Vnoun+Plur1	&	koymamız	&	koy	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Plur,Person[psor]=1,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Pot+Neg+TAM1\_AR+Agr\_IM	&	yaşayamam	&	yaşa	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Tense=Pres	&	2  \\
-%Pot+Neg+TAM1\_AR+Agr\_IM	&	yapamam	&	yap	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Tense=Pres	&	2  \\
-%Pot+Neg+TAM1\_AR+Agr\_IM	&	güvenemem	&	güven	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Tense=Pres	&	2  \\
-%Pass+Pot+TAM1\_AR	&	beklenebilir	&	bekle	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Pass	&	1  \\
-%Pass+Pot+TAM1\_AR	&	düşünülebilir	&	düşün	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Pass	&	1  \\
-%Pass+Pot+TAM1\_AR	&	katılabilir	&	kat	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Pass	&	1  \\
-%Neg+Vnoun+Sing3	&	olmaması	&	ol	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Pres,VerbForm=Vnoun	&	3  \\
-%Neg+Vnoun+Sing3	&	gelmemesi	&	gel	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Neg+Vnoun+Sing3	&	çelişmemesi	&	çeliş	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Neg+TAM1\_IYOR+TAM2\_DU	&	etmiyordu	&	et	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Neg+TAM1\_IYOR+TAM2\_DU	&	bakmıyordu	&	bak	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Neg+TAM1\_IYOR+TAM2\_DU	&	bilmiyordu	&	bil	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Past	&	1  \\
-%Pot+Neg+TAM1\_IYOR	&	edemiyor	&	et	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Pres	&	3  \\
-%Pot+Neg+TAM1\_IYOR	&	giremiyor	&	gir	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Pres	&	3  \\
-%Pot+Neg+TAM1\_IYOR	&	söyleyemiyor	&	söyle	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Pres	&	1  \\
-%Cau+TAM1\_AR	&	şaşırtır	&	şaşır	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+TAM1\_AR	&	büyütür	&	büyü	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+TAM1\_AR	&	hissettirir	&	hisset	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Cau	&	1  \\
-%TAM1\_IYOR+Form	&	oturmakta	&	otur	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Form,Tense=Pres	&	1  \\
-%TAM1\_IYOR+Form	&	soymakta	&	soy	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Form,Tense=Pres	&	1  \\
-%TAM1\_IYOR+Form	&	kapamakta	&	kapa	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Form,Tense=Pres	&	1  \\
-%Pass+Pot	&	yanlışlanabilir	&	yanlışla	&	Aspect=Hab,Mood=Pot,Polarity=Pos,Tense=Pres,VerbForm=Part,Voice=Pass	&	3  \\
-%Pass+Pot	&	verilebilecek	&	ver	&	Aspect=Perf,Mood=Pot,Polarity=Pos,Tense=Fut,VerbForm=Part,Voice=Pass	&	2  \\
-%Pass+Pot	&	çizilebileceğini	&	çiz	&	Aspect=Perf,Case=Acc,Mood=Pot,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Fut,VerbForm=Part,Voice=Pass	&	1  \\
-%Neg+TAM1\_ACAK+Agr\_SINIZ	&	demeyin	&	de	&	Aspect=Perf,Mood=Imp,Number=Plur,Person=2,Polarity=Neg,Tense=Pres	&	2  \\
-%Neg+TAM1\_ACAK+Agr\_SINIZ	&	gitmeyin	&	git	&	Aspect=Perf,Mood=Imp,Number=Plur,Person=2,Polarity=Neg,Tense=Pres	&	2  \\
-%Neg+TAM1\_ACAK+Agr\_SINIZ	&	görmeyin	&	gör	&	Aspect=Perf,Mood=Imp,Number=Plur,Person=2,Polarity=Neg,Tense=Pres	&	1  \\
-%Gen	&	olacaktır	&	ol	&	Aspect=Perf,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Tense=Fut	&	5  \\
-%Gen	&	çarpacaktır	&	çarp	&	Aspect=Perf,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Tense=Fut	&	1  \\
-%Gen	&	etkileyecektir	&	etkile	&	Aspect=Perf,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Tense=Fut	&	1  \\
-%Neg+TAM1\_MIS1	&	olmamış	&	ol	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Past	&	3  \\
-%Neg+TAM1\_MIS1	&	değilmiş	&	değil	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Past	&	3  \\
-%Neg+TAM1\_MIS1	&	kalmamış	&	kal	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Past	&	2  \\
-%Neg+TAM1\_ACAK+Gen	&	değildir	&	değil	&	Aspect=Perf,Mood=Gen,Number=Sing,Person=3,Polarity=Neg,Tense=Pres	&	15  \\
-%Pot+Neg+TAM1\_TI+Agr\_IM	&	tutamadım	&	tut	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Tense=Past	&	2  \\
-%Pot+Neg+TAM1\_TI+Agr\_IM	&	anlatamadım	&	anlat	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Tense=Past	&	2  \\
-%Pot+Neg+TAM1\_TI+Agr\_IM	&	anlayamadım	&	anla	&	Aspect=Perf,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Tense=Past	&	2  \\
-%    \end{tabular}
-%    }
-%    \caption{Caption}
-%    \label{tab:my_label}
-%\end{table}
-%
-%
-%
-%
-%
-%\begin{table}[]
-%    \centering
-%    \resizebox{\textwidth}{!}{
-%    \begin{tabular}{llllllllllllllllllll}
-%Cau+Pass+Vnoun+Sing3	&	gerçekleştirilmesi	&	gerçekleş	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=CauPass	&	3  \\
-%Cau+Pass+Vnoun+Sing3	&	cezalandırılması	&	cezalan	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=CauPass	&	2  \\
-%Cau+Pass+Vnoun+Sing3	&	kaldırılması	&	kal	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=CauPass	&	2  \\
-%Pass+TAM1\_IYOR+TAM2\_DU	&	deniyordu	&	de	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Past,Voice=Pass	&	3  \\
-%Pass+TAM1\_IYOR+TAM2\_DU	&	kapanıyordu	&	kapa	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Past,Voice=Pass	&	2  \\
-%Pass+TAM1\_IYOR+TAM2\_DU	&	iniliyordu	&	in	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Past,Voice=Pass	&	1  \\
-%Cau+Pass+TAM1\_TI	&	belirtildi	&	belir	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=CauPass	&	4  \\
-%Cau+Pass+TAM1\_TI	&	kaldırıldı	&	kal	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=CauPass	&	3  \\
-%Cau+Pass+TAM1\_TI	&	kapatıldı	&	kapa	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=CauPass	&	2  \\
-%TAM1\_MIS1+3PL\_LAR	&	gelmişler	&	gel	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Past	&	2  \\
-%TAM1\_MIS1+3PL\_LAR	&	etmişler	&	et	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Past	&	2  \\
-%TAM1\_MIS1+3PL\_LAR	&	vermişler	&	ver	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Past	&	1  \\
-%Neg+TAM1\_ACAK+Agr\_IM	&	değilim	&	değil	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Tense=Pres	&	14  \\
-%Neg+TAM1\_ACAK+Agr\_IM	&	duymayayım	&	duy	&	Aspect=Perf,Mood=Opt,Number=Sing,Person=1,Polarity=Neg,Tense=Pres	&	1  \\
-%Neg+TAM1\_ACAK+Agr\_IM	&	olmasam	&	ol	&	Aspect=Perf,Mood=Cnd,Number=Sing,Person=1,Polarity=Neg,Tense=Pres	&	1  \\
-%TAM1\_IYOR+3PL\_LAR+TAM2\_DU	&	bakıyorlardı	&	bak	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Polite=Infm,Tense=Past	&	2  \\
-%TAM1\_IYOR+3PL\_LAR+TAM2\_DU	&	konuşuyorlardı	&	konuş	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%TAM1\_IYOR+3PL\_LAR+TAM2\_DU	&	yaşıyorlardı	&	yaşa	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Polite=Infm,Tense=Past	&	1  \\
-%Pot+Neg+TAM1\_IYOR+Agr\_IM	&	giremiyorum	&	gir	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Pres	&	5  \\
-%Pot+Neg+TAM1\_IYOR+Agr\_IM	&	bilemiyorum	&	bil	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Pres	&	3  \\
-%Pot+Neg+TAM1\_IYOR+Agr\_IM	&	davranamıyorum	&	davran	&	Aspect=Prog,Mood=Pot,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Pres	&	2  \\
-%Pot+Vnoun	&	girebilmek	&	gir	&	Aspect=Perf,Case=Nom,Mood=Pot,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	3  \\
-%Pot+Vnoun	&	olabilmek	&	ol	&	Aspect=Perf,Case=Nom,Mood=Pot,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	2  \\
-%Pot+Vnoun	&	gelebilmek	&	gel	&	Aspect=Perf,Case=Nom,Mood=Pot,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Neg+TAM1\_AR+Agr\_IM	&	bilmem	&	bil	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Tense=Pres	&	4  \\
-%Neg+TAM1\_AR+Agr\_IM	&	içmem	&	iç	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Tense=Pres	&	3  \\
-%Neg+TAM1\_AR+Agr\_IM	&	olmam	&	ol	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Tense=Pres	&	2  \\
-%Cau+TAM1\_IYOR	&	karıştırıyor	&	karış	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Cau	&	2  \\
-%Cau+TAM1\_IYOR	&	cesaretlendiriyor	&	cesaretlen	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Cau	&	1  \\
-%Cau+TAM1\_IYOR	&	bastırıyor	&	bas	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Cau	&	1  \\
-%Neg+TAM1\_TI+Agr\_IM	&	vermedim	&	ver	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Tense=Past	&	2  \\
-%Neg+TAM1\_TI+Agr\_IM	&	rastlamadım	&	rastla	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Tense=Past	&	2  \\
-%Neg+TAM1\_TI+Agr\_IM	&	okumadım	&	oku	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Tense=Past	&	2  \\
-%Vnoun+Sing1	&	çalışmam	&	çalış	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=1,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	2  \\
-%Vnoun+Sing1	&	anlatmam	&	anlat	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=1,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	2  \\
-%Vnoun+Sing1	&	olmam	&	ol	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=1,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	2  \\
-%Vnoun+Plur3	&	olmaları	&	ol	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Plur,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	4  \\
-%Vnoun+Plur3	&	konuşmalarını	&	konuş	&	Aspect=Perf,Case=Acc,Mood=Ind,Number[psor]=Plur,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%Vnoun+Plur3	&	okumalarını	&	oku	&	Aspect=Perf,Case=Acc,Mood=Ind,Number[psor]=Plur,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	1  \\
-%TAM1\_IYOR+Agr\_SINIZ	&	biliyorsunuz	&	bil	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=2,Polarity=Pos,Polite=Infm,Tense=Pres	&	6  \\
-%TAM1\_IYOR+Agr\_SINIZ	&	oluyorsunuz	&	ol	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=2,Polarity=Pos,Polite=Infm,Tense=Pres	&	2  \\
-%TAM1\_IYOR+Agr\_SINIZ	&	yaratabiliyorsanız	&	yarat	&	Aspect=Prog,Mood=CndPot,Number=Plur,Person=2,Polarity=Pos,Polite=Infm,Tense=Pres	&	1  \\
-%TAM1\_AR+Agr\_SIN	&	istersen	&	iste	&	Aspect=Hab,Mood=Cnd,Number=Sing,Person=2,Polarity=Pos,Tense=Pres	&	2  \\
-%TAM1\_AR+Agr\_SIN	&	sanırsın	&	san	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Tense=Pres	&	2  \\
-%TAM1\_AR+Agr\_SIN	&	verirsin	&	ver	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Tense=Pres	&	2  \\
-%Neg+TAM1\_ACAK+Agr\_SIN	&	açma	&	aç	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=2,Polarity=Neg,Tense=Pres	&	2  \\
-%Neg+TAM1\_ACAK+Agr\_SIN	&	anlama	&	anla	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=2,Polarity=Neg,Tense=Pres	&	2  \\
-%Neg+TAM1\_ACAK+Agr\_SIN	&	etme	&	et	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=2,Polarity=Neg,Tense=Pres	&	2  \\
-%TAM1\_AR+Agr\_IZ	&	bakarız	&	bak	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Pres	&	2  \\
-%TAM1\_AR+Agr\_IZ	&	alırız	&	al	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Pres	&	2  \\
-%TAM1\_AR+Agr\_IZ	&	görüşürüz	&	görüş	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Pres	&	2  \\
-%Pass+TAM1\_MIS1	&	yapılmış	&	yap	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Pass	&	3  \\
-%Pass+TAM1\_MIS1	&	açılmış	&	aç	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Pass	&	2  \\
-%Pass+TAM1\_MIS1	&	kullanılmış	&	kullan	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Pass	&	2  \\
-%TAM1\_IYOR+Agr\_SIN	&	yazıyorsun	&	yaz	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Polite=Infm,Tense=Pres	&	3  \\
-%TAM1\_IYOR+Agr\_SIN	&	biliyorsun	&	bil	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Polite=Infm,Tense=Pres	&	3  \\
-%TAM1\_IYOR+Agr\_SIN	&	hissediyorsun	&	hisset	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Polite=Infm,Tense=Pres	&	2  \\
-%Pass+TAM1\_ACAK	&	alınsın	&	al	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Pass	&	3  \\
-%Pass+TAM1\_ACAK	&	bağlansa	&	bağla	&	Aspect=Perf,Mood=Cnd,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Pass	&	2  \\
-%Pass+TAM1\_ACAK	&	bakıla	&	bak	&	Aspect=Perf,Mood=Opt,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Pass	&	2  \\
-%TAM1\_AR+Agr\_SINIZ	&	gidersiniz	&	git	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=2,Polarity=Pos,Tense=Pres	&	4  \\
-%TAM1\_AR+Agr\_SINIZ	&	isterseniz	&	iste	&	Aspect=Hab,Mood=Cnd,Number=Plur,Person=2,Polarity=Pos,Tense=Pres	&	2  \\
-%TAM1\_AR+Agr\_SINIZ	&	bilirsiniz	&	bil	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=2,Polarity=Pos,Tense=Pres	&	2  \\
-%TAM1\_AR+3PL\_LAR	&	koyarlar	&	koy	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Pres	&	3  \\
-%TAM1\_AR+3PL\_LAR	&	ederler	&	et	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Pres	&	2  \\
-%TAM1\_AR+3PL\_LAR	&	olurlar	&	ol	&	Aspect=Hab,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Pres	&	2  \\
-%TAM1\_TI+Agr\_SINIZ	&	geldiniz	&	gel	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=2,Polarity=Pos,Tense=Past	&	6  \\
-%TAM1\_TI+Agr\_SINIZ	&	korktunuz	&	kork	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=2,Polarity=Pos,Tense=Past	&	4  \\
-%TAM1\_TI+Agr\_SINIZ	&	konuşsaydınız	&	konuş	&	Aspect=Perf,Mood=Des,Number=Plur,Person=2,Polarity=Pos,Tense=Past	&	3  \\
-%Neg+TAM1\_IYOR+Agr\_IM	&	bilmiyorum	&	bil	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Pres	&	14  \\
-%Neg+TAM1\_IYOR+Agr\_IM	&	istemiyorum	&	iste	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Pres	&	5  \\
-%Neg+TAM1\_IYOR+Agr\_IM	&	anımsamıyorum	&	anımsa	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Neg,Polite=Infm,Tense=Pres	&	3  \\
-%Pass+TAM1\_AR	&	yapılır	&	yap	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Pass	&	5  \\
-%Pass+TAM1\_AR	&	denir	&	de	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Pass	&	3  \\
-%Pass+TAM1\_AR	&	çıkılır	&	çık	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Pres,Voice=Pass	&	2  \\
-%Pass+Vnoun	&	edilme	&	et	&	Aspect=Perf,Case=Nom,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Pass	&	2  \\
-%Pass+Vnoun	&	alınma	&	al	&	Aspect=Perf,Case=Nom,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Pass	&	1  \\
-%Pass+Vnoun	&	yazılmak	&	yaz	&	Aspect=Perf,Case=Nom,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Pass	&	1  \\
-%Pass+Neg	&	inanılmaz	&	inan	&	Aspect=Hab,Mood=Ind,Polarity=Neg,Tense=Pres,VerbForm=Part,Voice=Pass	&	4  \\
-%Pass+Neg	&	yapılmadan	&	yap	&	Aspect=Perf,Mood=Ind,Polarity=Neg,Tense=Pres,VerbForm=Conv,Voice=Pass	&	2  \\
-%Pass+Neg	&	edilmedikçe	&	et	&	Aspect=Perf,Mood=Ind,Polarity=Neg,Tense=Pres,VerbForm=Conv,Voice=Pass	&	1  \\
-%TAM1\_IYOR+3PL\_LAR	&	diyorlar	&	de	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres	&	5  \\
-%TAM1\_IYOR+3PL\_LAR	&	yapıyorlar	&	yap	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres	&	4  \\
-%TAM1\_IYOR+3PL\_LAR	&	oluyorlar	&	ol	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres	&	3  \\
-%TAM1\_MIS1+Gen	&	olmuştur	&	ol	&	Aspect=Perf,Evident=Nfh,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Tense=Past	&	5  \\
-%TAM1\_MIS1+Gen	&	ulaşmıştır	&	ulaş	&	Aspect=Perf,Evident=Nfh,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Tense=Past	&	3  \\
-%TAM1\_MIS1+Gen	&	açmıştır	&	aç	&	Aspect=Perf,Evident=Nfh,Mood=Gen,Number=Sing,Person=3,Polarity=Pos,Tense=Past	&	3  \\
-%Pot+TAM1\_AR	&	olabilir	&	ol	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Tense=Pres	&	14  \\
-%Pot+TAM1\_AR	&	edebilir	&	et	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Tense=Pres	&	2  \\
-%Pot+TAM1\_AR	&	gelebilir	&	gel	&	Aspect=Hab,Mood=Pot,Number=Sing,Person=3,Polarity=Pos,Tense=Pres	&	2  \\
-%TAM1\_IYOR+Agr\_IZ	&	gidiyoruz	&	git	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Polite=Infm,Tense=Pres	&	7  \\
-%TAM1\_IYOR+Agr\_IZ	&	ediyoruz	&	et	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Polite=Infm,Tense=Pres	&	4  \\
-%TAM1\_IYOR+Agr\_IZ	&	düşünüyoruz	&	düşün	&	Aspect=Prog,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Polite=Infm,Tense=Pres	&	3  \\
-%Neg+TAM1\_IYOR	&	olmuyor	&	ol	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Pres	&	7  \\
-%Neg+TAM1\_IYOR	&	etmiyor	&	et	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Pres	&	5  \\
-%Neg+TAM1\_IYOR	&	bilmiyor	&	bil	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Polite=Infm,Tense=Pres	&	3  \\
-%TAM1\_TI+Agr\_SIN	&	anlattın	&	anlat	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Tense=Past	&	5  \\
-%TAM1\_TI+Agr\_SIN	&	yaptın	&	yap	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Tense=Past	&	3  \\
-%TAM1\_TI+Agr\_SIN	&	buldun	&	bul	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=2,Polarity=Pos,Tense=Past	&	3  \\
-%Cau+Pass	&	bastırılmış	&	bas	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Polarity=Pos,Tense=Past,VerbForm=Part,Voice=CauPass	&	2  \\
-%Cau+Pass	&	yansıtıldığını	&	yansı	&	Aspect=Perf,Case=Acc,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Past,VerbForm=Part,Voice=CauPass	&	2  \\
-%Cau+Pass	&	yerleştirilmiş	&	yerleş	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Polarity=Pos,Tense=Past,VerbForm=Part,Voice=CauPass	&	2  \\
-%Neg+TAM1\_TI	&	değildi	&	değil	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Past	&	15  \\
-%Neg+TAM1\_TI	&	olmadı	&	ol	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Past	&	8  \\
-%Neg+TAM1\_TI	&	kalmadı	&	kal	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Past	&	2  \\
-%TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	biliyordum	&	bil	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Past	&	8  \\
-%    \end{tabular}
-%    }
-%    \caption{Caption}
-%    \label{tab:my_label}
-%\end{table}
-%
-%\begin{table}[]
-%    \centering
-%    \resizebox{\textwidth}{!}{
-%    \begin{tabular}{lllllllllllllllllll}
-%TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	bakıyordum	&	bak	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Past	&	3  \\
-%TAM1\_IYOR+TAM2\_DU+Agr\_IM	&	korkuyordum	&	kork	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Past	&	3  \\
-%Pass+TAM1\_IYOR	&	ediliyor	&	et	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Pass	&	5  \\
-%Pass+TAM1\_IYOR	&	getiriliyor	&	getir	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Pass	&	3  \\
-%Pass+TAM1\_IYOR	&	veriliyor	&	ver	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres,Voice=Pass	&	3  \\
-%Pot+Neg	&	anlayamadığı	&	anla	&	Aspect=Perf,Case=Nom,Mood=Pot,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Past,VerbForm=Part	&	1  \\
-%Pot+Neg	&	ödeyemediği	&	öde	&	Aspect=Perf,Mood=Pot,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Past,VerbForm=Part	&	1  \\
-%Pot+Neg	&	anlatamadan	&	anlat	&	Aspect=Perf,Mood=Pot,Polarity=Neg,Tense=Pres,VerbForm=Conv	&	1  \\
-%Pot	&	alabilen	&	al	&	Aspect=Perf,Mood=Pot,Polarity=Pos,Tense=Pres,VerbForm=Part	&	3  \\
-%Pot	&	olabileceği	&	ol	&	Aspect=Perf,Case=Nom,Mood=Pot,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Fut,VerbForm=Part	&	2  \\
-%Pot	&	verebileceklerini	&	ver	&	Aspect=Perf,Case=Acc,Mood=Pot,Number[psor]=Plur,Person[psor]=3,Polarity=Pos,Tense=Fut,VerbForm=Part	&	2  \\
-%TAM1\_ACAK+Agr\_IM	&	yazayım	&	yaz	&	Aspect=Perf,Mood=Opt,Number=Sing,Person=1,Polarity=Pos,Tense=Pres	&	4  \\
-%TAM1\_ACAK+Agr\_IM	&	gitmeliyim	&	git	&	Aspect=Perf,Mood=Nec,Number=Sing,Person=1,Polarity=Pos,Tense=Pres	&	3  \\
-%TAM1\_ACAK+Agr\_IM	&	anlatayım	&	anlat	&	Aspect=Perf,Mood=Opt,Number=Sing,Person=1,Polarity=Pos,Tense=Pres	&	2  \\
-%Cau+TAM1\_TI	&	belirtti	&	belir	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Cau	&	9  \\
-%Cau+TAM1\_TI	&	bildirdi	&	bil	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Cau	&	8  \\
-%Cau+TAM1\_TI	&	indirdi	&	in	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Cau	&	3  \\
-%TAM1\_ACAK+Agr\_IZ	&	bakalım	&	bak	&	Aspect=Perf,Mood=Opt,Number=Plur,Person=1,Polarity=Pos,Tense=Pres	&	9  \\
-%TAM1\_ACAK+Agr\_IZ	&	gidelim	&	git	&	Aspect=Perf,Mood=Opt,Number=Plur,Person=1,Polarity=Pos,Tense=Pres	&	7  \\
-%    \end{tabular}
-%    }
-%    \caption{Caption}
-%    \label{tab:my_label}
-%\end{table}
-%
-%\begin{table}[]
-%    \centering
-%    \resizebox{\textwidth}{!}{
-%    \begin{tabular}{lllllllllllllllllll}
-%    TAM1\_ACAK+Agr\_IZ	&	çıkaralım	&	çıkar	&	Aspect=Perf,Mood=Opt,Number=Plur,Person=1,Polarity=Pos,Tense=Pres	&	2  \\
-%TAM1\_AR+Agr\_IM	&	ederim	&	et	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Pres	&	5  \\
-%TAM1\_AR+Agr\_IM	&	sanırım	&	san	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Pres	&	5  \\
-%TAM1\_AR+Agr\_IM	&	veririm	&	ver	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Pres	&	4  \\
-%TAM1\_ACAK+Agr\_SINIZ	&	bakın	&	bak	&	Aspect=Perf,Mood=Imp,Number=Plur,Person=2,Polarity=Pos,Tense=Pres	&	8  \\
-%TAM1\_ACAK+Agr\_SINIZ	&	bırakın	&	bırak	&	Aspect=Perf,Mood=Imp,Number=Plur,Person=2,Polarity=Pos,Tense=Pres	&	4  \\
-%TAM1\_ACAK+Agr\_SINIZ	&	bakınız	&	bak	&	Aspect=Perf,Mood=Imp,Number=Plur,Person=2,Polarity=Pos,Tense=Pres	&	3  \\
-%Cau+Vnoun	&	uzatma	&	uza	&	Aspect=Perf,Case=Nom,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Cau	&	3  \\
-%Cau+Vnoun	&	öldürme	&	öl	&	Aspect=Perf,Case=Nom,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Cau	&	3  \\
-%Cau+Vnoun	&	öldürmek	&	öl	&	Aspect=Perf,Case=Nom,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Cau	&	3  \\
-%Neg+TAM1\_AR	&	olmaz	&	ol	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Pres	&	18  \\
-%Neg+TAM1\_AR	&	istemez	&	iste	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Pres	&	5  \\
-%Neg+TAM1\_AR	&	gerekmez	&	gerek	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Pres	&	3  \\
-%Neg+TAM1\_ACAK	&	değil	&	değil	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Neg,Tense=Pres	&	49  \\
-%Neg+TAM1\_ACAK	&	değilse	&	değil	&	Aspect=Perf,Mood=Cnd,Number=Sing,Person=3,Polarity=Neg,Tense=Pres	&	5  \\
-%Neg+TAM1\_ACAK	&	olmasın	&	ol	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=3,Polarity=Neg,Tense=Pres	&	5  \\
-%TAM1\_TI+3PL\_LAR	&	dediler	&	de	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Past	&	5  \\
-%TAM1\_TI+3PL\_LAR	&	söylediler	&	söyle	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Past	&	5  \\
-%TAM1\_TI+3PL\_LAR	&	çıktılar	&	çık	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=3,Polarity=Pos,Tense=Past	&	4  \\
-%Pass+Vnoun+Sing3	&	yapılması	&	yap	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Pass	&	3  \\
-%Pass+Vnoun+Sing3	&	alınması	&	al	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Pass	&	3  \\
-%Pass+Vnoun+Sing3	&	getirilmesi	&	getir	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun,Voice=Pass	&	3  \\
-%Pass+TAM1\_TI	&	edildi	&	et	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Pass	&	9  \\
-%Pass+TAM1\_TI	&	katıldı	&	kat	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Pass	&	5  \\
-%Pass+TAM1\_TI	&	istendi	&	iste	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past,Voice=Pass	&	3  \\
-%TAM1\_TI+Agr\_K	&	girdik	&	gir	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Past	&	8  \\
-%TAM1\_TI+Agr\_K	&	gittik	&	git	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Past	&	7  \\
-%TAM1\_TI+Agr\_K	&	geldik	&	gel	&	Aspect=Perf,Mood=Ind,Number=Plur,Person=1,Polarity=Pos,Tense=Past	&	5  \\
-%TAM1\_IYOR+Agr\_IM	&	biliyorum	&	bil	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Pres	&	12  \\
-%TAM1\_IYOR+Agr\_IM	&	istiyorum	&	iste	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Pres	&	9  \\
-%TAM1\_IYOR+Agr\_IM	&	sanıyorum	&	san	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Polite=Infm,Tense=Pres	&	7  \\
-%TAM1\_ACAK	&	olsa	&	ol	&	Aspect=Perf,Mood=Cnd,Number=Sing,Person=3,Polarity=Pos,Tense=Pres	&	17  \\
-%TAM1\_ACAK	&	olsun	&	ol	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=3,Polarity=Pos,Tense=Pres	&	16  \\
-%TAM1\_ACAK	&	olmalı	&	ol	&	Aspect=Perf,Mood=Nec,Number=Sing,Person=3,Polarity=Pos,Tense=Pres	&	4  \\
-%TAM1\_IYOR+TAM2\_DU	&	geliyordu	&	gel	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Past	&	9  \\
-%TAM1\_IYOR+TAM2\_DU	&	oturuyordu	&	otur	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Past	&	7  \\
-%TAM1\_IYOR+TAM2\_DU	&	bakıyordu	&	bak	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Past	&	6  \\
-%Vnoun+Sing3	&	olması	&	ol	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	18  \\
-%Vnoun+Sing3	&	etmesi	&	et	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	5  \\
-%Vnoun+Sing3	&	olmasını	&	ol	&	Aspect=Perf,Case=Acc,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	5  \\
-%Cau	&	belirten	&	belir	&	Aspect=Perf,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Part,Voice=Cau	&	5  \\
-%Cau	&	belirterek	&	belir	&	Aspect=Perf,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Conv,Voice=Cau	&	5  \\
-%Cau	&	ürkütücü	&	ürk	&	Aspect=Perf,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Part,Voice=Cau	&	4  \\
-%TAM1\_ACAK+Agr\_SIN	&	var	&	var	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=2,Polarity=Pos,Tense=Pres	&	29  \\
-%TAM1\_ACAK+Agr\_SIN	&	bak	&	bak	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=2,Polarity=Pos,Tense=Pres	&	12  \\
-%TAM1\_ACAK+Agr\_SIN	&	gel	&	gel	&	Aspect=Perf,Mood=Imp,Number=Sing,Person=2,Polarity=Pos,Tense=Pres	&	6  \\
-%TAM1\_MIS1	&	olmuş	&	ol	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past	&	14  \\
-%TAM1\_MIS1	&	demiş	&	de	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past	&	11  \\
-%TAM1\_MIS1	&	etmiş	&	et	&	Aspect=Perf,Evident=Nfh,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past	&	9  \\
-%Neg	&	olmadığını	&	ol	&	Aspect=Perf,Case=Acc,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Past,VerbForm=Part	&	15  \\
-%Neg	&	olmayan	&	ol	&	Aspect=Perf,Mood=Ind,Polarity=Neg,Tense=Pres,VerbForm=Part	&	9  \\
-%Neg	&	olmadığı	&	ol	&	Aspect=Perf,Case=Nom,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Neg,Tense=Past,VerbForm=Part	&	9  \\
-%TAM1\_AR	&	olur	&	ol	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Pres	&	30  \\
-%TAM1\_AR	&	eder	&	et	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Pres	&	8  \\
-%TAM1\_AR	&	ister	&	iste	&	Aspect=Hab,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Pres	&	8  \\
-%TAM1\_IYOR	&	diyor	&	de	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres	&	21  \\
-%TAM1\_IYOR	&	oluyor	&	ol	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres	&	18  \\
-%TAM1\_IYOR	&	geliyor	&	gel	&	Aspect=Prog,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Polite=Infm,Tense=Pres	&	16  \\
-%TAM1\_TI+Agr\_IM	&	dedim	&	de	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Past	&	54  \\
-%TAM1\_TI+Agr\_IM	&	ettim	&	et	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Past	&	11  \\
-%TAM1\_TI+Agr\_IM	&	gördüm	&	gör	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=1,Polarity=Pos,Tense=Past	&	11  \\
-%Pass	&	yapılan	&	yap	&	Aspect=Perf,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Part,Voice=Pass	&	17  \\
-%Pass	&	yapılacak	&	yap	&	Aspect=Perf,Mood=Ind,Polarity=Pos,Tense=Fut,VerbForm=Part,Voice=Pass	&	13  \\
-%Pass	&	verilen	&	ver	&	Aspect=Perf,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Part,Voice=Pass	&	6  \\
-%Vnoun	&	demek	&	de	&	Aspect=Perf,Case=Nom,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	22  \\
-%Vnoun	&	olmak	&	ol	&	Aspect=Perf,Case=Nom,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	14  \\
-%Vnoun	&	savunma	&	savun	&	Aspect=Perf,Case=Nom,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Vnoun	&	11  \\
-%TAM1\_TI	&	dedi	&	de	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past	&	176  \\
-%TAM1\_TI	&	oldu	&	ol	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past	&	47  \\
-%TAM1\_TI	&	söyledi	&	söyle	&	Aspect=Perf,Mood=Ind,Number=Sing,Person=3,Polarity=Pos,Tense=Past	&	36  \\
-%	&	olan	&	ol	&	Aspect=Perf,Mood=Ind,Polarity=Pos,Tense=Pres,VerbForm=Part	&	104  \\
-%	&	olduğunu	&	ol	&	Aspect=Perf,Case=Acc,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Past,VerbForm=Part	&	51  \\
-%	&	olduğu	&	ol	&	Aspect=Perf,Mood=Ind,Number[psor]=Sing,Person[psor]=3,Polarity=Pos,Tense=Past,VerbForm=Part	&	39  \\
-%    \end{tabular}
-%    }
-%    \caption{Caption}
-%    \label{tab:my_label}
-%\end{table}
 
 
 \subsection{Hungarian Verb Suffixes}
@@ -1608,16 +1038,16 @@ Ind & Pres   &  I    & teszek &	teszel &	tesz &	teszünk &	tesztek &	tesznek \\
    &&  D    & teszem &	teszed &	teszi &	tesszük &	teszitek &	teszik \\
    &&       & csinálom &	csinálod &	csinálja &	csináljuk &	csináljátok &	csinálják \\
   &&& ismerem &	ismered &	ismeri &ismerjük &	ismeritek &	ismerik \\
-&&      & -EM &	-ED &	-E &	-I-UK &	-I-TEK &	-I-EK \\ \hline
+&&      & -EM &	-ED &	-I &	-I-UK &	-I-TEK &	-I-EK \\ \hline
    &&      & teszlek \\ \hline\hline
 & Past &     I    &tettem &	tettél &	tett &	tettünk &	tettetek &	tettek \\
 &      &          & csináltam &	csináltál &	csinált &	csináltunk &	csináltatok &	csináltak \\
 &&&ismertem &	ismertél &	ismert &	ismertünk &	ismertetek &	ismertek \\
-	    &  &         &-T-EM &	-T-EL &	-T &	-T-UNK &	-T-TEK &	-T-\textcolor{red}{EK} \\ \hline
+	    &  &         &-T-EM &	-T-EL &	-T &	-T-UNK &	-T-TEK &	-T-EK \\ \hline
  & &   D    &tettem &	tetted &	tette &	tettük &	tettétek &	tették \\
  & &        & csináltam &	csináltad &	csinálta &	csináltuk &	csináltátok &	csinálták \\
 &&& ismertem &	ismerted &	ismerte &	ismertük &	ismertétek 	&ismerték \\
-	    & &       &-T-EM &	-T-ED &	-T-E &	-T-UK &	-T-I-TEK &	-T-\textcolor{red}{I}-EK \\ \hline
+	    & &       &-T-EM &	-T-ED &	-T-I &	-T-UK &	-T-I-TEK &	-T-I-EK \\ \hline
   &&       &tettelek \\ \hline
 Cond  &Pres &   I    &tennék &	tennél &	tenne &	tennénk &	tennétek &	tennének \\
       &     &        & csinálnék &	csinálnál &	csinálna &	csinálnánk 	&csinálnátok &	csinálnának \\
@@ -1626,7 +1056,7 @@ Cond  &Pres &   I    &tennék &	tennél &	tenne &	tennénk &	tennétek &	tennén
    &&  D    &tenném &	tennéd &	tenné &	tennénk &	tennétek &	tennék \\
    &&       & csinálnám &	csinálnád &	csinálná &	csinálnánk &	csinálnátok &	csinálnák \\
  &&&  ismerném &	ismernéd &	ismerné &	ismernénk 	&ismernétek &	ismernék \\
-&&      &-N-EM &	-N-ED &	-N-E &	-N-ENK &	-N-TEK &	-N-EK \\ \hline
+&&      &-N-EM &	-N-ED &	-N-I &	-N-ENK &	-N-TEK &	-N-EK \\ \hline
        &&  &tennélek \\ \hline
 Subj & Pres & I         &tegyek &	tégy or tegyél &	tegyen &	tegyünk &	tegyetek &	tegyenek \\
      &      &           & csináljak &	csinálj or
@@ -1640,7 +1070,7 @@ csináljad &	csinálja &	csináljuk &	csináljátok &	csinálják \\
 &&&ismerjem &	ismerd or
 ismerjed &	ismerje &	ismerjük &	ismerjétek & ismerjék
  \\
-&&         &-J-EM &	-ED or -J-ED &	-J-E &	-J-UK & 	-J-I-TEK &	-J-I-EK \\ \hline
+&&         &-J-EM &	-ED or -J-ED &	-J-I &	-J-UK & 	-J-I-TEK &	-J-I-EK \\ \hline
   &&       &tegyelek \\
     \end{tabular}
     }
@@ -1651,24 +1081,28 @@ ismerjed &	ismerje &	ismerjük &	ismerjétek & ismerjék
 \begin{table}
     \centering
     \begin{tabular}{lllllllll}
+    \hline
 Valence	    & AT & Causative \\ \hline
-Mood	    & HET & Potential \\\hline
-Finiteness  & NI & Infinitive \\\hline
-Mood/Tense& T & indicative past \\
+Mood	    & HET & Potential \\
          & N & conditional \\
          & J & subjunctive \\
+\hline
+Tense& T & indicative past \\
          \hline
-Definiteness & I & definite 2/3pl \\
-         \hline
-Agreement/Definiteness/Tense         & EK & 1sg indefinite present\\
+Finiteness  & NI & Infinitive \\
+\hline
+%Definiteness & I & definite 2/3pl \\
+%         \hline
+Agreement (Obj+Subj)         & EK & 1sg indefinite present\\
          & EL & 2sg present\\
          & UNK & 1pl present\\
          & TEK & 2pl\\
          & NEK & 3pl present\\
          & EM & 1sg past or definite \\
          & ED & 2sg definite \\
+         \hline
     \end{tabular}
-    \caption{Caption}
+    \caption{Hungarian verb suffixes}
     \label{tab:my_label}
 \end{table}
 
