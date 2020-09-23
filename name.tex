@@ -20,6 +20,10 @@
 \usepackage{CJKutf8}
 \newcommand{\korean}[1]{\begin{CJK}{UTF8}{mj}#1\end{CJK}}
 
+\usepackage{tikz}
+
+
+\usepackage{colortbl}
 
 %\usepackage{xeCJK}
 
@@ -60,6 +64,7 @@
 \newcommand{\nopreview}[1]{}
 \newcommand\comment[1]{{\color{red}#1}}
 \newcommand\mhahn[1]{{\color{red}(#1)}}
+\newcommand\becky[1]{{\color{blue}(#1)}}
 \newcommand\note[1]{{\color{red}(#1)}}
 \newcommand\jd[1]{{\color{red}(#1)}}
 \newcommand\rljf[1]{{\color{red}(#1)}}
@@ -266,13 +271,17 @@ Information locality has had success as a predictor of word order \citep{futrell
 
 \subsection{Data} % TODO: Becky
 % why agglutinative?
-We considered:
 
-- UD data for Japanese, Korean, Turkish, Hungarian, Finnish
+We are interested in analyzing languages in which words have easily separable morphemes and have a tendency to have more than two morphemes per word, because that allows us to vary morphemes distances. As such, we considered agglutinative languages that have morpheme-segmented corpora available. The language sample includes Universal Dependencies (UD) corpora for Japanese, Korean, Turkish, Hungarian, and Finnish (CITE). In addition, we use the Child Language Data Exchange System (CHILDES) Sesotho corpus (CITE). 
 
-- CHILDES data for Sesotho
+The Korean, Japanese, and Sesotho corpora have words segmented into the grapheme representations of their morphemes. However, the Turkish, Hungarian, and Finnish corpora do not segment the words into morphemes, but rather include a list of features (such as person, number, voice, etc.) present in each word. We built segmenters to reconstruct the order of morphemes in each word from those feature labels \becky{TODO: see Appendix?} \mhahn{Yes, I think we can explain in the main paper what data we collected in linguistic terms (e.g. finite verb forms, what we did with auxiliaries), and in the appendix discuss what steps were needed to do this. The technical details don't have to be 100\% there since the code will be available to the reviewers and readers.}.
 
 The Sesotho and Japanese data was previously used by CITE; we reanalyze these data here in a way consistent across all six languages.
+
+\begin{itemize}
+    \item Grapheme, label, phoneme for Korean
+    \item Fine versus coarse for Turkish, Hungarian, Finnish
+\end{itemize}
 
 
 \subsection{Nouns}
@@ -289,7 +298,7 @@ The Sesotho and Japanese data was previously used by CITE; we reanalyze these da
 \begin{enumerate}
     \item Number
     \item Possessor person
-    \item Possessor number
+    \item Possessor number \becky{Missing in citation}
     \item Case 
 \end{enumerate}
 
@@ -303,12 +312,34 @@ The Sesotho and Japanese data was previously used by CITE; we reanalyze these da
 
 \subsection{Verbs}
 
-\paragraph{Hungarian Verbs}
+\begin{table}[]
+    \centering
+\begin{tabular}{l||l|l|l|l|l|l|llll}
+                    & Turkish & Hungarian & Finnish  & Sesotho Pref.     & Ses Suff. & Japanese & Korean\\ \hline\hline
+Derivation          &  &         &          &               & Reversive & suru    & ha,i\\ \hline
+Valence             &  Causative &         &           & Object marker & Valence & Causative\\ \hline
+Voice               & Passive & Passive    & Passive     &               & Passive & Passive\\ \hline
+TAM, Pol.           & Negation  &   Potential  &   Tense/Asp &    Negation &  Politeness &      Potential        & Formality\\
+                    & Potential & Tense        &    Mood     &     Tense   &    Mood     &   Honorific  &  Mood I         \\
+                    &   TAM1    &          &                &         &                  & Tense/Aspect &  Mood II\\
+                    & lar       &          &           &  & & Negation \\
+                    & TAM2         &           &               &          &             &  \\ \hline
+Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
+\textit{Other}               & Formality          & Clitic    &              & Int/Rel &      &        & Politeness \\
+                    &           &     &              &  &          &    & Conj \\
+\end{tabular}
+    \caption{Morpheme order across the six languages in our sample, matched with the universal order described by \cite{bybee-morphology-1985}.}
+    \label{tab:my_label}
+\end{table}
+
+
+
+\paragraph{Hungarian Verbs} \url{https://cl.lingfil.uu.se/~bea/publ/megyesi-hungarian.pdf}
 \begin{enumerate}
-    \item Voice
-    \item Tense 
+    \item Voice \becky{Missing in citation}
     \item Mood
-    \item Definiteness, person, and number
+    \item Tense \mhahn{Potential mood appears in front of Tense, so I changed from Tense--Mood to Mood -- Tense as the order here.}
+    \item Definiteness, person, and number: This suffix indicates the definiteness or indefiniteness of the direct object of the verb, as well as the person and number of the subject performing the verb. 
 \end{enumerate}
 
 \paragraph{Turkish Verbs}
@@ -322,6 +353,25 @@ The Sesotho and Japanese data was previously used by CITE; we reanalyze these da
     \item Person and Number
     \item Formality
 \end{enumerate}
+
+\mhahn{I've changed this to the following}
+\begin{enumerate}
+    \item Valence (Causative -tir-)
+    \item Voice (Passive -il-)
+    \item Negation / polarity (Negation -ma-)
+    \item Mood (Potential -bil-)
+    \item TAM1: Tense, Aspect, Mood, Evidential
+    \item 3rd Plural (-lar-)
+    \item TAM2: Tense, Aspect, Mood, Evidential
+    \item Subject agreement (incorporating TAM information)
+    \item Formality (polite -makta-)
+    \item Genitive (-dir-)
+    \item Verbal Noun (-mak)
+    \item Possessive agreement
+\end{enumerate}
+
+
+
 
 \paragraph{Finnish Verbs}
 \begin{enumerate}
@@ -453,6 +503,7 @@ wish  & &  Assertive && & informal & polite \\
 
 \section{Results}
 
+
 \begin{figure}
     \centering
     \includegraphics[width=0.4\textwidth]{figures/Hungarian-suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
@@ -464,11 +515,70 @@ wish  & &  Assertive && & informal & polite \\
     \label{fig:my-label}
 \end{figure}
 
+
+\begin{table}[]
+    \centering
+    Turkish
+    
+
+    
+\begin{tikzpicture}[%
+  % common options for blocks:
+  block/.style = {draw, fill=blue!30, align=center, anchor=west,
+              minimum height=0.65cm, inner sep=0},
+  % common options for the circles:
+  ball/.style = {circle, draw, align=center, anchor=north, inner sep=0}]
+\node[rectangle,text width=1.2cm,anchor=base] (A1) at (1,-1) {VAL};
+\node[rectangle,text width=1.2cm,anchor=base] (A2) at (1,-1.5) {VOICE};
+\node[rectangle,text width=1.2cm,anchor=base] (A3) at (1,-2) {POLAR};
+\node[rectangle,text width=1.2cm,anchor=base] (A4) at (1,-2.5) {POLITE};
+\node[rectangle,text width=1.2cm,anchor=base] (A5) at (1,-3) {MOOD};
+\node[rectangle,text width=1.2cm,anchor=base] (A6) at (1,-3.5) {TAM1};
+\node[rectangle,text width=1.2cm,anchor=base] (A7) at (1,-4) {3PL};
+\node[rectangle,text width=1.2cm,anchor=base] (A8) at (1,-4.5) {TAM2};
+\node[rectangle,text width=1.2cm,anchor=base] (A9) at (1,-5) {Vnoun};
+\node[rectangle,text width=1.2cm,anchor=base] (A10) at (1,-5.5) {Agr};
+\node[rectangle,text width=1.2cm,anchor=base] (A11) at (1,-6) {Gen};
+\node[rectangle,text width=1.2cm,anchor=base] (A12) at (1,-6.5) {Numpers};
+
+\node[rectangle,text width=0.9cm,anchor=base] (B1) at (4,-1) {VAL};
+\node[rectangle,text width=0.9cm,anchor=base] (B2) at (4,-1.5) {VOICE};
+\node[rectangle,text width=0.9cm,anchor=base] (B3) at (4,-2) {POLAR};
+\node[rectangle,text width=0.9cm,anchor=base] (B4) at (4,-2.5) {POLITE};
+\node[rectangle,text width=0.3cm,anchor=base] (B5) at (4,-3) {TAM1};
+\node[rectangle,text width=0.3cm,anchor=base] (B6) at (4,-3.5) {TAM2};
+\node[rectangle,text width=0.3cm,anchor=base] (B7) at (4,-4) {3PL};
+\node[rectangle,text width=0.3cm,anchor=base] (B8) at (4,-4.5) {Gen};
+\node[rectangle,text width=0.3cm,anchor=base] (B9) at (4,-5) {Vnoun};
+\node[rectangle,text width=0.3cm,anchor=base] (B10) at (4,-5.5) {NUMPERS};
+\node[rectangle,text width=0.3cm,anchor=base] (B11) at (4,-6) {MOOD};
+\node[rectangle,text width=0.3cm,anchor=base] (B12) at (4,-6.5) {Agr};
+
+\draw[->] (A1.east) to (B1.west);
+\draw[->] (A2.east) to  (B2.west);
+\draw[->] (A3.east) to  (B3.west);
+\draw[->] (A4.east) to (B4.west);
+\draw[->] (A5.east) to  (B11.west);
+\draw[->] (A6.east) to (B5.west);
+\draw[->] (A7.east) to  (B7.west);
+\draw[->] (A8.east) to  (B6.west);
+\draw[->] (A9.east) to (B9.west);
+\draw[->] (A10.east) to (B12.west);
+\draw[->] (A11.east) to (B8.west);
+\draw[->] (A12.east) to (B10.west);
+\end{tikzpicture}
+    \caption{Real and optimized ordering \mhahn{TODO I'll write a script to generate these pictures for all languages}}
+    \label{tab:my_label}
+\end{table}
+
+
+
+
 \section{Discussion}
 
 We have examined morpheme order in nouns and verbs in six languages, testing the recently propiosed Efficient Tradeoff Hypothesis \citep{hahn2020modeling} as an explanatory account of morpheme ordering.
 We compared actual morpheme orderings to other possible orderings and to orderings optimized for efficiency of the memory-surprisal tradeoff.
-In most cases, we found that the real ordering provided almost more efficient tradeoffs than most alternative orderings.
+In most cases, we found that the real ordering provided almost more efficient tradeoffs than most alternative orderings. \becky{Why does this say ``almost more efficient"?}
 More importantly, we found that the real orderings match the optimal orderings in many respects.
 Ordering forms found in a corpus according according to real or optimized orderings yields the same orders in XXX of cases.
 In some cases, particlarly for noun inflection, match between real and optimized orderings is perfect.
@@ -480,7 +590,11 @@ In some cases, particlarly for noun inflection, match between real and optimized
 In this section, we discuss the linguistic literature on morpheme ordering.
 
 \paragraph{Meaning and Scope}
+As mentioned in section \becky{cite S2}, Bybee proposes a concept of \textit{semantic relevance}, which is the degree to which one morpheme affects the semantic content of the other \becky{cite bybee}. She hypothesizes that morphemes that are more highly relevant to each other should be closer to each other, and therefore proposes a universal ordering of verbal inflectional morphemes. For example, attaching a causative marker to a root meaning "to die" produces a verb form meaning "to kill." Since the causative greatly changes the semantic content of the original root, the causative is highly relevant to the root. 
 
+\becky{Format Korean example of juk-da ``to kill" and juk-i-da ``to die"}
+
+Bybee did not provide a way to computationally measure semantic relevance. However, our optimized orders of Turkish and Hungarian \becky{Are there other languages?} perfectly match Bybee's proposed universal verbal inflection order \becky{need a figure comparing optimized order to Bybee's order}. This suggests that high mutual information generally correlates with semantic relevance. 
 
 Besides Bybee's account in terms of relevance, there are also accounts focusing on semantic scope \citep{rice2000morpheme}.
 
@@ -618,30 +732,30 @@ We show morphemes occurring at least 50 times in slots 1-8 in Figure~\ref{tab:ko
 
 Frequent morphemes:
 \begin{table}
-\resizebox{\textwidth}{!}{
+\resizebox{1.2\textwidth}{!}{
 \begin{tabular}{llllllllll}
-Slot & Identifier in our code & Short & Frequency & Description & Citation \\ \hline\hline
-Derivation & adj-\korean{하} & HA$_2$ &	 68 & & \citep[4.1.2]{yeon2010korean}\\
-& predicative-i & I$_2$ &	 3947 && \citep[4.1.4]{yeon2010korean} \\ \hline
-Honorific & honorific-s 	& SI$_3$ & 99 & &\citep[4.3.2, 4.4.1]{yeon2010korean}\\\hline
-Tense/Aspect & remote-past-\korean{었었} 	& ESSESS$_4$ &  56&& \citep[4.5.1.2]{yeon2010korean} \\
-&assertive/strong-will-get 	& GET$_4$ & 355 && \citep[4.5.2.1]{yeon2010korean}\\
-&past &ESS$_4$ &	 9720 && \citep[4.5.1.1]{yeon2010korean}\\\hline
-Formality & formal-polite-p &P$_5$ &	 1761 & &\citep[4.3.2]{yeon2010korean}\\\hline
-Mood 1&I-guess-ri & RI$_6$ &	 70 \\
-&formal-polite-ni 	&NI$_6$ & 1700 && \citep[4.3.2]{yeon2010korean}\\
-&indicative-n 	&N$_6$ &5069 & TODO  \\\hline
-Mood 2&hortative-formal-polite-sida & SIDA$_7$ & 	 51 & Hortative, formal, polite \\
-& indicative-informal-\korean{어} 	& EO$_7$ & 62 & Indicative, informal\\
-& hortative-formal-nonpolite-\korean{자} & JA$_7$&	 163 & Hortative, formal, nonpolite & \citep[4.3.6.3]{yeon2010korean}\\
-& declarative-haoche-\korean{소} &SO$_7$  &	 194 & Declarative, informal\\
-& interrogative-lkka & LKKA$_7$&	 200 & Interrogative & \citep[8.9]{yeon2010korean} \\
-& semiformal-\korean{오} & O$_7$ &	 226 & See Table~\ref{tab:korean-styles} \\
+Slot & Morphs & Short & Freq. & Description & Citation \\ \hline\hline
+Derivation & \korean{하} & HA$_2$ &	 68 & & \citep[4.1.2]{yeon2010korean}\\
+& i & I$_2$ &	 3947 && \citep[4.1.4]{yeon2010korean} \\ \hline
+Honorific & si 	& SI$_3$ & 99 & &\citep[4.3.2, 4.4.1]{yeon2010korean}\\\hline
+Tense/Asp. & \korean{었었} 	& ESSESS$_4$ &  56&& \citep[4.5.1.2]{yeon2010korean} \\
+&get 	& GET$_4$ & 355 & assertive & \citep[4.5.2.1]{yeon2010korean}\\
+& &ESS$_4$ &	 9720 & past& \citep[4.5.1.1]{yeon2010korean}\\\hline
+Formality & p &P$_5$ &	 1761 & formal-polite &\citep[4.3.2]{yeon2010korean}\\\hline
+Mood 1&ri & RI$_6$ &	 70 & I-guess-\\
+&ni 	&NI$_6$ & 1700 && \citep[4.3.2]{yeon2010korean}\\
+&n 	&N$_6$ &5069 & TODO  \\\hline
+Mood 2&sida & SIDA$_7$ & 	 51 & Hortative, formal, polite \\
+& \korean{어} 	& EO$_7$ & 62 & Indicative, informal\\
+& \korean{자} & JA$_7$&	 163 & Hortative, formal, nonpolite & \citep[4.3.6.3]{yeon2010korean}\\
+& \korean{소} &SO$_7$  &	 194 & See Table~\ref{tab:korean-styles} \\
+& lkka & LKKA$_7$&	 200 & Interrogative & \citep[8.9]{yeon2010korean} \\
+& \korean{오} & O$_7$ &	 226 & See Table~\ref{tab:korean-styles} \\
 & ji & JI$_7$ &	 260 &    & \citep[4.2.2-3]{yeon2010korean}\\
-& interrogative-ka 	& KA$_7$ & 485 & Interrogative & \citep[4.3.4, p. 175; p. 183]{yeon2010korean} \\
+& ka 	& KA$_7$ & 485 & Interrogative & \citep[4.3.4, p. 175; p. 183]{yeon2010korean} \\
 & ra &RA$_7$ \korean{라} &	 959 & plain style command & \citep[4.3.6.4]{yeon2010korean} \\
-& declarative-da & DA$_7$ &	 23035 & Declarative & \citep[4.3.2]{yeon2010korean} &  \\\hline
-Polite & POLITE-polite-\korean{요} & YO$_8$&	 267 & See Table~\ref{tab:korean-styles} \\
+& da & DA$_7$ &	 23035 & Declarative & \citep[4.3.2]{yeon2010korean} &  \\\hline
+Polite & \korean{요} & YO$_8$&	 267 & See Table~\ref{tab:korean-styles} \\
 \end{tabular}
 }
 \caption{Frequent Korean verb suffixes in slots 1-8.}\label{tab:korean-frequent-morphemes}
@@ -766,21 +880,26 @@ Motive && \korean{하려고} \\
            &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
     \multirow{6}{*}{Indicative}         & Non-past  & \korean{있다} & \korean{있어} & \korean{있어요} & \korean{있습니다} \\
          &  &  \korean{있+다} & \korean{있+어} & \korean{있+어+요} & \korean{있+습니다}\\
+         &  &  -DA            & -EO            & -EO-YO            & -P-NI-DA \\
          &  & +ef & +ef & +ef+jxf & +ef \\
          \hline
  & Past & \korean{있었다} & \korean{있었어} & \korean{있었어요} & \korean{있었습니다} \\
          &  & \korean{있+었+다} & \korean{있+었+어} & \korean{있+었+어+요} & \korean{있+었+습니다}\\
+         && -ESS-DA            & ESS-EO             & ESS-EO-YO & -ESS-P-NI-DA \\
          &  & +ep+ef & +ep+ef & +ep+ef+jxf & +ep+ef \\
          \hline
 \multirow{6}{*}{Interrogative} & Non-past  & \korean{있느냐} & \korean{있어} & \korean{있어요} & \korean{있습니까} \\
+&& -NEUNYA & -EO & -EO-YO & -P-NIKKA \\
          &  & \korean{있+느냐} & \korean{있+어} & \korean{있+어+요} & \korean{있+습니까}\\
          &  & +ef              & +ef  & +ef+jxf & +ef\\
          \hline
          & Past & \korean{있었느냐} & \korean{있었어} & \korean{있었어요} & \korean{있었습니까} \\
+         && -ESS-NEUNYA & -ESS-EO & -ESS-EO-YO & -ESS-P-NIKKA \\
          &  & \korean{있+었+느냐} & \korean{있+었+어} & \korean{있+었+어+요}\\
          &  & +ep+ef & paa+ep+ef &  paa+ep+ef+jxf\\
          \hline
 \multirow{3}{*}{Assertive} &  & \korean{있겠다} & \korean{있겠어} & \korean{있겠어요} & \korean{있겠습니다} \\
+&& -GESS-DA & -GESS-EO & -GESS-EO-YO & -GESS-P-NI-DA \\
          &  & \korean{있+겠+다} & \korean{} & \korean{있+겠+어+요} & \korean{있+겠+습니다}\\
          &  & +ep+f             &           & paa+ep+ef+jxf & paa+ep+ef\\
     \end{tabular}
@@ -820,187 +939,6 @@ Motive && \korean{하려고} \\
     \label{tab:my_label}
 \end{table}
 
-
-\begin{table}[]
-    \centering
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{llllll}
-    \korean{따라}	&	\korean{따르+아}	&	pvg+ecs	&	CONNECTOR-infinitive-a/eo	&	6154 \\
-\korean{있었다}	&	\korean{있+었+다}	&	paa+ep+ef	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	4385 \\
-\korean{것이다}	&	\korean{것+이+다}	&	nbn+jp+ef	&	DERIVATION-predicative-i+PRAGMATICMOOD-declarative-da	&	3922 \\
-\korean{있다}	&	\korean{있+다}	&	paa+ef	&	PRAGMATICMOOD-declarative-da	&	2871 \\
-\korean{한다}	&	\korean{하+ㄴ다}	&	px+ef	&	SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da	&	2835 \\
-\korean{않고}	&	\korean{않+고}	&	px+ecc	&	CONNECTOR-go	&	1898 \\
-\korean{크게}	&	\korean{크+게}	&	paa+ecs	&	CONNECTOR-so-that-ge	&	1369 \\
-\korean{시작했다}	&	\korean{시작+하+었+다}	&	ncpa+xsv+ep+ef	&	DERIVATION-verb-\korean{하}+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	1232 \\
-\korean{보면}	&	\korean{보+면}	&	pvg+ecs	&	CONNECTOR-conditional-myeon	&	1133 \\
-\korean{생각해}	&	\korean{생각+하+어}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-infinitive-a/eo	&	1106 \\
-\korean{있어서}	&	\korean{있+어서}	&	paa+ecs	&	CONNECTOR-conjunctive-aseo	&	871 \\
-\korean{하지}	&	\korean{하+지}	&	pvg+ecx	&	CONNECTOR-ecx-ji	&	864 \\
-\korean{것이었다}	&	\korean{것+이+었+다}	&	nbn+jp+ep+ef	&	DERIVATION-predicative-i+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	851 \\
-\korean{있습니다}	&	\korean{있+습니다}	&	px+ef	&	FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	603 \\
-\korean{의미한다}	&	\korean{의미+하+ㄴ다}	&	ncpa+xsv+ef	&	DERIVATION-verb-\korean{하}+SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da	&	590 \\
-\korean{것입니다}	&	\korean{것+이+ㅂ니다}	&	nbn+jp+ef	&	DERIVATION-predicative-i+FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	556 \\
-\korean{시작되었다}	&	\korean{시작+되+었+다}	&	ncpa+xsv+ep+ef	&	DERIVATION-denominal-\korean{되}+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	500 \\
-\korean{불구하고}	&	\korean{불구+하+고}	&	ncpa+xsv+ecs	&	DERIVATION-verb-\korean{하}+CONNECTOR-go	&	481 \\
-\korean{포함되어}	&	\korean{포함+되+어}	&	ncpa+xsv+ecx	&	DERIVATION-denominal-\korean{되}+CONNECTOR-infinitive-a/eo	&	440 \\
-\korean{아니라}	&	\korean{아니+라}	&	paa+ecs	&	PRAGMATICMOOD-ra	&	394 \\
-\korean{같이}	&	\korean{같+이}	&	paa+ecs	&	CONNECTOR-connector-i	&	384 \\
-\korean{생각된다}	&	\korean{생각+되+ㄴ다}	&	ncpa+xsv+ef	&	DERIVATION-denominal-\korean{되}+SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da	&	348 \\
-\korean{있어야}	&	\korean{있+어야}	&	paa+ecx	&	CONNECTOR-conjunctive-aya	&	305 \\
-\korean{중요하다}	&	\korean{중요+하+다}	&	ncps+xsm+ef	&	DERIVATION-adj-\korean{하}+PRAGMATICMOOD-declarative-da	&	251 \\
-\korean{생각하게}	&	\korean{생각+하+게}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-so-that-ge	&	239 \\
-\korean{있다고}	&	\korean{있+다고}	&	px+ecs	&	PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	232 \\
-\korean{있지만}	&	\korean{있+지만}	&	paa+ecs	&	CONNECTOR-but-jiman	&	228 \\
-\korean{존재하지}	&	\korean{존재+하+지}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-ecx-ji	&	220 \\
-\korean{것이라고}	&	\korean{것+이+라+고}	&	nbn+jp+ef+jcr	&	DERIVATION-predicative-i+PRAGMATICMOOD-ra+CONNECTOR-go	&	179 \\
-\korean{한다고}	&	\korean{하+ㄴ다고}	&	px+ecs	&	SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	164 \\
-\korean{있도록}	&	\korean{있+도록}	&	paa+ecs	&	CONNECTOR-in-order-to-dorok	&	158 \\
-\korean{있는데}	&	\korean{있+는데}	&	px+ecs	&	CONNECTOR-informal-nonpolite-contrast-neunde	&	155 \\
-\korean{것인가}	&	\korean{것+이+ㄴ가}	&	nbn+jp+ef	&	DERIVATION-predicative-i+PRAGMATICMOOD-interrogative-(neu)nka	&	150 \\
-\korean{사용되고}	&	\korean{사용+되+고}	&	ncpa+xsv+ecx	&	DERIVATION-denominal-\korean{되}+CONNECTOR-go	&	150 \\
-\korean{있었다고}	&	\korean{있+었+다+고}	&	paa+ep+ef+jcr	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	147 \\
-\korean{보자}	&	\korean{보+자}	&	px+ef	&	PRAGMATICMOOD-hortative-formal-nonpolite-\korean{자}	&	139 \\
-\korean{있으며}	&	\korean{있+으며}	&	px+ecs	&	CONNECTOR-as/while-myeo	&	134 \\
-\korean{본다면}	&	\korean{보+ㄴ다면}	&	pvg+ecs	&	CONNECTOR-conditional-\korean{ㄴ다면}	&	130 \\
-\korean{해도}	&	\korean{하+어도}	&	pvg+ecs	&	CONNECTOR-even-if/although-eodo	&	129 \\
-\korean{나서}	&	\korean{나+서}	&	px+ecs	&	CONNECTOR-conjunctive-seo	&	124 \\
-\korean{하면서}	&	\korean{하+면서}	&	px+ecs	&	CONNECTOR-conjunctive-meyonseo	&	124 \\
-\korean{이용하면}	&	\korean{이용+하+면}	&	ncpa+xsv+ecs	&	DERIVATION-verb-\korean{하}+CONNECTOR-conditional-myeon	&	124 \\
-\korean{있었고}	&	\korean{있+었+고}	&	px+ep+ecc	&	TENSE/ASPECT-past+CONNECTOR-go	&	121 \\
-\korean{했지만}	&	\korean{하+었+지만}	&	pvg+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-but-jiman	&	118 \\
-\korean{노력해야}	&	\korean{노력+하+어야}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-conjunctive-aya	&	118 \\
-\korean{하겠다}	&	\korean{하+겠+다}	&	pvg+ep+ef	&	TENSE/ASPECT-assertive/strong-will-get+PRAGMATICMOOD-declarative-da	&	116 \\
-\korean{있었는데}	&	\korean{있+었+는데}	&	paa+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-informal-nonpolite-contrast-neunde	&	115 \\
-\korean{계속해서}	&	\korean{계속+하+어서}	&	ncpa+xsv+ecs	&	DERIVATION-verb-\korean{하}+CONNECTOR-conjunctive-aseo	&	104 \\
-\korean{실현되지}	&	\korean{실현+되+지}	&	ncpa+xsv+ecx	&	DERIVATION-denominal-\korean{되}+CONNECTOR-ecx-ji	&	103 \\
-\korean{분명해진다}	&	\korean{분명+하+어}	&	ncps+xsm+ecx	&	DERIVATION-adj-\korean{하}+CONNECTOR-infinitive-a/eo	&	97 \\
-\end{tabular}
-}
-    \caption{Caption}
-    \label{tab:my_label}
-\end{table}
-
-
-\begin{table}[]
-    \centering
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{llllllllllllllllll}
-\korean{있었다}	&	\korean{있+었+다}	&	px+ep+ef	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	4385 \\
-\korean{것이다}	&	\korean{것+이+다}	&	nbn+jp+ef	&	DERIVATION-predicative-i+PRAGMATICMOOD-declarative-da	&	3922 \\
-\korean{있다}	&	\korean{있+다}	&	pvg+ef	&	PRAGMATICMOOD-declarative-da	&	2871 \\
-\korean{한다}	&	\korean{하+ㄴ다}	&	pvg+ef	&	SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da	&	2835 \\
-\korean{시작했다}	&	\korean{시작+하+었+다}	&	ncpa+xsv+ep+ef	&	DERIVATION-verb-\korean{하}+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	1232 \\
-\korean{생각해}	&	\korean{생각+하+어}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-infinitive-a/eo	&	1106 \\
-\korean{것이었다}	&	\korean{것+이+었+다}	&	nbn+jp+ep+ef	&	DERIVATION-predicative-i+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	851 \\
-\korean{있습니다}	&	\korean{있+습니다}	&	px+ef	&	FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	603 \\
-\korean{의미한다}	&	\korean{의미+하+ㄴ다}	&	ncpa+xsv+ef	&	DERIVATION-verb-\korean{하}+SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da	&	590 \\
-\korean{것입니다}	&	\korean{것+이+ㅂ니다}	&	nbn+jp+ef	&	DERIVATION-predicative-i+FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	556 \\
-\korean{시작되었다}	&	\korean{시작+되+었+다}	&	ncpa+xsv+ep+ef	&	DERIVATION-denominal-\korean{되}+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	500 \\
-\korean{불구하고}	&	\korean{불구+하+고}	&	ncpa+xsv+ecs	&	DERIVATION-verb-\korean{하}+CONNECTOR-go	&	481 \\
-\korean{포함되어}	&	\korean{포함+되+어}	&	ncpa+xsv+ecx	&	DERIVATION-denominal-\korean{되}+CONNECTOR-infinitive-a/eo	&	440 \\
-\korean{아니라}	&	\korean{아니+라}	&	paa+ecs	&	PRAGMATICMOOD-ra	&	394 \\
-\korean{생각된다}	&	\korean{생각+되+ㄴ다}	&	ncpa+xsv+ef	&	DERIVATION-denominal-\korean{되}+SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da	&	348 \\
-\korean{중요하다}	&	\korean{중요+하+다}	&	ncps+xsm+ef	&	DERIVATION-adj-\korean{하}+PRAGMATICMOOD-declarative-da	&	251 \\
-\korean{생각하게}	&	\korean{생각+하+게}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-so-that-ge	&	239 \\
-\korean{있다고}	&	\korean{있+다+고}	&	px+ef+jcr	&	PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	232 \\
-\korean{존재하지}	&	\korean{존재+하+지}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-ecx-ji	&	220 \\
-\korean{것이라고}	&	\korean{것+이+라+고}	&	nbn+jp+ef+jcr	&	DERIVATION-predicative-i+PRAGMATICMOOD-ra+CONNECTOR-go	&	179 \\
-\korean{한다고}	&	\korean{하+ㄴ다고}	&	pvg+ecs	&	SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	164 \\
-\korean{것인가}	&	\korean{것+이+ㄴ가}	&	nbn+jp+ef	&	DERIVATION-predicative-i+PRAGMATICMOOD-interrogative-(neu)nka	&	150 \\
-\korean{사용되고}	&	\korean{사용+되+고}	&	ncpa+xsv+ecx	&	DERIVATION-denominal-\korean{되}+CONNECTOR-go	&	150 \\
-\korean{있었다고}	&	\korean{있+었+다+고}	&	paa+ep+ef+jcr	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	147 \\
-\korean{보자}	&	\korean{보+자}	&	px+ef	&	PRAGMATICMOOD-hortative-formal-nonpolite-\korean{자}	&	139 \\
-\korean{비교하면}	&	\korean{비교+하+면}	&	ncpa+xsv+ecs	&	DERIVATION-verb-\korean{하}+CONNECTOR-conditional-myeon	&	124 \\
-\korean{있었고}	&	\korean{있+었+고}	&	px+ep+ecc	&	TENSE/ASPECT-past+CONNECTOR-go	&	121 \\
-\korean{사용해야}	&	\korean{사용+하+어야}	&	ncpa+xsv+ecx	&	DERIVATION-verb-\korean{하}+CONNECTOR-conjunctive-aya	&	118 \\
-\korean{했지만}	&	\korean{하+었+지만}	&	pvg+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-but-jiman	&	118 \\
-\korean{하겠다}	&	\korean{하+겠+다}	&	pvg+ep+ef	&	TENSE/ASPECT-assertive/strong-will-get+PRAGMATICMOOD-declarative-da	&	116 \\
-\korean{있었는데}	&	\korean{있+었+는데}	&	paa+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-informal-nonpolite-contrast-neunde	&	115 \\
-\korean{계속해서}	&	\korean{계속+하+어서}	&	ncpa+xsv+ecs	&	DERIVATION-verb-\korean{하}+CONNECTOR-conjunctive-aseo	&	104 \\
-\korean{해결되지}	&	\korean{해결+되+지}	&	ncpa+xsv+ecx	&	DERIVATION-denominal-\korean{되}+CONNECTOR-ecx-ji	&	103 \\
-\korean{분명해진다}	&	\korean{분명+하+어}	&	ncps+xsm+ecx	&	DERIVATION-adj-\korean{하}+CONNECTOR-infinitive-a/eo	&	97 \\
-\korean{불과했다}	&	\korean{불과+하+었+다}	&	ncps+xsm+ep+ef	&	DERIVATION-adj-\korean{하}+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	96 \\
-\korean{있는가}	&	\korean{있+는가}	&	paa+ef	&	PRAGMATICMOOD-interrogative-(neu)nka	&	96 \\
-\korean{있었습니다}	&	\korean{있+었+습니다}	&	px+ep+ef	&	TENSE/ASPECT-past+FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	93 \\
-\korean{했으나}	&	\korean{하+었+으나}	&	pvg+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-but-na	&	92 \\
-\korean{있었으며}	&	\korean{있+었+으며}	&	px+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-as/while-myeo	&	91 \\
-	    \korean{것이오}	&	\korean{것+이+오}	&	nbn+jp+ef	&	DERIVATION-predicative-i+PRAGMATICMOOD-semiformal-\korean{오}	&	90 \\
-\korean{하오}	&	\korean{하+오}	&	pvg+ef	&	PRAGMATICMOOD-semiformal-\korean{오}	&	88 \\
-\korean{있소}	&	\korean{있+소}	&	paa+ef	&	PRAGMATICMOOD-declarative-haoche-\korean{소}	&	86 \\
-\korean{것이라}	&	\korean{것+이+라}	&	nbn+jp+ef	&	DERIVATION-predicative-i+PRAGMATICMOOD-ra	&	81 \\
-\korean{했소}	&	\korean{하+었+소}	&	pvg+ep+ef	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-haoche-\korean{소}	&	79 \\
-\korean{있음을}	&	\korean{있+ㅁ+을}	&	paa+etn+jco	&	NOMINALIZER-nominalizer-formal-nonpolite-m+NOMINALIZER-future-determiner-\korean{을}	&	70 \\
-\korean{있을까}	&	\korean{있+ㄹ까}	&	paa+ef	&	PRAGMATICMOOD-interrogative-lkka	&	70 \\
-	    \korean{야기시켰다}	&	\korean{야기+시키+었+다}	&	ncpa+xsv+ep+ef	&	DERIVATION-\korean{시키}+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	68 \\
-	    \korean{발전시켜}	&	\korean{발전+시키+어}	&	ncpa+xsv+ecx	&	DERIVATION-\korean{시키}+CONNECTOR-infinitive-a/eo	&	67 \\
-	    \korean{효과적이다}	&	\korean{효과+적+이+다}	&	ncn+xsn+jp+ef	&	DERIVATION-\korean{적}+DERIVATION-predicative-i+PRAGMATICMOOD-declarative-da	&	61 \\
-\korean{필요하지}	&	\korean{필요+하+지}	&	ncps+xsm+ecx	&	DERIVATION-adj-\korean{하}+CONNECTOR-ecx-ji	&	61 \\
-    \end{tabular}
-    }
-    \caption{Caption}
-    \label{tab:my_label}
-\end{table}
-
-\begin{table}[]
-    \centering
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{lllllllllllllllllll}
-\korean{있었다}	&	\korean{있+었+다}	&	paa+ep+ef	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	4385 \\
-\korean{있다}	&	\korean{있+다}	&	paa+ef	&	PRAGMATICMOOD-declarative-da	&	2871 \\
-\korean{한다}	&	\korean{하+ㄴ다}	&	pvg+ef	&	SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da	&	2835 \\
-\korean{있습니다}	&	\korean{있+습니다}	&	paa+ef	&	FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	603 \\
-\korean{아니라}	&	\korean{아니+라}	&	paa+ecs	&	PRAGMATICMOOD-ra	&	394 \\
-\korean{있다고}	&	\korean{있+다+고}	&	paa+ef+jcr	&	PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	232 \\
-\korean{한다고}	&	\korean{하+ㄴ다+고}	&	px+ef+jcr	&	SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	164 \\
-\korean{있었다고}	&	\korean{있+었+다+고}	&	paa+ep+ef+jcr	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da+CONNECTOR-go	&	147 \\
-\korean{보자}	&	\korean{보+자}	&	px+ef	&	PRAGMATICMOOD-hortative-formal-nonpolite-\korean{자}	&	139 \\
-\korean{있었고}	&	\korean{있+었+고}	&	paa+ep+ecc	&	TENSE/ASPECT-past+CONNECTOR-go	&	121 \\
-\korean{했지만}	&	\korean{하+었+지만}	&	pvg+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-but-jiman	&	118 \\
-\korean{하겠다}	&	\korean{하+겠+다}	&	pvg+ep+ef	&	TENSE/ASPECT-assertive/strong-will-get+PRAGMATICMOOD-declarative-da	&	116 \\
-\korean{있었는데}	&	\korean{있+었+는데}	&	paa+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-informal-nonpolite-contrast-neunde	&	115 \\
-\korean{있는가}	&	\korean{있+는가}	&	paa+ef	&	PRAGMATICMOOD-interrogative-(neu)nka	&	96 \\
-\korean{있었습니다}	&	\korean{있+었+습니다}	&	paa+ep+ef	&	TENSE/ASPECT-past+FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	93 \\
-\korean{했으나}	&	\korean{하+었+으나}	&	pvg+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-but-na	&	92 \\
-\korean{있었으며}	&	\korean{있+었+으며}	&	px+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-as/while-myeo	&	91 \\
-\korean{하오}	&	\korean{하+오}	&	px+ef	&	PRAGMATICMOOD-semiformal-\korean{오}	&	88 \\
-	    \korean{있소}	&	\korean{있+소}	&	px+ef	&	PRAGMATICMOOD-declarative-haoche-\korean{소}	&	86 \\
-\korean{했소}	&	\korean{하+었+소}	&	pvg+ep+ef	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-haoche-\korean{소}	&	79 \\
-\korean{있을까}	&	\korean{있+ㄹ까}	&	paa+ef	&	PRAGMATICMOOD-interrogative-lkka	&	70 \\
-	    \korean{있음을}	&	\korean{있+ㅁ+을}	&	px+etn+jco	&	NOMINALIZER-nominalizer-formal-nonpolite-m+NOMINALIZER-future-determiner-\korean{을}	&	70 \\
-\korean{아니라고}	&	\korean{아니+라+고}	&	paa+ef+jcr	&	PRAGMATICMOOD-ra+CONNECTOR-go	&	58 \\
-	    \korean{하다가}	&	\korean{하+다가}	&	pvg+ecs	&	PRAGMATICMOOD-declarative-da+CONNECTOR-\korean{가}	&	56 \\
-\korean{보기로}	&	\korean{보+기+로}	&	px+etn+jca	&	NOMINALIZER-nominalizer-informal-nonpolite-gi+CONNECTOR-ro	&	52 \\
-\korean{있다면}	&	\korean{있+다면}	&	paa+ecs	&	PRAGMATICMOOD-declarative-da+CONNECTOR-conditional-myeon	&	50 \\
-\korean{합시다}	&	\korean{하+ㅂ시다}	&	pvg+ef	&	FORMALITY-formal-polite-p+PRAGMATICMOOD-hortative-formal-polite-sida	&	49 \\
-\korean{하겠습니다}	&	\korean{하+겠+습니다}	&	px+ep+ef	&	TENSE/ASPECT-assertive/strong-will-get+FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-declarative-da	&	41 \\
-\korean{있으리라}	&	\korean{있+으리라}	&	paa+ef	&	SYNTACTICMOOD-I-guess-ri+PRAGMATICMOOD-ra	&	41 \\
-\korean{있었으며}	&	\korean{있+었+으며}	&	px+ep+ecc	&	TENSE/ASPECT-past+CONNECTOR-\korean{며}	&	37 \\
-	    \korean{있어서는}	&	\korean{있+어서+는}	&	paa+ecs+jxt	&	CONNECTOR-conjunctive-aseo+NOMINALIZER-topic?past-determiner-\korean{은}	&	36 \\
-\korean{있겠습니까}	&	\korean{있+겠+습니까}	&	paa+ep+ef	&	TENSE/ASPECT-assertive/strong-will-get+FORMALITY-formal-polite-p+SYNTACTICMOOD-formal-polite-ni+PRAGMATICMOOD-interrogative-ka	&	35 \\
-\korean{있는지}	&	\korean{있+는지}	&	paa+ecs	&	SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-ji	&	33 \\
-\korean{해라}	&	\korean{하+어라}	&	px+ef	&	PRAGMATICMOOD-imperative-eora/ara	&	33 \\
-\korean{있었을까}	&	\korean{있+었+ㄹ까}	&	paa+ep+ef	&	TENSE/ASPECT-past+PRAGMATICMOOD-interrogative-lkka	&	32 \\
-\korean{있기도}	&	\korean{있+기+도}	&	px+etn+jxc	&	NOMINALIZER-nominalizer-informal-nonpolite-gi+CONNECTOR-do	&	30 \\
-	    \korean{있지요}	&	\korean{있+지+요}	&	paa+ef+jxf	&	PRAGMATICMOOD-ji+POLITE-polite-\korean{요}	&	29 \\
-\korean{됨으로써}	&	\korean{되+ㅁ+으로써}	&	px+etn+jca	&	NOMINALIZER-nominalizer-formal-nonpolite-m+CONNECTOR-rosseo	&	27 \\
-\korean{되었는지}	&	\korean{되+었+는지}	&	pvg+ep+ecs	&	TENSE/ASPECT-past+SYNTACTICMOOD-indicative-n+PRAGMATICMOOD-ji	&	26 \\
-\korean{있겠지만}	&	\korean{있+겠+지만}	&	paa+ep+ecs	&	TENSE/ASPECT-assertive/strong-will-get+CONNECTOR-but-jiman	&	25 \\
-	    \korean{들어갔다가}	&	\korean{가+ㅆ+다가}	&	px+ep+ecs	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da+CONNECTOR-\korean{가}	&	24 \\
-\korean{시대라고}	&	\korean{시대+라고}	&	ncn+jcr	&	PRAGMATICMOOD-jcr-rago	&	24 \\
-\korean{없었다면}	&	\korean{없+었+다면}	&	paa+ep+ecs	&	TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da+CONNECTOR-conditional-myeon	&	23 \\
-\korean{말했듯이}	&	\korean{말하+었+듯이}	&	pvg+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-deusi	&	23 \\
-\korean{있어서도}	&	\korean{있+어서+도}	&	paa+ecs+jxc	&	CONNECTOR-conjunctive-aseo+CONNECTOR-do	&	21 \\
-	    \korean{있었으므로}	&	\korean{있+었+으므로}	&	paa+ep+ecs	&	TENSE/ASPECT-past+CONNECTOR-\korean{므로}	&	20 \\
-\korean{않았는가}	&	\korean{않+았+는가}	&	px+ep+ef	&	TENSE/ASPECT-past+PRAGMATICMOOD-interrogative-(neu)nka	&	20 \\
-\korean{했었다}	&	\korean{하+었었+다}	&	pvg+ep+ef	&	TENSE/ASPECT-remote-past-\korean{었었}+PRAGMATICMOOD-declarative-da	&	19 \\
-\korean{있겠는가}	&	\korean{있+겠+는가}	&	paa+ep+ef	&	TENSE/ASPECT-assertive/strong-will-get+PRAGMATICMOOD-interrogative-(neu)nka	&	18 \\
-\korean{주셨다}	&	\korean{주+셨+다}	&	px+ep+ef	&	HONORIFIC-honorific-s+TENSE/ASPECT-past+PRAGMATICMOOD-declarative-da	&	18 \\
-    \end{tabular}
-    }
-    \caption{Caption}
-    \label{tab:my_label}
-\end{table}
 
 \begin{longtable}{lllll}
 NOMINALIZER-future-determiner-\korean{을} & EUL &	 128 \\
