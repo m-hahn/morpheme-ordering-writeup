@@ -406,6 +406,26 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
     \label{fig:my-label}
 \end{figure}
 
+\begin{table}[]
+    \centering
+    \begin{tabular}{l|l|ll|lllllllll}
+    &     &    \multicolumn{2}{c|}{Pairs} & \multicolumn{2}{c|}{Full} & \multicolumn{2}{c}{Full (Types)} \\
+     &   &     Optim. & Baseline & Optim. & Baseline & Optim. & Baseline \\ \hline
+ & finnish nouns & -- & 0.42 (0.31) & -- & 0.37 (0.32) & -- & 0.38 (0.29) \\
+ & turkish nouns & 1.0 (0.0) & 0.56 (0.36) & 1.0 (0.0) & 0.5 (0.37) & 1.0 (0.0) & 0.5 (0.36) \\
+ & hungarian nouns & 1.0 (0.0) & 0.48 (0.22) & 1.0 (0.0) & 0.33 (0.27) & 1.0 (0.0) & 0.33 (0.27) \\
+ & finnish verbs & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.36 (0.32) & 0.38 (0.37) \\
+ & hungarian verbs & -- & -- & -- & -- & -- & -- \\
+ & turkish verbs & 0.96 (0.09) & 0.46 (0.14) & 0.95 (0.0) & 0.37 (0.15) & 0.93 (0.07) & 0.36 (0.14) \\
+ & korean & 0.95 (0.09) & -- & 0.96 (0.0) & -- & 0.84 (0.07) & -- \\
+ & japanese & -- & -- & -- & -- & -- & -- \\
+ & sesotho pre & -- & -- & -- & -- & -- & -- \\
+ & sesotho suff & -- & -- & -- & -- & -- & -- \\
+    \end{tabular}
+    \caption{Accuracies. }
+    \label{tab:my_label}
+\end{table}
+
 
 \begin{table}[]
     \centering
@@ -424,7 +444,7 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
 
 We have examined morpheme order in nouns and verbs in six languages, testing the recently propiosed Efficient Tradeoff Hypothesis \citep{hahn2020modeling} as an explanatory account of morpheme ordering.
 We compared actual morpheme orderings to other possible orderings and to orderings optimized for efficiency of the memory-surprisal tradeoff.
-In most cases, we found that the real ordering provided almost more efficient tradeoffs than most alternative orderings. \becky{Why does this say ``almost more efficient"?}
+In most cases, we found that the real ordering provided more efficient tradeoffs than most alternative orderings. \becky{Why does this say ``almost more efficient"?}\mhahn{I removed `almost'}
 More importantly, we found that the real orderings match the optimal orderings in many respects.
 Ordering forms found in a corpus according according to real or optimized orderings yields the same orders in XXX of cases.
 In some cases, particlarly for noun inflection, match between real and optimized orderings is perfect.
