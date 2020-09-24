@@ -197,7 +197,7 @@ verb stem & valence & voice & aspect & tense& mood & subject agreement
 \textit{Voice} describes the distinction between active and passive.
 \textit{Aspect} describes how an event unfolds over time, such as the English progressive -ing indicating that an action  is still ongoing.
 \textit{Tense} describes where an event is located in time (e.g. past or future).
-\textit{Mood} TODO \textit{Modality} TODO
+\textit{Mood} TODO
 \textit{Subject person and number} mark categories of the subject, such as English third-person -s.
 
 While these are particularly common types of affixes, there are further types.
@@ -279,12 +279,14 @@ The Korean, Japanese, and Sesotho corpora have words segmented into the grapheme
 The Sesotho and Japanese data was previously used by CITE; we reanalyze these data here in a way consistent across all six languages.
 
 \begin{itemize}
-    \item Grapheme, label, phoneme for Korean
-    \item Fine versus coarse for Turkish, Hungarian, Finnish
+    \item Grapheme, label, phoneme for Korean \mhahn{For now, I think we can place grapheme and phoneme versions into the appendix, and only discuss the MorphemeMeanings-based one in the main paper (i.e., ordering based on morpheme meanings, surprisal based on abstract morphemes, analogous to the Coarse+FineSurprisal version for the other languages.}
+    \item Fine versus coarse for Turkish, Hungarian, Finnish \mhahn{In the main paper, I think it's enough to present the Coarse+FinalSurprisal results. We can present others in the appendix, and don't need to introduce them here in detail.}
 \end{itemize}
 
 
 \subsection{Nouns}
+
+\mhahn{Here is an idea for how we might structure this section: We can describe the systems in the individual languages in prose and in broad strokes here, highlighting what's common and what's different across languages. For the nouns, it's interesting to point out that the relative position of Case and Possessor differs between Finnish and the rest, whereas the position of Number is stable. For the verbs, the discussion could refer to Table~\ref{tab:table-orders}. I've collapsed all the Tense/Aspect/Modality/Negation morphemes into one big category ``TAM, Polarity'' since aligning the morphemes in each language with those individual categories seems very hard, and in any case there are differences between the languages. Talking about this in broad strokes, again highlighting parallels and differences, should be the right level of detail here. We can then leave precise and detailed discussion of each of the languages, including detailed references to the literature for these individual languages, to the appendix. The \texttt{enumerate} blocks could go into the appendix, with some description of what each morpheme does and references to reference grammars (I can do this).}
 
 \paragraph{Turkish Nouns}
 \begin{enumerate}
@@ -319,17 +321,17 @@ The Sesotho and Japanese data was previously used by CITE; we reanalyze these da
 Derivation          &  &         &          &               & Reversive & suru    & ha,i\\ \hline
 Valence             &  Causative &         &           & Object marker & Valence & Causative\\ \hline
 Voice               & Passive & Passive    & Passive     &               & Passive & Passive\\ \hline
-TAM, Pol.           & Negation  &   Potential  &   Tense/Asp &    Negation &  Politeness &      Potential        & Formality\\
-                    & Potential & Tense        &    Mood     &     Tense   &    Mood     &   Honorific  &  Mood I         \\
-                    &   TAM1    &          &                &         &                  & Tense/Aspect &  Mood II\\
-                    & lar       &          &           &  & & Negation \\
-                    & TAM2         &           &               &          &             &  \\ \hline
+TAM, Pol.           & Negation  &   Potential  &   Tense/Asp &    Negation &  Politeness &      Potential        & Honorific \\
+                    & Potential & Tense        &    Mood     &     Tense   &    Mood     &   Honorific  &    Tense       \\
+                    &   TAM1    &          &                &         &                  & Tense/Aspect & Formality \\
+                    & lar       &          &           &  & & Negation & Mood I\\
+                    & TAM2         &           &               &          &       &      &  Mood II \\ \hline
 Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
 \textit{Other}               & Formality          & Clitic    &              & Int/Rel &      &        & Politeness \\
                     &           &     &              &  &          &    & Conj \\
 \end{tabular}
     \caption{Morpheme order across the six languages in our sample, matched with the universal order described by \cite{bybee-morphology-1985}.}
-    \label{tab:my_label}
+    \label{tab:table-orders}
 \end{table}
 
 
@@ -435,9 +437,20 @@ Verbs & finnish  & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.36 (0.
 
 
 \begin{table}[]
+\begin{tabular}{cccccccc}
+\textbf{Turkish} & \textbf{Hungarian} & \textbf{Finnish} \\
+\begin{minipage}{.3\textwidth}
   \include{figures/turkish_nouns/comparison}
+    \end{minipage}
+  &
+  \begin{minipage}{.3\textwidth}
   \include{figures/hungarian_nouns/comparison}
+    \end{minipage}
+  &
+  \begin{minipage}{.3\textwidth}
   \include{figures/finnish_nouns/comparison}
+  \end{minipage}
+  \end{tabular}
   
     \caption{Real and optimized ordering (nouns)}
     \label{tab:my_label}
@@ -445,10 +458,27 @@ Verbs & finnish  & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.36 (0.
 
 
 \begin{table}[]
+
+\begin{tabular}{cccccccc}
+\textbf{Turkish} & \textbf{Hungarian} & \textbf{Finnish} \\
+\begin{minipage}{.3\textwidth}
   \include{figures/turkish_verbs/comparison}
+  \end{minipage}
+  &
+  \begin{minipage}{.3\textwidth}
   \include{figures/hungarian_verbs/comparison}
+  \end{minipage}
+  &
+    \begin{minipage}{.3\textwidth}
   \include{figures/finnish_verbs/comparison}
+  \end{minipage}
+  \\
+  \textbf{Korean} \\
+      \begin{minipage}{.3\textwidth}
   \include{figures/korean/comparison}
+  \end{minipage}
+  \end{tabular}
+  
   
     \caption{Real and optimized ordering (verbs)}
     \label{tab:my_label}
