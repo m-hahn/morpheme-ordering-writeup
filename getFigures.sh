@@ -10,4 +10,7 @@ cp ~/morpheme-ordering/utils/hungarian_verbs/analyze/suffixes-byMorphemes-auc-hi
 cp ~/morpheme-ordering/utils/finnish_verbs/analyze/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf figures/finnish_verbs/
 cp ~/morpheme-ordering/utils/korean/analyze/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf figures/korean/
 cp ~/morpheme-ordering/utils/turkish_michael/visualize/comparison.tex figures/turkish_verbs/
+cp ~/morpheme-ordering/utils/japanese/analyze/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf figures/japanese/
+cp ~/morpheme-ordering/utils/sesotho_prefixes/analyze/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf figures/sesotho_prefixes/
+cp ~/morpheme-ordering/utils/sesotho_suffixes/analyze/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf figures/sesotho_suffixes/
 
