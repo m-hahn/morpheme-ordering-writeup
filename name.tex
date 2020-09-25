@@ -280,14 +280,19 @@ The Sesotho and Japanese data was previously used by CITE; we reanalyze these da
 
 \begin{itemize}
     \item Grapheme, label, phoneme for Korean \mhahn{For now, I think we can place grapheme and phoneme versions into the appendix, and only discuss the MorphemeMeanings-based one in the main paper (i.e., ordering based on morpheme meanings, surprisal based on abstract morphemes, analogous to the Coarse+FineSurprisal version for the other languages.}
+    For Korean, the corpus came with segmented morphemes labeled with fine-grained categories such as "ending final marker," or "predicative maker." We also built a segmenter to take in each segment and out
     \item Fine versus coarse for Turkish, Hungarian, Finnish \mhahn{In the main paper, I think it's enough to present the Coarse+FinalSurprisal results. We can present others in the appendix, and don't need to introduce them here in detail.}
 \end{itemize}
 
+\becky{discuss segmenters more} 
 
 \subsection{Nouns}
 
 \mhahn{Here is an idea for how we might structure this section: We can describe the systems in the individual languages in prose and in broad strokes here, highlighting what's common and what's different across languages. For the nouns, it's interesting to point out that the relative position of Case and Possessor differs between Finnish and the rest, whereas the position of Number is stable. For the verbs, the discussion could refer to Table~\ref{tab:table-orders}. I've collapsed all the Tense/Aspect/Modality/Negation morphemes into one big category ``TAM, Polarity'' since aligning the morphemes in each language with those individual categories seems very hard, and in any case there are differences between the languages. Talking about this in broad strokes, again highlighting parallels and differences, should be the right level of detail here. You can draw on Table S1 and Tables S5, S12, S13 in the appendix for my revised verb morpheme segmentation in Korean, Turkish, and Hungarian. We can then leave precise and detailed discussion of each of the languages, including detailed references to the literature for these individual languages, to the appendix. The \texttt{enumerate} blocks could go into the appendix, with some description of what each morpheme does and references to reference grammars (I can do this).}
 
+We're interested in investigating languages where nouns are inflected with multiple suffixes, because that allows us to more extensively measure the relationship between mutual information and mutual information. As such, we only investigated our hypothesis on Turkish, Hungarian, and Finnish nouns. All of these languages inflect nouns for number, possessor person, possessor number, and case, in that order. Finnish is the exception, where we include derivation (verbs that are nominalized, for example), and where the possessor person and number appears after the case suffix in the natural ordering. 
+In contrast, the number suffix, which is generally only marked for the plural, has a stable position close to the root in all three languages. Number has high mutual information with the noun root, because certain nouns have a tendency to appear only in the plural or only in the singular. As such, number must come close to the root. \becky{Is this correct? Also, should I move this?}
+\mhahn{This is good. We could think about moving the part about mutual information up into a paragraph at the end of S3, where we could give the reader some intuition on why we expect MI to be a good predictor of ordering (as mentioned in my Slack message).}
 \paragraph{Turkish Nouns}
 \begin{enumerate}
     \item Number
@@ -313,6 +318,7 @@ The Sesotho and Japanese data was previously used by CITE; we reanalyze these da
 \end{enumerate}
 
 \subsection{Verbs}
+For verbs, we investigated Finnish, Hungarian, Japanese, Korean, Sesotho, and Turkish inflectional suffixes. Broadly speaking, all of the languages have a real ordering of valence, voice, negation, tense/aspect/mood (TAM), person and number, and formality, where applicable. \becky{Check that this is correct and discuss some specifics.} 
 
 \begin{table}[]
     \centering
@@ -502,7 +508,7 @@ Verbs & finnish  & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.36 (0.
 
 We have examined morpheme order in nouns and verbs in six languages, testing the recently propiosed Efficient Tradeoff Hypothesis \citep{hahn2020modeling} as an explanatory account of morpheme ordering.
 We compared actual morpheme orderings to other possible orderings and to orderings optimized for efficiency of the memory-surprisal tradeoff.
-In most cases, we found that the real ordering provided more efficient tradeoffs than most alternative orderings. \becky{Why does this say ``almost more efficient"?}\mhahn{I removed `almost'}
+In most cases, we found that the real ordering provided more efficient tradeoffs than most alternative orderings.
 More importantly, we found that the real orderings match the optimal orderings in many respects.
 Ordering forms found in a corpus according according to real or optimized orderings yields the same orders in XXX of cases.
 In some cases, particlarly for noun inflection, match between real and optimized orderings is perfect.
@@ -516,7 +522,7 @@ In this section, we discuss the linguistic literature on morpheme ordering.
 \paragraph{Meaning and Scope}
 As mentioned in section \becky{cite S2}, Bybee proposes a concept of \textit{semantic relevance}, which is the degree to which one morpheme affects the semantic content of the other \becky{cite bybee}. She hypothesizes that morphemes that are more highly relevant to each other should be closer to each other, and therefore proposes a universal ordering of verbal inflectional morphemes. For example, attaching a causative marker to a root meaning "to die" produces a verb form meaning "to kill." Since the causative greatly changes the semantic content of the original root, the causative is highly relevant to the root. 
 
-\becky{Format Korean example of juk-da ``to kill" and juk-i-da ``to die"}
+\becky{Format Korean example of juk-da ``to die" and juk-i-da ``to kill"}
 
 Bybee did not provide a way to computationally measure semantic relevance. However, our optimized orders of Turkish and Hungarian \becky{Are there other languages?} perfectly match Bybee's proposed universal verbal inflection order \becky{need a figure comparing optimized order to Bybee's order}. This suggests that high mutual information generally correlates with semantic relevance. 
 
