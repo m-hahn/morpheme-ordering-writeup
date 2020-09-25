@@ -13,6 +13,18 @@ cp ~/morpheme-ordering/utils/japanese/analyze/suffixes-byMorphemes-auc-hist-held
 cp ~/morpheme-ordering/utils/sesotho_prefixes/analyze/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf figures/sesotho_prefixes/
 cp ~/morpheme-ordering/utils/sesotho_suffixes/analyze/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf figures/sesotho_suffixes/
 
+cp ~/morpheme-ordering/utils/turkish_verbs/visualize/comparison-opt-uni.tex figures/turkish_verbs/
+cp ~/morpheme-ordering/utils/turkish_nouns/visualize/comparison-opt-uni.tex figures/turkish_nouns/
+cp ~/morpheme-ordering/utils/finnish_verbs/visualize/comparison-opt-uni.tex figures/finnish_verbs/
+cp ~/morpheme-ordering/utils/finnish_nouns/visualize/comparison-opt-uni.tex figures/finnish_nouns/
+cp ~/morpheme-ordering/utils/hungarian_verbs/visualize/comparison-opt-uni.tex figures/hungarian_verbs/
+cp ~/morpheme-ordering/utils/hungarian_nouns/visualize/comparison-opt-uni.tex figures/hungarian_nouns/
+cp ~/morpheme-ordering/utils/korean/visualize/comparison-opt-uni.tex figures/korean/
+cp ~/morpheme-ordering/utils/japanese/visualize/comparison-opt-uni.tex figures/japanese/
+cp ~/morpheme-ordering/utils/sesotho_prefixes/visualize/comparison-opt-uni.tex figures/sesotho_prefixes/
+cp ~/morpheme-ordering/utils/sesotho_suffixes/visualize/comparison-opt-uni.tex figures/sesotho_suffixes/
+
+
 cp ~/morpheme-ordering/utils/turkish_verbs/visualize/comparison.tex figures/turkish_verbs/
 cp ~/morpheme-ordering/utils/turkish_nouns/visualize/comparison.tex figures/turkish_nouns/
 cp ~/morpheme-ordering/utils/finnish_verbs/visualize/comparison.tex figures/finnish_verbs/
