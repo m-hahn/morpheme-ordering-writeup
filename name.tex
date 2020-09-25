@@ -396,6 +396,8 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
 \section{Results}
 
 
+
+
 \begin{figure}
     \centering
     \begin{tabular}{cccccc}
@@ -408,8 +410,9 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
     \\
     Korean & Japanese & Sesotho (prefixes) \\
     \includegraphics[width=0.3\textwidth]{figures/korean/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+    &
+        \includegraphics[width=0.3\textwidth]{figures/japanese/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     \end{tabular}
-%    \includegraphics[width=0.2\textwidth]{figures/japanese/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
 %    \includegraphics[width=0.2\textwidth]{figures/sesotho_prefixes/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
 %    \includegraphics[width=0.2\textwidth]{figures/sesotho_suffixes/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     \caption{Verb Suffixes}
@@ -435,17 +438,17 @@ Finnish & Turkish & Hungarian \\
     \begin{tabular}{l|l|ll|lllllllll}
     &     &    \multicolumn{2}{c|}{Pairs} & \multicolumn{2}{c|}{Full} & \multicolumn{2}{c}{Full (Types)} \\
      &   &     Optim. & Baseline & Optim. & Baseline & Optim. & Baseline \\ \hline
-Nouns & finnish  & 1.0 (0.0) & 0.42 (0.31) & 1.0 (0.0) & 0.37 (0.32) & 1.0 (0.0) & 0.38 (0.29) \\
- & turkish  & 1.0 (0.0) & 0.56 (0.36) & 1.0 (0.0) & 0.5 (0.37) & 1.0 (0.0) & 0.5 (0.36) \\
- & hungarian  & 1.0 (0.0) & 0.48 (0.22) & 1.0 (0.0) & 0.33 (0.27) & 1.0 (0.0) & 0.33 (0.27) \\
- \hline
-Verbs & finnish  & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.36 (0.32) & 0.38 (0.37) \\
- & hungarian  & 0.95 (0.09) & 0.52 (0.37) & 0.95 (0.0) & 0.5 (0.4) & 0.94 (0.0) & 0.5 (0.39) \\
- & turkish  & 0.96 (0.09) & 0.46 (0.14) & 0.95 (0.0) & 0.37 (0.15) & 0.93 (0.07) & 0.36 (0.14) \\
- & korean & 0.97 (0.0) & 0.56 (0.33) & 0.96 (0.09) & 0.53 (0.33) & 0.94 (0.08) & 0.53 (0.36) \\
- & japanese & -- & -- & -- & -- & -- & -- \\
- & sesotho (pref.) & -- & -- & -- & -- & -- & -- \\
- & sesotho (suff.) & -- & -- & -- & -- & -- & -- \\
+Nouns & finnish nouns & 1.0 (0.0) & 0.42 (0.31) & 1.0 (0.0) & 0.37 (0.32) & 1.0 (0.0) & 0.38 (0.29) \\
+ & turkish nouns & 1.0 (0.0) & 0.56 (0.36) & 1.0 (0.0) & 0.5 (0.37) & 1.0 (0.0) & 0.5 (0.36) \\
+ & hungarian nouns & 1.0 (0.0) & 0.48 (0.22) & 1.0 (0.0) & 0.33 (0.27) & 1.0 (0.0) & 0.33 (0.27) \\ \hline
+Verbs & finnish verbs & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.36 (0.32) & 0.38 (0.37) \\
+ & hungarian verbs & 0.95 (0.09) & 0.52 (0.37) & 0.95 (0.0) & 0.5 (0.4) & 0.94 (0.0) & 0.5 (0.39) \\
+ & turkish verbs & 0.96 (0.09) & 0.46 (0.14) & 0.95 (0.0) & 0.37 (0.15) & 0.93 (0.07) & 0.36 (0.14) \\
+ & korean & 0.97 (0.1) & 0.56 (0.33) & 0.97 (0.0) & 0.53 (0.33) & 0.95 (0.0) & 0.53 (0.36) \\
+ & japanese & 0.94 (0.08) & 0.48 (0.24) & 0.93 (0.0) & 0.39 (0.24) & 0.9 (0.1) & 0.39 (0.24) \\
+ & sesotho pre & -- & -- & -- & -- & -- & -- \\
+ & sesotho suff & -- & -- & -- & -- & -- & -- \\
+
     \end{tabular}
     \caption{Accuracies in predicting morpheme ordering. `Optim.' indicates grammars optimized for AUC, `'Baseline' indicates randomly constructed weights.
     In each cell, we provide the mean and the stgandard deviation over orderings. `Pairs' indicates the fraction of pairs of morphemes occurring together in the same word that are ordered correctly. `Full' indicates the fraction of verb forms in the corpus that are ordered fully correctly. `Full (Types)' counts forms that occur multiple times only once, it thus down-weights the role of frequent forms.}
@@ -454,7 +457,7 @@ Verbs & finnish  & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.36 (0.
 
 
 
-\begin{table}[]
+\begin{figure}[]
 \begin{tabular}{cccccccc}
 \textbf{Turkish} & \textbf{Hungarian} & \textbf{Finnish} \\
 \begin{minipage}{.3\textwidth}
@@ -472,10 +475,10 @@ Verbs & finnish  & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.36 (0.
   
     \caption{Real and optimized ordering (nouns)}
     \label{tab:my_label}
-\end{table}
+\end{figure}
 
 
-\begin{table}[]
+\begin{figure}[]
 
 \begin{tabular}{cccccccc}
 \textbf{Turkish} & \textbf{Hungarian} & \textbf{Finnish} \\
@@ -495,13 +498,56 @@ Verbs & finnish  & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.36 (0.
       \begin{minipage}{.3\textwidth}
   \include{figures/korean/comparison}
   \end{minipage}
+  &
+  \begin{minipage}{.3\textwidth}
+  \include{figures/japanese/comparison}
+  \end{minipage}
   \end{tabular}
   
   
     \caption{Real and optimized ordering (verbs)}
     \label{tab:my_label}
-\end{table}
+\end{figure}
 
+
+
+\begin{figure}
+ \begin{tikzpicture}[%
+% common options for blocks:
+block/.style = {draw, fill=blue!30, align=center, anchor=west,
+            minimum height=0.65cm, inner sep=0},
+% common options for the circles:
+ball/.style = {circle, draw, align=center, anchor=north, inner sep=0}]
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (4,-0.3) {Optimized};
+\node[rectangle,text width=0.9cm,anchor=base] (C0) at (7,-0.3) {Universal};
+
+\node[rectangle,text width=1.2cm,anchor=base] (B1) at (4,-1.0) {Valence};
+\node[rectangle,text width=1.2cm,anchor=base] (B2) at (4,-1.5) {Tense};
+\node[rectangle,text width=1.2cm,anchor=base] (B3) at (4,-2.0) {Mood};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (4,-2.5) {Agr};
+\node[rectangle,text width=1.2cm,anchor=base] (B5) at (4,-3.0) {Inf};
+
+
+\node[rectangle,text width=1.2cm,anchor=base] (C1) at (7,-1.0) {Valence};
+\node[rectangle,text width=1.2cm,anchor=base] (C2) at (7,-1.5) {Voice};
+\node[rectangle,text width=1.2cm,anchor=base] (C3) at (7,-2.0) {Aspect};
+\node[rectangle,text width=1.2cm,anchor=base] (C4) at (7,-2.5) {Tense};
+\node[rectangle,text width=1.2cm,anchor=base] (C5) at (7,-3.0) {Mood};
+\node[rectangle,text width=1.2cm,anchor=base] (C6) at (7,-3.5) {Agreement};
+
+\draw[->] (B1.east) to (C1.west);
+\draw[->] (B2.east) to (C4.west);
+\draw[->] (B3.east) to (C5.west);
+\draw[->] (B4.east) to (C6.west);
+\end{tikzpicture}
+
+\begin{minipage}{.3\textwidth}
+  \include{figures/hungarian_verbs/comparison-opt-uni}
+    \end{minipage}
+
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
 
 
 \section{Discussion}
