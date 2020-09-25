@@ -512,39 +512,27 @@ Verbs & finnish verbs & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.3
 
 
 \begin{figure}
- \begin{tikzpicture}[%
-% common options for blocks:
-block/.style = {draw, fill=blue!30, align=center, anchor=west,
-            minimum height=0.65cm, inner sep=0},
-% common options for the circles:
-ball/.style = {circle, draw, align=center, anchor=north, inner sep=0}]
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (4,-0.3) {Optimized};
-\node[rectangle,text width=0.9cm,anchor=base] (C0) at (7,-0.3) {Universal};
-
-\node[rectangle,text width=1.2cm,anchor=base] (B1) at (4,-1.0) {Valence};
-\node[rectangle,text width=1.2cm,anchor=base] (B2) at (4,-1.5) {Tense};
-\node[rectangle,text width=1.2cm,anchor=base] (B3) at (4,-2.0) {Mood};
-\node[rectangle,text width=1.2cm,anchor=base] (B4) at (4,-2.5) {Agr};
-\node[rectangle,text width=1.2cm,anchor=base] (B5) at (4,-3.0) {Inf};
-
-
-\node[rectangle,text width=1.2cm,anchor=base] (C1) at (7,-1.0) {Valence};
-\node[rectangle,text width=1.2cm,anchor=base] (C2) at (7,-1.5) {Voice};
-\node[rectangle,text width=1.2cm,anchor=base] (C3) at (7,-2.0) {Aspect};
-\node[rectangle,text width=1.2cm,anchor=base] (C4) at (7,-2.5) {Tense};
-\node[rectangle,text width=1.2cm,anchor=base] (C5) at (7,-3.0) {Mood};
-\node[rectangle,text width=1.2cm,anchor=base] (C6) at (7,-3.5) {Agreement};
-
-\draw[->] (B1.east) to (C1.west);
-\draw[->] (B2.east) to (C4.west);
-\draw[->] (B3.east) to (C5.west);
-\draw[->] (B4.east) to (C6.west);
-\end{tikzpicture}
-
+\begin{tabular}{ccccccc}
 \begin{minipage}{.3\textwidth}
+  \include{figures/finnish_verbs/comparison-opt-uni}
+    \end{minipage}
+    &
+    \begin{minipage}{.3\textwidth}
   \include{figures/hungarian_verbs/comparison-opt-uni}
     \end{minipage}
-
+        &
+    \begin{minipage}{.3\textwidth}
+  \include{figures/turkish_verbs/comparison-opt-uni}
+    \end{minipage} 
+    \\
+        \begin{minipage}{.3\textwidth}
+  \include{figures/korean/comparison-opt-uni}
+    \end{minipage}
+    &
+    \begin{minipage}{.3\textwidth}
+  \include{figures/japanese/comparison-opt-uni}
+    \end{minipage}
+\end{tabular}
     \caption{Caption}
     \label{fig:my_label}
 \end{figure}
