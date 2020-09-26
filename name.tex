@@ -401,7 +401,7 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
 \begin{figure}
     \centering
     \begin{tabular}{cccccc}
-    Finnish & Turkish & Hungarian \\
+    \textsc{Finnish} & \textsc{Turkish} & \textsc{Hungarian} \\
         \includegraphics[width=0.3\textwidth]{figures/finnish_verbs/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
         &
     \includegraphics[width=0.3\textwidth]{figures/turkish_verbs/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
@@ -412,17 +412,22 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
     \includegraphics[width=0.3\textwidth]{figures/korean/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     &
         \includegraphics[width=0.3\textwidth]{figures/japanese/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+        &
+            \includegraphics[width=0.3\textwidth]{figures/sesotho_prefixes/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+            \\
+            \textsc{Sesotho Suffixes} \\
+            \includegraphics[width=0.3\textwidth]{figures/sesotho_suffixes/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     \end{tabular}
-%    \includegraphics[width=0.2\textwidth]{figures/sesotho_prefixes/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
-%    \includegraphics[width=0.2\textwidth]{figures/sesotho_suffixes/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
-    \caption{Verb Suffixes}
+
+    
+    \caption{AUC Histograms for Verb Affixes.}
     \label{fig:my-label}
 \end{figure}
 
 
 \begin{figure}
 \begin{tabular}{ccc}
-Finnish & Turkish & Hungarian \\
+\textsc{Finnish} & \textsc{Turkish} & \textsc{Hungarian} \\
     \includegraphics[width=0.3\textwidth]{figures/finnish_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     &
     \includegraphics[width=0.3\textwidth]{figures/turkish_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
@@ -459,7 +464,7 @@ Finnish & Turkish & Hungarian \\
 
 \begin{figure}[]
 \begin{tabular}{cccccccc}
-\textbf{Turkish} & \textbf{Hungarian} & \textbf{Finnish} \\
+\textsc{Turkish} & \textsc{Hungarian} & \textsc{Finnish} \\
 \begin{minipage}{.3\textwidth}
   \include{figures/turkish_nouns/comparison}
     \end{minipage}
@@ -481,7 +486,7 @@ Finnish & Turkish & Hungarian \\
 \begin{figure}[]
 
 \begin{tabular}{cccccccc}
-\textbf{Turkish} & \textbf{Hungarian} & \textbf{Finnish} \\
+\textsc{Turkish} & \textsc{Hungarian} & \textsc{Finnish} \\
 \begin{minipage}{.3\textwidth}
   \include{figures/turkish_verbs/comparison}
   \end{minipage}
@@ -494,13 +499,21 @@ Finnish & Turkish & Hungarian \\
   \include{figures/finnish_verbs/comparison}
   \end{minipage}
   \\
-  \textbf{Korean}  & \textbf{Japanese} & \textbf{Sesotho} \\
+  \textsc{Korean}  & \textsc{Japanese} & \textsc{Sesotho Prefixes} \\
       \begin{minipage}{.3\textwidth}
   \include{figures/korean/comparison}
   \end{minipage}
   &
   \begin{minipage}{.3\textwidth}
   \include{figures/japanese/comparison}
+  \end{minipage}
+  &
+  \begin{minipage}{.3\textwidth}
+  \include{figures/sesotho_prefixes/comparison}
+  \end{minipage} \\
+  \textsc{Sesotho Suffixes} \\
+  \begin{minipage}{.3\textwidth}
+  \include{figures/sesotho_suffixes/comparison}
   \end{minipage}
   \end{tabular}
   
@@ -513,7 +526,7 @@ Finnish & Turkish & Hungarian \\
 
 \begin{figure}
 \begin{tabular}{ccccccc}
-\textbf{Finnish} & \textbf{Hungarian} & \textbf{Turkish} \\
+\textsc{Finnish} & \textsc{Hungarian} & \textsc{Turkish} \\
 \begin{minipage}{.3\textwidth}
   \include{figures/finnish_verbs/comparison-opt-uni}
     \end{minipage}
@@ -526,7 +539,7 @@ Finnish & Turkish & Hungarian \\
   \include{figures/turkish_verbs/comparison-opt-uni}
     \end{minipage} 
     \\
-    \textbf{Korean} & \textbf{Japanese} \\
+    \textsc{Korean} & \textsc{Japanese} & \textsc{Sesotho Prefixes} \\
         \begin{minipage}{.3\textwidth}
   \include{figures/korean/comparison-opt-uni}
     \end{minipage}
@@ -534,8 +547,17 @@ Finnish & Turkish & Hungarian \\
     \begin{minipage}{.3\textwidth}
   \include{figures/japanese/comparison-opt-uni}
     \end{minipage}
+        &
+    \begin{minipage}{.3\textwidth}
+  \include{figures/sesotho_prefixes/comparison-opt-uni}
+    \end{minipage}
+    \\
+    \textsc{Sesotho Suffixes} \\
+        \begin{minipage}{.3\textwidth}
+  \include{figures/sesotho_suffixes/comparison-opt-uni}
+    \end{minipage}
 \end{tabular}
-    \caption{Comparing optimized orders with the universal order described by \citep{bybee-morphology-1985} \mhahn{TODO I'll have to exclude rare categories like UNKNOWN from Korean.}.}
+    \caption{Comparing optimized orders with the universal order described by \citep{bybee-morphology-1985} \mhahn{TODO I'll have to exclude rare categories like UNKNOWN from Korean.}. Note that, for Sesotho prefixes, inversion of order relative to the universal order is expected, as the universal order indicates distance from the root, not absolute position.}
     \label{fig:my_label}
 \end{figure}
 
@@ -663,9 +685,9 @@ We indicate morphemes by a small-caps representation of a stylized phonological 
     \item Honorific \textsc{si}$_3$ \citep[4.3.2, 4.4.1]{yeon2010korean}
     \item Tense/Aspect suffixes include -\textsc{ess}$_4$ for past \citep[4.5.1.1]{yeon2010korean}, -\textsc{essess}$_4$ for remote past \citep[4.5.1.2]{yeon2010korean}, -\textsc{get}$_4$ for future \citep[4.5.2.1]{yeon2010korean}
     \item Formality \textsc{p}$_5$ (allomorphs include -\textit{p}-, -\textit{m}-, -\textit{seum}-,  \citep[4.3.2]{yeon2010korean})
-    \item We partition Mood suffixes into two slots, as these can be combined. Frequent elements of the Mood I slot are -\textsc{n}-, -\textsc{ni}- \citep[4.3.2]{yeon2010korean}.
+    \item We partition Mood suffixes into two slots, as these can be combined. Frequent elements of the Mood I slot are -\textsc{n}$_6$-, -\textsc{ni}$_6$- \citep[4.3.2]{yeon2010korean}.
     
-    \item Frequent elements of the Mood II slot are declarative -\textsc{da}- \citep[4.3.2]{yeon2010korean}, command -\textsc{ra}-, interrogative -\textsc{ka}-, the suffix  -\textsc{ji} \citep[4.2.2-3]{yeon2010korean}, and informal -\textsc{eo}- (informal).
+    \item Frequent elements of the Mood II slot are declarative -\textsc{da}$_7$- \citep[4.3.2]{yeon2010korean}, command -\textsc{ra}-, interrogative -\textsc{ka}-, the suffix  -\textsc{ji} \citep[4.2.2-3]{yeon2010korean}, and informal -\textsc{eo}$_7$- (informal).
     
     \item Polite -yo
     \item Conjunctive endings
@@ -747,22 +769,22 @@ Note that none of these paradigms are intended to be exhaustive lists of all for
             & Statement & Question  & Command    & Proposal    \\ \hline\hline
 Formal      &  \korean{ㅂ니다} & \korean{ㅂ니까} & \korean{지-ㅂ-지오} & \korean{지-ㅂ-지다} \\ 
       &  -mnida & -mnikka  & -sipsio & -sipsida  \\ 
-      &  -P$_5$-NI$_6$-DA$_7$ & -P$_5$-NI$_6$-KKA$_7$  & -SI-P$_5$-SIO$_7$ & -SI$_3$-P$_5$-SIDA$_7$ \\ \hline
+      &  -\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ & -\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{kka}$_7$  & -\textsc{si}$_3$-\textsc{p}$_5$-\textsc{sio}$_7$ & -\textsc{si}$_3$-\textsc{p}$_5$-\textsc{sida}$_7$ \\ \hline
 Polite      &  \multicolumn{4}{c}{\korean{아/어/요}}  \\
       &  \multicolumn{4}{c}{-a/eoyo}  \\
-            & \multicolumn{4}{c}{-\textsc{eo}$_7$-\textsc{eo}$_8$} \\ \hline
+            & \multicolumn{4}{c}{-\textsc{eo}$_7$-\textsc{yo}$_8$} \\ \hline
 Semi-Formal & \korean{오/소}   &           &   \korean{오}       &  \korean{-ㅂ-지다} \\
 &  -o/so   &           & -o        & -p-sida \\
- &  -O$_7$/-SO$_7$   &           & -O$_7$    & -P$_5$-SIDA$_7$ \\\hline
+ &  -O$_7$/-SO$_7$   &           & -O$_7$    & -\textsc{p}$_5$-\textsc{sida}$_7$ \\\hline
 Familiar    &    \korean{네}    &  \korean{나/는가} &  \korean{게}      &    \korean{세} \\
             & -ne                  & -na/neunka & -ge & -se \\ 
-            & -NE$_7$                  & -NA$_7$/-NEUNKA$_7$ & -GE$_9$ & \textcolor{red}{-SE} \\ \hline
+            & -\textsc{ne}$_7$                  & -\textsc{na}$_7$/-\textsc{neunka}$_7$ & -GE$_9$ & \textcolor{red}{-SE} \\ \hline
 Intimate      &  \multicolumn{4}{c}{\korean{아/어}}  \\
       &  \multicolumn{4}{c}{-a/eo}  \\
             & \multicolumn{4}{c}{-\textsc{eo}$_7$} \\ \hline
 Plain       &   \korean{다}     &  \korean{(느)냐} &  \korean{라}     &  \korean{자}\\
             &  -da    &  -(neu)nya & -ra      & -ja \\
-            & -DA$_7$    &   -NYA$_7$          & -RA$_7$      & -JA$_7$\\
+            & -\textsc{da}$_7$    &   -\textsc{nya}$_7$          & -RA$_7$      & -JA$_7$\\
 \end{tabular}
 \caption{Correspondence between our morpheme segmentation and the speech style system described by \citep[4.3.2]{yeon2010korean}. In each cell, we provide the Hangul ending given by \citep{yeon2010korean}, a transliteration, and a representation in terms of underlying morphemes.}\label{tab:korean-styles}
 \end{table}
@@ -774,48 +796,48 @@ Plain       &   \korean{다}     &  \korean{(느)냐} &  \korean{라}     &  \ko
            &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
 \multirow{6}{*}{Indicative} & \multirow{3}{*}{Non-past} & \korean{한다} & \korean{해}  & \korean{해요}  & \korean{합니다}  \\
            &          & handa & hae & haeyo &  hamnida \\
-           &          & -N$_6$-DA$_7$ & -EO$_7$ & -EO$_7$-YO$_8$ &  -P$_5$-NI$_6$-DA$_7$ \\
+           &          & -\textsc{n}$_6$-\textsc{da}$_7$ & -\textsc{eo}$_7$ & -\textsc{eo}$_7$-\textsc{yo}$_8$ &  -\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
            &          & \korean{하+ㄴ다}  & \korean{하+어}    & \korean{하+어+요} & \korean{하+ㅂ니다} \\
             &          &  px+ef        &   pvg+ecs        & pvg+ef+jxf & pvg+ef\\
            \hline
            & \multirow{3}{*}{Past}     & \korean{했다}  & \korean{했어} & \korean{했어요}   & \korean{했습니다}  \\
            &      & haet-da &  haesseo &  haesseoyo  & haetseumnida \\
-           &      & -ESS$_4$-DA &  -ESS$_4$-EO$_7$ &  -ESS$_4$-EO$_7$-YO$_8$  & -ESS$_4$-P$_5$-NI$_6$-DA$_7$ \\
+           &      & -\textsc{ess}$_4$-\textsc{da}$_7$ &  -\textsc{ess}$_4$-\textsc{eo}$_7$ &  -\textsc{ess}$_4$-\textsc{eo}$_7$-\textsc{yo}$_8$  & -\textsc{ess}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
            &      &  \korean{하+었+다}  &  \korean{하+었+어} & \korean{하+었+어+요} & \korean{하+었+습니다}  \\
            &      &  ncpa+xsv+ep+ef   & px+ep+ef   &   px+ep+ef+jxf &     pvg+ep+ef\\
            \hline
 \multirow{6}{*}{Interrogative} & \multirow{3}{*}{Non-past} & \korean{하느냐} & \korean{해}  & \korean{해요}  & \korean{합니까} \\
  &  & haneunya &  hae &  haeyo & hamnikka\\
- &  & -NYA$_7$ &  -EO$_7$ &  -EO$_7$-YO$_8$ & -P$_5$-NI$_6$+KKA$_7$ \\
+ &  & -\textsc{nya}$_7$ &  -\textsc{eo}$_7$ &  -\textsc{eo}$_7$-\textsc{yo}$_8$ & -\textsc{p}$_5$-\textsc{ni}$_6$+KKA$_7$ \\
                && \korean{하+느냐} & & & \korean{하+ㅂ니까}    \\
               && px+ef & & & px+ef \\
  \hline
               & \multirow{3}{*}{Past} & \korean{했느냐} & \korean{했어} & \korean{했어요} & \korean{했습니까} \\
               &  & ha-n-neunya &  hae-sseo &  hae-sseo-yo &  haetseumnikka\\
-              &  & -ESS$_4$-NYA$_7$ &  -ESS$_4$-EO$_7$ &  -ESS$_4$-EO$_7$+YO$_8$ &  -ESS$_4$-P$_5$-NI$_6$-KKA$_7$\\
+              &  & -\textsc{ess}$_4$-\textsc{nya}$_7$ &  -\textsc{ess}$_4$-\textsc{eo}$_7$ &  -\textsc{ess}$_4$-\textsc{eo}$_7$+YO$_8$ &  -\textsc{ess}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{kka}$_7$\\
               &  &  \korean{하+었+느냐}  & \korean{하+었+어} & \korean{하+었+어+요} & \korean{하+었+습니까} \\
               &  & +ep+ef  & +ep+ef            & px+ep+ef+jxf & pvg+ep+ef \\
               \hline
 Hortative   && \korean{하자}  & \korean{해}  & \korean{해요}  & \korean{합시다}  \\
    && haja &  hae &  haeyo & hapsida \\
-   && -JA$_7$ &  -EO$_7$ &  -EO$_7$-YO$_8$ & -P$_5$-SIDA$_7$ \\
+   && -JA$_7$ &  -\textsc{eo}$_7$ &  -\textsc{eo}$_7$-\textsc{yo}$_8$ & -\textsc{p}$_5$-\textsc{sida}$_7$ \\
    && \korean{+자} && \korean{하+어+요} & \korean{하+ㅂ시다}\\
    && +ef  && pvg+ef+jxf & ef \\
    \hline
 Imperative  && \korean{해라, 하여라}  & \korean{해}  & \korean{해요}  & \korean{합시오}  \\
   && haera, hayeora &  hae &  haeyo &  hapsio \\
-  && -RA$_7$ & -EO$_7$ & -EO$_7$-YO$_8$ & -P$_5$-SIO \\
+  && -RA$_7$ & -\textsc{eo}$_7$ & -\textsc{eo}$_7$-\textsc{yo}$_8$ & -\textsc{p}$_5$-\textsc{si}$_3$O \\
   && \korean{하+어라}, \korean{하+어라}  &  &    & \korean{+ㅂ시오} \\
   && pvg+ef,  pvg+ef                     &  &    &  +ef\\
   \hline
 Assertive   && \korean{하겠다}  & \korean{하겠어}  & \korean{하겠어요}  & \korean{하겠습니다}  \\
    &&  hagetda & hagesseo &  hagesseoyo & hagetseumnida \\
-   &&  -GESS$_4$-DA$_7$ & -GESS$_4$-EO$_7$ &  -GESS$_4$-EO$_7$-YO$_8$ & GESS$_4$-P$_5$-NI$_6$-DA$_7$ \\
+   &&  -\textsc{get}$_4$-\textsc{da}$_7$ & -\textsc{get}$_4$-\textsc{eo}$_7$ &  -\textsc{get}$_4$-\textsc{eo}$_7$-\textsc{yo}$_8$ & \textsc{get}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
 && \korean{하+겠+다}  & \korean{하+겠+어}   & \korean{하+겠+어+요} & \korean{하+겠+습니다}\\
 &&  px+ep+ef          & pvg+ep+ef   & pvg+ep+ef+jxf & pvg+ep+ef\\
 \hline
 \end{tabular}
-	\caption{Correspondence between our morpheme segmentation and the paradigm of \textit{hada} `to do' as described by Wiktionary and in the Kaist treebank. In each cell, we provide the Hangul (e.g., \korean{한다}) and transliterated (e.g., handa) forms given by Wiktionary, a representation in terms of underlying morphemes (e.g., -N$_6$-DA$_7$), and -- where available -- how the form is segmented in the Kaist corpus (e.g., \korean{하+ㄴ다} and px+ef).}\label{tab:korean-hada-1}
+	\caption{Correspondence between our morpheme segmentation and the paradigm of \textit{hada} `to do' as described by Wiktionary and in the Kaist treebank. In each cell, we provide the Hangul (e.g., \korean{한다}) and transliterated (e.g., handa) forms given by Wiktionary, a representation in terms of underlying morphemes (e.g., -\textsc{n}$_6$-\textsc{da}$_7$), and -- where available -- how the form is segmented in the Kaist corpus (e.g., \korean{하+ㄴ다} and px+ef).}\label{tab:korean-hada-1}
 \end{table}
 
 \begin{table}
@@ -823,13 +845,13 @@ Assertive   && \korean{하겠다}  & \korean{하겠어}  & \korean{하겠어요}
            &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
 Cause/Reason && \korean{해} & \korean{해서, 하여서} & \korean{하니} & \korean{하니까} \\
 && hae & haeseo, hayeoseo & hani & hanikka \\ 
-&& -EO$_7$ & -EOSEO$_9$ & -NI$_9$ & -NIKKA$_9$ \\
+&& -\textsc{eo}$_7$ & -\textsc{eo}$_7$SEO$_9$ & -\textsc{ni}$_9$ & -\textsc{ni}KKA$_9$ \\
 && &\korean{하+어서, 하+어서} & \korean{하+니} & \korean{하+니까} \\
 && & pvg+ecs, xsm+ecs         & pvg+ecs & xsm+ef \\
 \hline
 Contrast && \korean{하지만} & \korean{하는데} & \korean{하더니} \\
  && hajiman & haneunde & haedoni & \\ 
- && -JIMAN$_9$ & -NEUNDE$_9$ & -DEONI$_9$ & \\ \hline
+ && -JIMAN$_9$ & -\textsc{neunde}$_9$ & -DEONI$_9$ & \\ \hline
 Conjunction && \korean{하고} \\
  && hago \\ 
 && -GO$_9$ \\ \hline
@@ -850,27 +872,27 @@ Motive && \korean{하려고} \\
     \begin{tabular}{llllllllllllllllllllllllll}
            &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
 \multirow{2}{*}{Indicative} & Non-past & \korean{하신다} & \korean{하셔} & \korean{하세요, 하셔요} & \korean{하십니다} \\
-                           && -SI-N-DA & SI-EO & SI-EO-YO & SI-P-NI-DA \\
+                           && -\textsc{si}$_3$-\textsc{n}$_6$-\textsc{da}$_7$ & \textsc{si}$_3$-\textsc{eo}$_7$ & \textsc{si}$_3$-\textsc{eo}$_7$-\textsc{yo} & \textsc{si}$_3$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
 && \korean{하+시+ㄴ다}       &   --   &    \korean{하+시+어+요}             &  \korean{하+시+ㅂ니다}        \\
 \hline
 && \korean{하셨다} & \korean{하셨어} & \korean{하셨어요} & \korean{하셨습니다} \\
-&& SI-ESS-DA & SI-ESS-EO & SI-ESS-EO-YO & SI-ESS-P-NI-DA \\
+&& \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{da}$_7$ & \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{eo}$_7$ & \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{eo}$_7$-\textsc{yo} & \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
 & & \korean{하+셨+다}       &  --    &        --        &  \korean{하+셨+습니다}       \\
 \hline
 \multirow{2}{*}{Interrogative} & Non-past & \korean{하시느냐} & \korean{하셔} & \korean{하세요, 하셔요} & \korean{하십니까} \\
-&& SI-NYA & SI-EO & SI-EO-YO & SI-P-NI$_6$-KKA$_7$ \\
+&& \textsc{si}$_3$-\textsc{nya}$_7$ & \textsc{si}$_3$-\textsc{eo}$_7$ & \textsc{si}$_3$-\textsc{eo}$_7$-\textsc{yo} & \textsc{si}$_3$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{kka}$_7$ \\
 & &   --     &   --   &   \korean{하+시+어+요}             &  --        \\
 \hline
 & Past & \korean{하셨느냐} & \korean{하셨어} & \korean{하셨어요} & \korean{하셨습니까} \\
-&      & SI-ESS-NYA & SI-ESS-EO          & SI-ESS-EO-YO & SI-ESS-P-NI$_6$-KKA$_7$ \\
+&      & \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{nya}$_7$ & \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{eo}$_7$          & \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{eo}$_7$-\textsc{yo} & \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{kka}$_7$ \\
 & &        &      &                &          \\
 \hline
 \multirow{2}{*}{Imperative} && \korean{하시라} & \korean{하셔} & \korean{하세요} & \korean{하십시오} \\
-&& -SI-RA & -SI-EO & -SI-EO-YO & -SI-P-SIO \\
+&& -\textsc{si}$_3$-RA & -\textsc{si}$_3$-\textsc{eo}$_7$ & -\textsc{si}$_3$-\textsc{eo}$_7$-\textsc{yo} & -\textsc{si}$_3$-\textsc{p}$_5$-\textsc{si}$_3$O \\
 &        &      & \korean{하+시+어+}               &   \korean{하+십시오}       \\
 \hline
 \multirow{2}{*}{Assertive} & & \korean{하시겠다} & \korean{하시겠어} & \korean{하시겠어요} & \korean{하시겠습니다} \\
-&        &  -SI-GESS-DA     &  -SI-GESS-EO              &  -SI-GESS-EO-YO & -SI-GESS-P-NI-DA        \\
+&        &  -\textsc{si}$_3$-\textsc{get}$_4$-\textsc{da}$_7$     &  -\textsc{si}$_3$-\textsc{get}$_4$-\textsc{eo}$_7$              &  -\textsc{si}$_3$-\textsc{get}$_4$-\textsc{eo}$_7$-\textsc{yo} & -\textsc{si}$_3$-\textsc{get}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$        \\
 && -- & -- & -- & -- \\
     \end{tabular}
     \caption{Continuation of Tables~\ref{tab:korean-hada-1}--\ref{tab:korean-hada-2}: Conjugation of hada with an honorific (\textsc{si}$_3$). We provide Hangul forms, morpheme sequences, and -- where available -- segmentations as given in the Kaist corpus.}
@@ -885,26 +907,26 @@ Motive && \korean{하려고} \\
            &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
     \multirow{6}{*}{Indicative}         & Non-past  & \korean{있다} & \korean{있어} & \korean{있어요} & \korean{있습니다} \\
          &  &  \korean{있+다} & \korean{있+어} & \korean{있+어+요} & \korean{있+습니다}\\
-         &  &  -DA            & -EO            & -EO-YO            & -P-NI-DA \\
+         &  &  -\textsc{da}$_7$            & -\textsc{eo}$_7$            & -\textsc{eo}$_7$-\textsc{yo}            & -\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
          &  & +ef & +ef & +ef+jxf & +ef \\
          \hline
  & Past & \korean{있었다} & \korean{있었어} & \korean{있었어요} & \korean{있었습니다} \\
          &  & \korean{있+었+다} & \korean{있+었+어} & \korean{있+었+어+요} & \korean{있+었+습니다}\\
-         && -ESS-DA            & ESS-EO             & ESS-EO-YO & -ESS-P-NI-DA \\
+         && -\textsc{ess}$_4$-\textsc{da}$_7$            & \textsc{ess}$_4$-\textsc{eo}$_7$             & \textsc{ess}$_4$-\textsc{eo}$_7$-\textsc{yo} & -\textsc{ess}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
          &  & +ep+ef & +ep+ef & +ep+ef+jxf & +ep+ef \\
          \hline
 \multirow{6}{*}{Interrogative} & Non-past  & \korean{있느냐} & \korean{있어} & \korean{있어요} & \korean{있습니까} \\
-&& -NYA & -EO & -EO-YO & -P-NI$_6$-KKA$_7$ \\
+&& -\textsc{nya}$_7$ & -\textsc{eo}$_7$ & -\textsc{eo}$_7$-\textsc{yo} & -\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{kka}$_7$ \\
          &  & \korean{있+느냐} & \korean{있+어} & \korean{있+어+요} & \korean{있+습니까}\\
          &  & +ef              & +ef  & +ef+jxf & +ef\\
          \hline
          & Past & \korean{있었느냐} & \korean{있었어} & \korean{있었어요} & \korean{있었습니까} \\
-         && -ESS-NYA & -ESS-EO & -ESS-EO-YO & -ESS-P-NI$_6$-KKA$_7$ \\
+         && -\textsc{ess}$_4$-\textsc{nya}$_7$ & -\textsc{ess}$_4$-\textsc{eo}$_7$ & -\textsc{ess}$_4$-\textsc{eo}$_7$-\textsc{yo} & -\textsc{ess}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{kka}$_7$ \\
          &  & \korean{있+었+느냐} & \korean{있+었+어} & \korean{있+었+어+요}\\
          &  & +ep+ef & paa+ep+ef &  paa+ep+ef+jxf\\
          \hline
 \multirow{3}{*}{Assertive} &  & \korean{있겠다} & \korean{있겠어} & \korean{있겠어요} & \korean{있겠습니다} \\
-&& -GESS-DA & -GESS-EO & -GESS-EO-YO & -GESS-P-NI-DA \\
+&& -\textsc{get}$_4$-\textsc{da}$_7$ & -\textsc{get}$_4$-\textsc{eo}$_7$ & -\textsc{get}$_4$-\textsc{eo}$_7$-\textsc{yo} & -\textsc{get}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
          &  & \korean{있+겠+다} & \korean{} & \korean{있+겠+어+요} & \korean{있+겠+습니다}\\
          &  & +ep+f             &           & paa+ep+ef+jxf & paa+ep+ef\\
     \end{tabular}
@@ -934,19 +956,19 @@ In Figure~\ref{tab:turkish-yapmak}, we show how our segmentation corresponds to 
 \begin{tabular}{ll||llllllllllllll}
          &        & 1       & 2        & 3        & 1      & 2      & 3 \\ \hline\hline
  DNP & A & yaparım & yaparsın &  	yapar & yaparız & yaparsınız &  	yaparlar \\
-                    &  & -AR-IM & -AR-SIN &  	-AR & -AR-IZ & -AR-SINIZ &  	-AR-LAR \\ \hline
+                    &  & -AR-IM & -AR-\textsc{si}$_3$N &  	-AR & -AR-IZ & -AR-\textsc{si}$_3$NIZ &  	-AR-LAR \\ \hline
                 & I & yapıyorum & yapıyorsun & 	yapıyor &	yapıyoruz &	yapıyorsunuz &	yapıyorlar \\
-                &  & -IYOR-UM & -IYOR-SUN & 	-IYOR &	-IYOR-UZ &	-IYOR-SINIZ &	-IYOR-LAR \\ \hline
+                &  & -IYOR-UM & -IYOR-SUN & 	-IYOR &	-IYOR-UZ &	-IYOR-\textsc{si}$_3$NIZ &	-IYOR-LAR \\ \hline
                 & Pr  & yapacağım &	yapacaksın 	& yapacak 	& yapacağız &	yapacaksınız &	yapacaklar \\ 
-                &   & -ACAK-IM &	-ACAK-SIN 	& -ACAK 	& -ACAK-IZ &	-ACAK-SINIZ &	-ACAK-LAR \\ \hline\hline
+                &   & -ACAK-IM &	-ACAK-\textsc{si}$_3$N 	& -ACAK 	& -ACAK-IZ &	-ACAK-\textsc{si}$_3$NIZ &	-ACAK-LAR \\ \hline\hline
         DP    & Pe &yaptım &	yaptın &	yaptı &	yaptık &	yaptınız &	yaptılar \\
-              &  &-TI-IM &	-TI-SIN &	-TI &	-TI-K &	-TI-SINIZ &	-TI-LAR \\ \hline
+              &  &-TI-IM &	-TI-\textsc{si}$_3$N &	-TI &	-TI-K &	-TI-\textsc{si}$_3$NIZ &	-TI-LAR \\ \hline
                 & I & yapıyordum &	yapıyordun &	yapıyordu &	yapıyorduk &	yapıyordunuz &	yapıyorlardı \\ 
-                &  & -IYOR-DU-IM &	-IYOR-DU-SIN &	-IYOR-DU &	-IYOR-DU-K &	-IYOR-DU-SINIZ &	-IYOR-LAR-DU \\ \hline\hline
+                &  & -IYOR-DU-IM &	-IYOR-DU-\textsc{si}$_3$N &	-IYOR-DU &	-IYOR-DU-K &	-IYOR-DU-\textsc{si}$_3$NIZ &	-IYOR-LAR-DU \\ \hline\hline
  I     & Pe & yapmışım &	yapmışsın &	yapmış &	yapmışız &	yapmışsınız &	yapmışlar \\
-       &  & -MIS-IM &	-MIS-SIN &	-MIS &	-MIS-IZ &	-MIS-SINIZ &	-MIS-LAR \\ \hline
+       &  & -MIS-IM &	-MIS-\textsc{si}$_3$N &	-MIS &	-MIS-IZ &	-MIS-\textsc{si}$_3$NIZ &	-MIS-LAR \\ \hline
                & A & yaparmışım &	yaparmışsın &	yaparmış &	yaparmışız &	yaparmışsınız& 	yaparlarmış \\ 
-            &  & -AR-MIS-IM &	-AR-MIS-SIN &	-AR-MIS &	-AR-MIS-IZ &	-AR-MIS-SINIZ& 	-AR-LAR-MIS \\ \hline
+            &  & -AR-MIS-IM &	-AR-MIS-\textsc{si}$_3$N &	-AR-MIS &	-AR-MIS-IZ &	-AR-MIS-\textsc{si}$_3$NIZ& 	-AR-LAR-MIS \\ \hline
                & I & yapıyormuşum &	yapıyormuşsun &	yapıyormuş &	yapıyormuşuz &	yapıyormuşsunuz &	yapıyorlarmuş \\
                &              & -IYOR-MUS-IM &	-IYOR-MUS-SUN &	-IYOR-MUS &	-IYOR-MUS-UZ &	-IYOR-MUS-SUNUZ &	-IYOR-LAR-MUS \\
 \end{tabular}
@@ -1045,43 +1067,43 @@ Agreement (Obj+Subj)         & EK & 1sg indefinite present\\
 Ind & Pres   &  I    & teszek &	teszel &	tesz &	teszünk &	tesztek &	tesznek \\
     &        &       & csinálok &	csinálsz &	csinál &	csinálunk &	csináltok &	csinálnak \\
    &&&  ismerek &	ismersz &	ismer &	ismerünk &	ismertek &	ismernek \\
- &    &      & -EK &	-EL &	- &	-UNK &	-TEK &	-NEK \\ \hline
+ &    &      & -\textsc{ek} &	-\textsc{el} &	- &	-\textsc{unk} &	-\textsc{tek} &	-\textsc{nek} \\ \hline
    &&  D    & teszem &	teszed &	teszi &	tesszük &	teszitek &	teszik \\
    &&       & csinálom &	csinálod &	csinálja &	csináljuk &	csináljátok &	csinálják \\
   &&& ismerem &	ismered &	ismeri &ismerjük &	ismeritek &	ismerik \\
-&&      & -EM &	-ED &	-I &	-I-UK &	-I-TEK &	-I-EK \\ \hline
+&&      & -\textsc{em} &	-\textsc{ed} &	-\textsc{i} &	-\textsc{iuk} &	-\textsc{itek} &	-\textsc{ik} \\ \hline
    &&      & teszlek \\ \hline\hline
 & Past &     I    &tettem &	tettél &	tett &	tettünk &	tettetek &	tettek \\
 &      &          & csináltam &	csináltál &	csinált &	csináltunk &	csináltatok &	csináltak \\
 &&&ismertem &	ismertél &	ismert &	ismertünk &	ismertetek &	ismertek \\
-	    &  &         &-T-EM &	-T-EL &	-T &	-T-UNK &	-T-TEK &	-T-EK \\ \hline
+	    &  &         &-\textsc{t}-EM &	-\textsc{t}-EL &	-T &	-\textsc{t}-UNK &	-\textsc{t}-TEK &	-\textsc{t}-\textsc{ek} \\ \hline
  & &   D    &tettem &	tetted &	tette &	tettük &	tettétek &	tették \\
  & &        & csináltam &	csináltad &	csinálta &	csináltuk &	csináltátok &	csinálták \\
 &&& ismertem &	ismerted &	ismerte &	ismertük &	ismertétek 	&ismerték \\
-	    & &       &-T-EM &	-T-ED &	-T-I &	-T-UK &	-T-I-TEK &	-T-I-EK \\ \hline
+	    & &       &-\textsc{t}-EM &	-\textsc{t}-ED &	-\textsc{t}-I &	-\textsc{t}-UK &	-\textsc{t}-I-TEK &	-\textsc{t}-I-\textsc{ek} \\ \hline
   &&       &tettelek \\ \hline
 Cond  &Pres &   I    &tennék &	tennél &	tenne &	tennénk &	tennétek &	tennének \\
       &     &        & csinálnék &	csinálnál &	csinálna &	csinálnánk 	&csinálnátok &	csinálnának \\
   &&&    ismernék &	ismernél &	ismerne &	ismernénk &	ismernétek &	ismernének \\
-  & &   I    &-N-EK &	-N-EL &	-N &	-N-ENK &	-N-TEK &	-N-NEK \\\hline
+  & &   I    &-\textsc{n}-EK &	-\textsc{n}-EL &	-\textsc{n} &	-\textsc{n}-ENK &	-\textsc{n}-TEK &	-\textsc{n}-\textsc{nek} \\\hline
    &&  D    &tenném &	tennéd &	tenné &	tennénk &	tennétek &	tennék \\
    &&       & csinálnám &	csinálnád &	csinálná &	csinálnánk &	csinálnátok &	csinálnák \\
  &&&  ismerném &	ismernéd &	ismerné &	ismernénk 	&ismernétek &	ismernék \\
-&&      &-N-EM &	-N-ED &	-N-I &	-N-ENK &	-N-TEK &	-N-EK \\ \hline
+&&      &-\textsc{n}-EM &	-\textsc{n}-ED &	-\textsc{n}-I &	-\textsc{n}-ENK &	-\textsc{n}-TEK &	-\textsc{n}-EK \\ \hline
        &&  &tennélek \\ \hline
 Subj & Pres & I         &tegyek &	tégy or tegyél &	tegyen &	tegyünk &	tegyetek &	tegyenek \\
      &      &           & csináljak &	csinálj or
 csináljál &	csináljon &	csináljunk& 	csináljatok &	csináljanak \\
 &&&ismerjek &	ismerj or
 ismerjél &	ismerjen &	ismerjünk &	ismerjetek &	ismerjenek \\
- &  &          &-J-EK &	-J or -J-EL &	-J-EN &	-J-UNK &	-J-TEK &	-J-NEK \\ \hline
+ &  &          &-\textsc{j}-\textsc{ek} &	\textsc{j}-\textsc{el} &	-\textsc{j}-\textsc{en} &	-\textsc{j}-UNK &	-\textsc{j}-TEK &	-\textsc{j}-\textsc{nek} \\ \hline
 &&D         &tegyem &	tedd or tegyed &	tegye &	tegyük& 	tegyétek &	tegyék \\
 &&          & csináljam &	csináld or
 csináljad &	csinálja &	csináljuk &	csináljátok &	csinálják \\
 &&&ismerjem &	ismerd or
 ismerjed &	ismerje &	ismerjük &	ismerjétek & ismerjék
  \\
-&&         &-J-EM &	-ED or -J-ED &	-J-I &	-J-UK & 	-J-I-TEK &	-J-I-EK \\ \hline
+&&         &-\textsc{j}-\textsc{em} &	-\textsc{j}-\textsc{ED} &	-\textsc{j}-I &	-\textsc{j}-UK & 	-\textsc{j}-\textsc{itek} &	-\textsc{j}-\textsc{ik}- \\ \hline
   &&       &tegyelek \\
     \end{tabular}
     }
