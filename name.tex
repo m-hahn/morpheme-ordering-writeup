@@ -401,7 +401,7 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
 \begin{figure}
     \centering
     \begin{tabular}{cccccc}
-    Finnish & Turkish & Hungarian \\
+    \textsc{Finnish} & \textsc{Turkish} & \textsc{Hungarian} \\
         \includegraphics[width=0.3\textwidth]{figures/finnish_verbs/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
         &
     \includegraphics[width=0.3\textwidth]{figures/turkish_verbs/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
@@ -412,17 +412,22 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
     \includegraphics[width=0.3\textwidth]{figures/korean/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     &
         \includegraphics[width=0.3\textwidth]{figures/japanese/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+        &
+            \includegraphics[width=0.3\textwidth]{figures/sesotho_prefixes/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+            \\
+            \textsc{Sesotho Suffixes} \\
+            \includegraphics[width=0.3\textwidth]{figures/sesotho_suffixes/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     \end{tabular}
-%    \includegraphics[width=0.2\textwidth]{figures/sesotho_prefixes/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
-%    \includegraphics[width=0.2\textwidth]{figures/sesotho_suffixes/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
-    \caption{Verb Suffixes}
+
+    
+    \caption{AUC Histograms for Verb Affixes.}
     \label{fig:my-label}
 \end{figure}
 
 
 \begin{figure}
 \begin{tabular}{ccc}
-Finnish & Turkish & Hungarian \\
+\textsc{Finnish} & \textsc{Turkish} & \textsc{Hungarian} \\
     \includegraphics[width=0.3\textwidth]{figures/finnish_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     &
     \includegraphics[width=0.3\textwidth]{figures/turkish_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
@@ -459,7 +464,7 @@ Finnish & Turkish & Hungarian \\
 
 \begin{figure}[]
 \begin{tabular}{cccccccc}
-\textbf{Turkish} & \textbf{Hungarian} & \textbf{Finnish} \\
+\textsc{Turkish} & \textsc{Hungarian} & \textsc{Finnish} \\
 \begin{minipage}{.3\textwidth}
   \include{figures/turkish_nouns/comparison}
     \end{minipage}
@@ -481,7 +486,7 @@ Finnish & Turkish & Hungarian \\
 \begin{figure}[]
 
 \begin{tabular}{cccccccc}
-\textbf{Turkish} & \textbf{Hungarian} & \textbf{Finnish} \\
+\textsc{Turkish} & \textsc{Hungarian} & \textsc{Finnish} \\
 \begin{minipage}{.3\textwidth}
   \include{figures/turkish_verbs/comparison}
   \end{minipage}
@@ -494,7 +499,7 @@ Finnish & Turkish & Hungarian \\
   \include{figures/finnish_verbs/comparison}
   \end{minipage}
   \\
-  \textbf{Korean}  & \textbf{Japanese} & \textbf{Sesotho Prefixes} \\
+  \textsc{Korean}  & \textsc{Japanese} & \textsc{Sesotho Prefixes} \\
       \begin{minipage}{.3\textwidth}
   \include{figures/korean/comparison}
   \end{minipage}
@@ -505,6 +510,10 @@ Finnish & Turkish & Hungarian \\
   &
   \begin{minipage}{.3\textwidth}
   \include{figures/sesotho_prefixes/comparison}
+  \end{minipage} \\
+  \textsc{Sesotho Suffixes} \\
+  \begin{minipage}{.3\textwidth}
+  \include{figures/sesotho_suffixes/comparison}
   \end{minipage}
   \end{tabular}
   
@@ -517,7 +526,7 @@ Finnish & Turkish & Hungarian \\
 
 \begin{figure}
 \begin{tabular}{ccccccc}
-\textbf{Finnish} & \textbf{Hungarian} & \textbf{Turkish} \\
+\textsc{Finnish} & \textsc{Hungarian} & \textsc{Turkish} \\
 \begin{minipage}{.3\textwidth}
   \include{figures/finnish_verbs/comparison-opt-uni}
     \end{minipage}
@@ -530,7 +539,7 @@ Finnish & Turkish & Hungarian \\
   \include{figures/turkish_verbs/comparison-opt-uni}
     \end{minipage} 
     \\
-    \textbf{Korean} & \textbf{Japanese} \\
+    \textsc{Korean} & \textsc{Japanese} & \textsc{Sesotho Prefixes} \\
         \begin{minipage}{.3\textwidth}
   \include{figures/korean/comparison-opt-uni}
     \end{minipage}
@@ -538,8 +547,17 @@ Finnish & Turkish & Hungarian \\
     \begin{minipage}{.3\textwidth}
   \include{figures/japanese/comparison-opt-uni}
     \end{minipage}
+        &
+    \begin{minipage}{.3\textwidth}
+  \include{figures/sesotho_prefixes/comparison-opt-uni}
+    \end{minipage}
+    \\
+    \textsc{Sesotho Suffixes} \\
+        \begin{minipage}{.3\textwidth}
+  \include{figures/sesotho_suffixes/comparison-opt-uni}
+    \end{minipage}
 \end{tabular}
-    \caption{Comparing optimized orders with the universal order described by \citep{bybee-morphology-1985} \mhahn{TODO I'll have to exclude rare categories like UNKNOWN from Korean.}.}
+    \caption{Comparing optimized orders with the universal order described by \citep{bybee-morphology-1985} \mhahn{TODO I'll have to exclude rare categories like UNKNOWN from Korean.}. Note that, for Sesotho prefixes, inversion of order relative to the universal order is expected, as the universal order indicates distance from the root, not absolute position.}
     \label{fig:my_label}
 \end{figure}
 
