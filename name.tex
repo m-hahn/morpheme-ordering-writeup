@@ -438,17 +438,17 @@ Finnish & Turkish & Hungarian \\
     \begin{tabular}{l|l|ll|lllllllll}
     &     &    \multicolumn{2}{c|}{Pairs} & \multicolumn{2}{c|}{Full} & \multicolumn{2}{c}{Full (Types)} \\
      &   &     Optim. & Baseline & Optim. & Baseline & Optim. & Baseline \\ \hline
-Nouns & finnish nouns & 1.0 (0.0) & 0.42 (0.31) & 1.0 (0.0) & 0.37 (0.32) & 1.0 (0.0) & 0.38 (0.29) \\
+ & finnish nouns & 1.0 (0.0) & 0.42 (0.31) & 1.0 (0.0) & 0.37 (0.32) & 1.0 (0.0) & 0.38 (0.29) \\
  & turkish nouns & 1.0 (0.0) & 0.56 (0.36) & 1.0 (0.0) & 0.5 (0.37) & 1.0 (0.0) & 0.5 (0.36) \\
- & hungarian nouns & 1.0 (0.0) & 0.48 (0.22) & 1.0 (0.0) & 0.33 (0.27) & 1.0 (0.0) & 0.33 (0.27) \\ \hline
-Verbs & finnish verbs & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.36 (0.32) & 0.38 (0.37) \\
+ & hungarian nouns & 1.0 (0.0) & 0.48 (0.22) & 1.0 (0.0) & 0.33 (0.27) & 1.0 (0.0) & 0.33 (0.27) \\
+ \hline
+ & finnish verbs & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.36 (0.32) & 0.38 (0.37) \\
  & hungarian verbs & 0.95 (0.09) & 0.52 (0.37) & 0.95 (0.0) & 0.5 (0.4) & 0.94 (0.0) & 0.5 (0.39) \\
  & turkish verbs & 0.96 (0.09) & 0.46 (0.14) & 0.95 (0.0) & 0.37 (0.15) & 0.93 (0.07) & 0.36 (0.14) \\
  & korean & 0.97 (0.1) & 0.56 (0.33) & 0.97 (0.0) & 0.53 (0.33) & 0.95 (0.0) & 0.53 (0.36) \\
  & japanese & 0.94 (0.08) & 0.48 (0.24) & 0.93 (0.0) & 0.39 (0.24) & 0.9 (0.1) & 0.39 (0.24) \\
- & sesotho pre & -- & -- & -- & -- & -- & -- \\
- & sesotho suff & -- & -- & -- & -- & -- & -- \\
-
+ & sesotho prefixes & 0.99 (0.0) & 0.5 (0.48) & 0.99 (0.0) & 0.5 (0.48) & 0.98 (0.0) & 0.51 (0.46) \\
+ & sesotho suffixes & 0.62 (0.0) & 0.48 (0.2) & 0.54 (0.0) & 0.45 (0.19) & 0.52 (0.0) & 0.44 (0.19) \\
     \end{tabular}
     \caption{Accuracies in predicting morpheme ordering. `Optim.' indicates grammars optimized for AUC, `'Baseline' indicates randomly constructed weights.
     In each cell, we provide the mean and the stgandard deviation over orderings. `Pairs' indicates the fraction of pairs of morphemes occurring together in the same word that are ordered correctly. `Full' indicates the fraction of verb forms in the corpus that are ordered fully correctly. `Full (Types)' counts forms that occur multiple times only once, it thus down-weights the role of frequent forms.}
@@ -535,7 +535,7 @@ Verbs & finnish verbs & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.3
   \include{figures/japanese/comparison-opt-uni}
     \end{minipage}
 \end{tabular}
-    \caption{Comparing optimized orders with the universal order described by \citep{bybee-morphology-1985}.}
+    \caption{Comparing optimized orders with the universal order described by \citep{bybee-morphology-1985} \mhahn{TODO I'll have to exclude rare categories like UNKNOWN from Korean.}.}
     \label{fig:my_label}
 \end{figure}
 
@@ -663,7 +663,7 @@ We indicate morphemes by a small-caps representation of a stylized phonological 
     \item Honorific \textsc{si}$_3$ \citep[4.3.2, 4.4.1]{yeon2010korean}
     \item Tense/Aspect suffixes include -\textsc{ess}$_4$ for past \citep[4.5.1.1]{yeon2010korean}, -\textsc{essess}$_4$ for remote past \citep[4.5.1.2]{yeon2010korean}, -\textsc{get}$_4$ for future \citep[4.5.2.1]{yeon2010korean}
     \item Formality \textsc{p}$_5$ (allomorphs include -\textit{p}-, -\textit{m}-, -\textit{seum}-,  \citep[4.3.2]{yeon2010korean})
-    \item We partition Mood suffixes into two slots. Frequent elements of the Mood I slot are -\textsc{n}-, -\textsc{ni}- \citep[4.3.2]{yeon2010korean}.
+    \item We partition Mood suffixes into two slots, as these can be combined. Frequent elements of the Mood I slot are -\textsc{n}-, -\textsc{ni}- \citep[4.3.2]{yeon2010korean}.
     
     \item Frequent elements of the Mood II slot are declarative -\textsc{da}- \citep[4.3.2]{yeon2010korean}, command -\textsc{ra}-, interrogative -\textsc{ka}-, the suffix  -\textsc{ji} \citep[4.2.2-3]{yeon2010korean}, and informal -\textsc{eo}- (informal).
     
@@ -786,13 +786,13 @@ Plain       &   \korean{다}     &  \korean{(느)냐} &  \korean{라}     &  \ko
            \hline
 \multirow{6}{*}{Interrogative} & \multirow{3}{*}{Non-past} & \korean{하느냐} & \korean{해}  & \korean{해요}  & \korean{합니까} \\
  &  & haneunya &  hae &  haeyo & hamnikka\\
- &  & -NEUNYA$_7$ &  -EO$_7$ &  -EO$_7$-YO$_8$ & -P$_5$-NIKKA$_7$ \\
+ &  & -NYA$_7$ &  -EO$_7$ &  -EO$_7$-YO$_8$ & -P$_5$-NI$_6$+KKA$_7$ \\
                && \korean{하+느냐} & & & \korean{하+ㅂ니까}    \\
               && px+ef & & & px+ef \\
  \hline
               & \multirow{3}{*}{Past} & \korean{했느냐} & \korean{했어} & \korean{했어요} & \korean{했습니까} \\
               &  & ha-n-neunya &  hae-sseo &  hae-sseo-yo &  haetseumnikka\\
-              &  & -ESS$_4$-NEUNYA$_7$ &  -ESS$_4$-EO$_7$ &  -ESS$_4$-EO$_7$+YO$_8$ &  -ESS$_4$-P$_5$-NIKKA$_7$\\
+              &  & -ESS$_4$-NYA$_7$ &  -ESS$_4$-EO$_7$ &  -ESS$_4$-EO$_7$+YO$_8$ &  -ESS$_4$-P$_5$-NI$_6$-KKA$_7$\\
               &  &  \korean{하+었+느냐}  & \korean{하+었+어} & \korean{하+었+어+요} & \korean{하+었+습니까} \\
               &  & +ep+ef  & +ep+ef            & px+ep+ef+jxf & pvg+ep+ef \\
               \hline
@@ -804,7 +804,7 @@ Hortative   && \korean{하자}  & \korean{해}  & \korean{해요}  & \korean{합
    \hline
 Imperative  && \korean{해라, 하여라}  & \korean{해}  & \korean{해요}  & \korean{합시오}  \\
   && haera, hayeora &  hae &  haeyo &  hapsio \\
-  && -EORA$_7$ & -EO$_7$ & -EO$_7$-YO$_8$ & -P$_5$-SIO \\
+  && -RA$_7$ & -EO$_7$ & -EO$_7$-YO$_8$ & -P$_5$-SIO \\
   && \korean{하+어라}, \korean{하+어라}  &  &    & \korean{+ㅂ시오} \\
   && pvg+ef,  pvg+ef                     &  &    &  +ef\\
   \hline
@@ -858,11 +858,11 @@ Motive && \korean{하려고} \\
 & & \korean{하+셨+다}       &  --    &        --        &  \korean{하+셨+습니다}       \\
 \hline
 \multirow{2}{*}{Interrogative} & Non-past & \korean{하시느냐} & \korean{하셔} & \korean{하세요, 하셔요} & \korean{하십니까} \\
-&& SI-NEUNYA & SI-EO & SI-EO-YO & SI-P-NIKKA \\
+&& SI-NYA & SI-EO & SI-EO-YO & SI-P-NI$_6$-KKA$_7$ \\
 & &   --     &   --   &   \korean{하+시+어+요}             &  --        \\
 \hline
 & Past & \korean{하셨느냐} & \korean{하셨어} & \korean{하셨어요} & \korean{하셨습니까} \\
-&      & SI-ESS-NEUNYA & SI-ESS-EO          & SI-ESS-EO-YO & SI-ESS-P-NIKKA \\
+&      & SI-ESS-NYA & SI-ESS-EO          & SI-ESS-EO-YO & SI-ESS-P-NI$_6$-KKA$_7$ \\
 & &        &      &                &          \\
 \hline
 \multirow{2}{*}{Imperative} && \korean{하시라} & \korean{하셔} & \korean{하세요} & \korean{하십시오} \\
@@ -894,12 +894,12 @@ Motive && \korean{하려고} \\
          &  & +ep+ef & +ep+ef & +ep+ef+jxf & +ep+ef \\
          \hline
 \multirow{6}{*}{Interrogative} & Non-past  & \korean{있느냐} & \korean{있어} & \korean{있어요} & \korean{있습니까} \\
-&& -NEUNYA & -EO & -EO-YO & -P-NIKKA \\
+&& -NYA & -EO & -EO-YO & -P-NI$_6$-KKA$_7$ \\
          &  & \korean{있+느냐} & \korean{있+어} & \korean{있+어+요} & \korean{있+습니까}\\
          &  & +ef              & +ef  & +ef+jxf & +ef\\
          \hline
          & Past & \korean{있었느냐} & \korean{있었어} & \korean{있었어요} & \korean{있었습니까} \\
-         && -ESS-NEUNYA & -ESS-EO & -ESS-EO-YO & -ESS-P-NIKKA \\
+         && -ESS-NYA & -ESS-EO & -ESS-EO-YO & -ESS-P-NI$_6$-KKA$_7$ \\
          &  & \korean{있+었+느냐} & \korean{있+었+어} & \korean{있+었+어+요}\\
          &  & +ep+ef & paa+ep+ef &  paa+ep+ef+jxf\\
          \hline
