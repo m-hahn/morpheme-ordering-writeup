@@ -143,35 +143,43 @@ Our work adds to a growing body of work suggesting that many properties of langu
 
 \section{Introduction}
 
-Human language encodes thoughts into linear strings of words, syllables, and sounds (CITE).
-
-Something more general for cognitive audience
-
+Human language encodes thoughts into linear strings of words, and ultimately sounds (CITE).
 Across languages, words are composed of morphemes, commonly defined as the smallest meaning-bearing units of language.
-Morphemes can take different shapes.
-In many cases, words can be segmented into a sequence of morphemes, as in the English word runners (root run-, derivation -er-, plural -s).
-The order of morphemes within a word follows well-documented cross-linguistic tendencies, for instance, plural markers tend to be closer to noun stems than case markers \citep[112]{greenberg1963universals}.
-These tendencies have been explained in terms of the relative scope of different morphemes  \citep{rice2000morpheme}, parallelism between morphology and syntax \citep{givon1971historical,venneman1973explanation,baker1985the}, and the strength of their semantic association with the root \citep{bybee-morphology-1985}.
+%In many cases, words can be segmented into a sequence of morphemes, as in
+For instance, the English word runners can be decomposed into three morphemes: the root run- indicating an action, the suffix -er- indicating someone performing an action, and plural -s indicating a group of several referents.
+The order of morphemes within a word follows well-documented cross-linguistic tendencies, for instance, morphemes deriving new words (e.g., English -er deriving nouns from verbs) are ordered closer to the root than inflectional morphemes (e.g., English plural -s).
+Another well-documented universal applying to languages with richer morphology is Greenbergs' Universal X:
+Plural markers tend to be closer to noun stems than case markers \citep[112]{greenberg1963universals} (TODO example from some language).
+In morphologically rich languages, verbs often have a string of two or more affix morphemes attached to a root, and the typological literature has documented universal tendencies, such as a preference for morphemes changing the number of arguments to appear close to the root, while morphemes indicating agreement with subjects appear far away from the root \citep{bybee-morphology-1985}.
+
+Explaining these linguistic universals has been an important subject of study.
+Explanations have been stated in terms of the relative scope of different morphemes  \citep{rice2000morpheme}, parallelism between morphology and syntax \citep{givon1971historical,venneman1973explanation,baker1985the}, and the strength of their semantic association between different morphemes \citep{bybee-morphology-1985}.
 %One family of explanations holds that those affixes are closest to the root that are most relevant to the root \citep{bybee-morphology-1985}.
 %Other explanations suggest that morphemes are ordered based on (TODO CITE).
 
-A recent theory proposes a cognitive explanation for these tendencies, arguing that ordering universals in language can be understood as arising from optimization of processing effort under memory limitations \citep{Hahn2020modeling}.
+A recent theory proposes a cognitive explanation for word and morpheme order in language, arguing that ordering universals in language optimize processing effort under memory limitations \citep{Hahn2020modeling}.
 Formally, they introduced the notion of a memory-surprisal tradeoff: Depending on how many memory resources a comprehender invests, they can achieve different levels of surprisal.
-(CITE) hypothesize that order of words and morphemes in language optimizes this tradeoff.
+\citep{Hahn2020modeling} argue that order of words and morphemes in language optimizes this tradeoff.
 Optimizing the memory-surprisal tradeoff amounts to putting elements together when they predict each other strongly, as measured by mutual information.
-In a case study, CITE apply this to morpheme ordering in Japanese and Sesotho, finding that optimization could partly reproduce morpheme ordering in these languages.
-They also suggested that mutual information formalizes previous notions of strength of semantic association, such as \cite{bybee-morphology-1985}'s notion of \textit{relevance}.
+In a case study, \citep{Hahn2020modeling} apply this to morpheme ordering in verbs in two languages (Japanese and Sesotho), finding that optimization could partly reproduce morpheme ordering in these languages.
+They also suggested that mutual information formalizes previous notions of strength of semantic association between morphemes \cite{bybee-morphology-1985}. %, such as \cite{bybee-morphology-1985}'s notion of \textit{relevance}.
 
 
 
 
 
 
-In this work, we examine this theory on a broader basis by considering data from four additional languages.
-We focus on languages where words tend to have multiple morphemes and these are mostly realized separately. Such languages are referred to as agglutinative (Greenberg 1954).
+In this work, we examine this theory on a broader basis.
+First, we consider data from four additional languages, testing whether it predicts 
+Second, we consider nouns in addition to verbs, testing whether it accounts for Greenberg's Universal X.
+
+We focus on languages with rich morphology where words tend to have multiple morphemes and these are mostly realized separately.
+Such languages are referred to as agglutinative \cite{humboldt1836uber,greenberg1960a}.
 We obtained data from four languages (Korean, Turkish, Hungarian, Finnish).
-Whereas \cite{Hahn2020modeling} only considered verb inflection, we also consider noun inflection across three languages.
+These languages have very substantial verbal inflection, and three of these languages (Turkish, Hungarian, Finnish) also have substantial noun inflection.
+%Whereas \cite{Hahn2020modeling} only considered verb inflection, we also consider noun inflection across three languages.
 
+% interesting https://www.eva.mpg.de/fileadmin/content_files/staff/haspelmt/pdf/Agglutination.pdf
 
 %Greenberg 1963:  "the expression of number almost always comes between the noun base and the expression of case" (Greenberg 1963:112)
 
@@ -208,7 +216,7 @@ It states that the processing effort on a word $w_t$ in context $w-1 ... w_{t-1}
      \begin{equation}   \label{eq:true-surp}
     \text{Difficulty} \propto -\log P(w_t , w_1\dots w_{t-1}).
 \end{equation}
-Surprisal as estimated by corpus-based methods or cloze is a successful predictor of reading time on naturalistic text \citep{smith2013effect,goodkind-predictive-2018,frank2019interaction,aurnhammer2019evaluating,wilcox2020predictive} (TODO citation based on Cloze).
+Surprisal as estimated by corpus-based methods or cloze is a successful predictor of reading time on naturalistic text \citep{smith2013effect,goodkind-predictive-2018,frank2019interaction,aurnhammer2019evaluating,wilcox2020predictive}. % (TODO citation based on Cloze).
 Surprisal theory is a computational-level theory; it can be justified in terms of different mechanisms such as preactivation and integration~\citep{kuperberg2016we}.
 \citet{Hahn2020modeling} argue that, due to limitations in human memory, human expectations in reality do not reflect the true context $w_1\dots w_{t-1}$, but some memory representation $m\_t$:
 \begin{equation}   \label{eq:lossy-surp}
@@ -269,20 +277,23 @@ In this work, we aim to test the Memory-Surprisal Tradeoff as a predictor of mor
 
 \section{Morpheme Ordering and Ordering Universals}
 
-In this section, we introduce some general crosslinguistic tendencies in morpheme ordering, before discussing data from the six languages in Section XX.
+In this section, we introduce some general crosslinguistic tendencies in morpheme ordering, including discussion of the the six languages.
+
 Languages apply inflection to different classes of words, including both open word classes such as nouns, verbs, and adjectives, and closed word classes, in particular pronouns.
-In this work, we focus on open word classes, as these have productive paradigms that apply to thousands of words in a language, including words that newly enter the language, whereas pronominal inflection is restricted to a small number of words, often with idiosynractic and fossilized paradigms inherited from earlier stages of a language.
-Among open word classes, inflection commonly applies to verbs, nouns, and adjectives.
+In this work, we focus on open word classes, as these have productive paradigms that apply to thousands of words in a language, including words that newly enter the language, whereas pronominal inflection is restricted to a small number of words, often with idiosynractic and fossilized paradigms inherited from earlier stages of a language (CITE).
+Among open word classes, inflection commonly applies to verbs, nouns, and adjectives (CITE).
 We focus on nouns and verbs.
 When adjectives are inflected, they often pattern with either verbs -- when they are used as predicates -- or nouns -- when they are used as attributes or independent nouns.
 
 Nouns very commonly mark number and case morphologically.
 %Number marking typically distinguishes singular and plural (person -- person-s).
 %Case marking 
-These are the subject of a well-documented universal, namely \citep[112]{greenberg1963universals}'s Universal 39:
+In some languages, possession is also marked on the noun (CITE).
+Figure~\ref{fig:noun-inflection} shows a fully inflected Finnish noun, with endings for number (plural), case (illative), and possessor (2nd person singular).
+
+Number and case marking are the subject of a well-documented universal, namely \citep[112]{greenberg1963universals}'s Universal 39:
 It states that number affixes are closer to the stem than case affixes, if they appear on the same side.
-In some languages, possession is also marked on the noun.
-The following is a fully inflected Finnish noun, with endings for number (plural), case (illative), and possessor (2nd person singular).
+This universal is supported by the example in Figure~\ref{fig:noun-inflection}.
 
 %\ex.\ag. mi  rare mash yoo \\
 %%Stem (3) (5) (8) \\
@@ -300,7 +311,7 @@ The following is a fully inflected Finnish noun, with endings for number (plural
 Stem-Plural-Illative-2SgPoss \\
 `into your stories' (Finnish)
 \end{tabular}
-\caption{Noun inflection in Finnish}
+\caption{Noun inflection in Finnish}\caption{fig:noun-inflection}
 \end{figure}
 
 
@@ -342,21 +353,109 @@ b) & ismer-het-nek \\
  
  
 \begin{table}[]
-    \centering
-\begin{tabular}{l||l|l|l|l|l|l|llll}
-                    & Turkish & Hungarian & Finnish  & Sesotho Pref.     & Ses Suff. & Japanese & Korean\\ \hline\hline
-Derivation          &  &         &          &               & Reversive & suru    & ha,i\\ \hline
-Valence             &  Causative &         &           & Object marker & Valence & Causative\\ \hline
-Voice               & Passive & Passive    & Passive     &               & Passive & Passive\\ \hline
-TAM, Pol.           & Negation  &   Potential  &   Tense/Asp &    Negation &  Politeness &      Potential        & Honorific \\
-                    & Potential & Tense        &    Mood     &     Tense   &    Mood     &   Honorific  &    Tense       \\
-                    &   TAM1    &          &                &         &                  & Tense/Aspect & Formality \\
-                    & lar       &          &           &  & & Negation & Mood I\\
-                    & TAM2         &           &               &          &       &      &  Mood II \\ \hline
-Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
-\textit{Other}               & Formality          & Clitic    &              & Int/Rel &      &        & Politeness \\
-                    &           &     &              &  &          &    & Conj \\
-\end{tabular}
+
+  \begin{tikzpicture}[%
+% common options for blocks:
+block/.style = {draw, fill=blue!30, align=center, anchor=west,
+            minimum height=0.65cm, inner sep=0},
+% common options for the circles:
+ball/.style = {circle, draw, align=center, anchor=north, inner sep=0}]
+\node[rectangle,text width=1.2cm,anchor=base] (A0) at (1,-0.3) {Real};
+
+
+%\node[rectangle,text width=1.2cm,anchor=base] (A1) at (1,-1.0) {1Derivation};
+\node[rectangle,text width=1.2cm,anchor=base, color=red] (A2) at (1,-1.5) {Valence};
+\node[rectangle,text width=1.2cm,anchor=base, color=green] (A3) at (1,-2.0) {Voice};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-3) {Aspect};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-3.5) {Tense};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-4) {Mood};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (A4) at (1,-5) {Agreement};
+
+% Turkish
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (3,-0.3) {\textbf{Turkish}};
+\node[rectangle,text width=1.2cm,anchor=base,color=red] (B1) at (3,-1.5) {1Causative};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (3,-2) {2Passive};
+\node[rectangle,text width=1.2cm,anchor=base] (B3) at (3,-2.5) {3Negation};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-3) {4Potential};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-3.5) {5TAM1};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (3,-4) {6lar};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-4.5) {7TAM2};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (3,-5) {8Agreement};
+
+% Hungarian
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (5,-0.3) {\textbf{Hungarian}};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (5,-2) {1Passive};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (5,-3) {2Potential};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (5,-3.5) {3Tense};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (5,-5) {4Agreement};
+
+
+% Finnish
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (7,-0.3) {\textbf{Finnish}};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (7,-2) {1Passive};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (7,-3.5) {2TAM};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (7,-5) {3Agreement};
+
+% Sesotho Prefixes
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (9,-0.3) {\textbf{SesP}};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (9,-2) {1Ob.ag.};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (9,-2.5) {2Polarity};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (9,-3) {3Tense};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (9,-5) {4Agreement};
+\node[rectangle,text width=1.2cm,anchor=base,color=purple] (B4) at (9,-5.5) {5Int./Rel.};
+
+% Sesotho Suffixes
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (11,-0.3) {\textbf{SesS}};
+\node[rectangle,text width=1.2cm,anchor=base] (B2) at (11,-1) {1Reversive};
+\node[rectangle,text width=1.2cm,anchor=base,color=red] (B2) at (11,-1.5) {2Valence};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (11,-2) {3Passive};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (11,-3) {4Mood};
+
+
+
+% Japanese
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (13,-0.3) {\textbf{Japanese}};
+\node[rectangle,text width=1.2cm,anchor=base] (B2) at (13,-1) {1Derivation};
+\node[rectangle,text width=1.2cm,anchor=base,color=red] (B2) at (13,-1.5) {2Causative};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (13,-2) {3Pass./Pot.};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (13,-2.5) {4Politeness};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (13,-3) {5Desiderative};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (13,-3.5) {6Negation};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (13,-4) {7TAM/Emb.};
+
+% Korean
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (15,-0.3) {\textbf{Korean}};
+\node[rectangle,text width=1.2cm,anchor=base] (B2) at (15,-1.0) {Derivation};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-2.5) {Honorific};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (15,-3) {Tense};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-3.5) {Formality};
+\node[rectangle,text width=1.5cm,anchor=base,color=blue] (B4) at (15,-4.0) {Mood I};
+\node[rectangle,text width=1.5cm,anchor=base,color=blue] (B4) at (15,-4.5) {Mood II};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-5) {Politeness};
+\node[rectangle,text width=1.2cm,anchor=base,color=purple] (B4) at (15,-5.5) {Embedding};
+
+
+%\draw[->] (A1.east) to (B1.west);
+%\draw[->] (A2.east) to (B2.west);
+%\draw[->] (A3.east) to (B3.west);
+%\draw[->] (A4.east) to (B4.west);
+\end{tikzpicture}
+
+%    \centering
+%\begin{tabular}{l||l|l|l|l|l|l|llll}
+%                    & Turkish & Hungarian & Finnish  & Sesotho Pref.     & Ses Suff. & Japanese & Korean\\ \hline\hline
+%Derivation          &  &         &          &               & Reversive & suru    & ha,i\\ \hline
+%Valence             &  Causative &         &           & Object marker & Valence & Causative\\ \hline
+%Voice               & Passive & Passive    & Passive     &               & Passive & Passive\\ \hline
+%TAM, Pol.           & Negation  &   Potential  &   Tense/Asp &    Negation &  Politeness &      Potential        & Honorific \\
+%                    & Potential & Tense        &    Mood     &     Tense   &    Mood     &   Honorific  &    Tense       \\
+%                    &   TAM1    &          &                &         &                  & Tense/Aspect & Formality \\
+%                    & lar       &          &           &  & & Negation & Mood I\\
+%                    & TAM2         &           &               &          &       &      &  Mood II \\ \hline
+%Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
+%\textit{Other}               & Formality          & Clitic    &              & Int/Rel &      &        & Politeness \\
+%                    &           &     &              &  &          &    & Conj \\
+%\end{tabular}
     \caption{Morpheme order across the six languages in our sample, matched with the universal order described by \cite{bybee-morphology-1985}.}
     \label{tab:table-orders}
 \end{table}
@@ -368,8 +467,9 @@ Figure~\ref{tab:table-orders} summarises the affixes in the verbal morphologies 
 Verbal affixes are typically grouped into derivational and inflectional affixes.
 Derivational affixes derive new verb stems (e.g., 'do' $\rightarrow$ undo), whereas inflectional affixes derive inflected verb forms from verb stems (e.g., `do' $\rightarrow$ `does') (CITE).
 Examples of derivational suffixes are Japanese -su- and Korean -ha-, which derive verbs from non-verbal stems (CITE).
-Another example is the Reversive suffix in Sesotho (e.g., `do' $\rightarrow$ `undo', CITE)
+Another example is the Reversive suffix in Sesotho (e.g., `do' $\rightarrow$ `undo', CITE).
 Derivational affixes generally appear closer to the root than inflectional affixes.
+
 
 
 
@@ -379,16 +479,16 @@ In Turkish, -t- marks causatives (Figure~\ref{tab:examples-verbs}).
 \textit{Aspect} describes how an event unfolds over time.
 An example of aspect marking is the English progressive \textit{to be} ...-\textit{ing}, which indicates that an action is currently ongoing (CITE).
 \textit{Tense} describes where an event is located in time (e.g. past or future, CITE).
-Aspect and tense categories are often fused in morphology (CITE).
+Aspect and tense categories are often fused in morphology \citep{binnick2012the}, and this also applies to the languages in our sample.
 Examples of tense and aspect marking are shown in Figure~\ref{tab:examples-verbs}.
-\textit{Mood} describes a relation between an event and the speaker, including an assessment of the event's reality (CITE).
+\textit{Mood} describes a relation between an event and the speaker, including an assessment of the event's reality \cite{palmer1986mood,portner2018mood}.
 In analytical languages such as English, mood distinctions are often indicated using verbs such as \textit{might} or adverbs such as \textit{possibly}.
 Figure~\ref{tab:examples-verbs} shows how the potential mood is marked morphologically with -het- in Hungarian.
 In many languages, mood marking is at least partically fused with tense and aspect; for instance, the Japanese suffix -\textit{yoo} can mark future tense and the hortative mood (`let's ...', CITE).
 Tense, aspect, mood are often together referred to as TAM (Tense-Aspect-Mood, CITE).
 \textit{Subject agreement} mark categories of the subject, most often its person and number, sometimes also other categories such as its gender.
 An example is English third-person -s.
-While agreement is most commonly established with the subject, agreement with the object is found in Sesotho (CITE) and in Hungarian (CITE); it is fused with subject agreement in the latter case.
+While agreement is most commonly established with the subject, agreement with the object is found in Sesotho \cite{doke1967textbook} and in Hungarian \cite{rounds2001hungarian}; it is fused with subject agreement in the latter case.
 
 
 Based on data from several dozens of languages, \citep{bybee-morphology-1985} proposes the following ordering of these common verb affixes:
@@ -400,7 +500,7 @@ verb stem & valence & voice & aspect & tense& mood & subject agreement
 
 While these are particularly common types of affixes, there are further types, some of which occur in the six languages of our sample.
 \textit{Polarity} refers to the opposition between affirmative (e.g. `she arrived') and negative  (e.g., `she did not arrive') statements.
-\textit{Evidential} indicates on what evidence a speaker bases an assertion.
+\textit{Evidentiality} indicates on what evidence a speaker bases an assertion \citep{aikhenvald2003evidentiality}.
 \textit{Formality}, \text{honorifics}, and \text{politeness} are categories that index social relations between the speaker, the addressee, and the topic of the conversation (CITE).
 In our sample, these are prominent in Korean and Japanese.
 The Japanese politeness marker -masu- and the Korean formality (-p) and politeness (-yo) suffixes index the social relation between the speaker and the addressee (CITE); the Korean honorific suffix -si- indexes the social relation between the speaker and the topic of the conversation (CITE).
