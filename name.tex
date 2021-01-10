@@ -3,19 +3,20 @@
 \usepackage{showlabels}
 \usepackage{fullpage}
 \usepackage{pslatex}
-%\usepackage{latexsym}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{bm}
-%\usepackage{tikz}
 \usepackage{xcolor}
 \usepackage{url}
-%\usepackage[colorinlistoftodos]{todonotes}
 \usepackage{rotating}
 \usepackage{natbib}
 \usepackage{amssymb}
 \usepackage{lingmacros}
+
+
+%\usepackage{linguex}
+%\usepackage{lingmacros}
 
 \usepackage{CJKutf8}
 \newcommand{\korean}[1]{\begin{CJK}{UTF8}{mj}#1\end{CJK}}
@@ -43,8 +44,6 @@
 \usepackage{multirow}
 
 
-%\usepackage{linguex}
-%\usepackage{lingmacros}
 
 
 \usepackage{hyperref}
@@ -74,6 +73,10 @@
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator{\E}{\mathop{\mathbb{E}}}
 
+
+
+%\usepackage{lingmacros}
+%\usepackage{linguex}
 
 
 \usepackage{amsthm}
@@ -120,21 +123,20 @@
 %\emnlpfinalcopy
 %\def\emnlppaperid{496}
 
-\title{Morpheme Ordering across Languages reflects optimization for memory efficiency / information locality}
+\title{Morpheme Ordering across Languages reflects optimization for Memory Efficiency}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-    The order of morphemes in a word shows well-documented tendencies across languages.
-    These have been explained in terms of notions such as semantic scope and relevance in prior work.
-A recent theory (CITE) argues that word and morpheme order in language optimizes a tradeoff between Memory and surprisal, and provided initial evidence from twoi languages that morpheme order can partly be explained by optimization for this treadeoff.
-    %Efficient memory--surprisal tradeoffs are achieved by orders that display information locality, whereby elements that have high mutual information are closer together.
-    In this work, we test this idea more extensively using data from four additional agglutinative languages with significant amounts of morphology.
-    
-%    In this work, we examine corpus data from four languages to show that optimizing for tradeoff efficiency mostly predicts morpheme order in verb and noun morphology.
-    
+The order of morphemes in a word shows well-documented tendencies across languages.
+Previous work has explained these in terms of notions such as semantic scope and relevance.
+A recent theory argues that word and morpheme order in language optimizes a tradeoff between Memory and surprisal, and provided initial evidence from two languages that morpheme order can partly be explained by optimization for this treadeoff.
+In this work, we test this idea more extensively using data from four additional agglutinative languages with significant amounts of morphology, in both verb and noun inflection.
+We find that the memory-surprisal tradeoff predicts order in most cases with high accuracy.
+We also find that it accounts for several, previously documented, universal properties, such as the relative order of number and case suffixes on nouns.
+Our work adds to a growing body of work suggesting that many properties of language arise from cognitive principles.
 \end{abstract}
 
 
@@ -144,7 +146,7 @@ Across languages, words are composed of morphemes, commonly defined as the small
 Morphemes can take different shapes.
 In many cases, words can be segmented into a sequence of morphemes, as in the English word runners (root run-, derivation -er-, plural -s).
 The order of morphemes within a word follows well-documented cross-linguistic tendencies, for instance, plural markers tend to be closer to noun stems than case markers \citep[112]{greenberg1963universals}.
-These tendencies have been explained in terms of the relative scope of different morphemes  \citep{givon1971historical,venneman1973explanation,baker1985the,rice2000morpheme} and the strength of their semantic association with the root \citep{bybee-morphology-1985}.
+These tendencies have been explained in terms of the relative scope of different morphemes  \citep{rice2000morpheme}, parallelism between morphology and syntax \citep{givon1971historical,venneman1973explanation,baker1985the}, and the strength of their semantic association with the root \citep{bybee-morphology-1985}.
 %One family of explanations holds that those affixes are closest to the root that are most relevant to the root \citep{bybee-morphology-1985}.
 %Other explanations suggest that morphemes are ordered based on (TODO CITE).
 
@@ -154,6 +156,10 @@ Formally, they introduced the notion of a memory-surprisal tradeoff: Depending o
 Optimizing the memory-surprisal tradeoff amounts to putting elements together when they predict each other strongly, as measured by mutual information.
 In a case study, CITE apply this to morpheme ordering in Japanese and Sesotho, finding that optimization could partly reproduce morpheme ordering in these languages.
 They also suggested that mutual information formalizes previous notions of strength of semantic association, such as \cite{bybee-morphology-1985}'s notion of \textit{relevance}.
+
+
+
+
 
 
 In this work, we examine this theory on a broader basis by considering data from four additional languages.
@@ -176,61 +182,44 @@ Whereas \cite{Hahn2020modeling} only considered verb inflection, we also conside
 %Morphology is not always fossilizes syntax (Bybee and Brewer 1980, Bybee 1985 p. 39--40)
 
 
-\section{Morpheme Ordering and Ordering Universals}
+\section{Locality and the Memory--Surprisal Tradeoff}
 
-In this section, we introduce some general crosslinguistic tendencies in morpheme ordering, before discussing data from the six languages in Section XX.
-
-\paragraph{Nouns}
-Nouns commonly mark number and case.
-For nouns, \citep[112]{greenberg1963universals} Universal 39 states that number affixes are closer to the stem than case affixes, if they appear on the same side.
-In some languages, possession is also marked on the noun.
-
-\paragraph{Verbs}
-Verbs commonly mark a larger number of inflection categories.
-Based on data from several dozens of languages, \citep{bybee-morphology-1985} proposes the following ordering of verb affixes:
-\begin{quote}
-\begin{tabular}{llllllllllllllllllllllllll}
-verb stem & valence & voice & aspect & tense& mood & subject agreement
-\end{tabular}
-\end{quote}
-\textit{Valence} affixes change the number of arguments; for instance, causatives add an argument (TODO example).
-\textit{Voice} describes the distinction between active and passive.
-\textit{Aspect} describes how an event unfolds over time, such as the English progressive -ing indicating that an action  is still ongoing.
-\textit{Tense} describes where an event is located in time (e.g. past or future).
-\textit{Mood} TODO
-\textit{Subject person and number} mark categories of the subject, such as English third-person -s.
-
-While these are particularly common types of affixes, there are further types.
-Examples are polarity (negation), evidential (based on what evidence a speaker makes an assertion), and formality.
+A long line of work in linguistics has proposed principles of locality to account for word order regularities within and across languages (CITE).
+An early example is \citep{behaghel1932deutsche}, who argued that elements that are closer together in meaning are closer together in form.
+In word order, the Head Proximity principle of \citep{rijkhoff-word-1986} states that words are close to their syntactic heads, and this generalization has since found strong empirical support from data in many languages~\cite[e.g.][]{liu2008dependency, futrell-large-scale-2015-1, liu-dependency-2017}.
+In morpheme ordering, \citep{bybee-morphology-1985} argues that morphemes are closer to the root when they are more relevant to it.
+One explanation of such principles is in terms of iconicity in form-meaning correspondence \citep{givon1985iconicity}.
+More recently, locality principles have been explained in terms of memory and efficiency in online processing \citep{hawkins-efficiency-2003}.
+Based on considerations of memory limitations, \citet{futrell2020lossy} derived an information-theoretic locality principle that states that words are close to each other when they are highly predictive of each other (see also \citet{culbertson2020from}).
+This principle of information locality TODO
 
 
-We focus on inflection, except in those cases where derivational affixes are clearly marked in available data.
-Inflectional suffixes are generally outside of derivational affixes
-
-
-\section{Background: Memory--Surprisal Tradeoff and Information Locality}
-
-\citet{Hahn2020modeling} introduced the Memory--Surprisal Tradoff as a cognitive account of the order of words and morphemes in human language, based on a formalization of memory efficiency in incremental processing.
-
+\citet{Hahn2020modeling} proposed a cognitive principle that aims to unify and formalize these locality principles in the form of a Memory--Surprisal Tradoff.
+This is a cognitive account of the order of words and morphemes in human language, based on a formalization of memory efficiency in incremental processing.
 The memory-surprisal tradeoff links information-theoretic models of memory limitations with surprisal theory.
-Surprisal theory \citep{hale2001probabilistic, levy2008expectation} states that the processing effort on a word $w_t$ in context $w-1 ... w_{t-1}$ is proportional to its surprisal
+
+Surprisal theory \citep{hale2001probabilistic, levy2008expectation} is a theory of the word-by-word processing difficulty in online processing.
+It states that the processing effort on a word $w_t$ in context $w-1 ... w_{t-1}$ is proportional to its surprisal
      \begin{equation}   \label{eq:true-surp}
     \text{Difficulty} \propto -\log P(w_t , w_1\dots w_{t-1}).
 \end{equation}
-Surprisal as estimated by corpus-based methods is a successful predictor of reading time on naturalistic text \citep{smith2013effect,goodkind-predictive-2018,frank2019interaction,aurnhammer2019evaluating,wilcox2020predictive}.
-This effect can be explained in terms of mechanisms such as preactivation and integration~\citep{kuperberg2016we}.
-However, due to limitations in human memory, human expectations in reality do not reflect the true context $w-1\dots w_{t-1}$, but some memory representation $m\_t$:
+Surprisal as estimated by corpus-based methods or cloze is a successful predictor of reading time on naturalistic text \citep{smith2013effect,goodkind-predictive-2018,frank2019interaction,aurnhammer2019evaluating,wilcox2020predictive} (TODO citation based on Cloze).
+Surprisal theory is a computational-level theory; it can be justified in terms of different mechanisms such as preactivation and integration~\citep{kuperberg2016we}.
+\citet{Hahn2020modeling} argue that, due to limitations in human memory, human expectations in reality do not reflect the true context $w_1\dots w_{t-1}$, but some memory representation $m\_t$:
 \begin{equation}   \label{eq:lossy-surp}
     \text{Difficulty} \propto -\log P(w_t | m_t).
 \end{equation}
-\citet{Hahn2020modeling} note that there is a tradeoff between average surprisal and memory capacity:
-The more information a listener stores in $m\_t$, the lower their surprisal will be on average.
+
+Furthermore, they show that there is a tradeoff between average surprisal and memory capacity:
+The more information a listener stores in $m_t$, the lower their surprisal will be on average.
 This is because higher precision of memory leads to more precise expectations, which will achiever lower surprisal on average.
 More formally, given a function $M$ encoding contexts $w_1\dots w_{t_1}$ into memory representations $m_t$, there is a tradeoff between, on the one hand, the average surprisal $S\_M$, obtained by averaging $\log P(w_t , m_t)$ across the words in a text, and the memory capacity $H_M$, formalized as the average number of bits required to encode $m_t$.
 
 
-\citet{Hahn2020modeling} prove a theorem that provides a method of estimating the memory-surprisal tradeoff from corpus data.
-This theorem is based on \key{mutual information}, which quantifies the amount of statistical association between two random variables.
+
+\citet{Hahn2020modeling} provide a method for estimating a bound on the memory-surprisal tradeoff from corpus data, and show that orderings achieve efficient tradeoffs when elements that predict each other are close together.
+
+This result is based on the notion of mutual information, which quantifies the amount of statistical association between two random variables.
 If $X, Z, Y$ are random variables, then the mutual information of $X$ and $Y$, conditioned on $Z$, is defined to be:
 \begin{align}
 \label{eq:mi}
@@ -244,7 +233,7 @@ The key quantity derived from this is the mutual information between elements (s
 \begin{equation*}
     I_t \equiv \operatorname{I}[w_t : w_0 , w_1, \dots, w_{t-1}].
 \end{equation*}
-Based on this notion, \citet{Hahn2020modeling}  prove the following bound on the memory-surprisal tradeoff ($S_\infty$ is the average surprisal that would be achieved with perfectly veridical memory representations):
+Based on this notion, \citet{Hahn2020modeling}  prove the following bound on the memory-surprisal tradeoff :
 \begin{thm}\label{prop:suboptimal}(Information locality bound, \citet{Hahn2020modeling})
 For any positive integer $T$, let $M$ be a memory encoding function such that
 \begin{equation}
@@ -256,35 +245,159 @@ Then we have a lower bound on the average surprisal under the memory encoding fu
 \label{eq:surprisal-bound}
 S_M \ge S_\infty + \sum_{t=T+1}^\infty I_t.
 \end{equation}
+where $S_\infty$ is the average surprisal that would be achieved with perfectly veridical memory representations.
 \end{thm}
 
 
-A key consequence of this theorem is that it implies information locality:
-Orderings optimize this tradeoff when elements with high mutual information are closer together.
+A key consequence of this theorem is an information-theoretic notion of locality:
+Informally, orderings optimize this tradeoff when elements with high mutual information are closer together.
 A similar notion of information locality was previous derived by \citet{futrell2020lossy} for a specific family of memory representations $M$.
 Information locality has had success as a predictor of word order \citep{futrell2019information}, in particular for universals of the order inside noun phrases \citep{culbertson2020from,hahn-information-theoretic-2018,DBLP:conf/acl/FutrellDS20}.
 
-\citet{Hahn2020modeling} argue that information locality derives a range of locality principles proposed in the linguistic literature, including \cite{bybee-morphology-1985}'s idea that morphemes are closer together when they are more relevant to each other.
-\mhahn{say more about relevance}
+\citet{Hahn2020modeling} argue that information locality derives a range of locality principles proposed in the linguistic literature.
+They provide evidence that it predicts closeness of syntactically related words.
+They also provide preliminary evidence that it accounts for some properties of morpheme ordering and formalizes \cite{bybee-morphology-1985}'s idea that morphemes are closer together when they are more relevant to each other, using data of verb inflection in two languages (Japanese and Sesotho).
+
+In this work, we aim to test the Memory-Surprisal Tradeoff as a predictor of morpheme ordering more broadly, using data from more languages and from different parts of speech.
+
+
+
+\section{Morpheme Ordering and Ordering Universals}
+
+In this section, we introduce some general crosslinguistic tendencies in morpheme ordering, before discussing data from the six languages in Section XX.
+Languages apply inflection to different classes of words, including both open word classes such as nouns, verbs, and adjectives, and closed word classes, in particular pronouns.
+In this work, we focus on open word classes, as these have productive paradigms that apply to thousands of words in a language, including words that newly enter the language, whereas pronominal inflection is restricted to a small number of words, often with idiosynractic and fossilized paradigms inherited from earlier stages of a language.
+Among open word classes, inflection commonly applies to verbs, nouns, and adjectives.
+We focus on nouns and verbs.
+When adjectives are inflected, they often pattern with either verbs -- when they are used as predicates -- or nouns -- when they are used as attributes or independent nouns.
+
+Nouns very commonly mark number and case morphologically.
+These are the subject of a well-documented universal, namely \citep[112]{greenberg1963universals}'s Universal 39:
+It states that number affixes are closer to the stem than case affixes, if they appear on the same side.
+In some languages, possession is also marked on the noun.
+The following is a fully inflected Finnish noun, with endings for number (plural), case (illative), and possessor (2nd person singular):
+
+%\ex.\ag. mi  rare mash yoo \\
+%%Stem (3) (5) (8) \\
+%see  \textsc{passive}  \textsc{politeness}  \textsc{future} \\
+%`will be seen'
+%\bg. mi taku nakat ta \\
+%%Stem (6) (7) (8) \\
+%see \textsc{desiderative} \textsc{negation} \textsc{past} \\
+%`did not wish to see'
+
+\begin{tabular}{lllllllll}
+\textit{juttu-i-hi-si} \\
+Stem-Plural-Illative-2SgPoss \\
+`into your stories' (Finnish)
+\end{tabular}
+
+Verbs commonly mark a larger number of inflection categories.
+Based on data from several dozens of languages, \citep{bybee-morphology-1985} proposes the following ordering of verb affixes:
+\begin{quote}
+\begin{tabular}{llllllllllllllllllllllllll}
+verb stem & valence & voice & aspect & tense& mood & subject agreement
+\end{tabular}
+\end{quote}
+
+ Table~\ref{tab:table-orders}
+
+\textit{Valence} affixes change the number of arguments. A very common type of valence affix is a causative, which adds an argument. In Turkish, -t- marks causatives (CITE):
+
+\begin{tabular}{lllll}
+a) & çıldır-ır-ım \\
+& go.crazy-Causative-aorist-1sg \\
+& `I go crazy' (Turkish)\\
+b) & çıldır-t-ır-ım \\
+& go.crazy-Causative-aorist-1sg \\
+& `I make (someone) go crazy' (Turkish) \\
+\end{tabular}
+
+%In our dataset, Sesotho has the largest number of valence categories.
+\textit{Voice} describes the distinction between active and passive. An example is the Japanese passive suffix -(r)are- (CITE):
+
+\begin{tabular}{llllll}
+a) & mi-mash-yoo \\
+& see-politeness-future \\
+& `will see' (Japanese) \\
+b) & mi-rare-mash-yoo \\
+& see-passive-politeness-future \\
+&`will be seen' (Japanese)
+\end{tabular}
+
+
+
+\textit{Aspect} describes how an event unfolds over time, such as the English progressive -\textit{ing} indicating that an action  is still ongoing (CITE).
+\textit{Tense} describes where an event is located in time (e.g. past or future, CITE).
+Aspect and tense categories are often fused in morphology (CITE).
+
+TODO example
+
+\textit{Mood} describes a relation between an event and the speaker, including an assessment of the event's reality (CITE).
+An example is the Potential mood. In Hungarian, it is formed with -het (CITE): 
+
+\begin{tabular}{llll}
+a) & ismer-nek \\
+& know-3pl.def \\
+& `they know' (Hungarian) \\
+b) & ismer-het-nek \\
+& know-potential-3pl.def \\
+& `they can know' (Hungarian)
+\end{tabular}
+
+Mood may also be fused with tense and aspect; for instance, the Japanese suffix -\textit{yoo} can mark future tense and the hortative mood (`let's ...', CITE).
+Tense, aspect, mood are often together referred to as TAM (Tense-Aspect-Mood, CITE).
+
+\textit{Subject person and number} mark categories of the subject, such as English third-person -s.
+
+While agreement is most commonly established with the subject, agreement with the object is found in Sesotho (CITE) and in Hungarian (CITE); it is fused with subject agreement in the latter case.
+
+
+While these are particularly common types of affixes, there are further types.
+Examples are polarity (negation), evidential (based on what evidence a speaker makes an assertion), and formality.
+
+
+
+We focus on inflection, except in those cases where derivational affixes are clearly marked in available data.
+Inflectional suffixes are generally outside of derivational affixes
+
+% somewhere explain the choice of languages
+% - rich agglutinative.
+% - must have data with suitable morphological analysis.
+% - Among the languages, Hungarian and Finnish are genetically related (X millenia). There is also some evidence for genetic relations beyond these (Japanese, Korean, Turkish), but such relations would have to be quite ancient (x millenia).
+% The morphemes found in these languages as considered here are generally not cognate.
 
 \section{Methods}
 
 \subsection{Data} % TODO: Becky
 % why agglutinative?
 
-We are interested in analyzing languages in which words have easily separable morphemes and have a tendency to have more than two morphemes per word, because that allows us to vary morphemes distances. As such, we considered agglutinative languages that have morpheme-segmented corpora available. The language sample includes Universal Dependencies (UD) corpora for Japanese, Korean, Turkish, Hungarian, and Finnish (CITE). In addition, we use the Child Language Data Exchange System (CHILDES) Sesotho corpus (CITE). 
+We are interested in analyzing languages in which words have easily separable morphemes and have a tendency to have more than two morphemes per word, because that allows us to vary morpheme distances. As such, we considered agglutinative languages that have morpheme-segmented corpora available. The language sample includes Universal Dependencies (UD) corpora for Japanese, Korean, Turkish, Hungarian, and Finnish (CITE). In addition, we use the Child Language Data Exchange System (CHILDES) Sesotho corpus (CITE). 
+We're interested in investigating languages where nouns are inflected with multiple suffixes, because that allows us to more extensively measure the relationship between mutual information and mutual information. So, for nouns specifically, we only investigated our hypothesis on Turkish, Hungarian, and Finnish. In contrast, we used all the languages for investigating verbs. What constitutes a noun or a verb was determined by looking at the syntactic category labels in the corpus. 
 
-The Korean, Japanese, and Sesotho corpora have words segmented into the grapheme representations of their morphemes. However, the Turkish, Hungarian, and Finnish corpora do not segment the words into morphemes, but rather include a list of features (such as person, number, voice, etc.) present in each word. We built segmenters to reconstruct the order of morphemes in each word from those feature labels \becky{TODO: see Appendix?} \mhahn{Yes, I think we can explain in the main paper what data we collected in linguistic terms (e.g. finite verb forms, what we did with auxiliaries), and in the appendix discuss what steps were needed to do this. The technical details don't have to be 100\% there since the code will be available to the reviewers and readers.}.
+To investigate the memory-surprisal tradeoff of natural languages, we compare the efficiency each natural language's morpheme orderings (\textit{real}) to three different kinds of baselines: randomized morpheme orderings (\textit{random}), the reversed natural orderings (\textit{reverse}), and morpheme orderings that are optimized to maximize MI (\textit{optimized}). 
 
-The Sesotho and Japanese data was previously used by CITE; we reanalyze these data here in a way consistent across all six languages.
+In order to create these morpheme orderings, we first need to identify and label morphemes for each language. The Korean, Japanese, and Sesotho corpora have words segmented into the grapheme representations of their morphemes. However, the Turkish, Hungarian, and Finnish corpora do not segment the words into morphemes, but rather include a list of features (such as person, number, voice, etc.) present in each word. We built segmenters to reconstruct the order of morphemes in each word from those feature labels.
+\becky{TODO: see Appendix?} \mhahn{Yes, I think we can explain in the main paper what data we collected in linguistic terms (e.g. finite verb forms, what we did with auxiliaries), and in the appendix discuss what steps were needed to do this. The technical details don't have to be 100\% there since the code will be available to the reviewers and readers.}
 
 \begin{itemize}
+    \item \mhahn{In the main paper, I think it's enough to present the Coarse+FinalSurprisal results. We can present others in the appendix, and don't need to introduce them here in detail.} %We built two different segmenters for each of the Turkish, Hungarian, and Finnish corpora. One version was ``coarse-grained," meaning that we recovered the order of suffixes in the word on an abstract level, such as a list of ``subject person, subject number." The other version was ``fine-grained," meaning that we used more specific labels for each suffix, such as ``2nd person, plural." In the models, each word is represented as its list of coarse-grained labels, and the model tries to predict the fine-grained labels based on the coarse-grained abstract morphemes. As such, the model tries to order the fine-grained labels, but the surprisal is calculated on the basis of the coarse-grained abstract morphemes.
+    
+    We built segmenters on two different levels of abstraction for the Finnish, Hungarian, and Turkish corpora. The more fine-grained segmenter version takes the list of morphological features present in a particular word and reconstructs the natural order of morphemes, labelling each morpheme with its specific meaning, such as ``2nd person plural subject." The more abstract segmenter takes the list of morphological features for each word and reconstructs the filled abstract morpheme slots for that word, where each slot has generic label such as ``agreement." For example, in Hungarian, the only possible slots of suffixes appearing after a verb root are voice, mood, tense, agreement, and clitics. As such, we can assign each slot an integer representing the order in which the slots can be filled in a certain language. 
+    
+    
     \item Grapheme, label, phoneme for Korean \mhahn{For now, I think we can place grapheme and phoneme versions into the appendix, and only discuss the MorphemeMeanings-based one in the main paper (i.e., ordering based on morpheme meanings, surprisal based on abstract morphemes, analogous to the Coarse+FineSurprisal version for the other languages.}
-    For Korean, the corpus came with segmented morphemes labeled with fine-grained categories such as "ending final marker," or "predicative maker." We also built a segmenter to take in each segment and out
-    \item Fine versus coarse for Turkish, Hungarian, Finnish \mhahn{In the main paper, I think it's enough to present the Coarse+FinalSurprisal results. We can present others in the appendix, and don't need to introduce them here in detail.}
+    The Korean corpus came with segmented morphemes labeled with fine-grained categories such as "ending final marker," or "predicative maker," which were the labels we used for the specific morpheme meaning segmenter. We also built a segmenter to take in each segment and output the abstract morpheme slot it fills (such as ``formality"), similar to the abstract slot labelling we did with Turkish, Hungarian, and Finnish. 
+  
+The Sesotho and Japanese data was previously used by CITE; we reanalyze these data here in a way consistent across all six languages.
+
+For all the languages, we modelled surprisal on the level of the specific morphemes, and ordering on the level of the abstract morpheme slots. In essence, each word is represented as its list of abstract slots, and the model tries to predict the specific morphemes based on the abstract slots. As such, the model tries to order the abstract slots, but the surprisal is calculated on the basis of the specific morpheme meanings.
+
+
+\michael{Explain how optimization works.}
+\michael{Explain how we estimate surprisal.}
 \end{itemize}
 
-\becky{discuss segmenters more} 
 
 \subsection{Nouns}
 
@@ -293,32 +406,12 @@ The Sesotho and Japanese data was previously used by CITE; we reanalyze these da
 We're interested in investigating languages where nouns are inflected with multiple suffixes, because that allows us to more extensively measure the relationship between mutual information and mutual information. As such, we only investigated our hypothesis on Turkish, Hungarian, and Finnish nouns. All of these languages inflect nouns for number, possessor person, possessor number, and case, in that order. Finnish is the exception, where we include derivation (verbs that are nominalized, for example), and where the possessor person and number appears after the case suffix in the natural ordering. 
 In contrast, the number suffix, which is generally only marked for the plural, has a stable position close to the root in all three languages. Number has high mutual information with the noun root, because certain nouns have a tendency to appear only in the plural or only in the singular. As such, number must come close to the root. \becky{Is this correct? Also, should I move this?}
 \mhahn{This is good. We could think about moving the part about mutual information up into a paragraph at the end of S3, where we could give the reader some intuition on why we expect MI to be a good predictor of ordering (as mentioned in my Slack message).}
-\paragraph{Turkish Nouns}
-\begin{enumerate}
-    \item Number
-    \item Possessor number and possessor person
-    \item Case 
-\end{enumerate}
 
-\paragraph{Hungarian Nouns}
-\url{https://cl.lingfil.uu.se/~bea/publ/megyesi-hungarian.pdf}
-\begin{enumerate}
-    \item Number
-    \item Possessor person
-    \item Possessor number \becky{Missing in citation}
-    \item Case 
-\end{enumerate}
-
-\paragraph{Finnish Nouns}
-\begin{enumerate}
-    \item Derivation
-    \item Number
-    \item Case 
-    \item Possessor person and possessor number
-\end{enumerate}
 
 \subsection{Verbs}
-For verbs, we investigated Finnish, Hungarian, Japanese, Korean, Sesotho, and Turkish inflectional suffixes. Broadly speaking, all of the languages have a real ordering of valence, voice, negation, tense/aspect/mood (TAM), person and number, and formality, where applicable. \becky{Check that this is correct and discuss some specifics.} 
+For verbs, we investigated Finnish, Hungarian, Japanese, Korean, Sesotho, and Turkish inflectional suffixes. Broadly speaking, all of the languages have a real ordering of valence, voice, negation, tense/aspect/mood (TAM), person and number, and formality, where applicable. \becky{TODO: Check that this is correct and discuss some specifics.} 
+
+\becky{Which language provides data for which kind of suffix?}
 
 \begin{table}[]
     \centering
@@ -342,61 +435,30 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
 
 
 
-\paragraph{Hungarian Verbs} \url{https://cl.lingfil.uu.se/~bea/publ/megyesi-hungarian.pdf}
-\begin{enumerate}
-    \item Voice \becky{Missing in citation}
-    \item Mood
-    \item Tense \mhahn{Potential mood appears in front of Tense, so I changed from Tense--Mood to Mood -- Tense as the order here.}
-    \item Definiteness, person, and number: This suffix indicates the definiteness or indefiniteness of the direct object of the verb, as well as the person and number of the subject performing the verb. 
-\end{enumerate}
-
-\paragraph{Turkish Verbs}
-\begin{enumerate}
-    \item Voice
-    \item Negation / polarity
-    \item Aspect
-    \item Evidential 
-    \item Tense 
-    \item Mood 
-    \item Person and Number
-    \item Formality
-\end{enumerate}
-
-\mhahn{I've changed this to the following}
-\begin{enumerate}
-    \item Valence (Causative -tir-)
-    \item Voice (Passive -il-)
-    \item Negation / polarity (Negation -ma-)
-    \item Mood (Potential -bil-)
-    \item TAM1: Tense, Aspect, Mood, Evidential
-    \item 3rd Plural (-lar-)
-    \item TAM2: Tense, Aspect, Mood, Evidential
-    \item Subject agreement (incorporating TAM information)
-    \item Formality (polite -makta-)
-    \item Genitive (-dir-)
-    \item Verbal Noun (-mak)
-    \item Possessive agreement
-\end{enumerate}
-
-
-
-
-\paragraph{Finnish Verbs}
-\begin{enumerate}
-    \item Voice
-    \item Tense 
-    \item Mood 
-    \item Person and number
-    \item Clitic
-\end{enumerate}
-
 
 %https://en.wiktionary.org/wiki/%EB%B0%94%EB%9D%BC%EB%8B%A4
 
 \section{Results}
+Figures \ref{fig:auc_verbs} and \ref{fig:auc_nouns} show area under the curve (AUC) plots for random orders as compared to the real, natural order of morphemes for verbs and nouns, respectively. Here, AUC refers to the area under the curve for the memory-surprisal tradeoff for each order, where the lower the AUC is, the more efficient that memory-surprisal tradeoff is. As expected, the red line representing the natural languages is far on the left side of the scaled density plot of the AUC of the random orders, meaning that natural languages' morpheme orders have a lower AUC, and are therefore more efficient in terms of the memory-surprisal tradeoff, than random morpheme orders. 
+
+Table \ref{tab:optimized_acc} demonstrates the accuracies of different kinds of grammars at predicting a natural language's morpheme order. \textit{Optimized} refers to orderings that minimize AUC, while \textit{baseline} refers to random orderings of morphemes. We consider three different prediction accuracies: the accuracy for correctly predicting each pair of adjacent morphemes (Pairs), the accuracy for correctly predicting a full morpheme sequence for each word token (Full), and the accuracy for correctly predicting a full morpheme sequence for each word type (Full(Types)) so as to avoid frequency bias.
+Note that for nouns, the baseline grammars perform more or less at chance while the optimized prediction accuracy is at the ceiling (100\% accuracy), meaning that it is possible that to predict natural languages' nominal suffix orders through minimizing AUC. 
+For verbs on the other hand, we see a little bit more variance. In general, the optimized grammars perform at higher than 90\% accuracy in predicting the natural morpheme order for Hungarian verbs, Turkish verbs, Korean verbs, Japanese verbs, and Sesotho verb prefixes. Orderings optimized for minimizing AUC perform close to baseline for Finnish verbs and Sesotho suffixes, which will be discussed more in the discussion section. 
+
+Figures \ref{fig:real_and_optimized_nouns} and \ref{fig:real_and_optimized_verbs} show the comparison of natural languages' morpheme orders to morpheme orders that are optimized to reduce AUC, for nouns and verbs respectively. The real and optimized noun orders show a perfect match, and the real and verb optimized orders also agree for the most part. Divergences in the real and optimized verbal morpheme orders will be analyzed more in the Discussion section. 
+
+\becky{Refer to S3 to introduce this paragraph} Figure \ref{fig:optimized_and_universal_orders} compares Bybee's proposed universal verbal morpheme ordering to the optimized ordering for each language, which minimizes AUC. Once again, we see a high level of agreement between the optimized order and Bybee's universal order. We will compare each specific language's verbal morpheme ordering to the universal order, only for morphemes that are present both in the natural languages and in Bybee's universal order.
+
+For Finnish, the optimized order is the same as the universal order except for the fact that the agreement marker comes closest to the root instead of furthest. However, this is because person and number is not marked for passive forms of verbs, meaning that the inclusion of a person and number agreement marker provides an unusual amount of information, since it also shows that the verb is not passive. Therefore, the agreement marker has high MI with the root, and is placed closer to the root. 
+Hungarian, Korean, and Sesotho suffixes match the universal ordering perfectly. 
+Sesotho prefixes also match the universal ordering perfectly, considering that the order of prefixes should be reversed because the universal ordering is about distance from the root, rather than the absolute position, which is shown for suffixes.
+In addition, Turkish is a close match to the universal order, except for one artefact of the Turkish person-marking system, which is that the use of the 3rd person plural agreement marker ``-lar-" causes certain tense/aspect/mood (TAM) suffixes to come after it. Excluding the irregularity of the 3rd person plural marker, Turkish's optimized order perfectly matches Bybee's universal order. 
+\becky{Finish Japanese.}
+
+Taking a step back and looking at all of these languages at a whole, we see that the languages' optimized orders tend to closely mirror Bybee's universal ordering, which also means that these languages also have a high level of agreement between them on the relative ordering of verbal morphemes. As such, it's possible to predict Bybee's universal ordering from looking at commonalities between optimized orders of natural languages. 
 
 
-
+\becky{conclude}
 
 \begin{figure}
     \centering
@@ -408,7 +470,7 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
     &
     \includegraphics[width=0.3\textwidth]{figures/hungarian_verbs/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     \\
-    Korean & Japanese & Sesotho (prefixes) \\
+    \textsc{Korean} & \textsc{Japanese} & \textsc{Sesotho Prefixes} \\
     \includegraphics[width=0.3\textwidth]{figures/korean/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     &
         \includegraphics[width=0.3\textwidth]{figures/japanese/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
@@ -421,7 +483,7 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
 
     
     \caption{AUC Histograms for Verb Affixes.}
-    \label{fig:my-label}
+    \label{fig:auc_verbs}
 \end{figure}
 
 
@@ -435,7 +497,7 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
     \includegraphics[width=0.3\textwidth]{figures/hungarian_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     \end{tabular}
     \caption{Noun Suffixes}
-    \label{fig:my-label}
+    \label{fig:auc_nouns}
 \end{figure}
 
 \begin{table}[]
@@ -457,7 +519,7 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
     \end{tabular}
     \caption{Accuracies in predicting morpheme ordering. `Optim.' indicates grammars optimized for AUC, `'Baseline' indicates randomly constructed weights.
     In each cell, we provide the mean and the stgandard deviation over orderings. `Pairs' indicates the fraction of pairs of morphemes occurring together in the same word that are ordered correctly. `Full' indicates the fraction of verb forms in the corpus that are ordered fully correctly. `Full (Types)' counts forms that occur multiple times only once, it thus down-weights the role of frequent forms.}
-    \label{tab:my_label}
+    \label{tab:optimized_acc}
 \end{table}
 
 
@@ -479,7 +541,7 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
   \end{tabular}
   
     \caption{Real and optimized ordering (nouns)}
-    \label{tab:my_label}
+    \label{fig:real_and_optimized_nouns}
 \end{figure}
 
 
@@ -519,7 +581,7 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
   
   
     \caption{Real and optimized ordering (verbs)}
-    \label{tab:my_label}
+    \label{fig:real_and_optimized_verbs}
 \end{figure}
 
 
@@ -557,8 +619,8 @@ Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
   \include{figures/sesotho_suffixes/comparison-opt-uni}
     \end{minipage}
 \end{tabular}
-    \caption{Comparing optimized orders with the universal order described by \citep{bybee-morphology-1985} \mhahn{TODO I'll have to exclude rare categories like UNKNOWN from Korean.}. Note that, for Sesotho prefixes, inversion of order relative to the universal order is expected, as the universal order indicates distance from the root, not absolute position.}
-    \label{fig:my_label}
+    \caption{Comparing optimized orders with the universal order described by \citep{bybee-morphology-1985}.  Note that, for Sesotho prefixes, inversion of order relative to the universal order is expected, as the universal order indicates distance from the root, not absolute position.}
+    \label{fig:optimized_and_universal_orders}
 \end{figure}
 
 
@@ -569,7 +631,8 @@ We compared actual morpheme orderings to other possible orderings and to orderin
 In most cases, we found that the real ordering provided more efficient tradeoffs than most alternative orderings.
 More importantly, we found that the real orderings match the optimal orderings in many respects.
 Ordering forms found in a corpus according according to real or optimized orderings yields the same orders in XXX of cases.
-In some cases, particlarly for noun inflection, match between real and optimized orderings is perfect.
+In some cases, particularly for noun inflection, match between real and optimized orderings is perfect.
+Beyond language-specific ordering patterns, optimization recovers several previously-documented language universals of morpheme order.
 
 \subsection{Relation to previous accounts}
 
@@ -577,56 +640,98 @@ In some cases, particlarly for noun inflection, match between real and optimized
 
 In this section, we discuss the linguistic literature on morpheme ordering.
 
-\paragraph{Meaning and Scope}
+\paragraph{Levels of Linguistic Description}
+
+Morpheme ordering has been described from the perspective 
+
+Besides the explanation of broad typological tendencies, which we are interested in here, the linguistic literature has also debated at which level of linguistic representation morpheme ordering should be described, proposing accounts located at different levels such as the syntax-phonology interface \citep{baker1985the} and an autonomous layer of morphological description \citep{hyman2003suffix}.
+%TODO also template vs scope vs...
+We do not see the memory--surprisal tradeoff as competing with or contradicting these studies.
+Rather, it specifies tendencies for ordering that could be implemented at different levels of linguistic description.
+
+
+%\paragraph{Revelance and Proximity}
 As mentioned in section \becky{cite S2}, Bybee proposes a concept of \textit{semantic relevance}, which is the degree to which one morpheme affects the semantic content of the other \becky{cite bybee}. She hypothesizes that morphemes that are more highly relevant to each other should be closer to each other, and therefore proposes a universal ordering of verbal inflectional morphemes. For example, attaching a causative marker to a root meaning "to die" produces a verb form meaning "to kill." Since the causative greatly changes the semantic content of the original root, the causative is highly relevant to the root. 
 
 \becky{Format Korean example of juk-da ``to die" and juk-i-da ``to kill"}
 
 Bybee did not provide a way to computationally measure semantic relevance. However, our optimized orders of Turkish and Hungarian \becky{Are there other languages?} perfectly match Bybee's proposed universal verbal inflection order \becky{need a figure comparing optimized order to Bybee's order}. This suggests that high mutual information generally correlates with semantic relevance. 
 
-Besides Bybee's account in terms of relevance, there are also accounts focusing on semantic scope \citep{rice2000morpheme}.
 
-Also noted scope: \citep{baker1988incorporation,foley1984functional,chierchia1990meaning,valin1992a}
+A related family of explanations holds that those affixes are closest to the root that are most relevant to the root \citep{bybee-morphology-1985}.
+Other explanations suggest that morphemes are ordered based on (TODO CITE).
+The most straightforwardly related account is that of Bybee (1985) Semantic relevance
+CARP template in Bantu
+Explanations for the orders
+
+talk about Relevance and Mutual Information
 
 
-
-\paragraph{Morpheme Order and Word Order}
+%\paragraph{Morphemes as Fossilized Words}
 It has long been observed that the order of morphemes often parallels the order of independent words of corresponding meanings \citep{givon1971historical,venneman1973explanation,baker1985the}.
 It has been argued that the order of morphemes reflects the order of formerly independent elements that have been fossilized into bound morphemes \citet{givon1971historical,venneman1973explanation}.
 As the memory-surprisal tradeoff is optimized by word order, this is compatible with our results:
 To the extent that morpheme order does reflect fossilized word order, morpheme order should continue to reflect optimization for the tradeoff.
 
 On the other hand, \citet{bybee-morphology-1985} points out that there are historically documented cases where morpheme ordering has been restructured in ways that do not reflect former independent words, but respect the universal tendencies proposed by her (see also \citet{mithun2000the, haspelmath1993the, mithun1995affixation}; \citet[Section 15]{rice2000morpheme}).
-
-
-\paragraph{Levels of Linguistic Description}
-Besides the explanation of broad typological tendencies, which we are interested in here, the linguistic literature has also debated at which level of linguistic representation morpheme ordering should be described, proposing accounts located at different levels such as the syntax-phonology interface \citep{baker1985the} and an autonomous layer of morphological description \citep{hyman2003suffix}.
-TODO also template vs scope vs...
-We do not see the memory--surprisal tradeoff as competing with or contradicting these studies.
-Rather, it specifies tendencies for ordering that could be implemented at different levels of linguistic description.
+As a theory of order at multiple levels, the memory-surprisal tradeoff predicts these ordering patterns independent of the historical path leading to the morphemes found in a given language.
 
 
 
+syntax-phonology interface \citep{baker1985the} 
+For instance, 
+\cite{baker1985the} proposed the Mirror Principle, which -- informally -- states that the order of elements (morphemes) in morphology reflects the order of elements (words) in syntax.
 
-%One family of explanations holds that those affixes are closest to the root that are most relevant to the root \citep{bybee-morphology-1985}.
-%Other explanations suggest that morphemes are ordered based on (TODO CITE).
-%The most straightforwardly related account is that of Bybee (1985) Semantic relevance
-%CARP template in Bantu
-%Explanations for the orders
-%A related, though different, account is in terms of semantic scope \cite{rice2000morpheme}.
-%The scope hypothesis is attractive for some morphemes.
-%For instance, 
-%\cite{baker1985the} proposed the Mirror Principle, stating that the order of morphemes reflects ...
+Also noted scope: \citep{baker1988incorporation,foley1984functional,chierchia1990meaning,valin1992a}
+
+
 %This can be related to the scope-based explanation to the extent that syntactic structure and word order reflect scope.
-%\cite{muysken1981quechua}
-%\cite{mccarthy2008generalized} phonology
-%\cite{hyman2003suffix}
-%\cite{kanu2009suffix} morphotactics, not semantic scope
+% INTERESTING reference: http://www.jzeller.de/pdf/CARP.pdf
 
+%\paragraph{Semantic Scope}
+
+
+A related account is in terms of semantic scope \cite{rice2000morpheme}.
+The relative ordering of valence and voice is a good example for the scope-based explanation.
+Valence affixes change the number of arguments, and passive (voice) promotes one argument to the subject position.
+This can affect an argument introduced by a voice marker.
+The following example from Turkish illustrates this (\cite{schaaik2020turkish}, section 30.8.2):
+
+\begin{tabular}{ccccccc}
+don-dur-ul & freeze-caus-pass & be frozen \\
+don-dur & freeze-caus & to freeze (something) \\
+don & freeze& to freeze \\
+\end{tabular}
+
+In contrast, adding the passive marker to the root \textit{don} is illicit as the root verb is intransitive.
+
+Description in terms of scope faces limitations when order is different from semantic scope.
+Hyman  (2003:  249) proposed the CARP template to describe suffix order in Bantu languages (such as Sesotho), a templatic order for valence and voice morphemes that can be different from scope order.
+
+\paragraph{Templates}
+CARP template
+
+
+\cite{muysken1981quechua}
+
+\cite{mccarthy2008generalized} phonology
+
+\cite{hyman2003suffix}
+
+\cite{kanu2009suffix} morphotactics, not semantic scope
+
+
+
+See SI Apenndix Section X for simulations arguing that scope and mutual information may correlate.
 
 %\subsection{Relevance; Proximity; Iconicity}
 
 %The relation  between mutual information and relevance
+
+
+
+
+
 
 \subsection{Beyond Agglutionation}
 
@@ -644,11 +749,31 @@ non-concatenative morphology (in Arabic, k-t-b `to write' forms katab- `wrote'. 
 
 \subsection{Limitations}
 
-- genre of data: written
+- genre of data: written. but Sesotho is spoken (child-directed)
+
+
+- limitations of computational estimation of the memory-surprisal tradeoff
+
+As the set of all moprphological forms of a language is typically finite (CITE), we believe that these limitations play a smaller role in morpheme order, compared to word order.
+
+
+A further limitation relates to the selection of languages.
+The six languages considered in this study are spoken in Eurasia and Africa, not representing Australia and America.
+Among the languages, Hungarian and Finnish are genetically related (X millenia).
+There is also some evidence for genetic relations beyond these (Japanese, Korean, Turkish), but such relations would have to be quite ancient (x millenia).
+The morphemes found in these languages as considered here are generally not cognate.
+Thus, the commonalities in languages found cannot be traced to inherited orderings of morphemes inherited from a common ancestor.
+Furthermore, we note that the optimality of different orderings crucially depend not on the morphemes themselves (which might be inherited), but on the frequencies of different forms (e.g., of sinulars and plurals).
 
 
 
 \section{Conclusion}
+
+We have tested the recently proposed Memory-Surprisal Tradeoff as a predictor of morpheme order with data from verbs and nouns across six languages.
+We found that attested morpheme orders provide more efficient tradeoffs than most other possible orderings and that many properties of observed orderings are recovered by optimizing for tradeoff efficiency.
+With the exception of verb inflection in Finnish and Sesotho, we found that optimized orderings agree with the attested orderings in more than 90\% of forms found in corpora.
+Optimization also successfully predicts several universals of morpheme ordering, both for nouns and verbs.
+
 
 \bibliography{literature}
 \bibliographystyle{natbib}
@@ -656,6 +781,8 @@ non-concatenative morphology (in Arabic, k-t-b `to write' forms katab- `wrote'. 
 
 \section{Appendix}
 
+
+\subsection{Estimating Memory--Surprisal Tradeoffs}
 
 
 \subsection{Korean Verb Suffixes}
@@ -713,17 +840,17 @@ TODO
 %\label{ex:ophehela}
 
 
-Examples:
-\begin{tabular}{llllllllll}
-1    & 3 & 4     & 5   & 6  & 7 & 8 \\
-bara & sy & eots & eum & ni & da  & &  `wished'\\
-wish & Honorific & Past & Formal & Indicative & Indicative \\
-bara& & gess &  & &  eo & yo  &  `will wish' \\
-wish  & &  Assertive && & informal & polite \\
-\end{tabular}
+%Examples:
+%\begin{tabular}{llllllllll}
+%1    & 3 & 4     & 5   & 6  & 7 & 8 \\
+%bara & sy & eots & eum & ni & da  & &  `wished'\\
+%wish & Honorific & Past & Formal & Indicative & Indicative \\
+%bara& & gess &  & &  eo & yo  &  `will wish' \\
+%wish  & &  Assertive && & informal & polite \\
+%\end{tabular}
 
 
-Frequent morphemes:
+%Frequent morphemes:
 \begin{table}
 \resizebox{1.2\textwidth}{!}{
 \begin{tabular}{llllllllll}
@@ -753,8 +880,6 @@ Polite & \korean{요} & YO$_8$&	 267 & See Table~\ref{tab:korean-styles} \\
 }
 \caption{Frequent Korean verb suffixes in slots 1-8.}\label{tab:korean-frequent-morphemes}
 \end{table}
-
-Infinitive -eo: -eora/-ara for imperative \citep[4.3.6.4]{yeon2010korean}
 
 
 Next, we explain how our segmentation corresponds to commonly described paradigms.
@@ -826,7 +951,7 @@ Hortative   && \korean{하자}  & \korean{해}  & \korean{해요}  & \korean{합
    \hline
 Imperative  && \korean{해라, 하여라}  & \korean{해}  & \korean{해요}  & \korean{합시오}  \\
   && haera, hayeora &  hae &  haeyo &  hapsio \\
-  && -RA$_7$ & -\textsc{eo}$_7$ & -\textsc{eo}$_7$-\textsc{yo}$_8$ & -\textsc{p}$_5$-\textsc{si}$_3$O \\
+  && -\textsc{ra}$_7$ & -\textsc{eo}$_7$ & -\textsc{eo}$_7$-\textsc{yo}$_8$ & -\textsc{p}$_5$-\textsc{si}$_3$O \\
   && \korean{하+어라}, \korean{하+어라}  &  &    & \korean{+ㅂ시오} \\
   && pvg+ef,  pvg+ef                     &  &    &  +ef\\
   \hline
@@ -845,13 +970,13 @@ Assertive   && \korean{하겠다}  & \korean{하겠어}  & \korean{하겠어요}
            &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
 Cause/Reason && \korean{해} & \korean{해서, 하여서} & \korean{하니} & \korean{하니까} \\
 && hae & haeseo, hayeoseo & hani & hanikka \\ 
-&& -\textsc{eo}$_7$ & -\textsc{eo}$_7$SEO$_9$ & -\textsc{ni}$_9$ & -\textsc{ni}KKA$_9$ \\
+&& -\textsc{eo}$_7$ & -\textsc{eoseo}$_9$ & -\textsc{ni}$_9$ & -\textsc{nikka}$_9$ \\
 && &\korean{하+어서, 하+어서} & \korean{하+니} & \korean{하+니까} \\
 && & pvg+ecs, xsm+ecs         & pvg+ecs & xsm+ef \\
 \hline
 Contrast && \korean{하지만} & \korean{하는데} & \korean{하더니} \\
  && hajiman & haneunde & haedoni & \\ 
- && -JIMAN$_9$ & -\textsc{neunde}$_9$ & -DEONI$_9$ & \\ \hline
+ && -\textsc{jiman}$_9$ & -\textsc{neunde}$_9$ & -\textsc{deoni}$_9$ & \\ \hline
 Conjunction && \korean{하고} \\
  && hago \\ 
 && -GO$_9$ \\ \hline
@@ -930,7 +1055,7 @@ Motive && \korean{하려고} \\
          &  & \korean{있+겠+다} & \korean{} & \korean{있+겠+어+요} & \korean{있+겠+습니다}\\
          &  & +ep+f             &           & paa+ep+ef+jxf & paa+ep+ef\\
     \end{tabular}
-    \caption{Conjugation of itda}
+    \caption{Conjugation of \textit{itda}. Refer to Table~\ref{tab:korean-hada-1} for details.}
     \label{tab:kroean-itda}
 \end{table}
 
@@ -956,64 +1081,66 @@ In Figure~\ref{tab:turkish-yapmak}, we show how our segmentation corresponds to 
 \begin{tabular}{ll||llllllllllllll}
          &        & 1       & 2        & 3        & 1      & 2      & 3 \\ \hline\hline
  DNP & A & yaparım & yaparsın &  	yapar & yaparız & yaparsınız &  	yaparlar \\
-                    &  & -AR-IM & -AR-\textsc{si}$_3$N &  	-AR & -AR-IZ & -AR-\textsc{si}$_3$NIZ &  	-AR-LAR \\ \hline
+                    &  & -\textsc{ar}$_6$-\textsc{im}$_{10}$ & -\textsc{ar}$_6$-\textsc{sin}$_{10}$ &  	-\textsc{ar}$_6$ & -\textsc{ar}$_6$-\textsc{iz}$_{10}$ & -\textsc{ar}$_6$-\textsc{siniz}$_{10}$ &  	-\textsc{ar}$_6$-\textsc{lar}$_{7}$ \\ \hline
                 & I & yapıyorum & yapıyorsun & 	yapıyor &	yapıyoruz &	yapıyorsunuz &	yapıyorlar \\
-                &  & -IYOR-UM & -IYOR-SUN & 	-IYOR &	-IYOR-UZ &	-IYOR-\textsc{si}$_3$NIZ &	-IYOR-LAR \\ \hline
+                &  & -\textsc{iyor}$_6$-UM & -\textsc{iyor}$_6$-\textsc{sin}$_{10}$ & 	-\textsc{iyor}$_6$ &	-\textsc{iyor}$_6$-UZ &	-\textsc{iyor}$_6$-\textsc{siniz}$_{10}$ &	-\textsc{iyor}$_6$-\textsc{lar}$_{7}$ \\ \hline
                 & Pr  & yapacağım &	yapacaksın 	& yapacak 	& yapacağız &	yapacaksınız &	yapacaklar \\ 
-                &   & -ACAK-IM &	-ACAK-\textsc{si}$_3$N 	& -ACAK 	& -ACAK-IZ &	-ACAK-\textsc{si}$_3$NIZ &	-ACAK-LAR \\ \hline\hline
+                &   & -\textsc{acak}$_6$-IM &	-\textsc{acak}$_6$-\textsc{sin}$_{10}$ 	& -\textsc{acak}$_6$ 	& -\textsc{acak}$_6$-IZ &	-\textsc{acak}$_6$-\textsc{siniz}$_{10}$ &	-\textsc{acak}$_6$-\textsc{lar}$_{7}$ \\ \hline\hline
         DP    & Pe &yaptım &	yaptın &	yaptı &	yaptık &	yaptınız &	yaptılar \\
-              &  &-TI-IM &	-TI-\textsc{si}$_3$N &	-TI &	-TI-K &	-TI-\textsc{si}$_3$NIZ &	-TI-LAR \\ \hline
+              &  &-TI-IM &	-TI-\textsc{sin}$_{10}$ &	-TI &	-TI-K &	-TI-\textsc{siniz}$_{10}$ &	-TI-\textsc{lar}$_{7}$ \\ \hline
                 & I & yapıyordum &	yapıyordun &	yapıyordu &	yapıyorduk &	yapıyordunuz &	yapıyorlardı \\ 
-                &  & -IYOR-DU-IM &	-IYOR-DU-\textsc{si}$_3$N &	-IYOR-DU &	-IYOR-DU-K &	-IYOR-DU-\textsc{si}$_3$NIZ &	-IYOR-LAR-DU \\ \hline\hline
+                &  & -\textsc{iyor}$_6$-\textsc{du}$_8$-IM &	-\textsc{iyor}$_6$-\textsc{du}$_8$-\textsc{sin}$_{10}$ &	-\textsc{iyor}$_6$-\textsc{du}$_8$ &	-\textsc{iyor}$_6$-\textsc{du}$_8$-K &	-\textsc{iyor}$_6$-\textsc{du}$_8$-\textsc{siniz}$_{10}$ &	-\textsc{iyor}$_6$-\textsc{lar}$_{7}$-\textsc{du}$_8$ \\ \hline\hline
  I     & Pe & yapmışım &	yapmışsın &	yapmış &	yapmışız &	yapmışsınız &	yapmışlar \\
-       &  & -MIS-IM &	-MIS-\textsc{si}$_3$N &	-MIS &	-MIS-IZ &	-MIS-\textsc{si}$_3$NIZ &	-MIS-LAR \\ \hline
+       &  & -\textsc{mis}$_6$-IM &	-\textsc{mis}$_6$-\textsc{sin}$_{10}$ &	-\textsc{mis}$_6$ &	-\textsc{mis}$_6$-IZ &	-\textsc{mis}$_6$-\textsc{siniz}$_{10}$ &	-\textsc{mis}$_6$-\textsc{lar}$_{7}$ \\ \hline
                & A & yaparmışım &	yaparmışsın &	yaparmış &	yaparmışız &	yaparmışsınız& 	yaparlarmış \\ 
-            &  & -AR-MIS-IM &	-AR-MIS-\textsc{si}$_3$N &	-AR-MIS &	-AR-MIS-IZ &	-AR-MIS-\textsc{si}$_3$NIZ& 	-AR-LAR-MIS \\ \hline
+            &  & -AR-\textsc{mis}$_6$-IM &	-AR-\textsc{mis}$_6$-\textsc{sin}$_{10}$ &	-AR-\textsc{mis}$_6$ &	-AR-\textsc{mis}$_6$-IZ &	-AR-\textsc{mis}$_6$-\textsc{siniz}$_{10}$& 	-AR-\textsc{lar}$_{7}$-\textsc{mis}$_6$ \\ \hline
                & I & yapıyormuşum &	yapıyormuşsun &	yapıyormuş &	yapıyormuşuz &	yapıyormuşsunuz &	yapıyorlarmuş \\
-               &              & -IYOR-MUS-IM &	-IYOR-MUS-SUN &	-IYOR-MUS &	-IYOR-MUS-UZ &	-IYOR-MUS-SUNUZ &	-IYOR-LAR-MUS \\
+               &              & -IYOR-\textsc{mis}$_6$-IM &	-IYOR-\textsc{mis}$_6$-\textsc{sin}$_{10}$ &	-IYOR-\textsc{mis}$_6$ &	-IYOR-\textsc{mis}$_6$-UZ &	-IYOR-\textsc{mis}$_6$-SUNUZ &	-IYOR-\textsc{lar}$_{7}$-\textsc{mis}$_6$ \\
 \end{tabular}
 }
-\caption{Turkish}\label{tab:turkish-yapmak}
+\caption{Paradigm of the Turkish verb \textit{yapmak}. This paradigm covers TAM and agreement suffixes (Slots 6, 7, 8, 10).}\label{tab:turkish-yapmak}
 \end{table}
 
 \begin{table}
 \begin{tabular}{llllllll}
+Slot & Label & Function & Morphs & Reference \\ \hline
 \hline
 Valence &   & Causative\\
 \hline
 Voice &   & Passive\\
-\hline
-Polite &   & \\
+%\hline
+%Polite &   & \\
 \hline
 Polarity  & MA & Negation & \\
 \hline
-Mood \\
+Mood  & EBIL & Abilitative & -Ebil & \cite{schaaik2020turkish}, section 21 \\
+      & IN   & Imperative & -In & \cite{schaaik2020turkish}, section 18.1 \\
 \hline
-TAM1      & AR & Aorist, nonpast, direct \\
+TAM1      & AR & Aorist, nonpast, direct & -(I/E)r, (-mE)-z  & \cite{schaaik2020turkish}, section 20.5 (`Present-2') \\
           & IYOR & Imperfective, direct & Aspect=Prog\\
-          & ACAK & Prospective, nopast, direct\\
-          & MIS1  & Perfective, indirect \\
-          & TI & Perfective, past, direct \\
+          & ACAK & Prospective, nopast, direct & & \cite{schaaik2020turkish}, section 20.2\\
+          & MIS1  & Perfective, indirect & & \cite{schaaik2020turkish}, section 20.3\\
+          & TI & Perfective, past, direct & -dI & \cite{schaaik2020turkish}, section 20.4\\
+%\hline
+%V Noun &  \\
 \hline
-V Noun &  \\
+3rd Plural& \textsc{lar}$_{7}$ & 3rd Plural\\
 \hline
-3rd Plural& LAR & 3rd Plural\\
-\hline
-TAM2      & MUS2 & Aorist/Imperfective, indirect \\
-          & DU & imperfective, past, direct \\
+TAM2      & MUS2 & Aorist/Imperfective, indirect & -mIs & \cite{schaaik2020turkish}, section 24.2 \\
+          & DU & imperfective, past, direct &  & \cite{schaaik2020turkish}, section 24.1.3 \\
 \hline
 Agreement & IM & 1st singular\\
           & SIN &2nd singular\\
           & IZ  & 1st plural\\
           & SINIZ & 2nd plural \\
           & K     & 1st plural, past direct \\
-\hline
-Poss Num/Pers & \\
+%\hline
+%Poss Num/Pers & \\
 \hline
 Gen & \\
 \hline
 \end{tabular}
-\caption{Suffixes in Turkish}\label{tab:turkish-suffixes}
+\caption{Verb suffixes in Turkish, arranged by slot.}\label{tab:turkish-suffixes}
 \end{table}
 
 
@@ -1034,19 +1161,19 @@ In Figure~\ref{tab:hungarian-paradigms}, we show how our segmentation correspond
 \begin{table}
     \centering
     \begin{tabular}{lllllllll}
-    \hline
-Valence	    & AT & Causative \\ \hline
-Mood	    & HET & Potential \\
-         & N & conditional \\
-         & J & subjunctive \\
+    Slot & Morpheme & Function & Reference    \\ \hline\hline
+Valence	    & AT & Causative &   \cite{rounds2001hungarian} 4.5.3 \\ \hline
+Mood	    & HET & Potential &   \cite{rounds2001hungarian} 4.5.1  \\
+         & N & conditional &   \cite{rounds2001hungarian} 4.3.7 \\
+         & J & subjunctive &   \cite{rounds2001hungarian} 4.3.5 \\
 \hline
-Tense& T & indicative past \\
+Tense& T & indicative past &  \cite{rounds2001hungarian} 4.3.3 \\
          \hline
-Finiteness  & NI & Infinitive \\
+Finiteness  & NI & Infinitive  &  \cite{rounds2001hungarian} 4.4.4 \\
 \hline
 %Definiteness & I & definite 2/3pl \\
 %         \hline
-Agreement (Obj+Subj)         & EK & 1sg indefinite present\\
+Agreement (Obj+Subj)         & EK & 1sg indefinite present & \cite{rounds2001hungarian} 4.3 \\
          & EL & 2sg present\\
          & UNK & 1pl present\\
          & TEK & 2pl\\
@@ -1067,7 +1194,7 @@ Agreement (Obj+Subj)         & EK & 1sg indefinite present\\
 Ind & Pres   &  I    & teszek &	teszel &	tesz &	teszünk &	tesztek &	tesznek \\
     &        &       & csinálok &	csinálsz &	csinál &	csinálunk &	csináltok &	csinálnak \\
    &&&  ismerek &	ismersz &	ismer &	ismerünk &	ismertek &	ismernek \\
- &    &      & -\textsc{ek} &	-\textsc{el} &	- &	-\textsc{unk} &	-\textsc{tek} &	-\textsc{nek} \\ \hline
+ &    &      & -\textsc{ek}$_5$ &	-\textsc{el}$_5$ &	- &	-\textsc{unk}$_5$ &	-\textsc{tek}$_5$ &	-\textsc{nek}$_5$ \\ \hline
    &&  D    & teszem &	teszed &	teszi &	tesszük &	teszitek &	teszik \\
    &&       & csinálom &	csinálod &	csinálja &	csináljuk &	csináljátok &	csinálják \\
   &&& ismerem &	ismered &	ismeri &ismerjük &	ismeritek &	ismerik \\
@@ -1076,7 +1203,7 @@ Ind & Pres   &  I    & teszek &	teszel &	tesz &	teszünk &	tesztek &	tesznek \\
 & Past &     I    &tettem &	tettél &	tett &	tettünk &	tettetek &	tettek \\
 &      &          & csináltam &	csináltál &	csinált &	csináltunk &	csináltatok &	csináltak \\
 &&&ismertem &	ismertél &	ismert &	ismertünk &	ismertetek &	ismertek \\
-	    &  &         &-\textsc{t}-EM &	-\textsc{t}-EL &	-T &	-\textsc{t}-UNK &	-\textsc{t}-TEK &	-\textsc{t}-\textsc{ek} \\ \hline
+	    &  &         &-\textsc{t}$_3$-EM &	-\textsc{t}$_3$-EL &	-T &	-\textsc{t}-UNK &	-\textsc{t}$_3$-TEK &	-\textsc{t}$_3$-\textsc{ek} \\ \hline
  & &   D    &tettem &	tetted &	tette &	tettük &	tettétek &	tették \\
  & &        & csináltam &	csináltad &	csinálta &	csináltuk &	csináltátok &	csinálták \\
 &&& ismertem &	ismerted &	ismerte &	ismertük &	ismertétek 	&ismerték \\
@@ -1085,18 +1212,18 @@ Ind & Pres   &  I    & teszek &	teszel &	tesz &	teszünk &	tesztek &	tesznek \\
 Cond  &Pres &   I    &tennék &	tennél &	tenne &	tennénk &	tennétek &	tennének \\
       &     &        & csinálnék &	csinálnál &	csinálna &	csinálnánk 	&csinálnátok &	csinálnának \\
   &&&    ismernék &	ismernél &	ismerne &	ismernénk &	ismernétek &	ismernének \\
-  & &   I    &-\textsc{n}-EK &	-\textsc{n}-EL &	-\textsc{n} &	-\textsc{n}-ENK &	-\textsc{n}-TEK &	-\textsc{n}-\textsc{nek} \\\hline
+  & &   I    &-\textsc{n}$_2$-EK &	-\textsc{n}$_2$-EL &	-\textsc{n}$_2$ &	-\textsc{n}$_2$-ENK &	-\textsc{n}$_2$-TEK &	-\textsc{n}$_2$-\textsc{nek} \\\hline
    &&  D    &tenném &	tennéd &	tenné &	tennénk &	tennétek &	tennék \\
    &&       & csinálnám &	csinálnád &	csinálná &	csinálnánk &	csinálnátok &	csinálnák \\
  &&&  ismerném &	ismernéd &	ismerné &	ismernénk 	&ismernétek &	ismernék \\
-&&      &-\textsc{n}-EM &	-\textsc{n}-ED &	-\textsc{n}-I &	-\textsc{n}-ENK &	-\textsc{n}-TEK &	-\textsc{n}-EK \\ \hline
+&&      &-\textsc{n}$_2$-EM &	-\textsc{n}$_2$-ED &	-\textsc{n}$_2$-I &	-\textsc{n}$_2$-ENK &	-\textsc{n}$_2$-TEK &	-\textsc{n}$_2$-EK \\ \hline
        &&  &tennélek \\ \hline
 Subj & Pres & I         &tegyek &	tégy or tegyél &	tegyen &	tegyünk &	tegyetek &	tegyenek \\
      &      &           & csináljak &	csinálj or
 csináljál &	csináljon &	csináljunk& 	csináljatok &	csináljanak \\
 &&&ismerjek &	ismerj or
 ismerjél &	ismerjen &	ismerjünk &	ismerjetek &	ismerjenek \\
- &  &          &-\textsc{j}-\textsc{ek} &	\textsc{j}-\textsc{el} &	-\textsc{j}-\textsc{en} &	-\textsc{j}-UNK &	-\textsc{j}-TEK &	-\textsc{j}-\textsc{nek} \\ \hline
+ &  &          &-\textsc{j}$_2$-\textsc{ek} &	\textsc{j}$_2$-\textsc{el} &	-\textsc{j}$_2$-\textsc{en} &	-\textsc{j}$_2$-UNK &	-\textsc{j}$_2$-TEK &	-\textsc{j}$_2$-\textsc{nek} \\ \hline
 &&D         &tegyem &	tedd or tegyed &	tegye &	tegyük& 	tegyétek &	tegyék \\
 &&          & csináljam &	csináld or
 csináljad &	csinálja &	csináljuk &	csináljátok &	csinálják \\
@@ -1157,33 +1284,151 @@ We refer to \citep{Hahn2020modeling} for details.
 \end{enumerate}
 
 
-\subsection{Hungarian Nouns}
+\subsection{Nouns in Finnish. Hungarian, and Turkish}
+
+We illustrate noun suffixes using examples taken from the corpora, with the annotation given in UD and our segmentation, in Table~\ref{tab:noun-affixes-examples}.
+In addition to these three slots, Hungarian also has possessed suffixes, marked with \texttt{Number[psed]} in the data.
+However, this is rare in the data, occurring only three times in the training set, and was thus excluded.
+
+\begin{table}[]
+    \centering
+\begin{tabular}{lllllllll}
+\multirow{5}{*}{\textsc{Finnish}} & Form & \textit{juttuihisi} \\
+ & Lemma & \textit{juttu} \\
+& Annotation & \texttt{Case=Ill|Number=Plur|Number[psor]=Sing|Person[psor]=2} \\
+& Segmentation & -\textsc{i}-\textsc{hi}-\textsc{si} \\
+& Gloss & Stem-Plural-Illative-2SgPoss \\
+\hline
+\multirow{5}{*}{\textsc{Hungarian}} & Form & \textit{érveiket} \\
+& Lemma & \textit{érv}  \\
+& Annotation &	\texttt{Case=Acc|Number=Plur|Number[psor]=Plur|Person[psor]=3} \\
+& Segmentation & -\textsc{ei}-\textsc{k}-\textsc{et} \\
+& Gloss & -Plural-Possessor3rdPlur-Accusative \\
+\hline
+\multirow{5}{*}{\textsc{Turkish}} & Form & \textit{hareketlerimden} \\
+& Lemma & \textit{hareket} \\
+& Annotation & 	\texttt{Case=Abl|Number=Plur|Number[psor]=Sing|Person=3|Person[psor]=1}	\\
+& Segmentation & -\textsc{lar}-\textsc{im}-\textsc{den} \\
+& Gloss & Plural-1sgPoss-Ablative\\
+\end{tabular}
+    \caption{Noun affixes in Finnish, Hungarian, and Turkish.}
+    \label{tab:noun-affixes-examples}
+\end{table}
+
+
 
 % https://en.wiktionary.org/wiki/h%C3%A1z#Hungarian
+%Re Hungarian: Possessed suffixes are very rare, occurring only three times in the training partition. 
 
-Possessed suffixes are very rare, occurring only three times in the training partition. 
-
-\begin{tabular}{lllllllllllll}
+%\begin{tabular}{lllllllllllll}
 %országokéhoz & ország &	Case=All|Number=Plur|Number[psed]=Sing|Number[psor]=None|Person[psor]=None \\
 %-ok-é-hoz \\
 %-Plural-PossessedSingular-Allative \\
 %országokéhoz &	ország&	Case=All|Number=Plur|Number[psed]=Sing|Number[psor]=None|Person[psor]=None	\\
 %kancellárénál&	kancellár &	Case=Ade|Number=Sing|Number[psed]=Sing \\
-lapunkat &	lap &	Case=Acc|Number=Sing|Number[psed]=None|Number[psor]=Plur|Person[psor]=1	\\
-unk-at \\
-érveiket	& érv &	Case=Acc|Number=Plur|Number[psed]=None|Number[psor]=Plur|Person[psor]=3 \\
-ei-k-et \\
--Plural-Possessor3rdPlur-Accusative \\
-\end{tabular}
+%lapunkat &	lap &	Case=Acc|Number=Sing|Number[psed]=None|Number[psor]=Plur|Person[psor]=1	\\
+%unk-at \\
+%érveiket	& érv &	Case=Acc|Number=Plur|Number[psed]=None|Number[psor]=Plur|Person[psor]=3 \\
+%ei-k-et \\
+%-Plural-Possessor3rdPlur-Accusative \\
+%\end{tabular}
 
-\subsection{Turkish Nouns}
 
-\begin{tabular}{lllllllll}
-hareketlerimden	& hareket	& 	Case=Abl|Number=Plur|Number[psor]=Sing|Person=3|Person[psor]=1	\\
-ler-im-den \\
-Plural-1sgPoss-Ablative
-\end{tabular}
 
+\paragraph{Turkish Nouns}
+\begin{enumerate}
+    \item Number
+    \item Possessor number and possessor person
+    \item Case 
+\end{enumerate}
+
+\paragraph{Hungarian Nouns}
+\url{https://cl.lingfil.uu.se/~bea/publ/megyesi-hungarian.pdf}
+\begin{enumerate}
+    \item Number
+    \item Possessor person
+    \item Possessor number \becky{Missing in citation}
+    \item Case 
+\end{enumerate}
+
+\paragraph{Finnish Nouns}
+\begin{enumerate}
+    \item Derivation
+    \item Number
+    \item Case 
+    \item Possessor person and possessor number
+\end{enumerate}
+
+
+\paragraph{Hungarian Verbs} \url{https://cl.lingfil.uu.se/~bea/publ/megyesi-hungarian.pdf}
+\begin{enumerate}
+    \item Voice \becky{Missing in citation}
+    \item Mood
+    \item Tense \mhahn{Potential mood appears in front of Tense, so I changed from Tense--Mood to Mood -- Tense as the order here.}
+    \item Definiteness, person, and number: This suffix indicates the definiteness or indefiniteness of the direct object of the verb, as well as the person and number of the subject performing the verb. 
+\end{enumerate}
+
+\paragraph{Turkish Verbs}
+\begin{enumerate}
+    \item Voice
+    \item Negation / polarity
+    \item Aspect
+    \item Evidential 
+    \item Tense 
+    \item Mood 
+    \item Person and Number
+    \item Formality
+\end{enumerate}
+
+\mhahn{I've changed this to the following}
+\begin{enumerate}
+    \item Valence (Causative -tir-)
+    \item Voice (Passive -il-)
+    \item Negation / polarity (Negation -ma-)
+    \item Mood (Potential -bil-)
+    \item TAM1: Tense, Aspect, Mood, Evidential
+    \item 3rd Plural (-lar-)
+    \item TAM2: Tense, Aspect, Mood, Evidential
+    \item Subject agreement (incorporating TAM information)
+    \item Formality (polite -makta-)
+    \item Genitive (-dir-)
+    \item Verbal Noun (-mak)
+    \item Possessive agreement
+\end{enumerate}
+
+
+
+
+\paragraph{Finnish Verbs}
+\begin{enumerate}
+    \item Voice
+    \item Tense 
+    \item Mood 
+    \item Person and number
+    \item Clitic
+\end{enumerate}
+
+
+\section{Controlling for Vowel Harmony}
+\subsection{Vowel Harmony in Turkish}
+
+\url{https://turkishexplained.com/vh1.htm}
+
+
+Turkish vowel harmony can largely be described in terms of two underlying vowels ``A'' and ``I'' whose realization depends on the last preceding vowel.
+
+
+
+    \begin{tabular}{l|llllll}
+        Preceding & A & I \\ \hline
+        a, I & a & I \\
+        e, i & e & i \\
+        o, u & a & u \\
+        {\"o}, {\"u} & e & {\"u}
+    \end{tabular}
+    
+For most suffixes, vowel harmony can be encoded in terms of one underlying form.
+The suffix AR$_6$ has the form ``Ar'' after most monosyllabic stems, and ``Ir'' after multisyllabic stems or one of 13 exceptional monosyllabic stems.
 
 
 \end{document}
