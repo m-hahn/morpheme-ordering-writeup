@@ -143,6 +143,10 @@ Our work adds to a growing body of work suggesting that many properties of langu
 
 \section{Introduction}
 
+Human language encodes thoughts into linear strings of words, syllables, and sounds (CITE).
+
+Something more general for cognitive audience
+
 Across languages, words are composed of morphemes, commonly defined as the smallest meaning-bearing units of language.
 Morphemes can take different shapes.
 In many cases, words can be segmented into a sequence of morphemes, as in the English word runners (root run-, derivation -er-, plural -s).
@@ -273,10 +277,12 @@ We focus on nouns and verbs.
 When adjectives are inflected, they often pattern with either verbs -- when they are used as predicates -- or nouns -- when they are used as attributes or independent nouns.
 
 Nouns very commonly mark number and case morphologically.
+%Number marking typically distinguishes singular and plural (person -- person-s).
+%Case marking 
 These are the subject of a well-documented universal, namely \citep[112]{greenberg1963universals}'s Universal 39:
 It states that number affixes are closer to the stem than case affixes, if they appear on the same side.
 In some languages, possession is also marked on the noun.
-The following is a fully inflected Finnish noun, with endings for number (plural), case (illative), and possessor (2nd person singular):
+The following is a fully inflected Finnish noun, with endings for number (plural), case (illative), and possessor (2nd person singular).
 
 %\ex.\ag. mi  rare mash yoo \\
 %%Stem (3) (5) (8) \\
@@ -287,24 +293,21 @@ The following is a fully inflected Finnish noun, with endings for number (plural
 %see \textsc{desiderative} \textsc{negation} \textsc{past} \\
 %`did not wish to see'
 
+
+\begin{figure}
 \begin{tabular}{lllllllll}
 \textit{juttu-i-hi-si} \\
 Stem-Plural-Illative-2SgPoss \\
 `into your stories' (Finnish)
 \end{tabular}
+\caption{Noun inflection in Finnish}
+\end{figure}
 
-Verbs commonly mark a larger number of inflection categories.
-Based on data from several dozens of languages, \citep{bybee-morphology-1985} proposes the following ordering of verb affixes:
-\begin{quote}
-\begin{tabular}{llllllllllllllllllllllllll}
-verb stem & valence & voice & aspect & tense& mood & subject agreement
-\end{tabular}
-\end{quote}
 
- Table~\ref{tab:table-orders}
 
-\textit{Valence} affixes change the number of arguments. A very common type of valence affix is a causative, which adds an argument. In Turkish, -t- marks causatives (CITE):
-
+ 
+ \begin{table}[]
+     Valence:
 \begin{tabular}{lllll}
 a) & çıldır-ır-ım \\
 & go.crazy-Causative-aorist-1sg \\
@@ -312,11 +315,8 @@ a) & çıldır-ır-ım \\
 b) & çıldır-t-ır-ım \\
 & go.crazy-Causative-aorist-1sg \\
 & `I make (someone) go crazy' (Turkish) \\
-\end{tabular}
-
-%In our dataset, Sesotho has the largest number of valence categories.
-\textit{Voice} describes the distinction between active and passive. An example is the Japanese passive suffix -(r)are- (CITE):
-
+\end{tabular}     
+Voice:
 \begin{tabular}{llllll}
 a) & mi-mash-yoo \\
 & see-politeness-future \\
@@ -326,16 +326,7 @@ b) & mi-rare-mash-yoo \\
 &`will be seen' (Japanese)
 \end{tabular}
 
-
-
-\textit{Aspect} describes how an event unfolds over time, such as the English progressive -\textit{ing} indicating that an action  is still ongoing (CITE).
-\textit{Tense} describes where an event is located in time (e.g. past or future, CITE).
-Aspect and tense categories are often fused in morphology (CITE).
-
-TODO example
-
-\textit{Mood} describes a relation between an event and the speaker, including an assessment of the event's reality (CITE).
-An example is the Potential mood. In Hungarian, it is formed with -het (CITE): 
+Mood:
 
 \begin{tabular}{llll}
 a) & ismer-nek \\
@@ -345,28 +336,91 @@ b) & ismer-het-nek \\
 & know-potential-3pl.def \\
 & `they can know' (Hungarian)
 \end{tabular}
+\caption{Examples of verb inflection}
+     \label{tab:examples-verbs}
+ \end{table}
+ 
+ 
+\begin{table}[]
+    \centering
+\begin{tabular}{l||l|l|l|l|l|l|llll}
+                    & Turkish & Hungarian & Finnish  & Sesotho Pref.     & Ses Suff. & Japanese & Korean\\ \hline\hline
+Derivation          &  &         &          &               & Reversive & suru    & ha,i\\ \hline
+Valence             &  Causative &         &           & Object marker & Valence & Causative\\ \hline
+Voice               & Passive & Passive    & Passive     &               & Passive & Passive\\ \hline
+TAM, Pol.           & Negation  &   Potential  &   Tense/Asp &    Negation &  Politeness &      Potential        & Honorific \\
+                    & Potential & Tense        &    Mood     &     Tense   &    Mood     &   Honorific  &    Tense       \\
+                    &   TAM1    &          &                &         &                  & Tense/Aspect & Formality \\
+                    & lar       &          &           &  & & Negation & Mood I\\
+                    & TAM2         &           &               &          &       &      &  Mood II \\ \hline
+Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
+\textit{Other}               & Formality          & Clitic    &              & Int/Rel &      &        & Politeness \\
+                    &           &     &              &  &          &    & Conj \\
+\end{tabular}
+    \caption{Morpheme order across the six languages in our sample, matched with the universal order described by \cite{bybee-morphology-1985}.}
+    \label{tab:table-orders}
+\end{table}
 
-Mood may also be fused with tense and aspect; for instance, the Japanese suffix -\textit{yoo} can mark future tense and the hortative mood (`let's ...', CITE).
+
+Verbs commonly mark a larger number of inflection categories.
+Figure~\ref{tab:table-orders} summarises the affixes in the verbal morphologies of the six morphologically rich languages considered here.
+%The affixes closest to the verb root are derivational affixes, and inflectional affixes appear further out.
+Verbal affixes are typically grouped into derivational and inflectional affixes.
+Derivational affixes derive new verb stems (e.g., 'do' $\rightarrow$ undo), whereas inflectional affixes derive inflected verb forms from verb stems (e.g., `do' $\rightarrow$ `does') (CITE).
+Examples of derivational suffixes are Japanese -su- and Korean -ha-, which derive verbs from non-verbal stems (CITE).
+Another example is the Reversive suffix in Sesotho (e.g., `do' $\rightarrow$ `undo', CITE)
+Derivational affixes generally appear closer to the root than inflectional affixes.
+
+
+
+\textit{Valence} affixes change the number of arguments. A very common type of valence affix is a causative, which adds an argument indicating who causes an event or state to occur (CITE).
+In Turkish, -t- marks causatives (Figure~\ref{tab:examples-verbs}).
+\textit{Voice} describes the distinction between active and passive (CITE). An example is the Japanese passive suffix -\textit{(r)are}- (Figure~\ref{tab:examples-verbs}).
+\textit{Aspect} describes how an event unfolds over time.
+An example of aspect marking is the English progressive \textit{to be} ...-\textit{ing}, which indicates that an action is currently ongoing (CITE).
+\textit{Tense} describes where an event is located in time (e.g. past or future, CITE).
+Aspect and tense categories are often fused in morphology (CITE).
+Examples of tense and aspect marking are shown in Figure~\ref{tab:examples-verbs}.
+\textit{Mood} describes a relation between an event and the speaker, including an assessment of the event's reality (CITE).
+In analytical languages such as English, mood distinctions are often indicated using verbs such as \textit{might} or adverbs such as \textit{possibly}.
+Figure~\ref{tab:examples-verbs} shows how the potential mood is marked morphologically with -het- in Hungarian.
+In many languages, mood marking is at least partically fused with tense and aspect; for instance, the Japanese suffix -\textit{yoo} can mark future tense and the hortative mood (`let's ...', CITE).
 Tense, aspect, mood are often together referred to as TAM (Tense-Aspect-Mood, CITE).
-
-\textit{Subject person and number} mark categories of the subject, such as English third-person -s.
-
+\textit{Subject agreement} mark categories of the subject, most often its person and number, sometimes also other categories such as its gender.
+An example is English third-person -s.
 While agreement is most commonly established with the subject, agreement with the object is found in Sesotho (CITE) and in Hungarian (CITE); it is fused with subject agreement in the latter case.
 
 
-While these are particularly common types of affixes, there are further types.
-Examples are polarity (negation), evidential (based on what evidence a speaker makes an assertion), and formality.
+Based on data from several dozens of languages, \citep{bybee-morphology-1985} proposes the following ordering of these common verb affixes:
+\begin{quote}
+\begin{tabular}{llllllllllllllllllllllllll}
+verb stem & valence & voice & aspect & tense& mood & subject agreement
+\end{tabular}
+\end{quote}
+
+While these are particularly common types of affixes, there are further types, some of which occur in the six languages of our sample.
+\textit{Polarity} refers to the opposition between affirmative (e.g. `she arrived') and negative  (e.g., `she did not arrive') statements.
+\textit{Evidential} indicates on what evidence a speaker bases an assertion.
+\textit{Formality}, \text{honorifics}, and \text{politeness} are categories that index social relations between the speaker, the addressee, and the topic of the conversation (CITE).
+In our sample, these are prominent in Korean and Japanese.
+The Japanese politeness marker -masu- and the Korean formality (-p) and politeness (-yo) suffixes index the social relation between the speaker and the addressee (CITE); the Korean honorific suffix -si- indexes the social relation between the speaker and the topic of the conversation (CITE).
+
+Furthermore, verb forms can have affixes indicating the syntactic position of the verb within a sentence, in particular, affixes marking infinitives or other nonfinite forms.
+We use the term \textit{Embedding} (TODO) for this type of morpheme.
 
 
-
-We focus on inflection, except in those cases where derivational affixes are clearly marked in available data.
-Inflectional suffixes are generally outside of derivational affixes
+%We focus on inflection, except in those cases where derivational affixes are clearly marked in available data.
+%Inflectional suffixes are generally outside of derivational affixes
 
 % somewhere explain the choice of languages
 % - rich agglutinative.
 % - must have data with suitable morphological analysis.
 % - Among the languages, Hungarian and Finnish are genetically related (X millenia). There is also some evidence for genetic relations beyond these (Japanese, Korean, Turkish), but such relations would have to be quite ancient (x millenia).
 % The morphemes found in these languages as considered here are generally not cognate.
+
+
+
+
 
 \section{Methods}
 
@@ -413,27 +467,6 @@ In contrast, the number suffix, which is generally only marked for the plural, h
 For verbs, we investigated Finnish, Hungarian, Japanese, Korean, Sesotho, and Turkish inflectional suffixes. Broadly speaking, all of the languages have a real ordering of valence, voice, negation, tense/aspect/mood (TAM), person and number, and formality, where applicable. \becky{TODO: Check that this is correct and discuss some specifics.} 
 
 \becky{Which language provides data for which kind of suffix?}
-
-\begin{table}[]
-    \centering
-\begin{tabular}{l||l|l|l|l|l|l|llll}
-                    & Turkish & Hungarian & Finnish  & Sesotho Pref.     & Ses Suff. & Japanese & Korean\\ \hline\hline
-Derivation          &  &         &          &               & Reversive & suru    & ha,i\\ \hline
-Valence             &  Causative &         &           & Object marker & Valence & Causative\\ \hline
-Voice               & Passive & Passive    & Passive     &               & Passive & Passive\\ \hline
-TAM, Pol.           & Negation  &   Potential  &   Tense/Asp &    Negation &  Politeness &      Potential        & Honorific \\
-                    & Potential & Tense        &    Mood     &     Tense   &    Mood     &   Honorific  &    Tense       \\
-                    &   TAM1    &          &                &         &                  & Tense/Aspect & Formality \\
-                    & lar       &          &           &  & & Negation & Mood I\\
-                    & TAM2         &           &               &          &       &      &  Mood II \\ \hline
-Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
-\textit{Other}               & Formality          & Clitic    &              & Int/Rel &      &        & Politeness \\
-                    &           &     &              &  &          &    & Conj \\
-\end{tabular}
-    \caption{Morpheme order across the six languages in our sample, matched with the universal order described by \cite{bybee-morphology-1985}.}
-    \label{tab:table-orders}
-\end{table}
-
 
 
 
@@ -627,7 +660,7 @@ Taking a step back and looking at all of these languages at a whole, we see that
 
 \section{Discussion}
 
-We have examined morpheme order in nouns and verbs in six languages, testing the recently propiosed Efficient Tradeoff Hypothesis \citep{hahn2020modeling} as an explanatory account of morpheme ordering.
+We have examined morpheme order in nouns and verbs in six morphologically languages, testing the recently propiosed Efficient Tradeoff Hypothesis \citep{hahn2020modeling} as an explanatory account of morpheme ordering.
 We compared actual morpheme orderings to other possible orderings and to orderings optimized for efficiency of the memory-surprisal tradeoff.
 In most cases, we found that the real ordering provided more efficient tradeoffs than most alternative orderings.
 More importantly, we found that the real orderings match the optimal orderings in many respects.
@@ -639,36 +672,43 @@ Beyond language-specific ordering patterns, optimization recovers several previo
 
 %\subsubsection{Semantic Scope; Syntactic Structure; Historical Development}
 
-In this section, we discuss the linguistic literature on morpheme ordering.
 
-\paragraph{Levels of Linguistic Description}
+%Morpheme ordering has been described from the perspective 
 
-Morpheme ordering has been described from the perspective 
-
-Besides the explanation of broad typological tendencies, which we are interested in here, the linguistic literature has also debated at which level of linguistic representation morpheme ordering should be described, proposing accounts located at different levels such as the syntax-phonology interface \citep{baker1985the} and an autonomous layer of morphological description \citep{hyman2003suffix}.
+%Besides the explanation of broad typological tendencies, which we are interested in here, the linguistic literature has also debated at which level of linguistic representation morpheme ordering should be described, proposing accounts located at different levels such as the syntax-phonology interface \citep{baker1985the} and an autonomous layer of morphological description \citep{hyman2003suffix}.
 %TODO also template vs scope vs...
-We do not see the memory--surprisal tradeoff as competing with or contradicting these studies.
-Rather, it specifies tendencies for ordering that could be implemented at different levels of linguistic description.
+%We do not see the memory--surprisal tradeoff as competing with or contradicting these studies.
+%Rather, it specifies tendencies for ordering that could be implemented at different levels of linguistic description.
 
+
+In this section, we relate our results to existing explanatory accounts of morpheme ordering.
 
 %\paragraph{Revelance and Proximity}
+
+(CITE) suggested that information locality provides a formalization of Bybee's \citep{bybee-morphology-1985} claim that semantic relevance determines ordering.
+A related family of explanations holds that those affixes are closest to the root that are most relevant to the root.
+Our optimized orders of Turkish and Hungarian \becky{Are there other languages?} perfectly match Bybee's proposed universal verbal inflection order (Figure REF).
+This suggests that high mutual information generally correlates with semantic relevance. 
+
+TODO think about where to explain this
+
 As mentioned in section \becky{cite S2}, Bybee proposes a concept of \textit{semantic relevance}, which is the degree to which one morpheme affects the semantic content of the other \becky{cite bybee}. She hypothesizes that morphemes that are more highly relevant to each other should be closer to each other, and therefore proposes a universal ordering of verbal inflectional morphemes. For example, attaching a causative marker to a root meaning "to die" produces a verb form meaning "to kill." Since the causative greatly changes the semantic content of the original root, the causative is highly relevant to the root. 
 
 \becky{Format Korean example of juk-da ``to die" and juk-i-da ``to kill"}
 
-Bybee did not provide a way to computationally measure semantic relevance. However, our optimized orders of Turkish and Hungarian \becky{Are there other languages?} perfectly match Bybee's proposed universal verbal inflection order \becky{need a figure comparing optimized order to Bybee's order}. This suggests that high mutual information generally correlates with semantic relevance. 
+Bybee did not provide a way to computationally measure semantic relevance. 
 
 
-A related family of explanations holds that those affixes are closest to the root that are most relevant to the root \citep{bybee-morphology-1985}.
-Other explanations suggest that morphemes are ordered based on (TODO CITE).
-The most straightforwardly related account is that of Bybee (1985) Semantic relevance
-CARP template in Bantu
-Explanations for the orders
+%Other explanations suggest that morphemes are ordered based on (TODO CITE).
+%The most straightforwardly related account is that of Bybee (1985) Semantic relevance
+%CARP template in Bantu
+%Explanations for the orders
 
-talk about Relevance and Mutual Information
+%talk about Relevance and Mutual Information
 
 
-%\paragraph{Morphemes as Fossilized Words}
+%\paragraph{Morphemes as Fossilized Words}\
+There are also other explanatory theories of morpheme ordering.
 It has long been observed that the order of morphemes often parallels the order of independent words of corresponding meanings \citep{givon1971historical,venneman1973explanation,baker1985the}.
 It has been argued that the order of morphemes reflects the order of formerly independent elements that have been fossilized into bound morphemes \citet{givon1971historical,venneman1973explanation}.
 As the memory-surprisal tradeoff is optimized by word order, this is compatible with our results:
@@ -677,11 +717,10 @@ To the extent that morpheme order does reflect fossilized word order, morpheme o
 On the other hand, \citet{bybee-morphology-1985} points out that there are historically documented cases where morpheme ordering has been restructured in ways that do not reflect former independent words, but respect the universal tendencies proposed by her (see also \citet{mithun2000the, haspelmath1993the, mithun1995affixation}; \citet[Section 15]{rice2000morpheme}).
 As a theory of order at multiple levels, the memory-surprisal tradeoff predicts these ordering patterns independent of the historical path leading to the morphemes found in a given language.
 
-
-
-syntax-phonology interface \citep{baker1985the} 
-For instance, 
+A correspondence between the order of words and morphemes has also been postulated on a purely synchronic basis as a constraint on possible human languages.
 \cite{baker1985the} proposed the Mirror Principle, which -- informally -- states that the order of elements (morphemes) in morphology reflects the order of elements (words) in syntax.
+A large body of work in theoretical syntax models word and morpheme order using the same processes and principles (CITE some opf the Minimalist literature).
+To the extent that similar statistical patterns of usage hold for corresponding words and morphemes, this again is compatible with the Efficient Tradeoff Hypothesis.
 
 Also noted scope: \citep{baker1988incorporation,foley1984functional,chierchia1990meaning,valin1992a}
 
@@ -692,11 +731,16 @@ Also noted scope: \citep{baker1988incorporation,foley1984functional,chierchia199
 %\paragraph{Semantic Scope}
 
 
-A related account is in terms of semantic scope \cite{rice2000morpheme}.
+A related account is in terms of semantic scope \citep{rice2000morpheme}.
+This is the idea that morphemes are ordered in the order in which their meanings combine.
 The relative ordering of valence and voice is a good example for the scope-based explanation.
 Valence affixes change the number of arguments, and passive (voice) promotes one argument to the subject position.
 This can affect an argument introduced by a voice marker.
-The following example from Turkish illustrates this (\cite{schaaik2020turkish}, section 30.8.2):
+The following example from Turkish illustrates this (\cite{schaaik2020turkish}, section 30.8.2).
+Turkish has suffixes both for causative and passive.
+When adding both suffixes simultaneously, the causative marker appears closer to the root.
+This corresponds to the order in which the meanings of these suffixes combine with the meaning of the root:
+Causative adds an argument indicating who makes an object freeze, and passive then removes that argument, yielding a verb describing something that is being frozen by someone.
 
 \begin{tabular}{ccccccc}
 don-dur-ul & freeze-caus-pass & be frozen \\
@@ -704,10 +748,15 @@ don-dur & freeze-caus & to freeze (something) \\
 don & freeze& to freeze \\
 \end{tabular}
 
-In contrast, adding the passive marker to the root \textit{don} is illicit as the root verb is intransitive.
+A priori, semantic scope is different from mutual information.
+However, there are arguments that scope relations correlate with mutual information.
+\citet{culbertson2020from} made this argument for the order of nominal modifiers as in ``the four green books'', where mutual information predicts the order of attachment of modifiers to the noun.
+Furthermore, if the semantic propositions that speakers communicate are modeled using a probabilistic language of thought grammar such as CITE, mutual information will also correlate with scope ordering (see SI Appendix Section X for a simulation study).
 
 Description in terms of scope faces limitations when order is different from semantic scope.
+\cite{Hyman2003}
 Hyman  (2003:  249) proposed the CARP template to describe suffix order in Bantu languages (such as Sesotho), a templatic order for valence and voice morphemes that can be different from scope order.
+In \cite{Hyman2003}'s model, order is determined based on both the CARP template and a preference for ismorphism with semantic scope.
 
 \paragraph{Templates}
 CARP template
@@ -723,7 +772,6 @@ CARP template
 
 
 
-See SI Apenndix Section X for simulations arguing that scope and mutual information may correlate.
 
 %\subsection{Relevance; Proximity; Iconicity}
 
