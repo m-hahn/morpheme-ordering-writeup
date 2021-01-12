@@ -197,13 +197,13 @@ These languages have very substantial verbal inflection, and three of these lang
 
 \section{Locality and the Memory--Surprisal Tradeoff}
 
-A long line of work in linguistics has proposed principles of locality to account for word order regularities within and across languages (CITE).
+A long line of work in linguistics has proposed principles of locality to account for word order regularities within and across languages.
 An early example is \citep{behaghel1932deutsche}, who argued that elements that are closer together in meaning are closer together in form.
 In word order, the Head Proximity principle of \citep{rijkhoff-word-1986} states that words are close to their syntactic heads, and this generalization has since found strong empirical support from data in many languages~\cite[e.g.][]{liu2008dependency, futrell-large-scale-2015-1, liu-dependency-2017}.
 In morpheme ordering, \citep{bybee-morphology-1985} argues that morphemes are closer to the root when they are more relevant to it.
 One explanation of such principles is in terms of iconicity in form-meaning correspondence \citep{givon1985iconicity}.
 More recently, locality principles have been explained in terms of memory and efficiency in online processing \citep{hawkins-efficiency-2003}.
-Based on considerations of memory limitations, \citet{futrell2020lossy} derived an information-theoretic locality principle that states that words are close to each other when they are highly predictive of each other (see also \citet{culbertson2020from}).
+Based on considerations of memory limitations, \citet{futrell-noisy-context-2017} derived an information-theoretic locality principle that states that words are close to each other when they are highly predictive of each other (see also \citet{culbertson2020from}).
 %This principle of information locality TODO
 
 
@@ -214,25 +214,30 @@ The memory-surprisal tradeoff links information-theoretic models of memory limit
 Surprisal theory \citep{hale2001probabilistic, levy2008expectation} is a theory of the word-by-word processing difficulty in online processing.
 It states that the processing effort on a word $w_t$ in context $w-1 ... w_{t-1}$ is proportional to its surprisal
      \begin{equation}   \label{eq:true-surp}
-    \text{Difficulty} \propto -\log P(w_t , w_1\dots w_{t-1}).
+    \text{Difficulty} \propto -\log P(w_t | w_1\dots w_{t-1}).
 \end{equation}
 Surprisal as estimated by corpus-based methods or cloze is a successful predictor of reading time on naturalistic text \citep{smith2013effect,goodkind-predictive-2018,frank2019interaction,aurnhammer2019evaluating,wilcox2020predictive}. % (TODO citation based on Cloze).
 Surprisal theory is a computational-level theory; it can be justified in terms of different mechanisms such as preactivation and integration~\citep{kuperberg2016we}.
-\citet{Hahn2020modeling} argue that, due to limitations in human memory, human expectations in reality do not reflect the true context $w_1\dots w_{t-1}$, but some memory representation $m\_t$:
+\citet{Hahn2020modeling} argue that, due to limitations in human memory, human expectations in reality do not reflect the true context $w_1\dots w_{t-1}$, but some potentially lossy memory representation $m_t$ of the context $w_1\dots w_{t-1}$:
 \begin{equation}   \label{eq:lossy-surp}
     \text{Difficulty} \propto -\log P(w_t | m_t).
 \end{equation}
-
-Furthermore, they show that there is a tradeoff between average surprisal and memory capacity:
+\citet{Hahn2020modeling} note that there is a tradeoff between average surprisal and memory capacity:
 The more information a listener stores in $m_t$, the lower their surprisal will be on average.
 This is because higher precision of memory leads to more precise expectations, which will achiever lower surprisal on average.
-More formally, given a function $M$ encoding contexts $w_1\dots w_{t_1}$ into memory representations $m_t$, there is a tradeoff between, on the one hand, the average surprisal $S\_M$, obtained by averaging $\log P(w_t , m_t)$ across the words in a text, and the memory capacity $H_M$, formalized as the average number of bits required to encode $m_t$.
 
+More formally, they consider functions $M$ describing how comprehenders update memory representations $m_{t-1}$ when observing a word (or morpheme) $w_t$ to a new memory state $m_t := M(m_{t-1}, w_t)$.
+The memory capacity is formalized as the aveage number of bits required to encode $m_t$, i.e., its entropy:
+\begin{equation*}
+    \operatorname{H}[m_t] := - \sum_m P(m_t = m) \log_2 P(m_t=m)
+\end{equation*}
+where $m$ runs over possible memory states.
+\citet{Hahn2020modeling} prove that there is a tradeoff between, on the one hand, the average surprisal $S\_M$, obtained by averaging $- \log P(w_t , m_t)$ across the words in a text, and the memory capacity $\operatorname{H}[m_t]$.
 
+\mhahn{at this point illustrate with a figure?}
 
 \citet{Hahn2020modeling} provide a method for estimating a bound on the memory-surprisal tradeoff from corpus data, and show that orderings achieve efficient tradeoffs when elements that predict each other are close together.
-
-This result is based on the notion of mutual information, which quantifies the amount of statistical association between two random variables.
+This method is based on the notion of mutual information, which quantifies the amount of statistical association between two random variables.
 If $X, Z, Y$ are random variables, then the mutual information of $X$ and $Y$, conditioned on $Z$, is defined to be:
 \begin{align}
 \label{eq:mi}
@@ -251,9 +256,9 @@ Based on this notion, \citet{Hahn2020modeling}  prove the following bound on the
 For any positive integer $T$, let $M$ be a memory encoding function such that
 \begin{equation}
 \label{eq:memory-bound}
-H_M \le \sum_{t=1}^T t I_t.
+\operatorname{H}[m_t] \le \sum_{t=1}^T t I_t.
 \end{equation}
-Then we have a lower bound on the average surprisal under the memory encoding function $M$:
+Then we have a lower bound on the average surprisal $S_M$ under the memory encoding function $M$:
 \begin{equation}
 \label{eq:surprisal-bound}
 S_M \ge S_\infty + \sum_{t=T+1}^\infty I_t.
@@ -261,10 +266,11 @@ S_M \ge S_\infty + \sum_{t=T+1}^\infty I_t.
 where $S_\infty$ is the average surprisal that would be achieved with perfectly veridical memory representations.
 \end{thm}
 
+\mhahn{again, at this point illustrate with a figure?}
 
-A key consequence of this theorem is an information-theoretic notion of locality:
+A key consequence of this theorem is an information-theoretic notion of locality called Information locality:
 Informally, orderings optimize this tradeoff when elements with high mutual information are closer together.
-A similar notion of information locality was previous derived by \citet{futrell2020lossy} for a specific family of memory representations $M$.
+%Previously, a similar notion of information locality was derived by \citet{futrell2020lossy} for a specific family of memory representations $M$.
 Information locality has had success as a predictor of word order \citep{futrell2019information}, in particular for universals of the order inside noun phrases \citep{culbertson2020from,hahn-information-theoretic-2018,DBLP:conf/acl/FutrellDS20}.
 
 \citet{Hahn2020modeling} argue that information locality derives a range of locality principles proposed in the linguistic literature.
@@ -289,9 +295,8 @@ Nouns very commonly mark number and case morphologically.
 %Number marking typically distinguishes singular and plural (person -- person-s).
 %Case marking 
 In some languages, possession is also marked on the noun (CITE).
-Figure~\ref{fig:noun-inflection} shows a fully inflected Finnish noun, with endings for number (plural), case (illative), and possessor (2nd person singular).
-
-Number and case marking are the subject of a well-documented universal, namely \citep[112]{greenberg1963universals}'s Universal 39:
+Figure~\ref{fig:noun-inflection} shows fully inflected nouns in three languages from our sample, with endings for number, case, and possessor.
+Number and case marking are the subject of a well-documented universal, namely \citep{greenberg1963universals}'s Universal 39:
 
 \begin{adjustwidth}{6em}{6em}
 \textsc{Greenberg's Universal 39}:
@@ -316,6 +321,16 @@ This universal is supported by the example in Figure~\ref{fig:noun-inflection}.
 \textit{juttu-i-hi-si} \\
 Stem-Plural-Illative-2SgPoss \\
 `into your stories' (Finnish)
+\end{tabular}
+\begin{tabular}{lllllllll}
+\textit{érv-ei-k-et} \\
+Stem-Plural-3rdPlurPoss-Accusative \\
+`their arguments' (Hungarian)
+\end{tabular}
+\begin{tabular}{lllllllll}
+\textit{hareket-ler-im-den} \\
+Stem-Plural-1sgPoss-Ablative\\
+`from my actions' (Turkish) \\
 \end{tabular}
 
 \mhahn{TODO make this a nice illustration of noun inflection appropriate for the audience}
@@ -347,7 +362,6 @@ b) & mi-rare-mash-yoo \\
 \end{tabular}
 
 Mood:
-
 \begin{tabular}{llll}
 a) & ismer-nek \\
 & know-3pl.def \\
@@ -355,6 +369,24 @@ a) & ismer-nek \\
 b) & ismer-het-nek \\
 & know-potential-3pl.def \\
 & `they can know' (Hungarian)
+\end{tabular}
+Tense:
+\begin{tabular}{llllll}
+a) & isseo-yo \\ % 있다
+& be-polite \\
+& `is/are' (informal polite, Korean) \\ 
+b) & isseo-sseo-yo \\
+ & be-past-polite \\
+ & `was/were' (informal, polite, Korean)
+ \end{tabular}
+ Agreement:
+\begin{tabular}{lllll}
+a) & açar-ım \\
+b)& açar-sın \\
+c) & açar-ız \\
+d) &açar-sınız \\
+& stem-person \\
+& `I/you (sgd)/we/you (pl) open'
 \end{tabular}
 
 \mhahn{TODO make this a nice illustration of verb inflection appropriate for the audience}
