@@ -613,8 +613,6 @@ We use the term \textit{Embedding} (TODO) for this type of morpheme.
 
 
 
-
-
 \section{Methods}
 
 \subsection{Data} % TODO: Becky
@@ -903,6 +901,14 @@ In this section, we relate our results to existing explanatory accounts of morph
 \cite{Hahn2020modeling} suggested that information locality provides a formalization of Bybee's \citep{bybee-morphology-1985} claim that semantic relevance determines ordering.
 We suggest that mutual information provides an operational formalization of semantic relevance.
 Relatedly, \citep{culbertson2020from} link conceptual closeness to MI, and argue that it is a driver of order (in the domain of noun phrase modifiers)
+
+%\mhahn{report the following somewhere}
+%We measured the mutual information between roots and features using the other Universal Dependencies corpora for which these features were available.
+%First, for nouns, we compared the mutual information between the lemma and case and number, using a mixed-effects model with random effects for languages and language families.
+%Across 34 languages, mutual information tended to be higher for number than for case ($\beta=0.04$, $SE=0.015$, $t=2.58$, 30 languages).
+%For verbs, we compared mutual information between the root and voice, TAM, and subject agreement features.
+%Mutual information was higher for TAM than for agreement ($\beta=0.1$, $SE=0.04$, $t=2.29$, 37 languages), however, there was no significant difference between TAM and voice ($\beta=0.08$, $SE=0.058$, $t=1.39$, 30 languages).
+
 
 %TODO think about where to explain this As mentioned in section \becky{cite S2}, Bybee proposes a concept of \textit{semantic relevance}, which is the degree to which one morpheme affects the semantic content of the other \becky{cite bybee}. She hypothesizes that morphemes that are more highly relevant to each other should be closer to each other, and therefore proposes a universal ordering of verbal inflectional morphemes. For example, attaching a causative marker to a root meaning "to die" produces a verb form meaning "to kill." Since the causative greatly changes the semantic content of the original root, the causative is highly relevant to the root. 
 %\becky{Format Korean example of juk-da ``to die" and juk-i-da ``to kill"}
