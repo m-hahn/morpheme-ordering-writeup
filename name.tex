@@ -1,5 +1,5 @@
-%\documentclass[11pt,letterpaper]{article}
-\documentclass[man]{apa7}
+\documentclass[11pt,letterpaper]{article}
+% \documentclass[man]{apa7}
 
 \usepackage{showlabels}
 \usepackage{fullpage}
@@ -85,7 +85,8 @@
 \newcommand\michael[1]{{\color{red}(#1)}}
 \newcommand\mhahn[1]{{\color{red}(#1)}}
 \newcommand\becky[1]{{\color{blue}(#1)}}
-\newcommand\jd[1]{{\color{red}(#1)}}
+\definecolor{Pink}{RGB}{255,50,170}
+\newcommand{\jd}[1]{\textcolor{Pink}{[jd: #1]}}  
 \newcommand{\key}[1]{\textbf{#1}}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
@@ -312,14 +313,19 @@ In this work, we aim to test the Memory-Surprisal Tradeoff as a predictor of mor
 
 \section{Morpheme Ordering and Ordering Universals}
 
-In this section, we introduce some general crosslinguistic tendencies in morpheme ordering, including discussion of the the six languages, and the language universals that we seek to explain.
+\jd{give this section more structure}
+
+In this section, we introduce the phenomena we seek to explain: ...
+
+In this section, we introduce some general crosslinguistic tendencies in morpheme ordering, including discussion of the the six languages, and the language universals that we seek to explain. %\jd{turn this around? ie: ``In this section, we introduce the phenomena we seek to explain: ..."}
 
 Languages apply inflection to different classes of words, including both open word classes such as nouns, verbs, and adjectives, and closed word classes, in particular pronouns.
-In this work, we focus on open word classes, as these have productive paradigms that apply to thousands of words in a language, including words that newly enter the language, whereas pronominal inflection is restricted to a small number of words, often with idiosynractic and fossilized paradigms inherited from earlier stages of a language (CITE).
+In this work, we focus on open word classes, as these have productive paradigms that apply to thousands of words in a language, including words that newly enter the language, whereas pronominal inflection is restricted to a small number of words, often with idiosyncratic and fossilized paradigms inherited from earlier stages of a language (CITE).
 Among open word classes, inflection commonly applies to verbs, nouns, and adjectives (CITE).
-We focus on nouns and verbs.
 When adjectives are inflected, they often pattern with either verbs -- when they are used as predicates -- or nouns -- when they are used as attributes or independent nouns.
+We thus focus on nouns and verbs, treating adjectives together with one of the other classes depending on the language when appropriate (with verbs in Korean, Turkish, Japanese; with nouns in Hungarian, Finnish. TODO Sesotho?).
 
+\subsection{Universals of Noun Affixes}
 Nouns very commonly mark number and case morphologically.
 %Number marking typically distinguishes singular and plural (person -- person-s).
 %Case marking 
@@ -533,7 +539,7 @@ ball/.style = {circle, draw, align=center, anchor=north, inner sep=0}]
     \label{tab:table-orders}
 \end{figure}
 
-
+\subsection{Universals of Verb Affixes}
 Verbs commonly mark a larger number of inflection categories.
 Figure~\ref{tab:table-orders} summarises the affixes in the verbal morphologies of the six morphologically rich languages considered here.
 For each language in the sample, we determined a templatic sequence of slots into which morphemes are ordered (see SI Section X for details on how we arrived at these slots).
@@ -601,6 +607,7 @@ The Japanese politeness marker -masu- and the Korean formality (-p) and politene
 Furthermore, verb forms can have affixes indicating the syntactic position of the verb within a sentence, in particular, affixes marking infinitives or other nonfinite forms.
 We use the term \textit{Embedding} (TODO) for this type of morpheme.
 
+\jd{add segue to next section}
 
 %We focus on inflection, except in those cases where derivational affixes are clearly marked in available data.
 %Inflectional suffixes are generally outside of derivational affixes
@@ -639,7 +646,9 @@ We then identified which morphemes each extracted word was composed of, on the b
 
 
 
-\subsection{Setup}
+\subsection{Estimating memory-surprisal tradeoffs}
+%\jd{change title to something more informative, eg "Estimating memory-surprisal tradeoffs"?}
+
 For estimating memory-surprisal tradeoffs, we modeled words as strings of morphemes, following \citet{Hahn2020modeling}.
 For instance, we represent \textit{juttu-i-hi-si} `into your stories' (Figure REF) as juttu-\textsc{Plural}-\textsc{Illative}-\textsc{2sgPoss}.
 (See SI Appendix Section X for experiments taking morphophonological interactions between morphemes into account.)
@@ -740,7 +749,7 @@ On active forms -- which, unlike the passive, are fully inflected for person and
     &
     \includegraphics[width=0.3\textwidth]{figures/hungarian_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     \end{tabular}
-    \caption{Noun Suffixes}
+    \caption{AUC Histograms for Noun Suffixes.}
     \label{fig:auc_nouns}
 \end{figure}
 
@@ -762,7 +771,7 @@ On active forms -- which, unlike the passive, are fully inflected for person and
  & sesotho suffixes & 0.62 (0.0) & 0.48 (0.2) & 0.54 (0.0) & 0.45 (0.19) & 0.52 (0.0) & 0.44 (0.19) \\
     \end{tabular}
     \caption{Accuracies in predicting morpheme ordering. `Optim.' indicates grammars optimized for AUC, `'Baseline' indicates randomly constructed weights.
-    In each cell, we provide the mean and the stgandard deviation over orderings. `Pairs' indicates the fraction of pairs of morphemes occurring together in the same word that are ordered correctly. `Full' indicates the fraction of verb forms in the corpus that are ordered fully correctly. `Full (Types)' counts forms that occur multiple times only once, it thus down-weights the role of frequent forms.}
+    In each cell, we provide the mean and the stgandard deviation over orderings. `Pairs' indicates the fraction of pairs of morphemes occurring together in the same word that are ordered correctly. `Full' indicates the fraction of verb forms in the corpus that are ordered fully correctly. `Full (Types)' counts forms that occur multiple times only once, it thus down-weights the role of frequent forms.\jd{korean/japanese: add "nouns"/"verbs"?}}
     \label{tab:optimized_acc}
 \end{table}
 
@@ -876,7 +885,7 @@ In most cases, we found that the real ordering provided more efficient tradeoffs
 More importantly, we found that the real orderings match the optimal orderings in many respects.
 Ordering forms found in a corpus according according to real or optimized orderings yields the same orders in XXX of cases.
 In some cases, particularly for noun inflection, match between real and optimized orderings is perfect.
-Beyond language-specific ordering patterns, optimization recovers previously-documented language universals of morpheme order.
+Beyond language-specific ordering patterns, optimization recovers previously-documented language universals of morpheme order. \jd{These results support...}
 
 \subsection{Relation to previous accounts}
 
@@ -1032,7 +1041,7 @@ Furthermore, we note that the optimality of different orderings crucially depend
 We have tested the recently proposed Efficient Tradeoff Hypothesis as a predictor of morpheme order with data from verbs and nouns across six languages.
 We found that attested morpheme orders provide more efficient tradeoffs than most other possible orderings and that many properties of observed orderings are recovered by optimizing for tradeoff efficiency.
 With the exception of verb inflection in Finnish and Sesotho, we found that optimized orderings agree with the attested orderings in more than 90\% of forms found in corpora.
-Optimization also successfully predicts several universals of morpheme ordering, both for nouns and verbs.
+Optimization also successfully predicts several universals of morpheme ordering, both for nouns and verbs. \jd{add concluding sentence tying all together}
 
 
 \printbibliography
