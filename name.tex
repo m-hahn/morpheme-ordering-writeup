@@ -889,6 +889,9 @@ Ordering forms found in a corpus according according to real or optimized orderi
 In some cases, particularly for noun inflection, match between real and optimized orderings is perfect.
 Beyond language-specific ordering patterns, optimization recovers previously-documented language universals of morpheme order. \jd{These results support...}
 
+
+
+
 \subsection{Relation to previous accounts}
 
 %\subsubsection{Semantic Scope; Syntactic Structure; Historical Development}
@@ -907,14 +910,28 @@ Beyond language-specific ordering patterns, optimization recovers previously-doc
 
 
 In this section, we relate our results to existing explanatory accounts of morpheme ordering.
-In a review of research on morpheme ordering, \cite{manova2010modeling} % https://homepage.univie.ac.at/stela.manova/modeling%20affix%20order.pdf
-categorizes approaches to morpheme ordering into three classes: orderings that are grammatically motivated by properties of syntac, semantics or phonology; orderings that extra-grammatically motivated by statistical properties of language and human cognition; and orderings that are arbitrarily stipulated.
+In a review of research on morpheme ordering, \citet{manova2010modeling} % https://homepage.univie.ac.at/stela.manova/modeling%20affix%20order.pdf
+categorizes approaches to morpheme ordering into three classes (similarly \citet{rice2000morpheme}): orderings that are grammatically motivated by properties of syntac, semantics or phonology; orderings that extra-grammatically motivated by statistical properties of language and human cognition; and orderings that are arbitrarily stipulated.
 Our approach falls into the second class, explaining morpheme ordering based on minimization of human processing effort.
 In this section, we describe how our account relates to other accounts across these three clusters, and show how the memory-surprisal tradeoff has tight connections with notions proposed across seemingly very different accounts.
 
+
+
+- citing \cite{rice2000morpheme}; Manova and Aronoff 2010; Saarinen and Hay 2014
+
+Rice states three types of explanations/phenomena:
+
+
+
+- extra-grammatical: frequency, productivity, parsability
+
+
 \subsection{Grammatical Motivations}
 
+- grammatuical principle (syntactic, semantic, phonological). famous examples Mirror Principle and Bybee's relevance Principle; Scope (Rice)
 
+
+Mirror princuiple built into Distributed Morphology (Harley and Noyer 1998)
 
 %\mhahn{report the following somewhere}
 %We measured the mutual information between roots and features using the other Universal Dependencies corpora for which these features were available.
@@ -971,8 +988,11 @@ As a theory of order at multiple levels, the Efficient Tradeoff Hypothesis is co
 %In \cite{Hyman2003}'s model, order is determined based on both the CARP template and a preference for ismorphism with semantic scope.
 %
 
+
+%The principle of semantic scope is explained in detail and illustrated with copiousexamples in \cite{caballero2010scope}. \cite{narrog2010the} and most of the papers included in thenext issue provide analyses based on semantic scope, Aronoff and Xu (next issue),Korotkova and Lander (next issue), and Nordlinger (next issue).
+
 Another prominent account is in terms of semantic scope \citep{rice2000morpheme}.
-This is the idea that morphemes are ordered in the order in which their meanings combine.
+This is the idea that morphemes are ordered in the order in which their meanings combine \citep[e.g.,][]{rice2000morpheme, caballero2010scope,  narrog2010the}.
 The relative ordering of valence and voice is a good example for the scope-based explanation.
 Valence affixes change the number of arguments, and passive (voice) promotes one argument to the subject position.
 This can affect an argument introduced by a voice marker.
@@ -1002,99 +1022,95 @@ Relatedly, \citep{culbertson2020from} link conceptual closeness to MI, and argue
 
 \subsection{Cognitive Motivations}
 
-A prominent cognitively-motivated theory of morpheme ordering is the theory of complexity-based ordering \citep{plag2009suffix}
+A prominent cognitively-motivated theory of morpheme ordering is the theory of complexity-based ordering \citep{plag2009suffix}.
+This theory holds that affixes are closer to the root when they are less strongly separable from the base.
+This can be motivated in terms of the dual processing race model of morphological access, which asserts that morphological forms can be processed either separately in terms of its components or as a whole (Baayen 1993).
+Forms are more separable if they are less likely to be processed together with the root (Baayen \& Schreuder 1999, Baayen \& Moscoso del Prado Mart ́ın 2005).
 
-\cite{plag2009suffix} %http://www.sfs.uni-tuebingen.de/~hbaayen/publications/plagBaayenLanguage2009.pdf
+
+also mention \cite{manova2010suffix}
+%\cite{plag2009suffix} %http://www.sfs.uni-tuebingen.de/~hbaayen/publications/plagBaayenLanguage2009.pdf
 
 
 Usage statistics
-
 -- Hay 2002
-
 -- Plag 2002
-
 -- Hay and Plag 2004
-
 -- Hay and Baayen 2005
-
 -- Plag and Baayen 2009: productivity
 
-all show that `less parsable' affixes are closer to root
 
+On operationalization of separability is in terms of relative frequencies:
+affixes are more likely to be processed together with the root when the composite form has a higher frequency compared to the base form \cite{hay2001lexical, lee2011ordering}.
+This has an interesting relation to mutual information: 
+If the compound form is very frequent, in relation to the baseline frequencies of the base and the affix, then there is high (pointwise) mutual information between them.
 
-Broadly, this theory holds that affixes are closer to the root when they are less strongly separable from the base.
-
-Baayen's(1993) dual processing race model of morphological access.
-Forms are less separable when they are more likely to be processed together with the root in human morphological processing
-(Baayen \& Schreuder 1999, Baayen \& Moscoso del Prado Mart ́ın 2005).
-
-
-Hay (in press) distinguishes between derived forms which are more frequent than the bases they contain (e.g.illegible is more frequent than legible), and derived forms whic hare less frequent than their bases (e.g.illiberal is less frequent than liberal).
-
-\cite{hay2001lexical} argues that whether an affix is processed together with the root is determined in part by the relative frequency
+More recently, and most closely related to our proposal, \citet{inkelas2015informativity} has proposed that morphemes are ordered together when they are informative about each other.
+Formally (drawing on Cohen Priva 2013), they considered the informativity between a suffix $S_i$ and the preceding $S_{i-1}$ as 
 \begin{equation}
-    \frac{P(base+affix)}{P(base)}
+    \sum_{S_{i-1}, S_{i}} \frac{P(S_{i-1} , S_i)}{P(S_i)} \log P(S_i | S_{i-1})
+\end{equation}
+They tested this idea in a pilot study of Turkish, finding that high-informativity suffixes are closer to the root.
+This notion of informativity is similar to $I_1$, only differing in whether the $P(S_i)$ term occurs inside the logarithm:
+\begin{equation}
+   I_1 = \sum_{S_{i-1}, S_{i}} P(S_{i-1} , S_i) \log \frac{P(S_i | S_{i-1})}{P(S_i)}
 \end{equation}
 
-\begin{equation}
-    \log \frac{P(base, affix)}{P(base)} = \log P(affix|base)
-\end{equation}
 
-\begin{equation}
-    pmi(base, affix) = \log \frac{p(affix|base)}{p(base)}
-\end{equation}
-
-Hay and Baayen (2002).
-
-Hay and Plag (2004): parsing ratio and productivity measured by Hay and Baayen (2002).
-
-
-
-Alternatively, the lower thefrequency of the derived word in relation to the base word, the more important the role ofthe constituents become
-
-Hay and Plag (2004) show that ordering correlates with relative frequency and productivity
-
-Inkelas: informativity: they propose that bigram surprisal is minimized (not their terminology), test this in a pilot study of Turkish, with partially confirming results \citep{inkelas2015informativity}
-
+%Inkelas: informativity: they propose that bigram surprisal is minimized (not their terminology), test this in a pilot study of Turkish, with partially confirming results \citep{inkelas2015informativity}
+%Alternatively, the lower thefrequency of the derived word in relation to the base word, the more important the role ofthe constituents become
+%Hay and Plag (2004) show that ordering correlates with relative frequency and productivity
+%Hay (in press) distinguishes between derived forms which are more frequent than the bases they contain (e.g.illegible is more frequent than legible), and derived forms whic hare less frequent than their bases (e.g.illiberal is less frequent than liberal).
+% argues that whether an affix is processed together with the root is determined in part by the relative frequency
+%\begin{equation}
+%    \frac{P(base+affix)}{P(base)}
+%\end{equation}
+%\begin{equation}
+%    \log \frac{P(base, affix)}{P(base)} = \log P(affix|base)
+%\end{equation}
+%\begin{equation}
+%    pmi(base, affix) = \log \frac{p(affix|base)}{p(base)}
+%\end{equation}
+%Hay and Baayen (2002).
+%Hay and Plag (2004): parsing ratio and productivity measured by Hay and Baayen (2002).
 %Complexity-based Ordering, the position of a given suffix inthe hierarchy reflects the degree to which that suffix is processed independently of its base.
-
-
-\subsection{Arbitrary Orderings}
-
-also discuss \cite{ryan2010variable}: weighted bigram constraints in Tagalog, for the (rather uncommon) case of variable/flexible morpheme ordering
-
-\cite{inkelas2016affix}: optimality-thepretic model of lexiacl production, integrates semantic relevance (Bybee) and Scope (Baker, Rice).
 
 \citet{hay2004what} propose a model of complexity-based ordering based on processing considerations, called complexity-based ordering, arguing that affixes are further away from the root when they can be separated more easily in processing, testing this theory using 15 English affixes.
 
 
 from Inkelas
 
-- citing Rice 2011; Manova and Aronoff 2010; Saarinen and Hay 2014
 
-Rice states three types of explanations/phenomena:
 
-- grammatuical principle (syntactic, semantic, phonological). famous examples Mirror Principle and Bybee's relevance Principle; Scope (Rice)
+\subsection{Arbitrary Orderings}
 
-- arbitrary language-specific tenplatic (Fabb 1988 English affix ordering; position class templates, Simpson and Withgott 1986) (also finite-state automata Hankamer 1986; Karttunen 2003) \cite{fabb1988english}
+There are also studies suggesting language-specific and essentially arbitrary properties of morpheme ordering.
 
-- extra-grammatical: frequency, productivity, parsability
+A classical approach to describing morpheme ordering is in terms of levels, where morphemes from a higher level occur before morphemes from a lower level \citep{siegel1979topics}, and in terms of templates that describe the ordering of morphemes \citep{simpson1986pronominal,spencer1991morphological,stump1992on,inkelas1993nimboran,hyman2003suffix}.
+Ordering based on language-specific templates has been proposed specifically in cases where observed morpheme ordering is in conflict with semantic scope, as can happen in Bantu languages \citep{hyman2003suffix}.
 
-Mirror princuiple built into Distributed Morphology (Harley and Noyer 1998)
 
-Tension between Scope and templatic: Hyman 2003; Aronoff and Xu 2010; Spencer 2013
 
-re scope also Alsina 1999
+\citet{fabb1988english} prominently describes English affix ordering in terms of the selectional restrictions that individual affixes place on which other affixes they can attach to.
+While this approach does not make statements as to which affixes would go closer to the base in a given language, it does suggest that morpheme ordering is described based on the pairwise interactions between adjacent morphemes.
+In a similar vein, \citet{ryan2010variable} propose a model based on weighted bigram constraints in Tagalog, for the (rather uncommon) case of flexible morpheme ordering.
+Ordering constraints operating on adjacent pairs of morphemes might provide relatively efficient memory-surprisal tradeoffs because the appearance of a morpheme is constrained only by its immediately adjacent morphemes.
 
-\cite{manova2010modeling} % https://homepage.univie.ac.at/stela.manova/modeling%20affix%20order.pdf
-%
-also provide a ctagoeirzation into grammatical, psycholinguistic, unmotivated (among others)
 
-\cite{aronoff2010introduction}
 
-\cite{spencer2003putting}
 
-\cite{alsina1999where}
+Tension between Scope and templatic: \citep{hyman2003suffix}; \cite{aronoff2010introduction}; \cite{spencer2003putting}
+
+- arbitrary language-specific tenplatic (Fabb 1988 English affix ordering; position class templates, Simpson and Withgott 1986) (also finite-state automata Hankamer 1986; Karttunen 2003) 
+
+re scope also \cite{alsina1999where}
+
+%\cite{manova2010modeling} % https://homepage.univie.ac.at/stela.manova/modeling%20affix%20order.pdf
+%also provide a ctagoeirzation into grammatical, psycholinguistic, unmotivated (among others)
+
+
+
+
 
 \cite{aronoff2010a} % Within this model, phonological form is spelled out by means of individual-language-particular realization constraints that associate abstract morphosyntactic feature values with phonological forms and that are ordered among more general constraints governing factors like scope and feature splitting. The data used to exemplify the application of our theory to affix order are drawn from Haspelmath’s (A grammar of Lezgian, Mouton de Gruyter, Berlin, 1993) grammar of Lezgian, a language of the Northeast Caucasian family spoken largely in Dagestan (Russia) and Azerbaijan.
 
