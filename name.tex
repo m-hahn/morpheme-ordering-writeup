@@ -423,118 +423,14 @@ d) &a{\c c}ar-s{\i}n{\i}z \\
 \caption{Examples of verb inflection}\label{tab:examples-verbs}
 \end{figure}
  
-
-\begin{figure}
-
-  \begin{tikzpicture}[%
-% common options for blocks:
-block/.style = {draw, fill=blue!30, align=center, anchor=west,
-            minimum height=0.65cm, inner sep=0},
-% common options for the circles:
-ball/.style = {circle, draw, align=center, anchor=north, inner sep=0}]
-%\node[rectangle,text width=1.2cm,anchor=base] (A0) at (1,-0.3) {Real};
-
-%\node[rectangle,text width=5cm,anchor=left, color=red, fill=red, opacity=0.1] (A02) at (1,-1.5) {};
-
-%\node[rectangle,text width=1.2cm,anchor=base] (A1) at (1,-1.0) {1Derivation};
-\node[rectangle,text width=1.2cm,anchor=base, color=red] (A2) at (1,-1.5) {Valence};
-\node[rectangle,text width=1.2cm,anchor=base, color=green] (A3) at (1,-2.0) {Voice};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-3) {TAM};
-%\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-3.5) {Tense};
-%\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-4) {Mood};
-\node[rectangle,text width=1.2cm,anchor=base,color=orange] (A4) at (1,-5) {Agreement};
-
-% Turkish
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (3,-0.3) {\textbf{Turkish}};
-\node[rectangle,text width=1.2cm,anchor=base,color=red] (B1) at (3,-1.5) {1Causative};
-\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (3,-2) {2Passive};
-\node[rectangle,text width=1.2cm,anchor=base] (B3) at (3,-2.5) {3Negation};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-3) {4Potential};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-3.5) {5TAM1};
-\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (3,-4) {6.3rdPl};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-4.5) {7.TAM2};
-\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (3,-5) {8.Agreement};
-
-% Hungarian
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (5,-0.3) {\textbf{Hungarian}};
-\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (5,-2) {1Passive};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (5,-3) {2Potential};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (5,-3.5) {3Tense};
-\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (5,-5) {4Agreement};
-
-
-% Finnish
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (7,-0.3) {\textbf{Finnish}};
-\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (7,-2) {1Passive};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (7,-3.5) {2TAM};
-\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (7,-5) {3Agreement};
-
-% Sesotho Prefixes
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (9,-0.3) {\textbf{SesP}};
-\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (9,-2) {1Ob.ag.};
-\node[rectangle,text width=1.2cm,anchor=base] (B4) at (9,-2.5) {2Polarity};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (9,-3) {3Tense};
-\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (9,-5) {4Agreement};
-\node[rectangle,text width=1.2cm,anchor=base,color=purple] (B4) at (9,-5.5) {5Int./Rel.};
-
-% Sesotho Suffixes
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (11,-0.3) {\textbf{SesS}};
-\node[rectangle,text width=1.2cm,anchor=base] (B2) at (11,-1) {1Reversive};
-\node[rectangle,text width=1.2cm,anchor=base,color=red] (B2) at (11,-1.5) {2Valence};
-\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (11,-2) {3Passive};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (11,-3) {4Mood};
-
-
-
-% Japanese
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (13,-0.3) {\textbf{Japanese}};
-\node[rectangle,text width=1.2cm,anchor=base] (B2) at (13,-1) {1Derivation};
-\node[rectangle,text width=1.2cm,anchor=base,color=red] (B2) at (13,-1.5) {2Causative};
-\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (13,-2) {3Pass./Pot.};
-\node[rectangle,text width=1.2cm,anchor=base] (B4) at (13,-2.5) {4Politeness};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (13,-3) {5Desiderative};
-\node[rectangle,text width=1.2cm,anchor=base] (B4) at (13,-3.5) {6Negation};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (13,-4) {7TAM/Emb.};
-
-% Korean
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (15,-0.3) {\textbf{Korean}};
-\node[rectangle,text width=1.2cm,anchor=base] (B2) at (15,-1.0) {Derivation};
-\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-2.5) {Honorific};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (15,-3) {Tense};
-\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-3.5) {Formality};
-\node[rectangle,text width=1.5cm,anchor=base,color=blue] (B4) at (15,-4.0) {Mood I};
-\node[rectangle,text width=1.5cm,anchor=base,color=blue] (B4) at (15,-4.5) {Mood II};
-\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-5) {Politeness};
-\node[rectangle,text width=1.2cm,anchor=base,color=purple] (B4) at (15,-5.5) {Embedding};
-
-
-%\draw[->] (A1.east) to (B1.west);
-%\draw[->] (A2.east) to (B2.west);
-%\draw[->] (A3.east) to (B3.west);
-%\draw[->] (A4.east) to (B4.west);
-\end{tikzpicture}
-
-%    \centering
-%\begin{tabular}{l||l|l|l|l|l|l|llll}
-%                    & Turkish & Hungarian & Finnish  & Sesotho Pref.     & Ses Suff. & Japanese & Korean\\ \hline\hline
-%Derivation          &  &         &          &               & Reversive & suru    & ha,i\\ \hline
-%Valence             &  Causative &         &           & Object marker & Valence & Causative\\ \hline
-%Voice               & Passive & Passive    & Passive     &               & Passive & Passive\\ \hline
-%TAM, Pol.           & Negation  &   Potential  &   Tense/Asp &    Negation &  Politeness &      Potential        & Honorific \\
-%                    & Potential & Tense        &    Mood     &     Tense   &    Mood     &   Honorific  &    Tense       \\
-%                    &   TAM1    &          &                &         &                  & Tense/Aspect & Formality \\
-%                    & lar       &          &           &  & & Negation & Mood I\\
-%                    & TAM2         &           &               &          &       &      &  Mood II \\ \hline
-%Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
-%\textit{Other}               & Formality          & Clitic    &              & Int/Rel &      &        & Politeness \\
-%                    &           &     &              &  &          &    & Conj \\
-%\end{tabular}
-
-\mhahn{TODO make this visually more appealing}
-
-    \caption{Morpheme order across the six languages in our sample, matched with four universal categories (left).}
+ 
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{figures/slots.pdf}
+     \caption{Verb affix order across the six languages in our sample, matched with four universal categories (left). \mhahn{todo make this nicer}}
     \label{tab:table-orders}
-\end{figure}
+ \end{figure}
+
 
 \subsection{Universals of Verb Affixes}\label{sec:univ-verbs}
 Verbs commonly mark a larger number of inflection categories.
@@ -914,7 +810,7 @@ In this section, we describe how our account relates to other accounts across th
 %- extra-grammatical: frequency, productivity, parsability
 
 
-\subsection{Grammatical Motivations}
+\subsubsection{Grammatical Motivations}
 
 A family of theories hold that morpheme ordering is motivated by constraints placed on morphology through the interaction with other aspects of grammar.
 The appriaches most relevant for our results are approaches in terms of the relation of morphology to syntax~\citep{baker1985the} and semantics~\citep{bybee-morphology-1985,rice2000morpheme}.
@@ -1019,7 +915,7 @@ Furthermore, if the semantic propositions that speakers communicate are modeled 
 
 
 
-\subsection{Cognitive Motivations}
+\subsubsection{Cognitive Motivations}
 
 A prominent cognitively-motivated theory of morpheme ordering is the theory of Complexity-Based Ordering \citep{hay2002speech,plag2002the,hay2004what,hay2005shifting,plag2009suffix}.
 This theory holds that affixes are closer to the root when they are less ``separable'', where separability indicates the productivity of an affix and the likelihood that affixes are processed separately with the base in human lexical access  \citep{baayen1993on}.
@@ -1033,15 +929,16 @@ This has an interesting relation to mutual information:
 If the compound form is very frequent, in relation to the baseline frequencies of the base and the affix, then there is high (pointwise) mutual information between them.
 
 Most closely related to our proposal, \citet{inkelas2016affix} proposed that morphemes are ordered together when they are informative about each other.
-Formally (drawing on the notion of informativity defined by \citet{priva2017informativity}), they considered the informativity between a suffix $S_i$ and the preceding $S_{i-1}$ as 
-\begin{equation}
-    \sum_{S_{i-1}, S_{i}} \frac{P(S_{i-1} , S_i)}{P(S_i)} \log P(S_i | S_{i-1})
-\end{equation}
+They considered a notion of informativity introduced by \citet{priva2017informativity}, which is different from but related to the mutual information between adjacent morphemes $I_1$ (see SI Appendix Section TODO for details).
+%Formally (drawing on the notion of informativity defined by \citet{priva2017informativity}), they considered the informativity between a suffix $S_i$ and the preceding $S_{i-1}$ as 
+%\begin{equation}
+%    \sum_{S_{i-1}, S_{i}} \frac{P(S_{i-1} , S_i)}{P(S_i)} \log P(S_i | S_{i-1})
+%\end{equation}
 They tested this idea in a pilot study of Turkish, finding that high-informativity suffixes are closer to the root.
-This notion of informativity is similar to $I_1$, only differing in whether the $P(S_i)$ term occurs inside the logarithm:
-\begin{equation}
-   I_1 = \sum_{S_{i-1}, S_{i}} P(S_{i-1} , S_i) \log \frac{P(S_i | S_{i-1})}{P(S_i)}
-\end{equation}
+%This notion of informativity is similar to $I_1$, only differing in whether the $P(S_i)$ term occurs inside the logarithm:
+%\begin{equation}
+%   I_1 = \sum_{S_{i-1}, S_{i}} P(S_{i-1} , S_i) \log \frac{P(S_i | S_{i-1})}{P(S_i)}
+%\end{equation}
 
 
 %Inkelas: informativity: they propose that bigram surprisal is minimized (not their terminology), test this in a pilot study of Turkish, with partially confirming results \citep{inkelas2015informativity}
@@ -1069,7 +966,7 @@ This notion of informativity is similar to $I_1$, only differing in whether the 
 
 
 
-\subsection{Arbitrary Orderings}
+\subsubsection{Arbitrary Orderings}
 
 There are also studies suggesting language-specific and essentially arbitrary properties of morpheme ordering.
 A classical approach to describing morpheme ordering is in terms of levels, where morphemes from a higher level occur before morphemes from a lower level \citep{siegel1979topics}, and in terms of templates that describe the ordering of morphemes \citep{simpson1986pronominal,spencer1991morphological,stump1992on,inkelas1993nimboran,hyman2003suffix,nordlinger2010verbal}.
@@ -1157,3 +1054,117 @@ These results suggest that morpheme ordering reflects optimization pf processing
 
 \end{document}
 
+
+
+
+\begin{figure}
+
+  \begin{tikzpicture}[%
+% common options for blocks:
+block/.style = {draw, fill=blue!30, align=center, anchor=west,
+            minimum height=0.65cm, inner sep=0},
+% common options for the circles:
+ball/.style = {circle, draw, align=center, anchor=north, inner sep=0}]
+%\node[rectangle,text width=1.2cm,anchor=base] (A0) at (1,-0.3) {Real};
+
+%\node[rectangle,text width=5cm,anchor=left, color=red, fill=red, opacity=0.1] (A02) at (1,-1.5) {};
+
+%\node[rectangle,text width=1.2cm,anchor=base] (A1) at (1,-1.0) {1Derivation};
+\node[rectangle,text width=1.2cm,anchor=base, color=red] (A2) at (1,-1.5) {Valence};
+\node[rectangle,text width=1.2cm,anchor=base, color=green] (A3) at (1,-2.0) {Voice};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-3) {TAM};
+%\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-3.5) {Tense};
+%\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-4) {Mood};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (A4) at (1,-5) {Agreement};
+
+% Turkish
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (3,-0.3) {\textbf{Turkish}};
+\node[rectangle,text width=1.2cm,anchor=base,color=red] (B1) at (3,-1.5) {1Causative};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (3,-2) {2Passive};
+\node[rectangle,text width=1.2cm,anchor=base] (B3) at (3,-2.5) {3Negation};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-3) {4Potential};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-3.5) {5TAM1};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (3,-4) {6.3rdPl};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-4.5) {7.TAM2};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (3,-5) {8.Agreement};
+
+% Hungarian
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (5,-0.3) {\textbf{Hungarian}};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (5,-2) {1Passive};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (5,-3) {2Potential};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (5,-3.5) {3Tense};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (5,-5) {4Agreement};
+
+
+% Finnish
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (7,-0.3) {\textbf{Finnish}};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (7,-2) {1Passive};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (7,-3.5) {2TAM};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (7,-5) {3Agreement};
+
+% Sesotho Prefixes
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (9,-0.3) {\textbf{SesP}};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (9,-2) {1Ob.ag.};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (9,-2.5) {2Polarity};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (9,-3) {3Tense};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (9,-5) {4Agreement};
+\node[rectangle,text width=1.2cm,anchor=base,color=purple] (B4) at (9,-5.5) {5Int./Rel.};
+
+% Sesotho Suffixes
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (11,-0.3) {\textbf{SesS}};
+\node[rectangle,text width=1.2cm,anchor=base] (B2) at (11,-1) {1Reversive};
+\node[rectangle,text width=1.2cm,anchor=base,color=red] (B2) at (11,-1.5) {2Valence};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (11,-2) {3Passive};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (11,-3) {4Mood};
+
+
+
+% Japanese
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (13,-0.3) {\textbf{Japanese}};
+\node[rectangle,text width=1.2cm,anchor=base] (B2) at (13,-1) {1Derivation};
+\node[rectangle,text width=1.2cm,anchor=base,color=red] (B2) at (13,-1.5) {2Causative};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (13,-2) {3Pass./Pot.};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (13,-2.5) {4Politeness};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (13,-3) {5Desiderative};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (13,-3.5) {6Negation};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (13,-4) {7TAM/Emb.};
+
+% Korean
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (15,-0.3) {\textbf{Korean}};
+\node[rectangle,text width=1.2cm,anchor=base] (B2) at (15,-1.0) {Derivation};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-2.5) {Honorific};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (15,-3) {Tense};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-3.5) {Formality};
+\node[rectangle,text width=1.5cm,anchor=base,color=blue] (B4) at (15,-4.0) {Mood I};
+\node[rectangle,text width=1.5cm,anchor=base,color=blue] (B4) at (15,-4.5) {Mood II};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-5) {Politeness};
+\node[rectangle,text width=1.2cm,anchor=base,color=purple] (B4) at (15,-5.5) {Embedding};
+
+
+%\draw[->] (A1.east) to (B1.west);
+%\draw[->] (A2.east) to (B2.west);
+%\draw[->] (A3.east) to (B3.west);
+%\draw[->] (A4.east) to (B4.west);
+\end{tikzpicture}
+
+%    \centering
+%\begin{tabular}{l||l|l|l|l|l|l|llll}
+%                    & Turkish & Hungarian & Finnish  & Sesotho Pref.     & Ses Suff. & Japanese & Korean\\ \hline\hline
+%Derivation          &  &         &          &               & Reversive & suru    & ha,i\\ \hline
+%Valence             &  Causative &         &           & Object marker & Valence & Causative\\ \hline
+%Voice               & Passive & Passive    & Passive     &               & Passive & Passive\\ \hline
+%TAM, Pol.           & Negation  &   Potential  &   Tense/Asp &    Negation &  Politeness &      Potential        & Honorific \\
+%                    & Potential & Tense        &    Mood     &     Tense   &    Mood     &   Honorific  &    Tense       \\
+%                    &   TAM1    &          &                &         &                  & Tense/Aspect & Formality \\
+%                    & lar       &          &           &  & & Negation & Mood I\\
+%                    & TAM2         &           &               &          &       &      &  Mood II \\ \hline
+%Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
+%\textit{Other}               & Formality          & Clitic    &              & Int/Rel &      &        & Politeness \\
+%                    &           &     &              &  &          &    & Conj \\
+%\end{tabular}
+
+\mhahn{TODO make this visually more appealing}
+
+    \caption{Morpheme order across the six languages in our sample, matched with four universal categories (left).}
+    \label{tab:table-orders}
+\end{figure}
