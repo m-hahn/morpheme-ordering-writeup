@@ -132,289 +132,32 @@
 
 \tableofcontents
 
-\section{Estimating Memory--Surprisal Tradeoffs and Constructing Optimized Orderings}
+%\section{Estimating Memory--Surprisal Tradeoffs and Constructing Optimized Orderings}
+
+
 
 
 \section{Identifying Morphemes from Corpus Data}
 
+Here, we describe how we identified morphemes from corpus data and arrived at the classification of morphemes in the six languages as described in the main paper.
 
-In order to create these morpheme orderings, we first need to identify and label morphemes for each language. The Korean, Japanese, and Sesotho corpora have words segmented into the grapheme representations of their morphemes. However, the Turkish, Hungarian, and Finnish corpora do not segment the words into morphemes, but rather include a list of features (such as person, number, voice, etc.) present in each word. We built segmenters to reconstruct the order of morphemes in each word from those feature labels. See SI Appendix Section X for details.
-
-
- Grapheme, label, phoneme for Korean \mhahn{For now, I think we can place grapheme and phoneme versions into the appendix, and only discuss the MorphemeMeanings-based one in the main paper (i.e., ordering based on morpheme meanings, surprisal based on abstract morphemes, analogous to the Coarse+FineSurprisal version for the other languages.}
-    The Korean corpus came with segmented morphemes labeled with fine-grained categories such as "ending final marker," or "predicative maker," which were the labels we used for the specific morpheme meaning segmenter. We also built a segmenter to take in each segment and output the abstract morpheme slot it fills (such as ``formality"), similar to the abstract slot labelling we did with Turkish, Hungarian, and Finnish. 
-
- \mhahn{In the main paper, I think it's enough to present the Coarse+FinalSurprisal results. We can present others in the appendix, and don't need to introduce them here in detail.} %We built two different segmenters for each of the Turkish, Hungarian, and Finnish corpora. One version was ``coarse-grained," meaning that we recovered the order of suffixes in the word on an abstract level, such as a list of ``subject person, subject number." The other version was ``fine-grained," meaning that we used more specific labels for each suffix, such as ``2nd person, plural." In the models, each word is represented as its list of coarse-grained labels, and the model tries to predict the fine-grained labels based on the coarse-grained abstract morphemes. As such, the model tries to order the fine-grained labels, but the surprisal is calculated on the basis of the coarse-grained abstract morphemes.
-    
-%    We built segmenters on two different levels of abstraction for the Finnish, Hungarian, and Turkish corpora. The more fine-grained segmenter version takes the list of morphological features present in a particular word and reconstructs the natural order of morphemes, labelling each morpheme with its specific meaning, such as ``2nd person plural subject." The more abstract segmenter takes the list of morphological features for each word and reconstructs the filled abstract morpheme slots for that word, where each slot has generic label such as ``agreement." For example, in Hungarian, the only possible slots of suffixes appearing after a verb root are voice, mood, tense, agreement, and clitics. As such, we can assign each slot an integer representing the order in which the slots can be filled in a certain language. 
+%In order to create these morpheme orderings, we first need to identify and label morphemes for each language. The Korean, Japanese, and Sesotho corpora have words segmented into the grapheme representations of their morphemes. However, the Turkish, Hungarian, and Finnish corpora do not segment the words into morphemes, but rather include a list of features (such as person, number, voice, etc.) present in each word. We built segmenters to reconstruct the order of morphemes in each word from those feature labels. See SI Appendix Section X for details.
+%
+%
+% Grapheme, label, phoneme for Korean \mhahn{For now, I think we can place grapheme and phoneme versions into the appendix, and only discuss the MorphemeMeanings-based one in the main paper (i.e., ordering based on morpheme meanings, surprisal based on abstract morphemes, analogous to the Coarse+FineSurprisal version for the other languages.}
+%    The Korean corpus came with segmented morphemes labeled with fine-grained categories such as "ending final marker," or "predicative maker," which were the labels we used for the specific morpheme meaning segmenter. We also built a segmenter to take in each segment and output the abstract morpheme slot it fills (such as ``formality"), similar to the abstract slot labelling we did with Turkish, Hungarian, and Finnish. 
+%
+% \mhahn{In the main paper, I think it's enough to present the Coarse+FinalSurprisal results. We can present others in the appendix, and don't need to introduce them here in detail.} %We built two different segmenters for each of the Turkish, Hungarian, and Finnish corpora. One version was ``coarse-grained," meaning that we recovered the order of suffixes in the word on an abstract level, such as a list of ``subject person, subject number." The other version was ``fine-grained," meaning that we used more specific labels for each suffix, such as ``2nd person, plural." In the models, each word is represented as its list of coarse-grained labels, and the model tries to predict the fine-grained labels based on the coarse-grained abstract morphemes. As such, the model tries to order the fine-grained labels, but the surprisal is calculated on the basis of the coarse-grained abstract morphemes.
+%    
+%%    We built segmenters on two different levels of abstraction for the Finnish, Hungarian, and Turkish corpora. The more fine-grained segmenter version takes the list of morphological features present in a particular word and reconstructs the natural order of morphemes, labelling each morpheme with its specific meaning, such as ``2nd person plural subject." The more abstract segmenter takes the list of morphological features for each word and reconstructs the filled abstract morpheme slots for that word, where each slot has generic label such as ``agreement." For example, in Hungarian, the only possible slots of suffixes appearing after a verb root are voice, mood, tense, agreement, and clitics. As such, we can assign each slot an integer representing the order in which the slots can be filled in a certain language. 
 
 \subsection{Korean Verb Suffixes}
 
-Korean verb morphology is very complex, and there is no generally agreed-upon description in terms of morphemes and slots.
-We extracted suffixes based on the annotation found in the Kaist corpus \citep{chun2018building} and the linguistic literature on Korean \citep{yeon2010korean}.
-The Kaist corpus already provides segmentation into morphemes; we postprocessed it in two ways:
-First, we made it more fine-grained by splitting morphemes that are merged in the annotation, and, second, we abstracted away consistently from allomorphy.
-For instance, the Kaist corpus separately labels the segments \korean{ㅂ니다} \textit{-mnida} (as in \korean{합니다} \textit{hamnida} `does') and \korean{습니다} \textit{-seumnida} (as in \korean{했습니다} \textit{hatseumnida} `did').
-These two segments actually are allomorphs, conditioned by the preceding material.
-Furthermore, they can both be segmented into the formal marker \korean{ㅂ/습} (\textit{-p/-seup}, we label this underlying morpheme ``\textsc{p}$_5$'', see below for this notation), and the mood markers \korean{니} (\textit{-ni}, our \textsc{ni}$_6$) and \korean{다} (\textit{-da}, our \textsc{da}$_7$).
-We therefore transform both segments into the abstract morpheme sequence \textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ (see below for this notation).
-We then partitioned the resulting morphemes into slots that make it possible to consistently describe the ordering of almost all forms encountered in the corpus.
-
-
-With this procedure, we identified the nine slots described below:
-\begin{enumerate}
-    \item Root
-    %. The root may include a valency suffix, which is not separated frem the root in the dataset. We did not attempt to separate v
-    \item Derivation: The two derivational suffixes are \textit{ha} (\citep[4.1.2]{yeon2010korean}) and the predicative \textit{i}, whose function is similar to that of a copula \citep[4.1.4]{yeon2010korean}.
-    
-    \item Honorific \textsc{si}$_3$ \citep[4.3.2, 4.4.1]{yeon2010korean}
-    \item Tense/Aspect suffixes include -\textsc{ess}$_4$ for past \citep[4.5.1.1]{yeon2010korean}, -\textsc{essess}$_4$ for remote past \citep[4.5.1.2]{yeon2010korean}, -\textsc{get}$_4$ for future \citep[4.5.2.1]{yeon2010korean}
-    \item Formality \textsc{p}$_5$ (allomorphs include -\textit{p}-, -\textit{m}-, -\textit{seum}-,  \citep[4.3.2]{yeon2010korean})
-    \item Mood 1: We partition Mood suffixes into two slots, as these can be combined into strings of combined mood suffixes. Frequent elements of the Mood I slot are -\textsc{n}$_6$-, -\textsc{ni}$_6$- \citep[4.3.2]{yeon2010korean}.
-    
-    \item Mood II: Frequent elements of the Mood II slot are declarative -\textsc{da}$_7$- \citep[4.3.2]{yeon2010korean}, command -\textsc{ra}-, interrogative -\textsc{ka}-, the suffix  -\textsc{ji} \citep[4.2.2-3]{yeon2010korean}, and informal -\textsc{eo}$_7$-.
-    
-    \item Polite -yo
-    \item Conjunctive endings, such as -go, -seo,  and others
-    
-\end{enumerate}
-
-We show morphemes occurring at least 50 times in slots 2-8 in Figure~\ref{tab:korean-frequent-morphemes}.
-We do not provide the list of conjunctive and nominalizing suffixes since these are very numerous.
-
-Additional morphemes that occur less than TODO times are placed into an UNKNOWN slot, this affects TODO \% of morpheme occurrences in the dataset.
-We indicate morphemes by a small-caps representation of a stylized phonological representation (such as \textsc{p} for -\korean{ㅂ/습}  -\textit{p/seup}),\footnote{These transcriptions are purely conventional, we do not intend these to correspond to a theory of how underlying phonological forms are realized as surface phone strings.} with a subscript indicating their slot (such as \textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$).
-
-
-%TODO 
-%- Yeon 4.4.2.2 kkeo object honorific % 꺼   % does not seem to appear in Kaist corpus?
-
-
-%Frequent morphemes:
-\begin{table}
-\resizebox{1.2\textwidth}{!}{
-\begin{tabular}{llllllllll}
-Slot & Morphs & Short & Freq. & Description & Citation \\ \hline\hline
-Derivation & \korean{하} & HA$_2$ &	 68 & & \citep[4.1.2]{yeon2010korean}\\
-& i & I$_2$ &	 3947 && \citep[4.1.4]{yeon2010korean} \\ \hline
-Honorific & si 	& \textsc{si}$_3$ & 99 & &\citep[4.3.2, 4.4.1]{yeon2010korean}\\\hline
-Tense/Asp. & \korean{었었} 	& ESSESS$_4$ &  56&& \citep[4.5.1.2]{yeon2010korean} \\
-&get 	& GET$_4$ & 355 & assertive & \citep[4.5.2.1]{yeon2010korean}\\
-& &ESS$_4$ &	 9720 & past& \citep[4.5.1.1]{yeon2010korean}\\\hline
-Formality & p &P$_5$ &	 1761 & formal-polite &\citep[4.3.2]{yeon2010korean}\\\hline
-Mood 1&ri & RI$_6$ &	 70 & I-guess-\\
-&ni 	&NI$_6$ & 1700 && \citep[4.3.2]{yeon2010korean}\\
-&n 	&N$_6$ &5069 & TODO  \\\hline
-Mood 2&sida & SIDA$_7$ & 	 51 & Hortative, formal, polite \\
-& \korean{어} 	& EO$_7$ & 62 & Indicative, informal\\
-& \korean{자} & JA$_7$&	 163 & Hortative, formal, nonpolite & \citep[4.3.6.3]{yeon2010korean}\\
-& \korean{소} &SO$_7$  &	 194 & See Table~\ref{tab:korean-styles} \\
-& lkka & LKKA$_7$&	 200 & Interrogative & \citep[8.9]{yeon2010korean} \\
-& \korean{오} & O$_7$ &	 226 & See Table~\ref{tab:korean-styles} \\
-& ji & JI$_7$ &	 260 &    & \citep[4.2.2-3]{yeon2010korean}\\
-& ka 	& KA$_7$ & 485 & Interrogative & \citep[4.3.4, p. 175; p. 183]{yeon2010korean} \\
-& ra &RA$_7$ \korean{라} &	 959 & plain style command & \citep[4.3.6.4]{yeon2010korean} \\
-& da & DA$_7$ &	 23035 & Declarative & \citep[4.3.2]{yeon2010korean} &  \\\hline
-Polite & \korean{요} & YO$_8$&	 267 & See Table~\ref{tab:korean-styles} \\
-\end{tabular}
-}
-\caption{Frequent Korean verb suffixes in slots 1-8.}\label{tab:korean-frequent-morphemes}
-\end{table}
-
-
-Next, we explain how our segmentation corresponds to commonly described paradigms.
-First, in Table~\ref{tab:korean-styles}, we describe the correspondence to the speech style system described by \citep[4.3.2]{yeon2010korean}.
-Second, in Tables~\ref{tab:korean-hada-1}--\ref{tab:korean-hada-3}, we show the paradigm for the verb \korean{하다} \textit{hada} `to do' as described in Wiktionary.\footnote{ \texttt{https://en.wiktionary.org/wiki/\korean{하다}} (retrieved Septemgber 16, 2020).}
-In Table~\ref{tab:kroean-itda}, we show the part of the paradigm of the verb \textit{ida} `to be' corresponding to Table~\ref{tab:korean-hada-1} (the other parts of the paradigm are analogous to those of \textit{hada}).
-Note that none of these paradigms constitute exhaustive lists of all forms of these verbs; instead, they represent commonly used forms in a systematic paradigmatic representation.
-
-
-\begin{table}
-	\begin{center}
-\begin{tabular}{l||l|l|l|llll}
-            & Statement & Question  & Command    & Proposal    \\ \hline\hline
-Formal      &  \korean{ㅂ니다} & \korean{ㅂ니까} & \korean{지-ㅂ-지오} & \korean{지-ㅂ-지다} \\ 
-      &  -mnida & -mnikka  & -sipsio & -sipsida  \\ 
-      &  -\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ & -\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{kka}$_7$  & -\textsc{si}$_3$-\textsc{p}$_5$-\textsc{sio}$_7$ & -\textsc{si}$_3$-\textsc{p}$_5$-\textsc{sida}$_7$ \\ \hline
-Polite      &  \multicolumn{4}{c}{\korean{아/어/요}}  \\
-      &  \multicolumn{4}{c}{-a/eoyo}  \\
-            & \multicolumn{4}{c}{-\textsc{eo}$_7$-\textsc{yo}$_8$} \\ \hline
-Semi-Formal & \korean{오/소}   &           &   \korean{오}       &  \korean{-ㅂ-지다} \\
-&  -o/so   &           & -o        & -p-sida \\
- &  -O$_7$/-SO$_7$   &           & -O$_7$    & -\textsc{p}$_5$-\textsc{sida}$_7$ \\\hline
-Familiar    &    \korean{네}    &  \korean{나/는가} &  \korean{게}      &    \korean{세} \\
-            & -ne                  & -na/neunka & -ge & -se \\ 
-            & -\textsc{ne}$_7$                  & -\textsc{na}$_7$/-\textsc{neunka}$_7$ & -GE$_9$ & \textcolor{red}{-SE} \\ \hline
-Intimate      &  \multicolumn{4}{c}{\korean{아/어}}  \\
-      &  \multicolumn{4}{c}{-a/eo}  \\
-            & \multicolumn{4}{c}{-\textsc{eo}$_7$} \\ \hline
-Plain       &   \korean{다}     &  \korean{(느)냐} &  \korean{라}     &  \korean{자}\\
-            &  -da    &  -(neu)nya & -ra      & -ja \\
-            & -\textsc{da}$_7$    &   -\textsc{nya}$_7$          & -RA$_7$      & -JA$_7$\\
-\end{tabular}
-	\end{center}
-\caption{Correspondence between our morpheme segmentation and the speech style system described by \citep[4.3.2]{yeon2010korean}. In each cell, we provide the Hangul ending given by \citep{yeon2010korean}, a transliteration, and a representation in terms of underlying morphemes.}\label{tab:korean-styles}
-\end{table}
-
-
-
-\begin{table}
-\begin{tabular}{llllllllll}
-           &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
-\multirow{6}{*}{Indicative} & \multirow{3}{*}{Non-past} & \korean{한다} & \korean{해}  & \korean{해요}  & \korean{합니다}  \\
-           &          & handa & hae & haeyo &  hamnida \\
-           &          & -\textsc{n}$_6$-\textsc{da}$_7$ & -\textsc{eo}$_7$ & -\textsc{eo}$_7$-\textsc{yo}$_8$ &  -\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
-           &          & \korean{하+ㄴ다}  & \korean{하+어}    & \korean{하+어+요} & \korean{하+ㅂ니다} \\
-            &          &  px+ef        &   pvg+ecs        & pvg+ef+jxf & pvg+ef\\
-           \hline
-           & \multirow{3}{*}{Past}     & \korean{했다}  & \korean{했어} & \korean{했어요}   & \korean{했습니다}  \\
-           &      & haet-da &  haesseo &  haesseoyo  & haetseumnida \\
-           &      & -\textsc{ess}$_4$-\textsc{da}$_7$ &  -\textsc{ess}$_4$-\textsc{eo}$_7$ &  -\textsc{ess}$_4$-\textsc{eo}$_7$-\textsc{yo}$_8$  & -\textsc{ess}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
-           &      &  \korean{하+었+다}  &  \korean{하+었+어} & \korean{하+었+어+요} & \korean{하+었+습니다}  \\
-           &      &  ncpa+xsv+ep+ef   & px+ep+ef   &   px+ep+ef+jxf &     pvg+ep+ef\\
-           \hline
-\multirow{6}{*}{Interrogative} & \multirow{3}{*}{Non-past} & \korean{하느냐} & \korean{해}  & \korean{해요}  & \korean{합니까} \\
- &  & haneunya &  hae &  haeyo & hamnikka\\
- &  & -\textsc{nya}$_7$ &  -\textsc{eo}$_7$ &  -\textsc{eo}$_7$-\textsc{yo}$_8$ & -\textsc{p}$_5$-\textsc{ni}$_6$+KKA$_7$ \\
-               && \korean{하+느냐} & & & \korean{하+ㅂ니까}    \\
-              && px+ef & & & px+ef \\
- \hline
-              & \multirow{3}{*}{Past} & \korean{했느냐} & \korean{했어} & \korean{했어요} & \korean{했습니까} \\
-              &  & ha-n-neunya &  hae-sseo &  hae-sseo-yo &  haetseumnikka\\
-              &  & -\textsc{ess}$_4$-\textsc{nya}$_7$ &  -\textsc{ess}$_4$-\textsc{eo}$_7$ &  -\textsc{ess}$_4$-\textsc{eo}$_7$+YO$_8$ &  -\textsc{ess}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{kka}$_7$\\
-              &  &  \korean{하+었+느냐}  & \korean{하+었+어} & \korean{하+었+어+요} & \korean{하+었+습니까} \\
-              &  & +ep+ef  & +ep+ef            & px+ep+ef+jxf & pvg+ep+ef \\
-              \hline
-Hortative   && \korean{하자}  & \korean{해}  & \korean{해요}  & \korean{합시다}  \\
-   && haja &  hae &  haeyo & hapsida \\
-   && -JA$_7$ &  -\textsc{eo}$_7$ &  -\textsc{eo}$_7$-\textsc{yo}$_8$ & -\textsc{p}$_5$-\textsc{sida}$_7$ \\
-   && \korean{+자} && \korean{하+어+요} & \korean{하+ㅂ시다}\\
-   && +ef  && pvg+ef+jxf & ef \\
-   \hline
-Imperative  && \korean{해라, 하여라}  & \korean{해}  & \korean{해요}  & \korean{합시오}  \\
-  && haera, hayeora &  hae &  haeyo &  hapsio \\
-  && -\textsc{ra}$_7$ & -\textsc{eo}$_7$ & -\textsc{eo}$_7$-\textsc{yo}$_8$ & -\textsc{p}$_5$-\textsc{si}$_3$O \\
-  && \korean{하+어라}, \korean{하+어라}  &  &    & \korean{+ㅂ시오} \\
-  && pvg+ef,  pvg+ef                     &  &    &  +ef\\
-  \hline
-Assertive   && \korean{하겠다}  & \korean{하겠어}  & \korean{하겠어요}  & \korean{하겠습니다}  \\
-   &&  hagetda & hagesseo &  hagesseoyo & hagetseumnida \\
-   &&  -\textsc{get}$_4$-\textsc{da}$_7$ & -\textsc{get}$_4$-\textsc{eo}$_7$ &  -\textsc{get}$_4$-\textsc{eo}$_7$-\textsc{yo}$_8$ & \textsc{get}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
-&& \korean{하+겠+다}  & \korean{하+겠+어}   & \korean{하+겠+어+요} & \korean{하+겠+습니다}\\
-&&  px+ep+ef          & pvg+ep+ef   & pvg+ep+ef+jxf & pvg+ep+ef\\
-\hline
-\end{tabular}
-	\caption{Correspondence between our morpheme segmentation and the paradigm of \textit{hada} `to do' as described by Wiktionary and in the Kaist treebank. In each cell, we provide the Hangul  and transliterated (e.g., handa) forms given by Wiktionary, a representation in terms of underlying morphemes (e.g., -\textsc{n}$_6$-\textsc{da}$_7$), and -- where available -- how the form is segmented in the Kaist corpus (e.g., px+ef).}\label{tab:korean-hada-1} % (e.g., \korean{한다})\korean{하+ㄴ다} and 
-\end{table}
-
-\begin{table}
-	\begin{center}
-\begin{tabular}{llllllllll}
-           &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
-Cause/Reason && \korean{해} & \korean{해서, 하여서} & \korean{하니} & \korean{하니까} \\
-&& hae & haeseo, hayeoseo & hani & hanikka \\ 
-&& -\textsc{eo}$_7$ & -\textsc{eoseo}$_9$ & -\textsc{ni}$_9$ & -\textsc{nikka}$_9$ \\
-&& &\korean{하+어서, 하+어서} & \korean{하+니} & \korean{하+니까} \\
-&& & pvg+ecs, xsm+ecs         & pvg+ecs & xsm+ef \\
-\hline
-Contrast && \korean{하지만} & \korean{하는데} & \korean{하더니} \\
- && hajiman & haneunde & haedoni & \\ 
- && -\textsc{jiman}$_9$ & -\textsc{neunde}$_9$ & -\textsc{deoni}$_9$ & \\ \hline
-Conjunction && \korean{하고} \\
- && hago \\ 
-	&& -\textsc{go}$_9$ \\ \hline
-Condition && \korean{하면} & \korean{해야, 하여야} \\
-&& hamyeon & haeya, hayeoya \\
-	&& -\textsc{meyon}$_9$ & -\textsc{eoya}$_9$ \\ \hline
-Motive && \korean{하려고} \\
- && haryeogo \\
-&& -RYEOGO$_9$
-\end{tabular}
-	\end{center}
-	\caption{Continuation of Table~\ref{tab:korean-hada-1}: Forms of \textit{hada} with a conjunctive ending.}\label{tab:korean-hada-2}
-\end{table}
-
-
-
-\begin{table}[]
-    \centering
-    \begin{tabular}{llllllllllllllllllllllllll}
-           &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
-\multirow{2}{*}{Indicative} & Non-past & \korean{하신다} & \korean{하셔} & \korean{하세요, 하셔요} & \korean{하십니다} \\
-                           && -\textsc{si}$_3$-\textsc{n}$_6$-\textsc{da}$_7$ & \textsc{si}$_3$-\textsc{eo}$_7$ & \textsc{si}$_3$-\textsc{eo}$_7$-\textsc{yo} & \textsc{si}$_3$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
-&& \korean{하+시+ㄴ다}       &   --   &    \korean{하+시+어+요}             &  \korean{하+시+ㅂ니다}        \\
-\hline
-&& \korean{하셨다} & \korean{하셨어} & \korean{하셨어요} & \korean{하셨습니다} \\
-&& \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{da}$_7$ & \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{eo}$_7$ & \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{eo}$_7$-\textsc{yo} & \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
-& & \korean{하+셨+다}       &  --    &        --        &  \korean{하+셨+습니다}       \\
-\hline
-\multirow{2}{*}{Interrogative} & Non-past & \korean{하시느냐} & \korean{하셔} & \korean{하세요, 하셔요} & \korean{하십니까} \\
-&& \textsc{si}$_3$-\textsc{nya}$_7$ & \textsc{si}$_3$-\textsc{eo}$_7$ & \textsc{si}$_3$-\textsc{eo}$_7$-\textsc{yo} & \textsc{si}$_3$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{kka}$_7$ \\
-& &   --     &   --   &   \korean{하+시+어+요}             &  --        \\
-\hline
-& Past & \korean{하셨느냐} & \korean{하셨어} & \korean{하셨어요} & \korean{하셨습니까} \\
-&      & \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{nya}$_7$ & \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{eo}$_7$          & \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{eo}$_7$-\textsc{yo} & \textsc{si}$_3$-\textsc{ess}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{kka}$_7$ \\
-& &        &      &                &          \\
-\hline
-\multirow{2}{*}{Imperative} && \korean{하시라} & \korean{하셔} & \korean{하세요} & \korean{하십시오} \\
-&& -\textsc{si}$_3$-RA & -\textsc{si}$_3$-\textsc{eo}$_7$ & -\textsc{si}$_3$-\textsc{eo}$_7$-\textsc{yo} & -\textsc{si}$_3$-\textsc{p}$_5$-\textsc{si}$_3$O \\
-&        &      & \korean{하+시+어+}               &   \korean{하+십시오}       \\
-\hline
-\multirow{2}{*}{Assertive} & & \korean{하시겠다} & \korean{하시겠어} & \korean{하시겠어요} & \korean{하시겠습니다} \\
-&        &  -\textsc{si}$_3$-\textsc{get}$_4$-\textsc{da}$_7$     &  -\textsc{si}$_3$-\textsc{get}$_4$-\textsc{eo}$_7$              &  -\textsc{si}$_3$-\textsc{get}$_4$-\textsc{eo}$_7$-\textsc{yo} & -\textsc{si}$_3$-\textsc{get}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$        \\
-&& -- & -- & -- & -- \\
-    \end{tabular}
-    \caption{Continuation of Tables~\ref{tab:korean-hada-1}--\ref{tab:korean-hada-2}: Conjugation of hada with an honorific (\textsc{si}$_3$). We provide Hangul forms, morpheme sequences, and -- where available -- segmentations as given in the Kaist corpus.}
-    \label{tab:korean-hada-3}
-\end{table}
-
-%itda \url{https://en.wiktionary.org/wiki/%EC%9E%88%EB%8B%A4#Korean}
-
-\begin{table}[]
-    \centering
-    \begin{tabular}{llllllllllllllllllllllllllllllllll}
-           &          &Formal non-polite & Informal non-polite & Informal polite & Formal polite \\ \hline \hline
-    \multirow{6}{*}{Indicative}         & Non-past  & \korean{있다} & \korean{있어} & \korean{있어요} & \korean{있습니다} \\
-         &  &  \korean{있+다} & \korean{있+어} & \korean{있+어+요} & \korean{있+습니다}\\
-         &  &  -\textsc{da}$_7$            & -\textsc{eo}$_7$            & -\textsc{eo}$_7$-\textsc{yo}            & -\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
-         &  & +ef & +ef & +ef+jxf & +ef \\
-         \hline
- & Past & \korean{있었다} & \korean{있었어} & \korean{있었어요} & \korean{있었습니다} \\
-         &  & \korean{있+었+다} & \korean{있+었+어} & \korean{있+었+어+요} & \korean{있+었+습니다}\\
-         && -\textsc{ess}$_4$-\textsc{da}$_7$            & \textsc{ess}$_4$-\textsc{eo}$_7$             & \textsc{ess}$_4$-\textsc{eo}$_7$-\textsc{yo} & -\textsc{ess}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
-         &  & +ep+ef & +ep+ef & +ep+ef+jxf & +ep+ef \\
-         \hline
-\multirow{6}{*}{Interrogative} & Non-past  & \korean{있느냐} & \korean{있어} & \korean{있어요} & \korean{있습니까} \\
-&& -\textsc{nya}$_7$ & -\textsc{eo}$_7$ & -\textsc{eo}$_7$-\textsc{yo} & -\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{kka}$_7$ \\
-         &  & \korean{있+느냐} & \korean{있+어} & \korean{있+어+요} & \korean{있+습니까}\\
-         &  & +ef              & +ef  & +ef+jxf & +ef\\
-         \hline
-         & Past & \korean{있었느냐} & \korean{있었어} & \korean{있었어요} & \korean{있었습니까} \\
-         && -\textsc{ess}$_4$-\textsc{nya}$_7$ & -\textsc{ess}$_4$-\textsc{eo}$_7$ & -\textsc{ess}$_4$-\textsc{eo}$_7$-\textsc{yo} & -\textsc{ess}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{kka}$_7$ \\
-         &  & \korean{있+었+느냐} & \korean{있+었+어} & \korean{있+었+어+요}\\
-         &  & +ep+ef & paa+ep+ef &  paa+ep+ef+jxf\\
-         \hline
-\multirow{3}{*}{Assertive} &  & \korean{있겠다} & \korean{있겠어} & \korean{있겠어요} & \korean{있겠습니다} \\
-&& -\textsc{get}$_4$-\textsc{da}$_7$ & -\textsc{get}$_4$-\textsc{eo}$_7$ & -\textsc{get}$_4$-\textsc{eo}$_7$-\textsc{yo} & -\textsc{get}$_4$-\textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ \\
-         &  & \korean{있+겠+다} & \korean{} & \korean{있+겠+어+요} & \korean{있+겠+습니다}\\
-         &  & +ep+f             &           & paa+ep+ef+jxf & paa+ep+ef\\
-    \end{tabular}
-    \caption{Conjugation of \textit{itda}. Refer to Table~\ref{tab:korean-hada-1} for details.}
-    \label{tab:kroean-itda}
-\end{table}
-
-
-
-%\begin{longtable}{lllll}
-%NOMINALIZER-future-determiner-\korean{을} & EUL &	 128 \\
-%NOMINALIZER-topic?past-determiner-\korean{은} & EUN&	 129 \\
-%NOMINALIZER-nominalizer-informal-nonpolite-gi & GI &	 151 \\
-%NOMINALIZER-nominalizer-formal-nonpolite-m 	& M & 216 \\
-%\end{longtable}
+\input{si-korean.tex}
 
 \subsection{Finnish Verb Inflection}
 
-In the Finnish corpus, verb forms are annotated using collections of features, such as \texttt{Mood=Ind} and \text{Number=Sing}, which make it pssible to uniquely map the form to a cell of the paradigm in Table~\ref{tab:finnish} \footnote{From \url{https://en.wiktionary.org/wiki/tulla\#Conjugation}, retrieved January 10, 2021.}.
+In the Finnish corpus, verb forms are annotated using collections of features, such as \texttt{Mood=Ind} and \texttt{Number=Sing}, which make it pssible to uniquely map the form to a cell of the paradigm in Table~\ref{tab:finnish} \footnote{From \url{https://en.wiktionary.org/wiki/tulla\#Conjugation}, retrieved January 10, 2021.}.
 
 \begin{table}
 \begin{tabular}{l|llllll}
@@ -461,7 +204,7 @@ conditional mood  &1st sing. &	tulisin  & -isi$_3$-n$_4$\\
 \subsection{Turkish Verb Suffixes}
 
 In Table~\ref{tab:turkish-suffixes}, we show the list of identified Turkish verb suffixes.
-In Figure~\ref{tab:turkish-yapmak}, we show how our segmentation corresponds to the paradigm of yapmak as described by Wiktionary.\footnote{From https://en.wiktionary.org/wiki/yapmak\#Turkish, retrieved September 5, 2020.}
+In Figure~\ref{tab:turkish-yapmak}, we show how our segmentation corresponds to the paradigm of \textit{yapmak} as described by Wiktionary.\footnote{From https://en.wiktionary.org/wiki/yapmak\#Turkish, retrieved September 5, 2020.}
 
 
 
@@ -476,7 +219,7 @@ In Figure~\ref{tab:turkish-yapmak}, we show how our segmentation corresponds to 
                 & Pr  & yapacağım &	yapacaksın 	& yapacak 	& yapacağız &	yapacaksınız &	yapacaklar \\ 
                 &   & -\textsc{acak}$_6$-\textsc{im} &	-\textsc{acak}$_6$-\textsc{sin}$_{10}$ 	& -\textsc{acak}$_6$ 	& -\textsc{acak}$_6$-\textsc{iz} &	-\textsc{acak}$_6$-\textsc{siniz}$_{10}$ &	-\textsc{acak}$_6$-\textsc{lar}$_{7}$ \\ \hline\hline
         DP    & Pe &yaptım &	yaptın &	yaptı &	yaptık &	yaptınız &	yaptılar \\
-	      &  &-\textsc{ti}-\textsc{im} &	-\textsc{ti}-\textsc{sin}$_{10}$ &	-\textsc{ti} &	-\textsc{ti}-\textsc{k} &	-\textsc{ti}-\textsc{siniz}$_{10}$ &	-\textsc{ti}-\textsc{lar}$_{7}$ \\ \hline
+	      &  &-\textsc{ti}$_6$-\textsc{im} &	-\textsc{ti}-\textsc{sin}$_{10}$ &	-\textsc{ti} &	-\textsc{ti}-\textsc{k} &	-\textsc{ti}-\textsc{siniz}$_{10}$ &	-\textsc{ti}-\textsc{lar}$_{7}$ \\ \hline
                 & I & yapıyordum &	yapıyordun &	yapıyordu &	yapıyorduk &	yapıyordunuz &	yapıyorlardı \\ 
 		&  & -\textsc{iyor}$_6$-\textsc{du}$_8$-\textsc{im} &	-\textsc{iyor}$_6$-\textsc{du}$_8$-\textsc{sin}$_{10}$ &	-\textsc{iyor}$_6$-\textsc{du}$_8$ &	-\textsc{iyor}$_6$-\textsc{du}$_8$-\textsc{k} &	-\textsc{iyor}$_6$-\textsc{du}$_8$-\textsc{siniz}$_{10}$ &	-\textsc{iyor}$_6$-\textsc{lar}$_{7}$-\textsc{du}$_8$ \\ \hline\hline
  I     & Pe & yapmışım &	yapmışsın &	yapmış &	yapmışız &	yapmışsınız &	yapmışlar \\
@@ -494,42 +237,42 @@ In Figure~\ref{tab:turkish-yapmak}, we show how our segmentation corresponds to 
 \begin{tabular}{llllllll}
 Slot & Label & Function & Morphs & Reference \\ \hline
 \hline
-	Valence & -TIR  & Causative & -tIr & \\
+	Valence & -TIR$_1$  & Causative & -tIr & \\
 \hline
-	Voice &  -IL & Passive & -Il\\
+	Voice &  -IL$_2$ & Passive & -Il\\
 %\hline
 %Polite &   & \\
 \hline
-Polarity  & MA & Negation & -mA \\
+Polarity  & MA$_3$ & Negation & -mA \\
 \hline
-Mood  & EBIL & Abilitative & -Ebil & \cite{schaaik2020turkish}, section 21 \\
-      & IN   & Imperative & -In & \cite{schaaik2020turkish}, section 18.1 \\
+Mood  & EBIL$_4$ & Abilitative & -Ebil & \cite{schaaik2020turkish}, section 21 \\
+      & IN$_4$   & Imperative & -In & \cite{schaaik2020turkish}, section 18.1 \\
 \hline
-TAM1      & AR & Aorist, nonpast, direct & -(I/E)r, -z  & \cite{schaaik2020turkish}, section 20.5 (`Present-2') \\
-          & IYOR & Imperfective, direct & -Iyor \\
-          & ACAK & Prospective, nopast, direct & -AcAk & \cite{schaaik2020turkish}, section 20.2\\
-          & MIS1  & Perfective, indirect & -mIş & \cite{schaaik2020turkish}, section 20.3\\
-          & TI & Perfective, past, direct & -dI & \cite{schaaik2020turkish}, section 20.4\\
+TAM1      & AR$_5$ & Aorist, nonpast, direct & -(I/E)r, -z  & \cite{schaaik2020turkish}, section 20.5 (`Present-2') \\
+          & IYOR$_5$ & Imperfective, direct & -Iyor \\
+          & ACAK$_5$ & Prospective, nopast, direct & -AcAk & \cite{schaaik2020turkish}, section 20.2\\
+          & MIS1$_5$  & Perfective, indirect & -mIş & \cite{schaaik2020turkish}, section 20.3\\
+          & TI$_5$ & Perfective, past, direct & -dI & \cite{schaaik2020turkish}, section 20.4\\
 %\hline
 %V Noun &  \\
 \hline
-	3rd Plural& \textsc{lar}$_{7}$  & 3rd Plural & -lAr & \\
+	3rd Plural& \textsc{lar}$_{6}$  & 3rd Plural & -lAr & \\
 \hline
-TAM2      & MUS2 & Aorist/Imperfective, indirect & -mIş & \cite{schaaik2020turkish}, section 24.2 \\
-          & DU & imperfective, past, direct & -dI & \cite{schaaik2020turkish}, section 24.1.3 \\
+TAM2      & MUS2$_7$ & Aorist/Imperfective, indirect & -mIş & \cite{schaaik2020turkish}, section 24.2 \\
+          & DU$_7$ & imperfective, past, direct & -dI & \cite{schaaik2020turkish}, section 24.1.3 \\
 \hline
-	Agreement & IM & 1st singular & -Im\\
-	  & SIN &2nd singular & -sIn\\
-	  & IZ  & 1st plural & -Iz\\
-	  & SINIZ & 2nd plural & -sInIz \\
-	  & K     & 1st plural, past direct & -k\\
+	Agreement & IM$_8$ & 1st singular & -Im\\
+	  & SIN$_8$ &2nd singular & -sIn\\
+	  & IZ$_8$  & 1st plural & -Iz\\
+	  & SINIZ$_8$ & 2nd plural & -sInIz \\
+	  & K$_8$     & 1st plural, past direct & -k\\
 %\hline
 %Poss Num/Pers & \\
 \hline
 Gen & \\
 \hline
 \end{tabular}
-\caption{Verb suffixes in Turkish, arranged by slot.}\label{tab:turkish-suffixes}
+	\caption{Verb suffixes in Turkish, arranged by slot. The first column describes slots as in Table TODO of the main paper. The second column lists the unique identifiers for each morpheme. The third column describes the function and meaning; the fourth column describes the phonological form (see Section~\ref{sec:vowel-harmony} for the meaning of the vowels I, A, E).}\label{tab:turkish-suffixes}
 \end{table}
 
 
@@ -551,24 +294,24 @@ In Figure~\ref{tab:hungarian-paradigms}, we show how our segmentation correspond
     \centering
     \begin{tabular}{lllllllll}
     Slot & Morpheme & Function & Reference    \\ \hline\hline
-Valence	    & AT & Causative &   \cite{rounds2001hungarian} 4.5.3 \\ \hline
-Mood	    & HET & Potential &   \cite{rounds2001hungarian} 4.5.1  \\
-         & N & conditional &   \cite{rounds2001hungarian} 4.3.7 \\
-         & J & subjunctive &   \cite{rounds2001hungarian} 4.3.5 \\
+Valence	    & AT$_1$ & Causative &   \cite{rounds2001hungarian} 4.5.3 \\ \hline
+Mood	    & HET$_2$ & Potential &   \cite{rounds2001hungarian} 4.5.1  \\
+         & N$_2$ & conditional &   \cite{rounds2001hungarian} 4.3.7 \\
+         & J$_2$ & subjunctive &   \cite{rounds2001hungarian} 4.3.5 \\
 \hline
-Tense& T & indicative past &  \cite{rounds2001hungarian} 4.3.3 \\
+	    Tense& T$_3$ & indicative past &  \cite{rounds2001hungarian} 4.3.3 \\
          \hline
-Finiteness  & NI & Infinitive  &  \cite{rounds2001hungarian} 4.4.4 \\
+Finiteness  & NI$_4$ & Infinitive  &  \cite{rounds2001hungarian} 4.4.4 \\
 \hline
 %Definiteness & I & definite 2/3pl \\
 %         \hline
-Agreement (Obj+Subj)         & EK & 1sg indefinite present & \cite{rounds2001hungarian} 4.3 \\
-         & EL & 2sg present\\
-         & UNK & 1pl present\\
-         & TEK & 2pl\\
-         & NEK & 3pl present\\
-         & EM & 1sg past or definite \\
-         & ED & 2sg definite \\
+Agreement (Obj+Subj)         & & See Table~\ref{tab:hungarian-paradigms} & \cite{rounds2001hungarian} 4.3 \\
+%         & EL$_5$ & 2sg present\\
+%         & UNK$_5$ & 1pl present\\
+%         & TEK$_5$& 2pl\\
+%         & NEK$_5$ & 3pl present\\
+%         & EM$_5$ & 1sg past or definite \\
+%         & ED$_5$ & 2sg definite \\
          \hline
     \end{tabular}
     \caption{Hungarian verb suffixes}
@@ -578,52 +321,61 @@ Agreement (Obj+Subj)         & EK & 1sg indefinite present & \cite{rounds2001hun
 \begin{table}[]
     \centering
 \resizebox{\textwidth}{!}{
-    \begin{tabular}{lll||llllllllllllllll}
+    \begin{tabular}{lll||lll|lllllllllllll}
+	    &&& \multicolumn{3}{c|}{Singular} & \multicolumn{3}{c}{Plural} & Reference \\
     &    & &  1 & 2 & 3 & 1 & 2 & 3 \\ \hline
 Ind & Pres   &  I    & teszek &	teszel &	tesz &	teszünk &	tesztek &	tesznek \\
     &        &       & csinálok &	csinálsz &	csinál &	csinálunk &	csináltok &	csinálnak \\
    &&&  ismerek &	ismersz &	ismer &	ismerünk &	ismertek &	ismernek \\
- &    &      & -\textsc{ek}$_5$ &	-\textsc{el}$_5$ &	-- &	-\textsc{unk}$_5$ &	-\textsc{tek}$_5$ &	-\textsc{nek}$_5$ & Rounds 4.3.1.1 \\
- &    &      & -ek & -sz & -- & -{\"u}nk & -tek & -nek\\ \hline
+ &    &      & -ek & -sz & -- & -{\"u}nk & -tek & -nek & \cite{rounds2001hungarian} 4.3.1.1\\
+ &    &      & -\textsc{ek}$_5$ &	-\textsc{el}$_5$ &	-- &	-\textsc{unk}$_5$ &	-\textsc{tek}$_5$ &	-\textsc{nek}$_5$  \\
+	    \hline
    &&  D    & teszem &	teszed &	teszi &	tesszük &	teszitek &	teszik \\
    &&       & csinálom &	csinálod &	csinálja &	csináljuk &	csináljátok &	csinálják \\
   &&& ismerem &	ismered &	ismeri &ismerjük &	ismeritek &	ismerik \\
-&&      & -\textsc{em} &	-\textsc{ed} &	-\textsc{i} &	-\textsc{iuk} &	-\textsc{itek} &	-\textsc{ik} & Rounds 4.3.1.2 \\ 
-&&      & -em & -ed & -i & -j{\"u}k & -itek & -ik \\\hline
-   &&      & teszlek \\ \hline\hline
+    &&      & -em & -ed & -i & -j{\"u}k & -itek & -ik & \cite{rounds2001hungarian} 4.3.1.2\\
+ && & -\textsc{em}$_5$ &	-\textsc{ed}$_5$ &	-\textsc{i}$_5$ &	-\textsc{iuk}$_5$ &	-\textsc{itek}$_5$ &	-\textsc{ik}$_5$  \\ 
+	    \hline
+%   && 2po      & teszlek \\ 
+%	    &&& -lek \\
+%	    \hline\hline
 & Past &     I    &tettem &	tettél &	tett &	tettünk &	tettetek &	tettek \\
 &      &          & csináltam &	csináltál &	csinált &	csináltunk &	csináltatok &	csináltak \\
 &&&ismertem &	ismertél &	ismert &	ismertünk &	ismertetek &	ismertek \\
-	    &  &         &-\textsc{t}$_3$-EM &	-\textsc{t}$_3$-EEL &	-T &	-\textsc{t}-UNK &	-\textsc{t}$_3$-TEK &	-\textsc{t}$_3$-\textsc{ek} & (Rounds 4.3.3.1)\\ 
-	    &  &        &-t-em & -t-{\'e}l & -t & -t-{\"u}nk & -t-etek & -t-ek \\
+	    &  &        &-t-em & -t-{\'e}l & -t & -t-{\"u}nk & -t-etek & -t-ek &  (\cite{rounds2001hungarian} 4.3.3.1\\
+	    &  &         &-\textsc{t}$_3$-\textsc{em}$_5$ &	-\textsc{t}$_3$-\textsc{eel}$_5$ &	-\textsc{t}$_5$ &	-\textsc{t}-\textsc{unk}$_5$ &	-\textsc{t}$_3$-\textsc{etek}$_5$ &	-\textsc{t}$_3$-\textsc{ek}$_5$ &\\ 
 	    \hline
  & &   D    &tettem &	tetted &	tette &	tettük &	tettétek &	tették \\
  & &        & csináltam &	csináltad &	csinálta &	csináltuk &	csináltátok &	csinálták \\
 &&& ismertem &	ismerted &	ismerte &	ismertük &	ismertétek 	&ismerték \\
-        &  &      & -t-em & -t-ed & -t-e & -t-{\"u}k & -t-{\'e}tek & -t-{\'e}k \\
-	    & &       &-\textsc{t}-EM &	-\textsc{t}-ED &	-\textsc{t}-I &	-\textsc{t}-UK &	-\textsc{t}-EETEK &	-\textsc{t}-\textsc{eek}  & (Rounds 4.3.3.2) \\ \hline
-  &&       &tettelek \\ 
-  &&       & -T-ELEK  & (Rounds 4.3.3.2) \\
-  \hline
+	    &  &      & -t-em & -t-ed & -t-e & -t-{\"u}k & -t-{\'e}tek & -t-{\'e}k &  (\cite{rounds2001hungarian} 4.3.3.2 \\
+	    & &       &-\textsc{t}-EM$_5$ &	-\textsc{t}-ED$_5$ &	-\textsc{t}-I$_5$ &	-\textsc{t}-UK$_5$ &	-\textsc{t}-EETEK$_5$ &	-\textsc{t}-\textsc{eek}$_5$  & \\ 
+	    \hline
+%  &&       &tettelek  & (\cite{rounds2001hungarian} 4.3.3.2) \\ 
+%	    &&       & -\textsc{t}-\textsc{elek} \\
+%  \hline
 Cond  &Pres &   I    &tennék &	tennél &	tenne &	tennénk &	tennétek &	tennének \\
       &     &        & csinálnék &	csinálnál &	csinálna &	csinálnánk 	&csinálnátok &	csinálnának \\
   &&&    ismernék &	ismernél &	ismerne &	ismernénk &	ismernétek &	ismernének \\
-  & &   I    &-\textsc{ne}$_2$-EK &	-\textsc{ne}$_2$-EL &	-\textsc{ne}$_2$ &	-\textsc{ne}$_2$-ENK &	-\textsc{ne}$_2$-ETEK &	-\textsc{ne}$_2$-\textsc{enek} & (Rounds 4.3.7.1) \\
-  &&& -n{\'e}k & -n{\'e}l & -ne & -n{\'e}nk & -n{\'e}tek & -n{\'e}nek \\
+  &&& -n{\'e}k & -n{\'e}l & -ne & -n{\'e}nk & -n{\'e}tek & -n{\'e}nek & (\cite{rounds2001hungarian} 4.3.7.1\\
+  & &   I    &-\textsc{ne}$_2$-EK &	-\textsc{ne}$_2$-EL &	-\textsc{ne}$_2$ &	-\textsc{ne}$_2$-ENK &	-\textsc{ne}$_2$-ETEK &	-\textsc{ne}$_2$-\textsc{enek}  \\
   \hline
    &&  D    &tenném &	tennéd &	tenné &	tennénk &	tennétek &	tennék \\
    &&       & csinálnám &	csinálnád &	csinálná &	csinálnánk &	csinálnátok &	csinálnák \\
  &&&  ismerném &	ismernéd &	ismerné &	ismernénk 	&ismernétek &	ismernék \\
-&&      &-\textsc{ne}$_2$-EM &	-\textsc{ne}$_2$-ED &	-\textsc{ne}$_2$-E &	-\textsc{ne}$_2$-ENK &	-\textsc{ne}$_2$-ETEK &	-\textsc{ne}$_2$-EK & (Rounds 4.3.7.2) \\
-&&&     -n{\'e}m & -n{\'e}d & -n{\'e} & -n{\'e}nk & -n{\'e}tek & -n{\'e}k & -n{\'e}lek \\ \hline
-       &&  &tennélek \\ \hline
+&&&     -n{\'e}m & -n{\'e}d & -n{\'e} & -n{\'e}nk & -n{\'e}tek & -n{\'e}k &  (\cite{rounds2001hungarian} 4.3.7.2\\ 
+&&      &-\textsc{ne}$_2$-EM &	-\textsc{ne}$_2$-ED &	-\textsc{ne}$_2$-E &	-\textsc{ne}$_2$-ENK &	-\textsc{ne}$_2$-ETEK &	-\textsc{ne}$_2$-EK  \\
+	    \hline
+%	    && -n{\'e}lek  \\
+%	    && -\textsc{ne}-\textsc{lek} \\
+ %      &&  &tennélek \\ \hline
 Subj & Pres & I         &tegyek &	tégy or tegyél &	tegyen &	tegyünk &	tegyetek &	tegyenek \\
      &      &           & csináljak &	csinálj or
 csináljál &	csináljon &	csináljunk& 	csináljatok &	csináljanak \\
 &&&ismerjek &	ismerj or
 ismerjél &	ismerjen &	ismerjünk &	ismerjetek &	ismerjenek \\
- &  &          &-\textsc{j}$_2$-\textsc{ek} &	\textsc{j}$_2$-\textsc{eel} &	-\textsc{j}$_2$-\textsc{en} &	-\textsc{j}$_2$-UNK &	-\textsc{j}$_2$-TEK &	-\textsc{j}$_2$-\textsc{nek} & Rounds 4.3.5.1\\
- & &          & -j-ek & -j-({\'e}l) & -j-en & -j-{\"u}nk & -j-etek & -j-enek \\
+ & &          & -j-ek & -j-({\'e}l) & -j-en & -j-{\"u}nk & -j-etek & -j-enek  & \cite{rounds2001hungarian} 4.3.5.1\\
+ &  &          &-\textsc{j}$_2$-\textsc{ek} &	\textsc{j}$_2$-\textsc{eel} &	-\textsc{j}$_2$-\textsc{en} &	-\textsc{j}$_2$-UNK &	-\textsc{j}$_2$-ETEK &	-\textsc{j}$_2$-\textsc{enek}\\
  \hline
 &&D         &tegyem &	tedd or tegyed &	tegye &	tegyük& 	tegyétek &	tegyék \\
 &&          & csináljam &	csináld or
@@ -631,12 +383,14 @@ csináljad &	csinálja &	csináljuk &	csináljátok &	csinálják \\
 &&&ismerjem &	ismerd or
 ismerjed &	ismerje &	ismerjük &	ismerjétek & ismerjék
  \\
-&&         &-\textsc{j}-\textsc{em} &	-\textsc{j}-\textsc{ED} &	-\textsc{j}-E &	-\textsc{j}-UK & 	-\textsc{j}-\textsc{eetek} &	-\textsc{j}-\textsc{eek}- & (Rounds 4.3.5.2)\\ 
-  &&       & -j-em & -j-ed & -j-e & -j-{\"u}k & -j-{\'e}tek & -j-{\'e}k\\ \hline
-  &&       &tegyelek & (Rounds 4.3.5.2)\\
+  &&       & -j-em & -j-ed & -j-e & -j-{\"u}k & -j-{\'e}tek & -j-{\'e}k & (\cite{rounds2001hungarian} 4.3.5.2\\
+&&         &-\textsc{j}$_2$-\textsc{em}$_5$ &	-\textsc{j}$_2$-\textsc{ED}$_5$ &	-\textsc{j}$_2$-E$_5$ &	-\textsc{j}$_2$-UK$_5$ & 	-\textsc{j}$_2$-\textsc{eetek}$_5$ &	-\textsc{j}$_2$-\textsc{eek}$_5$-\\ 
+	    \hline
+ % &&       &tegyelek & (\cite{rounds2001hungarian} 4.3.5.2)\\
+%	    &&& \textsc{j}-\textsc{elek} \\
     \end{tabular}
     }
-    \caption{Hungarian verb suffixes (tense, mood, definitiness, person/number).}
+    \caption{Hungarian verb suffixes (tense, mood, definitiness, person/number). ``Ind'' = ``Indicative'', ``Cond'' = ``Conditional'', ``Subj'' = ``Subjunctive'', ``I'' = ``Indefinite'', ``D'' = ``Definite''.}
     \label{tab:hungarian-paradigms}
 \end{table}
 
@@ -736,10 +490,10 @@ However, this is rare in the data, occurring only three times in the training se
 %\end{tabular}
 
 
-\section{Controlling for Vowel Harmony}
-\subsection{Vowel Harmony in Turkish}
+\section{Controlling for Vowel Harmony}\label{sec:vowel-harmony}
+%\subsection{Vowel Harmony in Turkish}
 
-\url{https://turkishexplained.com/vh1.htm}
+%\url{https://turkishexplained.com/vh1.htm}
 
 
 Turkish vowel harmony can largely be described in terms of two underlying vowels ``A'' and ``I'' whose realization depends on the last preceding vowel.
@@ -757,6 +511,7 @@ Turkish vowel harmony can largely be described in terms of two underlying vowels
 For most suffixes, vowel harmony can be encoded in terms of one underlying form.
 The suffix AR$_6$ has the form ``Ar'' after most monosyllabic stems, and ``Ir'' after multisyllabic stems or one of 13 exceptional monosyllabic stems.
 
+TODO report results
 
 \bibliography{literature}
 \bibliographystyle{natbib}
