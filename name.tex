@@ -56,11 +56,10 @@
 
 
 
-\title{Morpheme Ordering across Languages reflects optimization for Memory Efficiency}
-%\shorttitle{Morpheme Ordering reflects Memory Efficiency}
+\title{Morpheme Ordering across Languages reflects Optimization for Processing Efficiency}
 
-\author{Anonymous}
-%\affiliation{}
+
+
 
 %\leftheader{Anonymous}
 
@@ -133,8 +132,8 @@
 \newcommand{\utterance}{\mathcal{U}}
 \newcommand{\tree}{\mathcal{T}}
 
-
-
+\author{Michael Hahn, Rebecca Mathew, Judith Degen}
+%\affiliation{}
 %\usepackage{siunitx}
 
 
@@ -170,22 +169,21 @@ Our work adds to a growing body of work suggesting that many properties of langu
 %\end{abstract}
 
 
+\mhahn{major todos (i) make nicer visualizations, (ii) fill in missing citations, (iii) tie up loose ends here and in SI and get final results for all experiments}
+
 \section{Introduction}
 
 Human language encodes thoughts into linear strings of words, and ultimately sounds.
-Across languages, words are composed of morphemes, commonly defined as the smallest meaning-bearing units of language~\citep{bloomfield1926a,katamba2006morphology}.
+Across languages, words are composed of morphemes, commonly defined as the smallest meaning-bearing units of language~\citep{courtenay1895attempt,bloomfield1926a,katamba2006morphology}.
 %In many cases, words can be segmented into a sequence of morphemes, as in
-For instance, the English word ``runners'' can be decomposed into three morphemes: the root run- indicating an action, the suffix -er- indicating someone performing an action, and plural -s indicating a group of several referents.
-The order of morphemes within a word follows well-documented cross-linguistic tendencies, for instance, morphemes deriving new words (e.g., English -er deriving nouns from verbs) are ordered closer to the root than inflectional morphemes (e.g., English plural -s).
+For instance, the English word ``runners'' can be decomposed into three morphemes: the root \textit{run-} indicating an action, the suffix \textit{-er-} indicating someone performing an action, and plural \textit{-s} indicating a group of several referents.
+The order of morphemes within a word follows well-documented cross-linguistic tendencies, for instance, morphemes deriving new words (e.g., English \textit{-er} deriving nouns from verbs) are ordered closer to the root than inflectional morphemes (e.g., English plural \textit{-s}).
 Another well-documented universal applying to languages with richer morphology is Greenbergs' Universal 39:
 Plural markers tend to be closer to noun stems than case markers \citep[112]{greenberg1963universals} (see Section~\ref{sec:univ-nouns} below).
 In morphologically rich languages, verbs often have a string of two or more affix morphemes attached to a root, and the typological literature has documented universal tendencies, such as a preference for morphemes changing the number of arguments to appear close to the root, while morphemes indicating agreement with subjects appear far away from the root \citep{bybee-morphology-1985}.
 
-Explaining these linguistic universals has been an important subject of study.
-Explanations have been stated in terms of the relative scope of different morphemes  \citep{rice2000morpheme}, parallelism between morphology and syntax \citep{givon1971historical,venneman1973explanation,baker1985the}, and the strength of their semantic association between different morphemes \citep{bybee-morphology-1985}.
-TODO cite more here.
-%One family of explanations holds that those affixes are closest to the root that are most relevant to the root \citep{bybee-morphology-1985}.
-%Other explanations suggest that morphemes are ordered based on (TODO CITE).
+Explaining these linguistic universals has been an important subject of study \citep{bybee-morphology-1985, spencer2006linguistic, manova2010modeling, bauer2010an, rice2011principles}.
+Explanations of morpheme ordering have been stated in terms of correspondences between morpheme order and morpheme meanings \citep{bybee-morphology-1985,rice2000morpheme}, parallelism between morphology and syntax \citep{givon1971historical,venneman1973explanation,baker1985the}, and human morphological processing and usage frequencies \citep{hay2002speech, plag2002the, inkelas2016affix}.
 
 A recent theory proposes a cognitive explanation for word and morpheme order in language, arguing that ordering universals in language optimize processing effort under memory limitations \citep{Hahn2020modeling}.
 Formally, they introduced the notion of a \emph{memory-surprisal tradeoff}: Depending on how many memory resources a comprehender invests, they can achieve different levels of surprisal.
@@ -204,7 +202,7 @@ First, we consider data from four additional languages, testing not only whether
 
 We focus on languages with rich morphology where words tend to have multiple morphemes and these are mostly realized separately.
 Such languages are referred to as agglutinative \citep{humboldt1836uber,greenberg1960a}.
-We obtained data from four languages where substantial amounts of corpus data with detailed morphological annotation are available (Korean, Turkish, Hungarian, Finnish).
+Beyond the two languages considered by \citet{Hahn2020modeling}, we obtained data from four languages where substantial amounts of corpus data with detailed morphological annotation are available (Korean, Turkish, Hungarian, Finnish).
 These languages have very substantial verbal inflection, and three of these languages (Turkish, Hungarian, Finnish) also have substantial noun inflection.
 %Whereas \cite{Hahn2020modeling} only considered verb inflection, we also consider noun inflection across three languages.
 
@@ -229,13 +227,11 @@ These languages have very substantial verbal inflection, and three of these lang
 A long line of work in linguistics has proposed principles of locality to account for word order regularities within and across languages.
 An early example is \citet{behaghel1932deutsche}, who argued that elements that are closer together in meaning are closer together in form.
 In word order, the Head Adjacency or Proximity principles of \citet{frazier1985syntactic,rijkhoff-word-1986} states that words are close to their syntactic heads, and this generalization has since found strong empirical support from data in many languages~\citep[e.g.][]{hawkins-performance-1994,liu2008dependency, futrell-large-scale-2015-1, liu-dependency-2017}.
-In morpheme ordering, \citet{bybee-morphology-1985} argues that morphemes are closer to the root when they are more relevant to it.
+In morpheme ordering, \citet{bybee-morphology-1985} argues that morphemes are closer to the root when they are more relevant to it; \citet{hay2002speech} and \citet{plag2002the} argue that morphemes are closer to the root when they are more likely to be processed together with the root.
 
 Such locality principles have been explained in terms of iconicity in form-meaning correspondence \citep{givon1985iconicity}, and in terms of memory and efficiency in online processing \citep{frazier1985syntactic, gibson1998linguistic, hawkins-efficiency-2003, futrell-noisy-context-2017}.
 %Based on considerations of memory limitations, \citet{futrell-noisy-context-2017} derived an information-theoretic locality principle that states that words are close to each other when they are highly predictive of each other (see also \citet{culbertson2020from}).
 %This principle of information locality TODO
-
-
 \citet{Hahn2020modeling} proposed a cognitive principle that aims to unify and formalize these locality principles in the form of a Memory--Surprisal Tradoff.
 This is a cognitive account of the order of words and morphemes in human language, based on a formalization of memory efficiency in incremental processing.
 The memory-surprisal tradeoff links information-theoretic models of memory limitations with surprisal theory.
@@ -263,7 +259,7 @@ The memory capacity is formalized as the average number of bits required to enco
 where $m$ runs over possible memory states.
 \citet{Hahn2020modeling} prove that there is a tradeoff between, on the one hand, the average surprisal $S\_M$, obtained by averaging $- \log P(w_t , m_t)$ across the words in a text, and the memory capacity $\operatorname{H}[m_t]$.
 
-\mhahn{at this point illustrate with a figure?}
+%\mhahn{at this point illustrate with a figure?}
 
 Based on this notion, \citet{Hahn2020modeling} argue that human language orders elements in such a way that the memory-surprisal tradeoff curve has a particularly steep fall-off, compared to other possible orderings.
 
@@ -298,7 +294,7 @@ S_M \ge S_\infty + \sum_{t=T+1}^\infty I_t.
 where $S_\infty$ is the average surprisal that would be achieved with perfectly veridical memory representations.
 \end{thm}
 
-\mhahn{again, at this point illustrate with a figure?}
+\mhahn{TODO design one or two figures to explain the concepts to the audience}
 
 A key consequence of this theorem is an information-theoretic notion of locality called Information locality:
 Informally, orderings optimize this tradeoff when elements with high mutual information are closer together.
@@ -320,12 +316,11 @@ In this work, we aim to test the Memory-Surprisal Tradeoff as a predictor of mor
 %\jd{give this section more structure}
 
 In this section, we introduce the phenomena we seek to explain: crosslinguistic tendencies in the order of affix morphemes in nouns (Section~\ref{sec:univ-nouns}) and verbs (Section~\ref{sec:univ-verbs}).
-
 Languages apply inflection to different classes of words, including both open word classes such as nouns, verbs, and adjectives, and closed word classes, in particular pronouns.
 In this work, we focus on open word classes, as these have productive paradigms that apply to thousands of words in a language, including words that newly enter the language, whereas pronominal inflection is restricted to a small number of words, often with idiosyncratic and fossilized paradigms inherited from earlier stages of a language.
 Among open word classes, inflection commonly applies to verbs, nouns, and adjectives.
 When adjectives are inflected, they often pattern with either verbs -- when they are used as predicates -- or nouns -- when they are used as attributes or independent nouns.
-We thus focus on nouns and verbs, treating adjectives together with one of the other classes depending on the language when appropriate (with verbs in Korean and Japanese; with nouns in Hungarian, Finnish, Turkish. TODO Sesotho?).
+We thus focus on nouns and verbs, treating adjectives together with one of the other classes depending on the language when appropriate (with verbs in Korean and Japanese; with nouns in Hungarian, Finnish, Turkish).
 
 \subsection{Universals of Noun Affixes}\label{sec:univ-nouns}
 Nouns very commonly mark number and case morphologically.
@@ -340,7 +335,6 @@ Number and case marking are the subject of a well-documented universal, namely \
 ``the expression of number almost always comes between the noun base and the expression of case'' (Greenberg 1963:112).
 \end{adjustwidth}
 %It states that number affixes are closer to the stem than case affixes, if they appear on the same side.
-
 This universal is supported by the example in Figure~\ref{fig:noun-inflection}.
 
 %\ex.\ag. mi  rare mash yoo \\
@@ -370,7 +364,7 @@ Stem-Plural-1sgPoss-Ablative\\
 `from my actions' (Turkish) \\
 \end{tabular}
 
-\mhahn{TODO make this a nice illustration of noun inflection appropriate for the audience}
+%\mhahn{TODO make this a nice illustration of noun inflection appropriate for the audience}
 
 \caption{Noun inflection}\label{fig:noun-inflection}
 \end{figure}
@@ -429,117 +423,14 @@ d) &a{\c c}ar-s{\i}n{\i}z \\
 \caption{Examples of verb inflection}\label{tab:examples-verbs}
 \end{figure}
  
-
-\begin{figure}
-
-  \begin{tikzpicture}[%
-% common options for blocks:
-block/.style = {draw, fill=blue!30, align=center, anchor=west,
-            minimum height=0.65cm, inner sep=0},
-% common options for the circles:
-ball/.style = {circle, draw, align=center, anchor=north, inner sep=0}]
-%\node[rectangle,text width=1.2cm,anchor=base] (A0) at (1,-0.3) {Real};
-
-
-%\node[rectangle,text width=1.2cm,anchor=base] (A1) at (1,-1.0) {1Derivation};
-\node[rectangle,text width=1.2cm,anchor=base, color=red] (A2) at (1,-1.5) {Valence};
-\node[rectangle,text width=1.2cm,anchor=base, color=green] (A3) at (1,-2.0) {Voice};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-3) {TAM};
-%\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-3.5) {Tense};
-%\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-4) {Mood};
-\node[rectangle,text width=1.2cm,anchor=base,color=orange] (A4) at (1,-5) {Agreement};
-
-% Turkish
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (3,-0.3) {\textbf{Turkish}};
-\node[rectangle,text width=1.2cm,anchor=base,color=red] (B1) at (3,-1.5) {1Causative};
-\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (3,-2) {2Passive};
-\node[rectangle,text width=1.2cm,anchor=base] (B3) at (3,-2.5) {3Negation};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-3) {4Potential};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-3.5) {5TAM1};
-\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (3,-4) {6.3rdPl};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-4.5) {7.TAM2};
-\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (3,-5) {8.Agreement};
-
-% Hungarian
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (5,-0.3) {\textbf{Hungarian}};
-\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (5,-2) {1Passive};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (5,-3) {2Potential};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (5,-3.5) {3Tense};
-\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (5,-5) {4Agreement};
-
-
-% Finnish
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (7,-0.3) {\textbf{Finnish}};
-\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (7,-2) {1Passive};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (7,-3.5) {2TAM};
-\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (7,-5) {3Agreement};
-
-% Sesotho Prefixes
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (9,-0.3) {\textbf{SesP}};
-\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (9,-2) {1Ob.ag.};
-\node[rectangle,text width=1.2cm,anchor=base] (B4) at (9,-2.5) {2Polarity};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (9,-3) {3Tense};
-\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (9,-5) {4Agreement};
-\node[rectangle,text width=1.2cm,anchor=base,color=purple] (B4) at (9,-5.5) {5Int./Rel.};
-
-% Sesotho Suffixes
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (11,-0.3) {\textbf{SesS}};
-\node[rectangle,text width=1.2cm,anchor=base] (B2) at (11,-1) {1Reversive};
-\node[rectangle,text width=1.2cm,anchor=base,color=red] (B2) at (11,-1.5) {2Valence};
-\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (11,-2) {3Passive};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (11,-3) {4Mood};
-
-
-
-% Japanese
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (13,-0.3) {\textbf{Japanese}};
-\node[rectangle,text width=1.2cm,anchor=base] (B2) at (13,-1) {1Derivation};
-\node[rectangle,text width=1.2cm,anchor=base,color=red] (B2) at (13,-1.5) {2Causative};
-\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (13,-2) {3Pass./Pot.};
-\node[rectangle,text width=1.2cm,anchor=base] (B4) at (13,-2.5) {4Politeness};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (13,-3) {5Desiderative};
-\node[rectangle,text width=1.2cm,anchor=base] (B4) at (13,-3.5) {6Negation};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (13,-4) {7TAM/Emb.};
-
-% Korean
-\node[rectangle,text width=0.9cm,anchor=base] (B0) at (15,-0.3) {\textbf{Korean}};
-\node[rectangle,text width=1.2cm,anchor=base] (B2) at (15,-1.0) {Derivation};
-\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-2.5) {Honorific};
-\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (15,-3) {Tense};
-\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-3.5) {Formality};
-\node[rectangle,text width=1.5cm,anchor=base,color=blue] (B4) at (15,-4.0) {Mood I};
-\node[rectangle,text width=1.5cm,anchor=base,color=blue] (B4) at (15,-4.5) {Mood II};
-\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-5) {Politeness};
-\node[rectangle,text width=1.2cm,anchor=base,color=purple] (B4) at (15,-5.5) {Embedding};
-
-
-%\draw[->] (A1.east) to (B1.west);
-%\draw[->] (A2.east) to (B2.west);
-%\draw[->] (A3.east) to (B3.west);
-%\draw[->] (A4.east) to (B4.west);
-\end{tikzpicture}
-
-%    \centering
-%\begin{tabular}{l||l|l|l|l|l|l|llll}
-%                    & Turkish & Hungarian & Finnish  & Sesotho Pref.     & Ses Suff. & Japanese & Korean\\ \hline\hline
-%Derivation          &  &         &          &               & Reversive & suru    & ha,i\\ \hline
-%Valence             &  Causative &         &           & Object marker & Valence & Causative\\ \hline
-%Voice               & Passive & Passive    & Passive     &               & Passive & Passive\\ \hline
-%TAM, Pol.           & Negation  &   Potential  &   Tense/Asp &    Negation &  Politeness &      Potential        & Honorific \\
-%                    & Potential & Tense        &    Mood     &     Tense   &    Mood     &   Honorific  &    Tense       \\
-%                    &   TAM1    &          &                &         &                  & Tense/Aspect & Formality \\
-%                    & lar       &          &           &  & & Negation & Mood I\\
-%                    & TAM2         &           &               &          &       &      &  Mood II \\ \hline
-%Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
-%\textit{Other}               & Formality          & Clitic    &              & Int/Rel &      &        & Politeness \\
-%                    &           &     &              &  &          &    & Conj \\
-%\end{tabular}
-
-\mhahn{TODO make this visually more appealing}
-
-    \caption{Morpheme order across the six languages in our sample, matched with four universal categories (left).}
+ 
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{figures/slots.pdf}
+     \caption{Verb affix order across the six languages in our sample, matched with four universal categories (left). \mhahn{todo make this nicer}}
     \label{tab:table-orders}
-\end{figure}
+ \end{figure}
+
 
 \subsection{Universals of Verb Affixes}\label{sec:univ-verbs}
 Verbs commonly mark a larger number of inflection categories.
@@ -569,10 +460,9 @@ In many languages, mood marking is at least partically fused with tense and aspe
 Tense, aspect, mood are often together referred to as TAM (Tense-Aspect-Mood, \citep{bybee1994the, wals-69}).
 Some languages have a single affix slot that accommodates a fused morpheme indicating TAM.
 For instance, Finnish marks both tense (present and past) and mood (indicative, conditional, and potential) categories with a single morpheme in the slot labeled TAM.
-Other languages have multiple slots, for instance, Turkish has (TODO explain TAM1, TAM2).
-\textit{Subject agreement} (orange in Figure~\ref{tab:table-orders}) mark categories of the subject, most often its person and number, sometimes also other categories such as its gender.
-An example is English third-person -s.
-% re agreement for references: http://epubs.surrey.ac.uk/1063/1/fulltext.pdf
+Other languages have multiple slots, for instance, Turkish TAM markers are distributed across two slots (Figure~\ref{tab:table-orders}).
+\textit{Subject agreement} (orange in Figure~\ref{tab:table-orders}) mark categories of the subject, most often its person and number, sometimes also other categories such as its gender \citep{corbett2003agreement}.
+An example is English third-person \textit{-s}.
 In our sample, Turkish, Hungarian, Finnish, and Sesotho have a subject agreement slot (Figure~\ref{tab:table-orders}); Turkish also has a special slot occupied only by the third-person plural marker \textit{-lar-} (indicated as 3rdPl in ~\ref{tab:table-orders}).
 
 The ordering of morphemes encoding these categories shows universal tendencies \citep{bybee-morphology-1985}, which we summarize as follows:
@@ -605,9 +495,8 @@ While agreement is most commonly established with the subject, \textit{agreement
 \textit{Formality}, \text{honorifics}, and \text{politeness} are categories that index social relations between the speaker, the addressee, and the topic of the conversation (CITE).
 In our sample, these are prominent in Korean and Japanese.
 The Japanese politeness marker -masu- and the Korean formality (-p) and politeness (-yo) suffixes index the social relation between the speaker and the addressee \citep{hasegawa2014japanese, yeon2010korean}; the Korean honorific suffix -si- indexes the social relation between the speaker and the topic of the conversation \citep{yeon2010korean}.
-
 Furthermore, verb forms can have affixes indicating the syntactic position of the verb within a sentence, in particular, affixes marking infinitives or other nonfinite forms.
-We use the term \textit{Embedding} (TODO) for this type of morpheme.
+We use the term \textit{Embedding} for this type of morpheme.
 
 \jd{add segue to next section}
 
@@ -624,17 +513,13 @@ We use the term \textit{Embedding} (TODO) for this type of morpheme.
 
 \section{Methods}
 
-\subsection{Data} % TODO: Becky
-% why agglutinative?
-
-
-We obtained data from four morphologically rich languages.
-We focused on languages in which verbs and nouns often have more than two morphemes per words, as that allows us to test predictions about the relative ordering of different morphemes.
-Furthermore, we focused on languages in which the morphemes within a word have clearly delimited boundaries, providing unambiguous information about the ordering of morphemes.
-Languages with these properties are referred to as agglutinative.
-Mutual information depends on the frequencies at which different morphological forms are used. We thus selected agglutinative languages for which large-scale text corpora with morphological annotation was available.
-The language sample includes Universal Dependencies (UD) corpora for Korean \citep{chun2018building}, Turkish \citep{turkish-imst}, Hungarian \citep{hungarian-szeged}, and Finnish \citep{UDFinnish-TDT}.
+\subsection{Data} 
+We selected data from languages that have rich agglutinative morphology, that is, languages in which (i) verbs and nouns often have more than two morphemes per words, as that allows us to test predictions about the relative ordering of different morphemes, and (ii) the morphemes within a word have clearly delimited boundaries, providing unambiguous information about the ordering of morphemes.
+Beyond the languages studied in \citet{Hahn2020modeling}, we obtained data from four such languages: the Universal Dependencies (UD) corpora for Korean \citep{chun2018building}, Turkish \citep{turkish-imst}, Hungarian \citep{hungarian-szeged}, and Finnish \citep{UDFinnish-TDT}.
 In addition, we also reanalyze the data from \citet{Hahn2020modeling}, covering UD data for Japanese \citep{asahara2018universal} and the Child Language Data Exchange System (CHILDES) Sesotho corpus \citep{demuth1992acquisition} in a way consistent with our analysis of the other four languages.
+
+
+% Mutual information depends on the frequencies at which different morphological forms are used. We thus selected agglutinative languages for which large-scale text corpora with morphological annotation was available.
 
 
 \mhahn{TODO corpus sizes.}
@@ -644,6 +529,7 @@ For nouns, we focused on Turkish, Hungarian, and Finnish, as nouns in these lang
 We used all six languages for verbs.
 
 For each language, we selected nouns and verbs based on the part-of-speech annotation in each corpus.
+We treated adjectives together with nouns in Hungarian, Finnish, and Turkish, and together with verbs in Korean and Japanese.
 We then identified which morphemes each extracted word was composed of, on the basis of the annotation provided in the corpora (see SI Appendix, Section X for details).
 
 
@@ -651,11 +537,11 @@ We then identified which morphemes each extracted word was composed of, on the b
 \subsection{Estimating memory-surprisal tradeoffs}
 %\jd{change title to something more informative, eg "Estimating memory-surprisal tradeoffs"?}
 
-For estimating memory-surprisal tradeoffs, we modeled words as strings of morphemes, following \citet{Hahn2020modeling}.
+In order to estimate memory-surprisal tradeoffs, we model words as strings of morphemes, following \citet{Hahn2020modeling}.
 For instance, we represent \textit{juttu-i-hi-si} `into your stories' (Figure REF) as juttu-\textsc{Plural}-\textsc{Illative}-\textsc{2sgPoss}.
 (See SI Appendix Section X for experiments taking morphophonological interactions between morphemes into account.)
 
-For each language, we parameterize possible morpheme orderings through the $N!$ possible orderings of the $N$ slots.
+For each language, we parameterize possible morpheme orderings through the $N!$ possible orderings of the $N$ morpheme slots.
 Applying any such ordering to the forms extracted from the corpus results in a set of counterfactual forms with some associated memory-surprisal tradeoff curve; in particular, applying the real orderings (Figure REF) results in the actual morpheme sequences as found in the corpus.
 Following \citet{Hahn2020modeling}, we quantify the efficiency of a tradeoff curve using its Area under the Curve (AUC). Lower values of AUC indicate a steeper decay of mutual information, and thus a more efficient tradeoff.
 
@@ -913,7 +799,7 @@ These results support the idea that optimization for processing effort can expla
 
 In this section, we relate our results to existing explanatory accounts of morpheme ordering.
 In a review of research on morpheme ordering, \citet{manova2010modeling} % https://homepage.univie.ac.at/stela.manova/modeling%20affix%20order.pdf
-categorize approaches to morpheme ordering into three classes (similarly \citet{rice2000morpheme}): orderings that are grammatically motivated by properties of syntax, semantics or phonology; orderings that are motivated by human cognition and statistical properties of language; and orderings that are arbitrarily stipulated.
+categorize approaches to morpheme ordering into three classes (similarly \citet{rice2000morpheme, rice2011principles}): orderings that are grammatically motivated by properties of syntax, semantics or phonology; orderings that are motivated by human cognition and statistical properties of language; and orderings that are arbitrarily stipulated.
 Our approach falls into the second class, explaining morpheme ordering based on minimization of human processing effort.
 In this section, we describe how our account relates to other accounts across these three clusters, and show how the memory-surprisal tradeoff has tight connections with notions proposed across seemingly very different accounts.
 
@@ -924,7 +810,7 @@ In this section, we describe how our account relates to other accounts across th
 %- extra-grammatical: frequency, productivity, parsability
 
 
-\subsection{Grammatical Motivations}
+\subsubsection{Grammatical Motivations}
 
 A family of theories hold that morpheme ordering is motivated by constraints placed on morphology through the interaction with other aspects of grammar.
 The appriaches most relevant for our results are approaches in terms of the relation of morphology to syntax~\citep{baker1985the} and semantics~\citep{bybee-morphology-1985,rice2000morpheme}.
@@ -997,12 +883,13 @@ As a theory of order at multiple levels, the Efficient Tradeoff Hypothesis is co
 
 Other prominent accounts are in terms of a correspondence between morpheme ordering and semantics~\citep{bybee-morphology-1985,rice2000morpheme}.
 \citet{bybee-morphology-1985} argues that semantic relevance determines ordering.
-For example, (TODO an example).
+For example, morphemes changing a verb's argument structure, such as passives and causatives, have a particularly strong relation to the verb's semantics, as they fundamentally alter the nature of the event described, whereas tense or agreement markers are much less tightly linked the the verb's meaning.
 We suggest that mutual information provides an operational formalization of semantic relevance.
-Relatedly, \citep{culbertson2020from} link conceptual closeness to MI, and argue that it is a driver of order (in the domain of noun phrase modifiers)
+For instance, we expect that passive markers have a high mutual information with the verb stem, since only certain verbs (typically a subclass of the transitive verbs) can form a passive.
+The idea that mutual information is an operationalization of semantic closeness has also been suggested in other places; for instance, \citep{culbertson2020from} link mutual information to conceptual closeness as a driving factor of noun phrase modification.
 
 A second prominent semantic account is in terms of semantic scope \citep{rice2000morpheme}.
-This is the idea that morphemes are ordered in the order in which their meanings combine \citep[e.g.,][]{rice2000morpheme, caballero2010scope,  narrog2010the}.
+This is the idea that morphemes are ordered in the order in which their meanings combine \citep[e.g.,][]{rice2000morpheme, caballero2010scope,  narrog2010the, korotkova2010deriving}.
 The relative ordering of valence and voice is a good example for the scope-based explanation.
 Valence affixes change the number of arguments, and passive (voice) promotes one argument to the subject position.
 This can affect an argument introduced by a voice marker.
@@ -1028,33 +915,30 @@ Furthermore, if the semantic propositions that speakers communicate are modeled 
 
 
 
-\subsection{Cognitive Motivations}
+\subsubsection{Cognitive Motivations}
 
 A prominent cognitively-motivated theory of morpheme ordering is the theory of Complexity-Based Ordering \citep{hay2002speech,plag2002the,hay2004what,hay2005shifting,plag2009suffix}.
-This theory holds that affixes are closer to the root when they are less ``separable'', where separability can be operationalized in different ways, such as in terms of productivity, relative frequency of base and composite form, and the likelihood that affixes are processed separately with the base in human lexical access  \citep{baayen1993on}.
-
+This theory holds that affixes are closer to the root when they are less ``separable'', where separability indicates the productivity of an affix and the likelihood that affixes are processed separately with the base in human lexical access  \citep{baayen1993on}.
 %In particular, affixes are less ``separable'' when they are processed holistically together with the base in human lexical access \citep{baayen1993on}. %, such as in the dual processing race model of morphological access, which asserts that morphological forms can be processed either separately in terms of its components or as a whole \citep{baayen1993on}.
 %Forms are more separable if they are less likely to be processed together with the root (Baayen \& Schreuder 1999, Baayen \& Moscoso del Prado Mart ́ın 2005).
 %also mention \cite{manova2010suffix}
 %\cite{plag2009suffix} %http://www.sfs.uni-tuebingen.de/~hbaayen/publications/plagBaayenLanguage2009.pdf
-
-
-
 A statistical operationalization of separability is in terms of relative frequencies:
-affixes are more likely to be processed together with the root when the composite form has a higher frequency compared to the base form \cite{hay2001lexical, lee2011ordering}.
+affixes are more likely to be processed together with the root when the composite form has a higher frequency compared to the base form \citep{hay2001lexical}. % , lee2011ordering
 This has an interesting relation to mutual information: 
 If the compound form is very frequent, in relation to the baseline frequencies of the base and the affix, then there is high (pointwise) mutual information between them.
 
-More recently, and most closely related to our proposal, \citet{inkelas2015informativity} has proposed that morphemes are ordered together when they are informative about each other.
-Formally (drawing on the notion of informativity defined by \citet{priva2017informativity}), they considered the informativity between a suffix $S_i$ and the preceding $S_{i-1}$ as 
-\begin{equation}
-    \sum_{S_{i-1}, S_{i}} \frac{P(S_{i-1} , S_i)}{P(S_i)} \log P(S_i | S_{i-1})
-\end{equation}
+Most closely related to our proposal, \citet{inkelas2016affix} proposed that morphemes are ordered together when they are informative about each other.
+They considered a notion of informativity introduced by \citet{priva2017informativity}, which is different from but related to the mutual information between adjacent morphemes $I_1$ (see SI Appendix Section TODO for details).
+%Formally (drawing on the notion of informativity defined by \citet{priva2017informativity}), they considered the informativity between a suffix $S_i$ and the preceding $S_{i-1}$ as 
+%\begin{equation}
+%    \sum_{S_{i-1}, S_{i}} \frac{P(S_{i-1} , S_i)}{P(S_i)} \log P(S_i | S_{i-1})
+%\end{equation}
 They tested this idea in a pilot study of Turkish, finding that high-informativity suffixes are closer to the root.
-This notion of informativity is similar to $I_1$, only differing in whether the $P(S_i)$ term occurs inside the logarithm:
-\begin{equation}
-   I_1 = \sum_{S_{i-1}, S_{i}} P(S_{i-1} , S_i) \log \frac{P(S_i | S_{i-1})}{P(S_i)}
-\end{equation}
+%This notion of informativity is similar to $I_1$, only differing in whether the $P(S_i)$ term occurs inside the logarithm:
+%\begin{equation}
+%   I_1 = \sum_{S_{i-1}, S_{i}} P(S_{i-1} , S_i) \log \frac{P(S_i | S_{i-1})}{P(S_i)}
+%\end{equation}
 
 
 %Inkelas: informativity: they propose that bigram surprisal is minimized (not their terminology), test this in a pilot study of Turkish, with partially confirming results \citep{inkelas2015informativity}
@@ -1075,22 +959,18 @@ This notion of informativity is similar to $I_1$, only differing in whether the 
 %Hay and Plag (2004): parsing ratio and productivity measured by Hay and Baayen (2002).
 %Complexity-based Ordering, the position of a given suffix inthe hierarchy reflects the degree to which that suffix is processed independently of its base.
 
-\citet{hay2004what} propose a model of complexity-based ordering based on processing considerations, called complexity-based ordering, arguing that affixes are further away from the root when they can be separated more easily in processing, testing this theory using 15 English affixes.
+%\citet{hay2004what} propose a model of complexity-based ordering based on processing considerations, called complexity-based ordering, arguing that affixes are further away from the root when they can be separated more easily in processing, testing this theory using 15 English affixes.
 
 
-from Inkelas
+%from Inkelas
 
 
 
-\subsection{Arbitrary Orderings}
+\subsubsection{Arbitrary Orderings}
 
 There are also studies suggesting language-specific and essentially arbitrary properties of morpheme ordering.
-
-A classical approach to describing morpheme ordering is in terms of levels, where morphemes from a higher level occur before morphemes from a lower level \citep{siegel1979topics}, and in terms of templates that describe the ordering of morphemes \citep{simpson1986pronominal,spencer1991morphological,stump1992on,inkelas1993nimboran,hyman2003suffix}.
+A classical approach to describing morpheme ordering is in terms of levels, where morphemes from a higher level occur before morphemes from a lower level \citep{siegel1979topics}, and in terms of templates that describe the ordering of morphemes \citep{simpson1986pronominal,spencer1991morphological,stump1992on,inkelas1993nimboran,hyman2003suffix,nordlinger2010verbal}.
 Ordering based on language-specific templates has been proposed specifically in cases where observed morpheme ordering is in conflict with semantic scope, as can happen in Bantu languages \citep{hyman2003suffix}.
-
-
-
 \citet{fabb1988english} prominently describes English affix ordering in terms of the selectional restrictions that individual affixes place on which other affixes they can attach to.
 While this approach does not make statements as to which affixes would go closer to the base in a given language, it does suggest that morpheme ordering is described based on the pairwise interactions between adjacent morphemes.
 In a similar vein, \citet{ryan2010variable} propose a model based on weighted bigram constraints in Tagalog, for the (rather uncommon) case of flexible morpheme ordering.
@@ -1099,11 +979,10 @@ Ordering constraints operating on adjacent pairs of morphemes might provide rela
 
 
 
-Tension between Scope and templatic: \citep{hyman2003suffix}; \cite{aronoff2010introduction}; \cite{spencer2003putting}
+%Tension between Scope and templatic: \citep{hyman2003suffix}; \cite{aronoff2010introduction}; \cite{spencer2003putting}
+%- arbitrary language-specific tenplatic (Fabb 1988 English affix ordering; position class templates, Simpson and Withgott 1986) (also finite-state automata Hankamer 1986; Karttunen 2003) 
 
-- arbitrary language-specific tenplatic (Fabb 1988 English affix ordering; position class templates, Simpson and Withgott 1986) (also finite-state automata Hankamer 1986; Karttunen 2003) 
-
-re scope also \cite{alsina1999where}
+%re scope also \cite{alsina1999where}
 
 %\cite{manova2010modeling} % https://homepage.univie.ac.at/stela.manova/modeling%20affix%20order.pdf
 %also provide a ctagoeirzation into grammatical, psycholinguistic, unmotivated (among others)
@@ -1112,10 +991,7 @@ re scope also \cite{alsina1999where}
 
 
 
-\cite{aronoff2010a} % Within this model, phonological form is spelled out by means of individual-language-particular realization constraints that associate abstract morphosyntactic feature values with phonological forms and that are ordered among more general constraints governing factors like scope and feature splitting. The data used to exemplify the application of our theory to affix order are drawn from Haspelmath’s (A grammar of Lezgian, Mouton de Gruyter, Berlin, 1993) grammar of Lezgian, a language of the Northeast Caucasian family spoken largely in Dagestan (Russia) and Azerbaijan.
-
-
-
+%\cite{aronoff2010a} % Within this model, phonological form is spelled out by means of individual-language-particular realization constraints that associate abstract morphosyntactic feature values with phonological forms and that are ordered among more general constraints governing factors like scope and feature splitting. The data used to exemplify the application of our theory to affix order are drawn from Haspelmath’s (A grammar of Lezgian, Mouton de Gruyter, Berlin, 1993) grammar of Lezgian, a language of the Northeast Caucasian family spoken largely in Dagestan (Russia) and Azerbaijan.
 
 
 
@@ -1128,19 +1004,15 @@ re scope also \cite{alsina1999where}
 
 
 
-
-
-
-
 \subsection{Other Aspects of Morphology}
 
 Our study focused on agglutination, where a word carries multiple clearly separated morphemes with distinct functions.
 There are other types of morphological processes that deserve study.
 
-Many languages show fusion where different categories are fused into a single morpheme, or stem changes, such as English swim $\rightarrow$ swam.
-An extreme case is non-concatenative morphology (in Arabic, k-t-b `to write' forms katab- `wrote'. -aktub `write/be writing', -kutib- `was written').
+Many languages show fusion where different categories are fused into a single morpheme, or stem changes, such as English \textit{swim} $\rightarrow$ \textit{swam}.
+An extreme case is non-concatenative morphology (e.g., in Arabic, k-t-b `to write' forms katab- `wrote'. -aktub `write/be writing', -kutib- `was written').
 These types of morphological processes are not described in terms of the order of different morphemes.
-
+We leave it to future research to determine whether these processes are also constrained by cognitive considerations of processing efficiency.
 
 While we have focused on the relative distance from the root, we have not touched on the question of why a morpheme is realized as a prefix or a suffix in a given language.
 There are well-known correlations between suffixing or prefixing preference and word order \citep{greenberg1963universals}.
@@ -1150,18 +1022,21 @@ There are well-known correlations between suffixing or prefixing preference and 
 
 \subsection{Limitations}
 
-- genre of data: written. but Sesotho is spoken (child-directed)
+%- limitations of computational estimation of the memory-surprisal tradeoff. %However: As the set of all moprphological forms of a language is typically finite (CITE), we believe that these limitations play a smaller role in morpheme order, compared to word order.
 
-- limitations of computational estimation of the memory-surprisal tradeoff. %However: As the set of all moprphological forms of a language is typically finite (CITE), we believe that these limitations play a smaller role in morpheme order, compared to word order.
+A limitation of this study is that memory-surprisal tradeoffs are estimated on finite datasets that do not cover all possible morphological forms of a language. However, to the extent that this limitation impacts the estimation of memory-surprisal tradeoffs, it should equally apply to real and counterfactual orderings. We thus do not expect the relative measured efficiencies of different orderings to be impacted by the finiteness of data.
 
-
-A further limitation relates to the selection of languages.
-The six languages considered in this study are spoken in Eurasia and Africa, not representing Australia and America.
-Among the languages, Hungarian and Finnish are genetically related (X millenia).
-There is also some evidence for genetic relations beyond these (Japanese, Korean, Turkish), but such relations would have to be quite ancient (x millenia).
-The morphemes found in these languages as considered here are generally not cognate.
+Due to limitations in data avilability, this study builds on languages from Eurasia and Africa, not representing Australia and America.
+Among the languages, Hungarian and Finnish are genetically related, sharing a common ancestor about 5,000 years ago \citep{maurits2020best}.
+There is also some evidence for genetic relations beyond these (Japanese, Korean, Turkish), but such relations would have to be quite ancient.
+Importantly, the morphemes found in these languages as considered here are generally not cognate.
 Thus, the commonalities in languages found cannot be traced to inherited orderings of morphemes inherited from a common ancestor.
-Furthermore, we note that the optimality of different orderings crucially depend not on the morphemes themselves (which might be inherited), but on the frequencies of different forms (e.g., of sinulars and plurals).
+Furthermore, we note that the optimality of different orderings crucially depend not on the morphemes themselves (which might be inherited), but on the frequencies of different forms (e.g., of singulars and plurals).
+
+
+%- genre of data: written. but Sesotho is spoken (child-directed)
+%A further limitation relates to the selection of languages.
+%The six languages considered in this study are spoken in Eurasia and Africa, not representing Australia and America.
 
 
 
@@ -1170,10 +1045,126 @@ Furthermore, we note that the optimality of different orderings crucially depend
 We have tested the recently proposed Efficient Tradeoff Hypothesis as a predictor of morpheme order with data from verbs and nouns across six languages.
 We found that attested morpheme orders provide more efficient tradeoffs than most other possible orderings and that many properties of observed orderings are recovered by optimizing for tradeoff efficiency.
 With the exception of verb inflection in Finnish and Sesotho, we found that optimized orderings agree with the attested orderings in more than 90\% of forms found in corpora.
-Optimization also successfully predicts several universals of morpheme ordering, both for nouns and verbs. \jd{add concluding sentence tying all together}
+Optimization also successfully predicts several universals of morpheme ordering, both for nouns and verbs.
+These results suggest that morpheme ordering reflects optimization pf processing efficiency across languages.
+%\jd{add concluding sentence tying all together}
 
 
 \printbibliography
 
 \end{document}
 
+
+
+
+\begin{figure}
+
+  \begin{tikzpicture}[%
+% common options for blocks:
+block/.style = {draw, fill=blue!30, align=center, anchor=west,
+            minimum height=0.65cm, inner sep=0},
+% common options for the circles:
+ball/.style = {circle, draw, align=center, anchor=north, inner sep=0}]
+%\node[rectangle,text width=1.2cm,anchor=base] (A0) at (1,-0.3) {Real};
+
+%\node[rectangle,text width=5cm,anchor=left, color=red, fill=red, opacity=0.1] (A02) at (1,-1.5) {};
+
+%\node[rectangle,text width=1.2cm,anchor=base] (A1) at (1,-1.0) {1Derivation};
+\node[rectangle,text width=1.2cm,anchor=base, color=red] (A2) at (1,-1.5) {Valence};
+\node[rectangle,text width=1.2cm,anchor=base, color=green] (A3) at (1,-2.0) {Voice};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-3) {TAM};
+%\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-3.5) {Tense};
+%\node[rectangle,text width=1.2cm,anchor=base,color=blue] (A4) at (1,-4) {Mood};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (A4) at (1,-5) {Agreement};
+
+% Turkish
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (3,-0.3) {\textbf{Turkish}};
+\node[rectangle,text width=1.2cm,anchor=base,color=red] (B1) at (3,-1.5) {1Causative};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (3,-2) {2Passive};
+\node[rectangle,text width=1.2cm,anchor=base] (B3) at (3,-2.5) {3Negation};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-3) {4Potential};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-3.5) {5TAM1};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (3,-4) {6.3rdPl};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (3,-4.5) {7.TAM2};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (3,-5) {8.Agreement};
+
+% Hungarian
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (5,-0.3) {\textbf{Hungarian}};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (5,-2) {1Passive};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (5,-3) {2Potential};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (5,-3.5) {3Tense};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (5,-5) {4Agreement};
+
+
+% Finnish
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (7,-0.3) {\textbf{Finnish}};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (7,-2) {1Passive};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (7,-3.5) {2TAM};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (7,-5) {3Agreement};
+
+% Sesotho Prefixes
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (9,-0.3) {\textbf{SesP}};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (9,-2) {1Ob.ag.};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (9,-2.5) {2Polarity};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (9,-3) {3Tense};
+\node[rectangle,text width=1.2cm,anchor=base,color=orange] (B4) at (9,-5) {4Agreement};
+\node[rectangle,text width=1.2cm,anchor=base,color=purple] (B4) at (9,-5.5) {5Int./Rel.};
+
+% Sesotho Suffixes
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (11,-0.3) {\textbf{SesS}};
+\node[rectangle,text width=1.2cm,anchor=base] (B2) at (11,-1) {1Reversive};
+\node[rectangle,text width=1.2cm,anchor=base,color=red] (B2) at (11,-1.5) {2Valence};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (11,-2) {3Passive};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (11,-3) {4Mood};
+
+
+
+% Japanese
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (13,-0.3) {\textbf{Japanese}};
+\node[rectangle,text width=1.2cm,anchor=base] (B2) at (13,-1) {1Derivation};
+\node[rectangle,text width=1.2cm,anchor=base,color=red] (B2) at (13,-1.5) {2Causative};
+\node[rectangle,text width=1.2cm,anchor=base,color=green] (B2) at (13,-2) {3Pass./Pot.};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (13,-2.5) {4Politeness};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (13,-3) {5Desiderative};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (13,-3.5) {6Negation};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (13,-4) {7TAM/Emb.};
+
+% Korean
+\node[rectangle,text width=0.9cm,anchor=base] (B0) at (15,-0.3) {\textbf{Korean}};
+\node[rectangle,text width=1.2cm,anchor=base] (B2) at (15,-1.0) {Derivation};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-2.5) {Honorific};
+\node[rectangle,text width=1.2cm,anchor=base,color=blue] (B4) at (15,-3) {Tense};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-3.5) {Formality};
+\node[rectangle,text width=1.5cm,anchor=base,color=blue] (B4) at (15,-4.0) {Mood I};
+\node[rectangle,text width=1.5cm,anchor=base,color=blue] (B4) at (15,-4.5) {Mood II};
+\node[rectangle,text width=1.2cm,anchor=base] (B4) at (15,-5) {Politeness};
+\node[rectangle,text width=1.2cm,anchor=base,color=purple] (B4) at (15,-5.5) {Embedding};
+
+
+%\draw[->] (A1.east) to (B1.west);
+%\draw[->] (A2.east) to (B2.west);
+%\draw[->] (A3.east) to (B3.west);
+%\draw[->] (A4.east) to (B4.west);
+\end{tikzpicture}
+
+%    \centering
+%\begin{tabular}{l||l|l|l|l|l|l|llll}
+%                    & Turkish & Hungarian & Finnish  & Sesotho Pref.     & Ses Suff. & Japanese & Korean\\ \hline\hline
+%Derivation          &  &         &          &               & Reversive & suru    & ha,i\\ \hline
+%Valence             &  Causative &         &           & Object marker & Valence & Causative\\ \hline
+%Voice               & Passive & Passive    & Passive     &               & Passive & Passive\\ \hline
+%TAM, Pol.           & Negation  &   Potential  &   Tense/Asp &    Negation &  Politeness &      Potential        & Honorific \\
+%                    & Potential & Tense        &    Mood     &     Tense   &    Mood     &   Honorific  &    Tense       \\
+%                    &   TAM1    &          &                &         &                  & Tense/Aspect & Formality \\
+%                    & lar       &          &           &  & & Negation & Mood I\\
+%                    & TAM2         &           &               &          &       &      &  Mood II \\ \hline
+%Agreement           & Agreement & Agreement & Agreement & Agreement \\ \hline
+%\textit{Other}               & Formality          & Clitic    &              & Int/Rel &      &        & Politeness \\
+%                    &           &     &              &  &          &    & Conj \\
+%\end{tabular}
+
+\mhahn{TODO make this visually more appealing}
+
+    \caption{Morpheme order across the six languages in our sample, matched with four universal categories (left).}
+    \label{tab:table-orders}
+\end{figure}
