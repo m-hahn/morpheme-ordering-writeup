@@ -161,7 +161,7 @@ A recent theory argues that word and morpheme order in language optimizes a trad
 In this work, we test this idea more extensively using data from four additional agglutinative languages with significant amounts of morphology, in both verb and noun inflection.
 We find that the memory-surprisal tradeoff predicts order in most cases with high accuracy.
 We also find that it accounts for several, previously documented, universal properties, such as the relative order of number and case suffixes on nouns.
-Our work adds to a growing body of work suggesting that many properties of language arise from cognitive principles.
+Our work adds to a growing body of work suggesting that many properties of language arise from enabling efficient human language processing.
 \end{abstract}
 
 
@@ -261,10 +261,19 @@ where $m$ runs over possible memory states.
 
 %\mhahn{at this point illustrate with a figure?}
 
-Based on this notion, \citet{Hahn2020modeling} argue that human language orders elements in such a way that the memory-surprisal tradeoff curve has a particularly steep fall-off, compared to other possible orderings.
+Different orderings can lead to different tradeoffs that can differ in their efficiency (Figure~\ref{fig:tradeoff}).
+The efficiency of a tradeoff curve can be quantified using its Area under the Curve (AUC) \citet{Hahn2020modeling}. Lower values of AUC indicate a steeper decay of mutual information, and thus a more efficient tradeoff (Figure~\ref{fig:tradeoff}).
+Based on this notion, \citet{Hahn2020modeling} propose that human language orders elements in such a way that the memory-surprisal tradeoff curve has a particularly steep fall-off, compared to other possible orderings.
+
+\begin{figure}
+    \centering
+    \mhahn{TODO visualize the memory-surprisal tradeoff}
+    \caption{Caption}
+    \label{fig:tradeoff}
+\end{figure}
 
 
-\citet{Hahn2020modeling} provide a method for estimating a bound on the memory-surprisal tradeoff from corpus data, and show that orderings achieve efficient tradeoffs when elements that predict each other are close together.
+To test this hypothesis, \citet{Hahn2020modeling} provide a method for estimating a bound on the memory-surprisal tradeoff from corpus data.
 This method is based on the notion of mutual information, which quantifies the amount of statistical association between two random variables.
 If $X, Z, Y$ are random variables, then the mutual information of $X$ and $Y$, conditioned on $Z$, is defined to be:
 \begin{align}
@@ -279,7 +288,9 @@ The key quantity derived from this is the mutual information between elements (s
 \begin{equation*}
     I_t \equiv \operatorname{I}[w_t : w_0 | w_1, \dots, w_{t-1}].
 \end{equation*}
-Based on this notion, \citet{Hahn2020modeling}  prove the following bound on the memory-surprisal tradeoff :
+This is visualized in Figure~\ref{fig:tradeoff} (left): $I_t$ This quantifies how much predictive information the element $t$ steps into the past provides about the next element, on average across all sequences in the language.
+Based on this notion, \citet{Hahn2020modeling}  prove the following bound on the memory-surprisal tradeoff, visualized in Figure~\ref{fig:tradeoff} (center):
+\mhahn{I'm wondering whether it is necessary to explain the theorem formally, or whether there might be a benefit in being a bit less formal here and only doing a pictorial presentation, referring to the PsychReview paper for the formal detai;s.}
 \begin{thm}\label{prop:suboptimal}(Information locality bound, \citet{Hahn2020modeling})
 For any positive integer $T$, let $M$ be a memory encoding function such that
 \begin{equation}
@@ -293,12 +304,9 @@ S_M \ge S_\infty + \sum_{t=T+1}^\infty I_t.
 \end{equation}
 where $S_\infty$ is the average surprisal that would be achieved with perfectly veridical memory representations.
 \end{thm}
+Figure~\ref{fig:tradeoff} (right) visualizes a key consequence of this theorem, namely an information-theoretic notion of locality called Information locality:
+Orderings optimize this tradeoff when elements with high mutual information are closer together.
 
-\mhahn{TODO design one or two figures to explain the concepts to the audience}
-
-A key consequence of this theorem is an information-theoretic notion of locality called Information locality:
-Informally, orderings optimize this tradeoff when elements with high mutual information are closer together.
-%Previously, a similar notion of information locality was derived by \citet{futrell2020lossy} for a specific family of memory representations $M$.
 Information locality has had success as a predictor of word order \citep{futrell2019information}, in particular for universals of the order inside noun phrases \citep{culbertson2020from,hahn-information-theoretic-2018,DBLP:conf/acl/FutrellDS20}.
 
 
@@ -306,6 +314,8 @@ Information locality has had success as a predictor of word order \citep{futrell
 \citet{Hahn2020modeling} argue that information locality derives a range of locality principles proposed in the linguistic literature.
 They provide evidence that it predicts closeness of syntactically related words.
 They also provide preliminary evidence that it accounts for some properties of morpheme ordering and formalizes \cite{bybee-morphology-1985}'s idea that morphemes are closer together when they are more relevant to each other, using data of verb inflection in two languages (Japanese and Sesotho).
+
+
 
 In this work, we aim to test the Memory-Surprisal Tradeoff as a predictor of morpheme ordering more broadly, using data from more languages and from different parts of speech.
 
@@ -326,9 +336,9 @@ We thus focus on nouns and verbs, treating adjectives together with one of the o
 Nouns very commonly mark number and case morphologically.
 %Number marking typically distinguishes singular and plural (person -- person-s).
 %Case marking 
-In some languages, possession is also marked on the noun (CITE).
+In some languages, possession is also marked on the noun.
 Figure~\ref{fig:noun-inflection} shows fully inflected nouns in three languages from our sample, with endings for number, case, and possessor.
-Number and case marking are the subject of a well-documented universal, namely \citep{greenberg1963universals}'s Universal 39:
+Number and case marking are the subject of a well-documented universal, namely \citet{greenberg1963universals}'s Universal 39:
 
 \begin{adjustwidth}{6em}{6em}
 \textsc{Greenberg's Universal 39}:
@@ -366,107 +376,87 @@ Stem-Plural-1sgPoss-Ablative\\
 
 %\mhahn{TODO make this a nice illustration of noun inflection appropriate for the audience}
 
-\caption{Noun inflection}\label{fig:noun-inflection}
+\caption{Noun inflection in the three languages in our sample. All three languages support Greenberg's Universal 39 by placing the case marker after the plural marker, but they differ in theplacement of the possessive marker.}\label{fig:noun-inflection}
 \end{figure}
 
 
 
  \begin{figure}
-     Valence:
-\begin{tabular}{lllll}
-	a) & {\c c}{\i}ld{\i}r-{\i}r-{\i}m \\
-& go.crazy-Causative-aorist-1sg \\
-& `I go crazy' (Turkish)\\
-b) & {\c c}{\i}ld{\i}r-t-{\i}r-{\i}m \\
-& go.crazy-Causative-aorist-1sg \\
-& `I make (someone) go crazy' (Turkish) \\
-\end{tabular}     
-Voice:
-\begin{tabular}{llllll}
-a) & mi-mash-yoo \\
-& see-politeness-future \\
-& `will see' (Japanese) \\
-b) & mi-rare-mash-yoo \\
-& see-passive-politeness-future \\
-&`will be seen' (Japanese)
-\end{tabular}
+      \includegraphics[width=\textwidth]{figures/Screenshot from 2021-03-16 10-43-10.png}
+ 
+%     Valence:
+%\begin{tabular}{lllll}
+%	a) & {\c c}{\i}ld{\i}r-{\i}r-{\i}m \\
+%& go.crazy-Causative-aorist-1sg \\
+%& `I go crazy' (Turkish)\\
+%b) & {\c c}{\i}ld{\i}r-t-{\i}r-{\i}m \\
+%& go.crazy-Causative-aorist-1sg \\
+%& `I make (someone) go crazy' (Turkish) \\
+%\end{tabular}     
+%Voice:
+%\begin{tabular}{llllll}
+%a) & mi-mash-yoo \\
+%& see-politeness-future \\
+%& `will see' (Japanese) \\
+%b) & mi-rare-mash-yoo \\
+%& see-passive-politeness-future \\
+%&`will be seen' (Japanese)
+%\end{tabular}%
 
-Mood:
-\begin{tabular}{llll}
-a) & ismer-nek \\
-& know-3pl.def \\
-& `they know' (Hungarian) \\
-b) & ismer-het-nek \\
-& know-potential-3pl.def \\
-& `they can know' (Hungarian)
-\end{tabular}
-Tense:
-\begin{tabular}{llllll}
-a) & isseo-yo \\ 
-& be-polite \\
-& `is/are' (informal polite, Korean) \\ 
-b) & isseo-sseo-yo \\
- & be-past-polite \\
- & `was/were' (informal, polite, Korean)
- \end{tabular}
- Agreement:
-\begin{tabular}{lllll}
-a) & a{\c c}ar-{\i}m \\
-b)& a{\c c}ar-s{\i}n \\
-c) & a{\c c}ar-{\i}z \\
-d) &a{\c c}ar-s{\i}n{\i}z \\
-& stem-person \\
-& `I/you (sgd)/we/you (pl) open'
-\end{tabular}
+%Mood:
+%\begin{tabular}{llll}
+%a) & ismer-nek \\
+%& know-3pl.def \\
+%& `they know' (Hungarian) \\
+%b) & ismer-het-nek \\
+%& know-potential-3pl.def \\
+%& `they can know' (Hungarian)
+%\end{tabular}
+%Tense:
+%\begin{tabular}{llllll}
+%a) & isseo-yo \\ 
+%& be-polite \\
+%& `is/are' (informal polite, Korean) \\ 
+%b) & isseo-sseo-yo \\
+% & be-past-polite \\
+% & `was/were' (informal, polite, Korean)
+% \end{tabular}
+% Agreement:
+%\begin{tabular}{lllll}
+%a) & a{\c c}ar-{\i}m \\
+%b)& a{\c c}ar-s{\i}n \\
+%c) & a{\c c}ar-{\i}z \\
+%d) &a{\c c}ar-s{\i}n{\i}z \\
+%& stem-person \\
+%& `I/you (sgd)/we/you (pl) open'
+%\end{tabular}
 
-\mhahn{TODO make this a nice illustration of verb inflection appropriate for the audience}
-\caption{Examples of verb inflection}\label{tab:examples-verbs}
+\mhahn{TODO make this rough draft look nice}
+\caption{Examples of verb inflection from the six languages in our sample.}\label{tab:examples-verbs}
 \end{figure}
  
  
  \begin{figure}
      \centering
      \includegraphics[width=\textwidth]{figures/slots.pdf}
-     \caption{Verb affix order across the six languages in our sample, matched with four universal categories (left). \mhahn{todo make this nicer}}
+     \mhahn{todo make this rough draft look nice, and m,ake colors consistent with the other figure. also, add in derivational suffixes at the top}
+     \caption{Verb affix order across the six languages in our sample, matched with four universal categories (left). }
     \label{tab:table-orders}
  \end{figure}
 
 
 \subsection{Universals of Verb Affixes}\label{sec:univ-verbs}
 Verbs commonly mark a larger number of inflection categories.
-Figure~\ref{tab:table-orders} summarises the affixes in the verbal morphologies of the six morphologically rich languages considered here.
-For each language in the sample, we determined a templatic sequence of slots into which morphemes are ordered (see SI Section X for details on how we arrived at these slots).
+Figures~\ref{tab:examples-verbs}--\ref{tab:table-orders} summarise the affixes in the verbal morphologies of the six languages considered here (see SI Section X for details on how we arrived at these summaries).
+Sesotho has both prefixes and suffices; we treat these separately, as we only aim to explain the relative distance of affixes from the base, not which side of the verb they appear on.
 
-Verbal affixes are typically grouped into derivational and inflectional affixes.
+Verb affixes are typically grouped into derivational and inflectional affixes.
 Derivational affixes derive new verb stems (e.g., 'do' $\rightarrow$ undo), whereas inflectional affixes derive inflected verb forms from verb stems (e.g., `do' $\rightarrow$ `does').
 Examples of derivational suffixes are Japanese -su- and Korean -ha-, which derive verbs from non-verbal stems \citep{hasegawa2014japanese, yeon2010korean}.
-Another example is the Reversive suffix in Sesotho (corresponding to `un-' in English `do' $\rightarrow$ `undo', \citep{doke1967textbook}).
-Derivational affixes generally appear closer to the root than inflectional affixes.
+Another example is the Reversive suffix in Sesotho (corresponding to `un-' in English `do' $\rightarrow$ `undo', \citep{doke1967textbook}.
+Derivational affixes generally appear closer to the root than inflectional affixes \citep{greenberg-universals-1963}.
 
-\textit{Valence} affixes (red in Figure~\ref{tab:table-orders}, Example X in Figure~\ref{tab:examples-verbs}) change the number of arguments. A very common type of valence affix is a causative, which adds an argument indicating who causes an event or state to occur \citep{wals-111}.
-%In Turkish, -t- marks causatives (\citep{schaaik2020turkish}, Figure~\ref{tab:examples-verbs}).
-\textit{Voice} (green in Figure~\ref{tab:table-orders}) describes the distinction between active and passive (CITE). An example is the Japanese passive suffix -\textit{(r)are}- (Figure~\ref{tab:examples-verbs}).
-\textit{Tense-Aspect-Mood (TAM)} (blue in Figure~\ref{tab:table-orders}) comprises three types of categories.
-\textit{Aspect} describes how an event unfolds over time \citep{comrie1976aspect,dahl1985tense,binnick1991time}.
-An example of aspect marking is the English progressive \textit{to be} ...-\textit{ing}, which indicates that an action is currently ongoing (CITE).
-\textit{Tense} describes where an event is located in time (e.g. past or future, CITE).
-Aspect and tense categories are often fused in morphology \citep{binnick2012the}, and this also applies to the languages in our sample.
-Examples of tense and aspect marking are shown in Figure~\ref{tab:examples-verbs}.
-\textit{Mood} describes a relation between an event and the speaker, including an assessment of the event's reality \cite{palmer1986mood,portner2018mood}.
-In analytical languages such as English, mood distinctions are often indicated using verbs such as \textit{might} or adverbs such as \textit{possibly}.
-A common mood category is the Potential mood, which indicates possibility (Turkish, Hungarian).
-Figure~\ref{tab:examples-verbs} shows how it is marked morphologically with -het- in Hungarian \citep{rounds2001hungarian}.
-In many languages, mood marking is at least partically fused with tense and aspect; for instance, the Japanese suffix -\textit{yoo} can mark future tense and the hortative mood (`let's ...', \citep{hasegawa2014japanese}).
-Tense, aspect, mood are often together referred to as TAM (Tense-Aspect-Mood, \citep{bybee1994the, wals-69}).
-Some languages have a single affix slot that accommodates a fused morpheme indicating TAM.
-For instance, Finnish marks both tense (present and past) and mood (indicative, conditional, and potential) categories with a single morpheme in the slot labeled TAM.
-Other languages have multiple slots, for instance, Turkish TAM markers are distributed across two slots (Figure~\ref{tab:table-orders}).
-\textit{Subject agreement} (orange in Figure~\ref{tab:table-orders}) mark categories of the subject, most often its person and number, sometimes also other categories such as its gender \citep{corbett2003agreement}.
-An example is English third-person \textit{-s}.
-In our sample, Turkish, Hungarian, Finnish, and Sesotho have a subject agreement slot (Figure~\ref{tab:table-orders}); Turkish also has a special slot occupied only by the third-person plural marker \textit{-lar-} (indicated as 3rdPl in ~\ref{tab:table-orders}).
-
-The ordering of morphemes encoding these categories shows universal tendencies \citep{bybee-morphology-1985}, which we summarize as follows:
-
+Languages can have several inflectional affixes stacked (Figure Figures~\ref{tab:examples-verbs}); their ordering shows universal tendencies \citep{bybee-morphology-1985}, which we summarize as follows:
 
 \begin{adjustwidth}{6em}{6em}
 \textsc{Verb Affix Ordering} \citep{bybee-morphology-1985}:
@@ -476,6 +466,28 @@ Verb affixes are ordered as follows, outward from the verb stem:
 verb stem & valence & voice & TAM & subject agreement
 \end{tabular}
 \end{adjustwidth}
+
+\textit{Valence} affixes (red in Figures~\ref{tab:examples-verbs}--\ref{tab:table-orders}) change the number of arguments. A very common type of valence affix is a causative, which adds an argument indicating who causes an event or state to occur \citep{wals-111}.
+\textit{Voice} (green in Figures~\ref{tab:examples-verbs}--\ref{tab:table-orders}) describes the distinction between active and passive (CITE). % An example is the Japanese passive suffix -\textit{(r)are}- (Figure~\ref{tab:examples-verbs}).
+\textit{Tense-Aspect-Mood (TAM)} (blue in Figures~\ref{tab:examples-verbs}--\ref{tab:table-orders}) comprises three types of categories.
+\textit{Aspect} describes how an event unfolds over time \citep{comrie1976aspect,dahl1985tense,binnick1991time}.
+%An example of aspect marking is the English progressive \textit{to be} ...-\textit{ing}, which indicates that an action is currently ongoing \citep{huddleston-cambridge-2002}.
+\textit{Tense} describes where an event is located in time (e.g. past or future, CITE).
+%Examples of tense and aspect marking are shown in Figure~\ref{tab:examples-verbs}.
+\textit{Mood} describes a relation between an event and the speaker, including an assessment of the event's reality \cite{palmer1986mood,portner2018mood}.
+%In analytical languages such as English, mood distinctions are often indicated using verbs such as \textit{might} or adverbs such as \textit{possibly}.
+A common mood category is the Potential mood, which indicates possibility (Turkish, Hungarian).
+%Figure~\ref{tab:examples-verbs} shows how it is marked morphologically with -het- in Hungarian \citep{rounds2001hungarian}.
+Aspect and tense categories are often fused in morphology \citep{binnick2012the}, and mood marking is also often fused with those. %; for instance, the Japanese suffix -\textit{yoo} can mark future tense and the hortative mood (`let's ...', \citep{hasegawa2014japanese}).
+Tense, aspect, mood are often together referred to as TAM (Tense-Aspect-Mood, \citep{bybee1994the, wals-69}).
+Some languages have a single affix slot that accommodates a fused morpheme indicating TAM.
+For instance, Finnish marks both tense (present and past) and mood (indicative, conditional, and potential) categories with a single morpheme in the slot labeled TAM.
+Other languages have multiple slots, for instance, Turkish TAM markers are distributed across two slots (Figure~\ref{tab:table-orders}).
+
+\textit{Subject agreement} (orange in Figure~\ref{tab:table-orders}) mark categories of the subject, most often its person and number, sometimes also other categories such as its gender \citep{corbett2003agreement}.
+An example is English third-person \textit{-s}.
+In our sample, Turkish, Hungarian, Finnish, and Sesotho have a subject agreement slot (Figure~\ref{tab:table-orders}); Turkish also has a special slot occupied only by the third-person plural marker \textit{-lar-} (indicated as 3rdPl in ~\ref{tab:table-orders}).
+
 
 %Based on data from several dozens of languages, \citep{bybee-morphology-1985} proposes the following ordering of these common verb affixes:
 %\begin{quote}
@@ -489,7 +501,7 @@ Figure~\ref{tab:table-orders} shows that the languages in our sample largely sup
 
 
 While these are particularly common types of affixes, there are further types, some of which occur in the six languages of our sample.
-While agreement is most commonly established with the subject, \textit{agreement with the object} is found in Sesotho \citep{doke1967textbook} (in person and noun class) and in Hungarian \citep{rounds2001hungarian} (in definiteness); it is fused with subject agreement in the latter case.
+While agreement is most commonly established with the subject, \textit{agreement with the object} is found in Sesotho \citep{doke1967textbook} (in person and noun class) and in Hungarian \citep{rounds2001hungarian} (in definiteness); it is fused with subject agreement in the Hungarian and shares a slot with Valence in Sesotho (see SI Section TODO).
 \textit{Polarity} refers to the opposition between affirmative (e.g. `she arrived') and negative  (e.g., `she did not arrive') statements \citep{wals-112}.
 \textit{Evidentiality} indicates on what evidence a speaker bases an assertion \citep{aikhenvald2003evidentiality}.
 \textit{Formality}, \text{honorifics}, and \text{politeness} are categories that index social relations between the speaker, the addressee, and the topic of the conversation (CITE).
@@ -498,7 +510,9 @@ The Japanese politeness marker -masu- and the Korean formality (-p) and politene
 Furthermore, verb forms can have affixes indicating the syntactic position of the verb within a sentence, in particular, affixes marking infinitives or other nonfinite forms.
 We use the term \textit{Embedding} for this type of morpheme.
 
-\jd{add segue to next section}
+Having introduced the two universal generalizations about noun and verb affixes, we now turn to testing the hpothesis that these generalizations arise from optimization for efficient memory-surprisal tradeoffs.
+
+%\jd{add segue to next section}
 
 %We focus on inflection, except in those cases where derivational affixes are clearly marked in available data.
 %Inflectional suffixes are generally outside of derivational affixes
@@ -517,12 +531,12 @@ We use the term \textit{Embedding} for this type of morpheme.
 We selected data from languages that have rich agglutinative morphology, that is, languages in which (i) verbs and nouns often have more than two morphemes per words, as that allows us to test predictions about the relative ordering of different morphemes, and (ii) the morphemes within a word have clearly delimited boundaries, providing unambiguous information about the ordering of morphemes.
 Beyond the languages studied in \citet{Hahn2020modeling}, we obtained data from four such languages: the Universal Dependencies (UD) corpora for Korean \citep{chun2018building}, Turkish \citep{turkish-imst}, Hungarian \citep{hungarian-szeged}, and Finnish \citep{UDFinnish-TDT}.
 In addition, we also reanalyze the data from \citet{Hahn2020modeling}, covering UD data for Japanese \citep{asahara2018universal} and the Child Language Data Exchange System (CHILDES) Sesotho corpus \citep{demuth1992acquisition} in a way consistent with our analysis of the other four languages.
+We obtained between (TODO) and (TODO) inflected nouns and between (TODO) and (TODO) inflected verbs in each language.
 
 
 % Mutual information depends on the frequencies at which different morphological forms are used. We thus selected agglutinative languages for which large-scale text corpora with morphological annotation was available.
 
 
-\mhahn{TODO corpus sizes.}
 
 
 For nouns, we focused on Turkish, Hungarian, and Finnish, as nouns in these languages often have more than one affix.
@@ -530,7 +544,8 @@ We used all six languages for verbs.
 
 For each language, we selected nouns and verbs based on the part-of-speech annotation in each corpus.
 We treated adjectives together with nouns in Hungarian, Finnish, and Turkish, and together with verbs in Korean and Japanese.
-We then identified which morphemes each extracted word was composed of, on the basis of the annotation provided in the corpora (see SI Appendix, Section X for details).
+
+We used available corpus annotation together with the grammatical literature on each language to determine which morphemes each extracted word was composed of (see SI Appendix, Section X for details).
 
 
 
@@ -538,12 +553,11 @@ We then identified which morphemes each extracted word was composed of, on the b
 %\jd{change title to something more informative, eg "Estimating memory-surprisal tradeoffs"?}
 
 In order to estimate memory-surprisal tradeoffs, we model words as strings of morphemes, following \citet{Hahn2020modeling}.
-For instance, we represent \textit{juttu-i-hi-si} `into your stories' (Figure REF) as juttu-\textsc{Plural}-\textsc{Illative}-\textsc{2sgPoss}.
+For instance, we represent \textit{juttu-i-hi-si} `into your stories' (Figure \ref{fig:noun-inflection}) as juttu-\textsc{Plural}-\textsc{Illative}-\textsc{2sgPoss}.
 (See SI Appendix Section X for experiments taking morphophonological interactions between morphemes into account.)
 
 For each language, we parameterize possible morpheme orderings through the $N!$ possible orderings of the $N$ morpheme slots.
-Applying any such ordering to the forms extracted from the corpus results in a set of counterfactual forms with some associated memory-surprisal tradeoff curve; in particular, applying the real orderings (Figure REF) results in the actual morpheme sequences as found in the corpus.
-Following \citet{Hahn2020modeling}, we quantify the efficiency of a tradeoff curve using its Area under the Curve (AUC). Lower values of AUC indicate a steeper decay of mutual information, and thus a more efficient tradeoff.
+Applying any such ordering to the forms extracted from the corpus results in a set of counterfactual forms with some associated memory-surprisal tradeoff curve; in particular, applying the real orderings (Figure \ref{tab:table-orders}) results in the actual morpheme sequences as found in the corpus.
 
 We compare the real orderings (\textit{real}) to three different kinds of alternative orderings: randomized morpheme orderings (\textit{random}), the reversed real orderings (\textit{reverse}), and morpheme orderings that are optimized to minimize AUC under the tradeoff curve (\textit{optimized}). 
 
@@ -623,7 +637,7 @@ On active forms -- which, unlike the passive, are fully inflected for person and
     \end{tabular}
 
     
-    \caption{AUC Histograms for Verb Affixes.}
+    \caption{AUC Histograms for Verb Affixes. \mhahn{TODO add optimized and reverse}}
     \label{fig:auc_verbs}
 \end{figure}
 
@@ -643,20 +657,20 @@ On active forms -- which, unlike the passive, are fully inflected for person and
 
 \begin{table}[]
     \centering
-    \begin{tabular}{l|l|ll|lllllllll}
+    \begin{tabular}{l|l|ll|ll|lllllll}
     &     &    \multicolumn{2}{c|}{Pairs} & \multicolumn{2}{c|}{Full} & \multicolumn{2}{c}{Full (Types)} \\
      &   &     Optim. & Baseline & Optim. & Baseline & Optim. & Baseline \\ \hline
-Nouns & finnish  & 1.0 (0.0) & 0.42 (0.31) & 1.0 (0.0) & 0.37 (0.32) & 1.0 (0.0) & 0.38 (0.29) \\
- & turkish  & 1.0 (0.0) & 0.56 (0.36) & 1.0 (0.0) & 0.5 (0.37) & 1.0 (0.0) & 0.5 (0.36) \\
- & hungarian  & 1.0 (0.0) & 0.48 (0.22) & 1.0 (0.0) & 0.33 (0.27) & 1.0 (0.0) & 0.33 (0.27) \\
+\multirow{3}{*}{Nouns} & Finnish  & 1.0 (0.0) & 0.42 (0.31) & 1.0 (0.0) & 0.37 (0.32) & 1.0 (0.0) & 0.38 (0.29) \\
+ & Turkish  & 1.0 (0.0) & 0.56 (0.36) & 1.0 (0.0) & 0.5 (0.37) & 1.0 (0.0) & 0.5 (0.36) \\
+ & Hungarian  & 1.0 (0.0) & 0.48 (0.22) & 1.0 (0.0) & 0.33 (0.27) & 1.0 (0.0) & 0.33 (0.27) \\
  \hline
-Verbs & finnish verbs & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.36 (0.32) & 0.38 (0.37) \\
- & hungarian  & 0.95 (0.09) & 0.52 (0.37) & 0.95 (0.0) & 0.5 (0.4) & 0.94 (0.0) & 0.5 (0.39) \\
- & turkish  & 0.96 (0.09) & 0.46 (0.14) & 0.95 (0.0) & 0.37 (0.15) & 0.93 (0.07) & 0.36 (0.14) \\
- & korean & 0.97 (0.1) & 0.56 (0.33) & 0.97 (0.0) & 0.53 (0.33) & 0.95 (0.0) & 0.53 (0.36) \\
- & japanese & 0.94 (0.08) & 0.48 (0.24) & 0.93 (0.0) & 0.39 (0.24) & 0.9 (0.1) & 0.39 (0.24) \\
- & sesotho p. & 0.99 (0.0) & 0.5 (0.48) & 0.99 (0.0) & 0.5 (0.48) & 0.98 (0.0) & 0.51 (0.46) \\
- & sesotho s. & 0.62 (0.0) & 0.48 (0.2) & 0.54 (0.0) & 0.45 (0.19) & 0.52 (0.0) & 0.44 (0.19) \\
+\multirow{7}{*}{Verbs} & Finnish & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.36 (0.32) & 0.38 (0.37) \\
+ & Hungarian  & 0.95 (0.09) & 0.52 (0.37) & 0.95 (0.0) & 0.5 (0.4) & 0.94 (0.0) & 0.5 (0.39) \\
+ & Turkish  & 0.96 (0.09) & 0.46 (0.14) & 0.95 (0.0) & 0.37 (0.15) & 0.93 (0.07) & 0.36 (0.14) \\
+ & Korean & 0.97 (0.1) & 0.56 (0.33) & 0.97 (0.0) & 0.53 (0.33) & 0.95 (0.0) & 0.53 (0.36) \\
+ & Japanese & 0.94 (0.08) & 0.48 (0.24) & 0.93 (0.0) & 0.39 (0.24) & 0.9 (0.1) & 0.39 (0.24) \\
+ & Sesotho P. & 0.99 (0.0) & 0.5 (0.48) & 0.99 (0.0) & 0.5 (0.48) & 0.98 (0.0) & 0.51 (0.46) \\
+ & Sesotho S. & 0.62 (0.0) & 0.48 (0.2) & 0.54 (0.0) & 0.45 (0.19) & 0.52 (0.0) & 0.44 (0.19) \\
     \end{tabular}
     \caption{Accuracies in predicting morpheme ordering. `Optim.' indicates grammars optimized for AUC, `'Baseline' indicates randomly constructed weights.
     In each cell, we provide the mean and the stgandard deviation over orderings. `Pairs' indicates the fraction of pairs of morphemes occurring together in the same word that are ordered correctly. `Full' indicates the fraction of verb forms in the corpus that are ordered fully correctly. `Full (Types)' counts forms that occur multiple times only once, it thus down-weights the role of frequent forms.}
@@ -760,7 +774,7 @@ Verbs & finnish verbs & 0.4 (0.3) & 0.4 (0.37) & 0.38 (0.31) & 0.39 (0.38) & 0.3
   \include{figures/sesotho_suffixes/comparison-opt-uni}
     \end{minipage}
 \end{tabular}
-    \caption{Comparing optimized orders with the universal order described by \citep{bybee-morphology-1985}.  Note that, for Sesotho prefixes, inversion of order relative to the universal order is expected, as the universal order indicates distance from the root, not absolute position.}
+    \caption{Comparing optimized orders with the universal order described by \citep{bybee-morphology-1985}. \mhahn{TODO when running the final iteration of the models, merge Aspect/Tense/Mood into TAM for the universal order.}  Note that, for Sesotho prefixes, inversion of order relative to the universal order is expected, as the universal order indicates distance from the root, not absolute position. \mhahn{TODO for Sesotho prefixes, just flip the order in presentation.}}
     \label{fig:optimized_and_universal_orders}
 \end{figure}
 
