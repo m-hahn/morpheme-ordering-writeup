@@ -268,7 +268,7 @@ Based on this notion, \citet{Hahn2020modeling} propose that human language order
 \begin{figure}
     \centering
     \mhahn{TODO visualize the memory-surprisal tradeoff}
-    \caption{Caption}
+    \caption{\mhahn{my plan for this figure is (i) curves for two languages A,B to show that tradeoffs can differ in their efficiency, (ii) a simple visualization of how AUC captures efficiency, (iii) a visualiation of MI $I_t$, (iv) a visualization of how the tradeoff curve is estimated based on $I_t$., (v) some kind of illustration of how locality leads to more efficient tradeoffs}}
     \label{fig:tradeoff}
 \end{figure}
 
@@ -290,7 +290,7 @@ The key quantity derived from this is the mutual information between elements (s
 \end{equation*}
 This is visualized in Figure~\ref{fig:tradeoff} (left): $I_t$ This quantifies how much predictive information the element $t$ steps into the past provides about the next element, on average across all sequences in the language.
 Based on this notion, \citet{Hahn2020modeling}  prove the following bound on the memory-surprisal tradeoff, visualized in Figure~\ref{fig:tradeoff} (center):
-\mhahn{I'm wondering whether it is necessary to explain the theorem formally, or whether there might be a benefit in being a bit less formal here and only doing a pictorial presentation, referring to the PsychReview paper for the formal detai;s.}
+\mhahn{QUESTION: I'm wondering whether it is necessary to explain the theorem formally, or whether there might be a benefit in being a bit less formal here and only doing a pictorial presentation, referring to the PsychReview paper for the formal detai;s.}
 \begin{thm}\label{prop:suboptimal}(Information locality bound, \citet{Hahn2020modeling})
 For any positive integer $T$, let $M$ be a memory encoding function such that
 \begin{equation}
@@ -440,7 +440,7 @@ Stem-Plural-1sgPoss-Ablative\\
      \centering
      \includegraphics[width=\textwidth]{figures/slots.pdf}
      \mhahn{todo make this rough draft look nice, and m,ake colors consistent with the other figure. also, add in derivational suffixes at the top}
-     \caption{Verb affix order across the six languages in our sample, matched with four universal categories (left). }
+     \caption{Verb affix order across the six languages in our sample, matched with four universal categories (left). \mhahn{Question: We could think about removing his figure, while adding this color coding to Figures 8--9 to tighten the link to Figure 3. This figure here doesn't seem to add much beyond Figure 3, except for language-specific detail that isn't useful to the reader here. Its main advantage is that it prepares the reader to expect somewhat messy language-specific patterns later in Figure 8, but that could also be done by adding color coding there. What do you think?} }
     \label{tab:table-orders}
  \end{figure}
 
@@ -508,9 +508,9 @@ While agreement is most commonly established with the subject, \textit{agreement
 In our sample, these are prominent in Korean and Japanese.
 The Japanese politeness marker -masu- and the Korean formality (-p) and politeness (-yo) suffixes index the social relation between the speaker and the addressee \citep{hasegawa2014japanese, yeon2010korean}; the Korean honorific suffix -si- indexes the social relation between the speaker and the topic of the conversation \citep{yeon2010korean}.
 Furthermore, verb forms can have affixes indicating the syntactic position of the verb within a sentence, in particular, affixes marking infinitives or other nonfinite forms.
-We use the term \textit{Embedding} for this type of morpheme.
+We use the term \textit{Syntactic} for this type of morpheme.
 
-Having introduced the two universal generalizations about noun and verb affixes, we now turn to testing the hpothesis that these generalizations arise from optimization for efficient memory-surprisal tradeoffs.
+Having introduced the two universal generalizations about noun and verb affixes, we now turn to testing the hypothesis that these generalizations arise from optimization for efficient memory-surprisal tradeoffs.
 
 %\jd{add segue to next section}
 
@@ -531,7 +531,7 @@ Having introduced the two universal generalizations about noun and verb affixes,
 We selected data from languages that have rich agglutinative morphology, that is, languages in which (i) verbs and nouns often have more than two morphemes per words, as that allows us to test predictions about the relative ordering of different morphemes, and (ii) the morphemes within a word have clearly delimited boundaries, providing unambiguous information about the ordering of morphemes.
 Beyond the languages studied in \citet{Hahn2020modeling}, we obtained data from four such languages: the Universal Dependencies (UD) corpora for Korean \citep{chun2018building}, Turkish \citep{turkish-imst}, Hungarian \citep{hungarian-szeged}, and Finnish \citep{UDFinnish-TDT}.
 In addition, we also reanalyze the data from \citet{Hahn2020modeling}, covering UD data for Japanese \citep{asahara2018universal} and the Child Language Data Exchange System (CHILDES) Sesotho corpus \citep{demuth1992acquisition} in a way consistent with our analysis of the other four languages.
-We obtained between (TODO) and (TODO) inflected nouns and between (TODO) and (TODO) inflected verbs in each language.
+We obtained between 7,328 (Hungarian) and 50,691 (Finnish) inflected nouns and between 2,735 (Hungarian) and 109,323 (Korean) inflected verbs in each language.
 
 
 % Mutual information depends on the frequencies at which different morphological forms are used. We thus selected agglutinative languages for which large-scale text corpora with morphological annotation was available.
@@ -580,7 +580,7 @@ We estimated memory-surprisal tradeoffs and computationally optimized orderings 
 \section{Results}
 Figures \ref{fig:auc_verbs} and \ref{fig:auc_nouns} show area under the curve (AUC) plots for random orders as compared to the real, natural order of morphemes for verbs and nouns, respectively.
 %Here, AUC refers to the area under the curve for the memory-surprisal tradeoff for each order, where the lower the AUC is, the more efficient that memory-surprisal tradeoff is.
-Across languages, and for both nouns and verbs, real orderings (TODO color) have lower AUC than most random baseline orderings (TODO stats), close to the computationally optimized orderings (TODO color) meaning that they enable more efficient memory-surprisal tradeoffs than most of the $N!$ possible orderings. 
+Across languages, and for both nouns and verbs, real orderings \mhahn{(TODO color)} have lower AUC than \mhahn{TODO}\% of the random baseline orderings, close to the computationally optimized orderings \mhahn{(TODO color)} meaning that they enable more efficient memory-surprisal tradeoffs than most of the $N!$ possible orderings. 
 
 Second, we evaluated to what extent real and optimized orderings agree in the orderings that they define, compared to the agreement between real and random orderings.
 Table \ref{tab:optimized_acc} shows the agreement of optimized and random baseline orderings with real orderings.
@@ -590,18 +590,16 @@ We defined three measures of agreement:
 Finally, \textit{Full (Types)} is analogous to \textit{Full} but only counts words that appear multiple times only once, in order to control for the possible effect of individual highly frequent forms.
 
 
-For nouns, the agreement between real and optimized orderings is perfect, far above the agreement with baseline grammars (TODO stats. how many baseline grammars are outperformed by optimized?).
-For verbs, agreement between real and optimized orderings is above 90\% for Hungarian, Turkish, Korean, Japanese, and Sesotho prefixes (TODO stats).
-For Sesotho suffixes, agreement is lower, though still better than X\% of baselines.
+For nouns, the agreement between real and optimized orderings is perfect, far above the agreement with baseline grammars. % (TODO stats. how many baseline grammars are outperformed by optimized?).
+For verbs, agreement between real and optimized orderings is above 90\% for Hungarian, Turkish, Korean, Japanese, and Sesotho prefixes, better than \mhahn{TODO}\% of the baseline grammars. % (TODO stats).
+For Sesotho suffixes, agreement is lower, though still better than \mhahn{TODO}\% of baselines.
 In Finnish, agreement between real and optimzed orderings is similar to agreement between real and baseline orderings (see below for discussion).
 
 Figures \ref{fig:real_and_optimized_nouns} and \ref{fig:real_and_optimized_verbs} directly compare real and optimized orderings for nouns and verbs respectively.
 The real and optimized noun orders show a perfect match.
-In particular, Greenberg's Universal (TODO) is recovered by all optimized orderings.
-The real and verb optimized orders show some disagreement in each language.
+In particular, Greenberg's Universal 39 is recovered by all optimized orderings.
+For verbs, real and verb optimized orders show some disagreement in each language.
 %Divergences in the real and optimized verbal morpheme orders will be analyzed more in the Discussion section. 
-
-%\becky{Refer to S3 to introduce this paragraph}
 Figure \ref{fig:optimized_and_universal_orders} compares the universal verb morpheme ordering to the optimized ordering for each language.
 Hungarian, Japanese, Korean, and Sesotho (suffixes and prefixes) match the universal ordering perfectly for the morphemes occurring in each of these languages. 
 Turkish matches the universal order except for the 3rd person plural agreement marker ``-lar-'', which is separated from the other agreement morphemes in both real and optimized orderings.
@@ -735,7 +733,7 @@ On active forms -- which, unlike the passive, are fully inflected for person and
   \end{tabular}
   
   
-    \caption{Real and optimized ordering (verbs)}
+    \caption{Real and optimized ordering for verb affixes. \mhahn{TODO make sure the language-specific morpheme slots such as ``Genitive'' and ``Clitic'' aren't confusing for the reader.}}
     \label{fig:real_and_optimized_verbs}
 \end{figure}
 
@@ -774,18 +772,18 @@ On active forms -- which, unlike the passive, are fully inflected for person and
   \include{figures/sesotho_suffixes/comparison-opt-uni}
     \end{minipage}
 \end{tabular}
-    \caption{Comparing optimized orders with the universal order described by \citep{bybee-morphology-1985}. \mhahn{TODO when running the final iteration of the models, merge Aspect/Tense/Mood into TAM for the universal order.}  Note that, for Sesotho prefixes, inversion of order relative to the universal order is expected, as the universal order indicates distance from the root, not absolute position. \mhahn{TODO for Sesotho prefixes, just flip the order in presentation.}}
+    \caption{Comparing optimized orders of verb affixes with the universal order described by \citep{bybee-morphology-1985}. \mhahn{It might be possible to remove this figure and instead indicate the match by introducing color coding to Figure 8, so it would become visually obvious there. What do you think?}}
     \label{fig:optimized_and_universal_orders}
 \end{figure}
 
 
 \section{Discussion}
 
-We have examined morpheme order in nouns and verbs in six morphologically rich and agglutinating languages, testing the recently propiosed Efficient Tradeoff Hypothesis \citep{hahn2020modeling} as an explanatory account of morpheme ordering.
+We have examined morpheme order in nouns and verbs in six morphologically rich and agglutinating languages, testing the recently proposed Memory-Surprisal Tradeoff \citep{Hahn2020modeling} as an explanatory account of morpheme ordering.
 We compared actual morpheme orderings to other possible orderings and to orderings optimized for efficiency of the memory-surprisal tradeoff.
 In most cases, we found that the real ordering provided more efficient tradeoffs than most alternative orderings.
 More importantly, we found that the real orderings match the optimal orderings in many respects.
-Ordering forms found in a corpus according according to real or optimized orderings yields the same orders in XXX of cases.
+Ordering forms found in a corpus according according to real or optimized orderings yields the same orders in the large majority of cases.
 In some cases, particularly for noun inflection, match between real and optimized orderings is perfect.
 Beyond language-specific ordering patterns, optimization recovers previously-documented language universals of morpheme order.
 These results support the idea that optimization for processing effort can explain universals of morpheme ordering.
@@ -813,10 +811,11 @@ These results support the idea that optimization for processing effort can expla
 
 In this section, we relate our results to existing explanatory accounts of morpheme ordering.
 In a review of research on morpheme ordering, \citet{manova2010modeling} % https://homepage.univie.ac.at/stela.manova/modeling%20affix%20order.pdf
-categorize approaches to morpheme ordering into three classes (similarly \citet{rice2000morpheme, rice2011principles}): orderings that are grammatically motivated by properties of syntax, semantics or phonology; orderings that are motivated by human cognition and statistical properties of language; and orderings that are arbitrarily stipulated.
-Our approach falls into the second class, explaining morpheme ordering based on minimization of human processing effort.
+categorize approaches to morpheme ordering into three classes (similarly \citet{rice2000morpheme, rice2011principles}): orderings that are motivated by properties of syntax, semantics or phonology; orderings that are motivated by human language processing responding to statistical properties of language; and orderings that are arbitrarily stipulated.
+%Our approach falls into the second class, explaining morpheme ordering based on minimization of human processing effort.
 In this section, we describe how our account relates to other accounts across these three clusters, and show how the memory-surprisal tradeoff has tight connections with notions proposed across seemingly very different accounts.
 
+%\mhahn{One can debate whether this trichotony is right -- e.g. Bybee's approach could be thought of as cognitive. What the second class 
 
 
 %- citing \cite{rice2000morpheme}; Manova and Aronoff 2010; Saarinen and Hay 2014
@@ -824,7 +823,7 @@ In this section, we describe how our account relates to other accounts across th
 %- extra-grammatical: frequency, productivity, parsability
 
 
-\subsubsection{Grammatical Motivations}
+\subsubsection{Motivations in Terms of Syntax and Meaning}
 
 A family of theories hold that morpheme ordering is motivated by constraints placed on morphology through the interaction with other aspects of grammar.
 The appriaches most relevant for our results are approaches in terms of the relation of morphology to syntax~\citep{baker1985the} and semantics~\citep{bybee-morphology-1985,rice2000morpheme}.
@@ -929,7 +928,7 @@ Furthermore, if the semantic propositions that speakers communicate are modeled 
 
 
 
-\subsubsection{Cognitive Motivations}
+\subsubsection{Motivations in Terms of Human Language Processing}
 
 A prominent cognitively-motivated theory of morpheme ordering is the theory of Complexity-Based Ordering \citep{hay2002speech,plag2002the,hay2004what,hay2005shifting,plag2009suffix}.
 This theory holds that affixes are closer to the root when they are less ``separable'', where separability indicates the productivity of an affix and the likelihood that affixes are processed separately with the base in human lexical access  \citep{baayen1993on}.
@@ -984,7 +983,7 @@ They tested this idea in a pilot study of Turkish, finding that high-informativi
 
 There are also studies suggesting language-specific and essentially arbitrary properties of morpheme ordering.
 A classical approach to describing morpheme ordering is in terms of levels, where morphemes from a higher level occur before morphemes from a lower level \citep{siegel1979topics}, and in terms of templates that describe the ordering of morphemes \citep{simpson1986pronominal,spencer1991morphological,stump1992on,inkelas1993nimboran,hyman2003suffix,nordlinger2010verbal}.
-Ordering based on language-specific templates has been proposed specifically in cases where observed morpheme ordering is in conflict with semantic scope, as can happen in Bantu languages \citep{hyman2003suffix}.
+Ordering based on language-specific templates has been proposed specifically in cases where observed morpheme ordering is in conflict with semantic scope, as in Bantu languages \citep{hyman2003suffix}.
 \citet{fabb1988english} prominently describes English affix ordering in terms of the selectional restrictions that individual affixes place on which other affixes they can attach to.
 While this approach does not make statements as to which affixes would go closer to the base in a given language, it does suggest that morpheme ordering is described based on the pairwise interactions between adjacent morphemes.
 In a similar vein, \citet{ryan2010variable} propose a model based on weighted bigram constraints in Tagalog, for the (rather uncommon) case of flexible morpheme ordering.
