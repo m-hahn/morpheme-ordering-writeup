@@ -272,7 +272,7 @@ TAM2      & MUS2$_7$ & Aorist/Imperfective, indirect & -mIş & \cite{schaaik2020
 Gen & \\
 \hline
 \end{tabular}
-	\caption{Verb suffixes in Turkish, arranged by slot. The first column describes slots as in Table TODO of the main paper. The second column lists the unique identifiers for each morpheme. The third column describes the function and meaning; the fourth column describes the phonological form (see Section~\ref{sec:vowel-harmony} for the meaning of the vowels I, A, E).}\label{tab:turkish-suffixes}
+	\caption{Verb suffixes in Turkish, arranged by slot. The first column describes slots as in Table \mhahn{TODO} of the main paper. The second column lists the unique identifiers for each morpheme. The third column describes the function and meaning; the fourth column describes the phonological form (see Section~\ref{sec:vowel-harmony} for the meaning of the vowels I, A, E).}\label{tab:turkish-suffixes}
 \end{table}
 
 
@@ -495,11 +495,14 @@ However, this is rare in the data, occurring only three times in the training se
 
 %\url{https://turkishexplained.com/vh1.htm}
 
+We represent words as sequences of abstract morphemes.
+In many languages, morphemes are subject to morphophonological changes depending on the other morphemes that they occur with, which means that morphemes can be expressed as different phoneme sequences depending on the environment.
+Such changes could be taken into account by explicitly distinguishing between different phonological expressions of the same morpheme.
+In most cases, such morphophonological processes only affect neighboring morphemes, but sometimes they involve interactions between non-adjacent morphemes.
+Among the languages in our sample, this is instantiated most extensively by Turkish vowel harmony.
+Turkish vowel harmony can largely be described in terms of two underlying vowels ``A'' and ``I'' whose realization depends on the last preceding vowel, as follows:
 
-Turkish vowel harmony can largely be described in terms of two underlying vowels ``A'' and ``I'' whose realization depends on the last preceding vowel.
-
-
-
+\begin{center}
     \begin{tabular}{l|llllll}
         Preceding & A & I \\ \hline
         a, I & a & I \\
@@ -507,11 +510,24 @@ Turkish vowel harmony can largely be described in terms of two underlying vowels
         o, u & a & u \\
         {\"o}, {\"u} & e & {\"u}
     \end{tabular}
-    
-For most suffixes, vowel harmony can be encoded in terms of one underlying form.
+\end{center}
+
+For most suffixes, vowel harmony can be encoded in terms of one underlying form (see Table~\ref{tab:turkish-suffixes}).
 The suffix AR$_6$ has the form ``Ar'' after most monosyllabic stems, and ``Ir'' after multisyllabic stems or one of 13 exceptional monosyllabic stems.
 
-TODO report results
+Vowel harmony can create dependencies between non-adjacent morphemes because the vowel of one morpheme can determine the vowels of multiple subsequent morphemes containing the vowels A or I.
+
+
+We asked whether our findings about the efficiency of Turkish verb suffix ordering continues to hold when explicitly account for vowel harmony.
+That is, we applied the same rules for vowel harmony to hypothetical affix orderings, and encoded realizations of the same morpheme differently when they are assigned different vowels.
+We repeated the same experiments as in the main paper, (i) comparing the AUC to other orderings, and (ii) comparing the optimized and real orderings.
+Results are shown in Figure~\ref{fig:turkish-harmony-results}.
+
+Real orderings have a lower AUC than almost all alternative orderings even when taking vowel harmony into account.
+Furthermore, optimized orderings recover the real orderings with higha ccuracy both in the ordering of the slots and in predicting orders for forms in the dataset \mhahn{TODO result}.
+
+
+\mhahn{TODO report results}
 
 \bibliography{literature}
 \bibliographystyle{natbib}
