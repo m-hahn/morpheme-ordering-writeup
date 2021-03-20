@@ -649,7 +649,7 @@ On active forms -- which, unlike the passive, are fully inflected for person and
     &
     \includegraphics[width=0.3\textwidth]{figures/hungarian_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     \end{tabular}
-    \caption{AUC Histograms for Noun Suffixes: We show a smoothed histogram of baseline orderings, and the AUC values for optimized, real, and reverse orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a Binomial confidence interval. \mhahn{TODO add missing bars \& quantiles}}
+    \caption{AUC Histograms for Noun Suffixes: We show a smoothed histogram of baseline orderings, and the AUC values for optimized, real, and reverse orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a Binomial confidence interval. Note that real and optimizesd orders and identical and thus indistinguishible in this figure.}
     \label{fig:auc_nouns}
 \end{figure}
 
@@ -658,14 +658,13 @@ On active forms -- which, unlike the passive, are fully inflected for person and
     \begin{tabular}{l|l|ll|ll|lllllll}
 %    &     &    \multicolumn{2}{c|}{Pairs} & \multicolumn{2}{c|}{Full} & \multicolumn{2}{c}{Full (Types)} \\
 %      &   &     Optim. & Baseline & Quantile. & 95\% CI  & Optim. & Baseline \\ \hline
-     &   &     Optim. & Baseline & Quantile. & 95\% CI  \\ \hline
+     &   &     Optim. & Baseline & Quantile  \\ \hline
      \input{figures/accuracies}
     \end{tabular}
     \caption{Accuracies in predicting morpheme ordering. `Optim.' indicates grammars optimized for AUC, `'Baseline' indicates randomly constructed weights.
     In each cell, we provide the mean and the standard deviation over orderings.
     We also show the fraction of baseline orderings with lower accuracy than the optimized order, with a 95\% binomial confidence interval.
     %`Pairs' indicates the fraction of pairs of morphemes occurring together in the same word that are ordered correctly. `Full' indicates the fraction of verb forms in the corpus that are ordered fully correctly. `Full (Types)' counts forms that occur multiple times only once, it thus down-weights the role of frequent forms.
-    \mhahn{TODO make the table look nicer}
     }
     \label{tab:optimized_acc}
 \end{table}
@@ -688,7 +687,7 @@ On active forms -- which, unlike the passive, are fully inflected for person and
   \end{minipage}
   \end{tabular}
   
-    \caption{Real and optimized ordering (nouns)}
+    \caption{Real and optimized ordering (nouns), Colors indicate universal position slots.}
     \label{fig:real_and_optimized_nouns}
 \end{figure}
 
