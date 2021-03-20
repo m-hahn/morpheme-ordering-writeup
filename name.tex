@@ -580,8 +580,6 @@ We estimated memory-surprisal tradeoffs and computationally optimized orderings 
 
 \section{Results}
 
-%\mhahn{TODO one thing that has to become a bit clearer is that we are explaining a substantial amount of copmplexity beyond the universals. We could also compare to baselines based on the universals. E.g. in Korean there is a huge amount of variance explained by AUC optimization even though not much happens in terms of the universals.}
-
 Figures \ref{fig:auc_verbs} and \ref{fig:auc_nouns} show area under the curve (AUC) plots for random orders as compared to the real order of morphemes for verbs and nouns, respectively.
 %Here, AUC refers to the area under the curve for the memory-surprisal tradeoff for each order, where the lower the AUC is, the more efficient that memory-surprisal tradeoff is.
 In most languages, and for both nouns and verbs, real orderings have lower AUC than the vast majority of random baseline orderings, even compared to most orderings that satisfy the universals, and close to the computationally optimized orderings, meaning that they enable more efficient memory-surprisal tradeoffs than most of the $N!$ possible orderings.
@@ -616,6 +614,8 @@ On active forms -- which, unlike the passive, are fully inflected for person and
 
 %Taking a step back and looking at all of these languages at a whole, we see that the languages' optimized orders tend to closely mirror Bybee's universal ordering, which also means that these languages also have a high level of agreement between them on the relative ordering of verbal morphemes. As such, it's possible to predict Bybee's universal ordering from looking at commonalities between optimized orders of natural languages. 
 
+
+\mhahn{TODO make clear that we are explaining the universals and language-specific patterns beyond those}
 
 %\becky{conclude}
 
@@ -664,16 +664,19 @@ On active forms -- which, unlike the passive, are fully inflected for person and
 
 \begin{table}[]
     \centering
-    \begin{tabular}{l|l|ll|ll|lllllll}
+    \begin{tabular}{l|l|l|ll|ll|llllll}
 %    &     &    \multicolumn{2}{c|}{Pairs} & \multicolumn{2}{c|}{Full} & \multicolumn{2}{c}{Full (Types)} \\
 %      &   &     Optim. & Baseline & Quantile. & 95\% CI  & Optim. & Baseline \\ \hline
-     &   &     Optim. & Baseline & Quantile  \\ \hline
+%     &   &     Optim. & Baseline & Quantile  \\ \hline
+     &   &     Optim. & \multicolumn{2}{|c}{Baseline (Random)} & \multicolumn{2}{|c|}{Baseline (Universals)}  \\ 
+     &  &            & Accuracy & Quantile & Accuracy & Quantile \\
+     \hline
      \input{figures/accuracies}
     \end{tabular}
     \caption{Accuracies in predicting morpheme ordering. `Optim.' indicates grammars optimized for AUC, `'Baseline' indicates randomly constructed weights.
     In each cell, we provide the mean and the standard deviation over orderings.
     We also show the fraction of baseline orderings with lower accuracy than the optimized order, with a 95\% binomial confidence interval.
-    \mhahn{could think about making this a set of small violin plots for each language, instead of providing numerical hard-to-think-about quantile infoemation}
+    \mhahn{could think about making this a set of small violin plots for each language, instead of providing numerical hard-to-think-about quantile information}
     }
     \label{tab:optimized_acc}
 \end{table}
