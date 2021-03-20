@@ -560,7 +560,7 @@ For instance, we represent \textit{juttu-i-hi-si} `into your stories' (Figure \r
 For each language, we parameterize possible morpheme orderings through the $N!$ possible orderings of the $N$ morpheme slots.
 Applying any such ordering to the forms extracted from the corpus results in a set of counterfactual forms with some associated memory-surprisal tradeoff curve; in particular, applying the real orderings (Figure \ref{tab:examples-verbs}) results in the actual morpheme sequences as found in the corpus.
 
-We compare the real orderings (\textit{real}) to three different kinds of alternative orderings: randomized morpheme orderings (\textit{random}), the reversed real orderings (\textit{reverse}), and morpheme orderings that are optimized to minimize AUC under the tradeoff curve (\textit{optimized}). 
+We compare the real orderings (\textit{real}) to four different kinds of alternative orderings: randomized morpheme orderings (\textit{random}), random morpheme orderings that respect the universals (\textit{universals}), the reversed real orderings (\textit{reverse}), and morpheme orderings that are optimized to minimize AUC under the tradeoff curve (\textit{optimized}). 
 
 We estimated memory-surprisal tradeoffs and computationally optimized orderings for the AUC under the tradeoff curve using the method of \citet{Hahn2020modeling}.
 
@@ -580,24 +580,26 @@ We estimated memory-surprisal tradeoffs and computationally optimized orderings 
 
 \section{Results}
 
-\mhahn{TODO one thing that has to become a bit clearer is that we are explaining a substantial amount of copmplexity beyond the universals. We could also compare to baselines based on the universals. E.g. in Korean there is a huge amount of variance explained by AUC optimization even though not much happens in terms of the universals.}
+%\mhahn{TODO one thing that has to become a bit clearer is that we are explaining a substantial amount of copmplexity beyond the universals. We could also compare to baselines based on the universals. E.g. in Korean there is a huge amount of variance explained by AUC optimization even though not much happens in terms of the universals.}
 
-Figures \ref{fig:auc_verbs} and \ref{fig:auc_nouns} show area under the curve (AUC) plots for random orders as compared to the real, natural order of morphemes for verbs and nouns, respectively.
+Figures \ref{fig:auc_verbs} and \ref{fig:auc_nouns} show area under the curve (AUC) plots for random orders as compared to the real order of morphemes for verbs and nouns, respectively.
 %Here, AUC refers to the area under the curve for the memory-surprisal tradeoff for each order, where the lower the AUC is, the more efficient that memory-surprisal tradeoff is.
-In most languages, and for both nouns and verbs, real orderings have lower AUC than the vast majority of random baseline orderings, close to the computationally optimized orderings meaning that they enable more efficient memory-surprisal tradeoffs than most of the $N!$ possible orderings.
+In most languages, and for both nouns and verbs, real orderings have lower AUC than the vast majority of random baseline orderings, even compared to most orderings that satisfy the universals, and close to the computationally optimized orderings, meaning that they enable more efficient memory-surprisal tradeoffs than most of the $N!$ possible orderings.
 Finnish verbs form the only ecxception; AUCs of real orderings are similar to those of baseline orderings (see below for discussion).
 
 Second, we evaluated to what extent real and optimized orderings agree in the orderings that they define, compared to the agreement between real and random orderings.
 Table \ref{tab:optimized_acc} shows the agreement of optimized and random baseline orderings with real orderings.
-We defined three measures of agreement:
-\textit{Pairs} counts what fraction of all pairs of affixes within a single word from the corpus are ordered in the same relative order under both orderings.
-\textit{Full} counts what fraction of words from the corpus is ordered entirely identically under both orderings.
-Finally, \textit{Full (Types)} is analogous to \textit{Full} but only counts words that appear multiple times only once, in order to control for the possible effect of individual highly frequent forms.
+We measured agreement by counting what fraction of all pairs of affixes within a single word from the corpus are ordered in the same relative order under both orderings (see SI Section X for other ways of quantifying agreement).
+%We defined three measures of agreement:
+%\textit{Pairs} counts what fraction of all pairs of affixes within a single word from the corpus are ordered in the same relative order under both orderings.
+%\textit{Full} counts what fraction of words from the corpus is ordered entirely identically under both orderings.
+%Finally, \textit{Full (Types)} is analogous to \textit{Full} but only counts words that appear multiple times only once, in order to control for the possible effect of individual highly frequent forms.
 
 
 For nouns, the agreement between real and optimized orderings is perfect, far above the agreement with baseline grammars. 
-For verbs, agreement between real and optimized orderings is above 90\% for Hungarian, Turkish, Korean, Japanese, and Sesotho prefixes, better than at least 80\% of the baseline grammars. 
-For Sesotho suffixes, agreement is lower, though still better than 82\% of baselines.
+For verbs, agreement between real and optimized orderings is above 90\% for Hungarian, Turkish, Korean, Japanese, and Sesotho prefixes, better than at least 80\% of the baseline grammars.
+With the exception of Hungarian, agreement is also higher than in almost all other orderingds satisfying the universals.
+For Sesotho suffixes, agreement is lower, though still better than $\approx$ 85\% of baselines, even when restricting to those that already satisfy the universals.
 In Finnish, agreement between real and optimzed orderings is similar to agreement between real and baseline orderings (see below for discussion).
 
 Figures \ref{fig:real_and_optimized_nouns} and \ref{fig:real_and_optimized_verbs} directly compare real and optimized orderings for nouns and verbs respectively.
@@ -616,6 +618,22 @@ On active forms -- which, unlike the passive, are fully inflected for person and
 
 
 %\becky{conclude}
+
+
+
+
+\begin{figure}
+\begin{tabular}{ccc}
+\textsc{Finnish} & \textsc{Turkish} & \textsc{Hungarian} \\
+    \includegraphics[width=0.3\textwidth]{figures/finnish_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+    &
+    \includegraphics[width=0.3\textwidth]{figures/turkish_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+    &
+    \includegraphics[width=0.3\textwidth]{figures/hungarian_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+    \end{tabular}
+    \caption{AUC Histograms for Noun Suffixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for optimized (red), real (green), and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a Binomial confidence interval. Note that real and optimizesd orders and identical and thus indistinguishible in this figure. }
+    \label{fig:auc_nouns}
+\end{figure}
 
 \begin{figure}
     \centering
@@ -639,23 +657,10 @@ On active forms -- which, unlike the passive, are fully inflected for person and
     \end{tabular}
 
     
-    \caption{AUC Histograms for Verb Affixes: We show a smoothed histogram of baseline orderings, and the AUC values for optimized, real, and reverse orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a Binomial confidence interval. }
+    \caption{AUC Histograms for Verb Affixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for optimized (red), real (green), and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a Binomial confidence interval. }
     \label{fig:auc_verbs}
 \end{figure}
 
-
-\begin{figure}
-\begin{tabular}{ccc}
-\textsc{Finnish} & \textsc{Turkish} & \textsc{Hungarian} \\
-    \includegraphics[width=0.3\textwidth]{figures/finnish_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
-    &
-    \includegraphics[width=0.3\textwidth]{figures/turkish_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
-    &
-    \includegraphics[width=0.3\textwidth]{figures/hungarian_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
-    \end{tabular}
-    \caption{AUC Histograms for Noun Suffixes: We show a smoothed histogram of baseline orderings, and the AUC values for optimized, real, and reverse orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a Binomial confidence interval. Note that real and optimizesd orders and identical and thus indistinguishible in this figure.}
-    \label{fig:auc_nouns}
-\end{figure}
 
 \begin{table}[]
     \centering
@@ -668,12 +673,12 @@ On active forms -- which, unlike the passive, are fully inflected for person and
     \caption{Accuracies in predicting morpheme ordering. `Optim.' indicates grammars optimized for AUC, `'Baseline' indicates randomly constructed weights.
     In each cell, we provide the mean and the standard deviation over orderings.
     We also show the fraction of baseline orderings with lower accuracy than the optimized order, with a 95\% binomial confidence interval.
-    %`Pairs' indicates the fraction of pairs of morphemes occurring together in the same word that are ordered correctly. `Full' indicates the fraction of verb forms in the corpus that are ordered fully correctly. `Full (Types)' counts forms that occur multiple times only once, it thus down-weights the role of frequent forms.
+    \mhahn{could think about making this a set of small violin plots for each language, instead of providing numerical hard-to-think-about quantile infoemation}
     }
     \label{tab:optimized_acc}
 \end{table}
 
-
+    %`Pairs' indicates the fraction of pairs of morphemes occurring together in the same word that are ordered correctly. `Full' indicates the fraction of verb forms in the corpus that are ordered fully correctly. `Full (Types)' counts forms that occur multiple times only once, it thus down-weights the role of frequent forms.
 
 \begin{figure}[]
 \begin{tabular}{cccccccc}
