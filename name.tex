@@ -580,7 +580,8 @@ We estimated memory-surprisal tradeoffs and computationally optimized orderings 
 \section{Results}
 Figures \ref{fig:auc_verbs} and \ref{fig:auc_nouns} show area under the curve (AUC) plots for random orders as compared to the real, natural order of morphemes for verbs and nouns, respectively.
 %Here, AUC refers to the area under the curve for the memory-surprisal tradeoff for each order, where the lower the AUC is, the more efficient that memory-surprisal tradeoff is.
-Across languages, and for both nouns and verbs, real orderings \mhahn{(TODO color)} have lower AUC than \mhahn{TODO}\% of the random baseline orderings, close to the computationally optimized orderings \mhahn{(TODO color)} meaning that they enable more efficient memory-surprisal tradeoffs than most of the $N!$ possible orderings. 
+In most languages, and for both nouns and verbs, real orderings have lower AUC than the vast majority of random baseline orderings, close to the computationally optimized orderings meaning that they enable more efficient memory-surprisal tradeoffs than most of the $N!$ possible orderings.
+Finnish verbs form the only ecxception; AUCs of real orderings are similar to those of baseline orderings (see below for discussion).
 
 Second, we evaluated to what extent real and optimized orderings agree in the orderings that they define, compared to the agreement between real and random orderings.
 Table \ref{tab:optimized_acc} shows the agreement of optimized and random baseline orderings with real orderings.
@@ -591,8 +592,8 @@ Finally, \textit{Full (Types)} is analogous to \textit{Full} but only counts wor
 
 
 For nouns, the agreement between real and optimized orderings is perfect, far above the agreement with baseline grammars. % (TODO stats. how many baseline grammars are outperformed by optimized?).
-For verbs, agreement between real and optimized orderings is above 90\% for Hungarian, Turkish, Korean, Japanese, and Sesotho prefixes, better than \mhahn{TODO}\% of the baseline grammars. % (TODO stats).
-For Sesotho suffixes, agreement is lower, though still better than \mhahn{TODO}\% of baselines.
+For verbs, agreement between real and optimized orderings is above 90\% for Hungarian, Turkish, Korean, Japanese, and Sesotho prefixes, better than at least 80\% of the baseline grammars. % (TODO stats).
+For Sesotho suffixes, agreement is lower, though still better than 82\% of baselines.
 In Finnish, agreement between real and optimzed orderings is similar to agreement between real and baseline orderings (see below for discussion).
 
 Figures \ref{fig:real_and_optimized_nouns} and \ref{fig:real_and_optimized_verbs} directly compare real and optimized orderings for nouns and verbs respectively.
@@ -600,8 +601,7 @@ The real and optimized noun orders show a perfect match.
 In particular, Greenberg's Universal 39 is recovered by all optimized orderings.
 For verbs, real and verb optimized orders show some disagreement in each language.
 %Divergences in the real and optimized verbal morpheme orders will be analyzed more in the Discussion section. 
-Figure \ref{fig:optimized_and_universal_orders} compares the universal verb morpheme ordering to the optimized ordering for each language.
-Hungarian, Japanese, Korean, and Sesotho (suffixes and prefixes) match the universal ordering perfectly for the morphemes occurring in each of these languages. 
+Comparing the universal verb morpheme ordering to the optimized ordering for each language, Hungarian, Japanese, Korean, and Sesotho (suffixes and prefixes) match the universal ordering perfectly for the morphemes occurring in each of these languages. 
 Turkish matches the universal order except for the 3rd person plural agreement marker ``-lar-'', which is separated from the other agreement morphemes in both real and optimized orderings.
 For Finnish, the optimized order is the same as the universal order except for the fact that the agreement marker comes closest to the root instead of furthest, which accounts for the low quantitative agreement observed in Table~\ref{tab:optimized_acc}.
 This can be traced to a peculiarity of the Finnish passive, which uses a single agreement marker that is only used for passives, and which does not distinguish between person and number categories (referred to as impersonal by \citep[Section 69]{karlsson1999finnish}).
@@ -728,48 +728,13 @@ On active forms -- which, unlike the passive, are fully inflected for person and
   \end{tabular}
   
   
-    \caption{Real and optimized ordering for verb affixes. \mhahn{TODO make sure the language-specific morpheme slots such as ``Genitive'' and ``Clitic'' aren't confusing for the reader. One option is to color-code the slots here as in the figure(s) earlier.}}
+    \caption{Real and optimized ordering for verb affixes.
+    \mhahn{TODO colors are missing in a few places}%\mhahn{TODO make sure the language-specific morpheme slots such as ``Genitive'' and ``Clitic'' aren't confusing for the reader. One option is to color-code the slots here as in the figure(s) earlier.}
+    }
     \label{fig:real_and_optimized_verbs}
 \end{figure}
 
 
-
-\begin{figure}
-\begin{tabular}{ccccccc}
-\textsc{Finnish} & \textsc{Hungarian} & \textsc{Turkish} \\
-\begin{minipage}{.3\textwidth}
-  \include{figures/finnish_verbs/comparison-opt-uni}
-    \end{minipage}
-    &
-    \begin{minipage}{.3\textwidth}
-  \include{figures/hungarian_verbs/comparison-opt-uni}
-    \end{minipage}
-        &
-    \begin{minipage}{.3\textwidth}
-  \include{figures/turkish_verbs/comparison-opt-uni}
-    \end{minipage} 
-    \\
-    \textsc{Korean} & \textsc{Japanese} & \textsc{Sesotho Prefixes} \\
-        \begin{minipage}{.3\textwidth}
-  \include{figures/korean/comparison-opt-uni}
-    \end{minipage}
-    &
-    \begin{minipage}{.3\textwidth}
-  \include{figures/japanese/comparison-opt-uni}
-    \end{minipage}
-        &
-    \begin{minipage}{.3\textwidth}
-  \include{figures/sesotho_prefixes/comparison-opt-uni}
-    \end{minipage}
-    \\
-    \textsc{Sesotho Suffixes} \\
-        \begin{minipage}{.3\textwidth}
-  \include{figures/sesotho_suffixes/comparison-opt-uni}
-    \end{minipage}
-\end{tabular}
-    \caption{Comparing optimized orders of verb affixes with the universal order described by \citep{bybee-morphology-1985}. \mhahn{It might be possible to remove this figure and instead indicate the match by introducing color coding to Figure 8, so it would become visually obvious there. What do you think?}}
-    \label{fig:optimized_and_universal_orders}
-\end{figure}
 
 
 \section{Discussion}
@@ -1175,4 +1140,44 @@ ball/.style = {circle, draw, align=center, anchor=north, inner sep=0}]
 
     \caption{Morpheme order across the six languages in our sample, matched with four universal categories (left).}
     \label{tab:examples-verbs}
+\end{figure}
+
+
+
+
+\begin{figure}
+\begin{tabular}{ccccccc}
+\textsc{Finnish} & \textsc{Hungarian} & \textsc{Turkish} \\
+\begin{minipage}{.3\textwidth}
+  \include{figures/finnish_verbs/comparison-opt-uni}
+    \end{minipage}
+    &
+    \begin{minipage}{.3\textwidth}
+  \include{figures/hungarian_verbs/comparison-opt-uni}
+    \end{minipage}
+        &
+    \begin{minipage}{.3\textwidth}
+  \include{figures/turkish_verbs/comparison-opt-uni}
+    \end{minipage} 
+    \\
+    \textsc{Korean} & \textsc{Japanese} & \textsc{Sesotho Prefixes} \\
+        \begin{minipage}{.3\textwidth}
+  \include{figures/korean/comparison-opt-uni}
+    \end{minipage}
+    &
+    \begin{minipage}{.3\textwidth}
+  \include{figures/japanese/comparison-opt-uni}
+    \end{minipage}
+        &
+    \begin{minipage}{.3\textwidth}
+  \include{figures/sesotho_prefixes/comparison-opt-uni}
+    \end{minipage}
+    \\
+    \textsc{Sesotho Suffixes} \\
+        \begin{minipage}{.3\textwidth}
+  \include{figures/sesotho_suffixes/comparison-opt-uni}
+    \end{minipage}
+\end{tabular}
+    \caption{Comparing optimized orders of verb affixes with the universal order described by \citep{bybee-morphology-1985}. \mhahn{It might be possible to remove this figure and instead indicate the match by introducing color coding to Figure 8, so it would become visually obvious there. What do you think?}}
+    \label{fig:optimized_and_universal_orders}
 \end{figure}
