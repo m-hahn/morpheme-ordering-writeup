@@ -323,7 +323,7 @@ In this work, we aim to test the Memory-Surprisal Tradeoff as a predictor of mor
 
 
 
-\section{Morpheme Ordering and Ordering Universals}
+\section{Morpheme Ordering and Ordering Universals}\label{sec:univ}
 
 %\jd{give this section more structure}
 
@@ -547,7 +547,7 @@ We used all six languages for verbs.
 For each language, we selected nouns and verbs based on the part-of-speech annotation in each corpus.
 We treated adjectives together with nouns in Hungarian, Finnish, and Turkish, and together with verbs in Korean and Japanese.
 
-We used available corpus annotation together with the grammatical literature on each language to determine which morphemes each extracted word was composed of (see SI Appendix, Section X for details).
+We used available corpus annotation together with the grammatical literature on each language to determine which morphemes each extracted word was composed of (see SI Appendix, Section S1 for details).
 
 
 
@@ -561,7 +561,7 @@ For instance, we represent \textit{juttu-i-hi-si} `into your stories' (Figure \r
 For each language, we parameterize possible morpheme orderings through the $N!$ possible orderings of the $N$ morpheme slots.
 Applying any such ordering to the forms extracted from the corpus results in a set of counterfactual forms with some associated memory-surprisal tradeoff curve; in particular, applying the real orderings (Figure \ref{tab:examples-verbs}) results in the actual morpheme sequences as found in the corpus.
 
-We compare the real orderings (\textit{real}) to four different kinds of alternative orderings: randomized morpheme orderings (\textit{random}), random morpheme orderings that respect the universals (\textit{universals}), the reversed real orderings (\textit{reverse}), and morpheme orderings that are optimized to minimize AUC under the tradeoff curve (\textit{optimized}). 
+We compare the real orderings (\textit{real}) to four different kinds of alternative orderings: randomized morpheme orderings (\textit{random}), random morpheme orderings that respect the universals discussed in Section \ref{sec:univ} (\textit{universals})\footnote{In addition to the two universals discussed there, they also respect the universal that derivational affixes are closer to the stem than inflectional affixes mentioned in the introduction.}, the reversed real orderings (\textit{reverse}), and morpheme orderings that are optimized to minimize AUC under the tradeoff curve (\textit{optimized}). 
 
 We estimated memory-surprisal tradeoffs and computationally optimized orderings for the AUC under the tradeoff curve using the method of \citet{Hahn2020modeling}.
 
@@ -609,7 +609,7 @@ For verbs, real and verb optimized orders show some disagreement in each languag
 Comparing the universal verb morpheme ordering to the optimized ordering for each language, Hungarian, Japanese, Korean, and Sesotho (suffixes and prefixes) match the universal ordering perfectly for the morphemes occurring in each of these languages. 
 Turkish matches the universal order except for the 3rd person plural agreement marker ``-lar-'', which is separated from the other agreement morphemes in both real and optimized orderings.
 For Finnish, the optimized order is the same as the universal order except for the fact that the agreement marker comes closest to the root instead of furthest, which accounts for the low quantitative agreement observed in Figure~\ref{tab:optimized_acc_verbs}.
-This can be traced to a peculiarity of the Finnish passive, which uses a single agreement marker that is only used for passives, and which does not distinguish between person and number categories (referred to as impersonal by \citep[Section 69]{karlsson1999finnish}).
+This can be traced to a peculiarity of the Finnish passive, which uses a single agreement marker that is only used for passives, and which does not distinguish between person and number categories (referred to as impersonal by \citet[Section 69]{karlsson1999finnish}).
 This means that the agreement marker has substantial mutual information with the voice morpheme, so that optimized orderings prefer agreement and voice morphemes to be adjacent.
 On active forms -- which, unlike the passive, are fully inflected for person and number -- optimized orderings place the agreement slot after the TAM slot, in agreement with the real ordering.
 
