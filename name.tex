@@ -587,7 +587,7 @@ In most languages, and for both nouns and verbs, real orderings have lower AUC t
 Finnish verbs form the only ecxception; AUCs of real orderings are similar to those of baseline orderings (see below for discussion).
 
 Second, we evaluated to what extent real and optimized orderings agree in the orderings that they define, compared to the agreement between real and random orderings.
-Table \ref{tab:optimized_acc} shows the agreement of optimized and random baseline orderings with real orderings.
+Figures \ref{tab:optimized_acc_nouns}--\ref{tab:optimized_acc_verbs} show the agreement of optimized and random baseline orderings with real orderings.
 We measured agreement by counting what fraction of all pairs of affixes within a single word from the corpus are ordered in the same relative order under both orderings (see SI Section X for other ways of quantifying agreement).
 %We defined three measures of agreement:
 %\textit{Pairs} counts what fraction of all pairs of affixes within a single word from the corpus are ordered in the same relative order under both orderings.
@@ -608,7 +608,7 @@ For verbs, real and verb optimized orders show some disagreement in each languag
 %Divergences in the real and optimized verbal morpheme orders will be analyzed more in the Discussion section. 
 Comparing the universal verb morpheme ordering to the optimized ordering for each language, Hungarian, Japanese, Korean, and Sesotho (suffixes and prefixes) match the universal ordering perfectly for the morphemes occurring in each of these languages. 
 Turkish matches the universal order except for the 3rd person plural agreement marker ``-lar-'', which is separated from the other agreement morphemes in both real and optimized orderings.
-For Finnish, the optimized order is the same as the universal order except for the fact that the agreement marker comes closest to the root instead of furthest, which accounts for the low quantitative agreement observed in Table~\ref{tab:optimized_acc}.
+For Finnish, the optimized order is the same as the universal order except for the fact that the agreement marker comes closest to the root instead of furthest, which accounts for the low quantitative agreement observed in Figure~\ref{tab:optimized_acc_verbs}.
 This can be traced to a peculiarity of the Finnish passive, which uses a single agreement marker that is only used for passives, and which does not distinguish between person and number categories (referred to as impersonal by \citep[Section 69]{karlsson1999finnish}).
 This means that the agreement marker has substantial mutual information with the voice morpheme, so that optimized orderings prefer agreement and voice morphemes to be adjacent.
 On active forms -- which, unlike the passive, are fully inflected for person and number -- optimized orderings place the agreement slot after the TAM slot, in agreement with the real ordering.
@@ -632,7 +632,7 @@ On active forms -- which, unlike the passive, are fully inflected for person and
     &
     \includegraphics[width=0.3\textwidth]{figures/hungarian_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     \end{tabular}
-    \caption{AUC Histograms for Noun Suffixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for optimized (red), real (green), and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a Binomial confidence interval. Note that real and optimizesd orders and identical and thus indistinguishible in this figure. }
+    \caption{AUC Histograms for Noun Suffixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for optimized (red), real (green), and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a Binomial confidence interval. Note that real and optimizesd orders and identical and thus indistinguishible in this figure. \mhahn{TODO i'll still make a color legend} }
     \label{fig:auc_nouns}
 \end{figure}
 
@@ -663,24 +663,21 @@ On active forms -- which, unlike the passive, are fully inflected for person and
 \end{figure}
 
 
-\begin{table}[]
+\begin{figure}[]
     \centering
-    \begin{tabular}{l|l|l|ll|ll|llllll}
-%    &     &    \multicolumn{2}{c|}{Pairs} & \multicolumn{2}{c|}{Full} & \multicolumn{2}{c}{Full (Types)} \\
-%      &   &     Optim. & Baseline & Quantile. & 95\% CI  & Optim. & Baseline \\ \hline
-%     &   &     Optim. & Baseline & Quantile  \\ \hline
-     &   &     Optim. & \multicolumn{2}{|c}{Baseline (Random)} & \multicolumn{2}{|c|}{Baseline (Universals)}  \\ 
-     &  &            & Accuracy & Quantile & Accuracy & Quantile \\
-     \hline
-     \input{figures/accuracies}
-    \end{tabular}
-    \caption{Accuracies in predicting morpheme ordering. `Optim.' indicates grammars optimized for AUC, `'Baseline' indicates randomly constructed weights.
-    In each cell, we provide the mean and the standard deviation over orderings.
-    We also show the fraction of baseline orderings with lower accuracy than the optimized order, with a 95\% binomial confidence interval.
-    \mhahn{could think about making this a set of small violin plots for each language, instead of providing numerical hard-to-think-about quantile information}
-    }
-    \label{tab:optimized_acc}
-\end{table}
+\includegraphics[width=0.7\textwidth]{figures/accuracies_nouns.pdf}
+    \caption{\mhahn{TODO i'll still rename Baseline to Random throughout the paper, so that ``Random'' and ``Universals'' are two types of baselines.}Accuracies in predicting noun morpheme ordering.
+    For the baselines, we provide both a smoothed violin plot of the distribution of accuracies, and the mean accuracy. For the optimized order, we show the accuracy. Comparisons between optimized and baseline (both random and based on universals) orderings are significant at $p<0.001$.}
+    \label{tab:optimized_acc_nouns}
+\end{figure}
+
+\begin{figure}[]
+    \centering
+\includegraphics[width=0.8\textwidth]{figures/accuracies_verbs.pdf}
+    \caption{Accuracies in predicting verb morpheme ordering.
+    For the baselines, we provide both a smoothed violin plot of the distribution of accuracies, and the mean accuracy. For the optimized order, we show the accuracy. Except for Finnish, comparisons between optimized and random baseline orderings are significant at $p<0.001$.}
+    \label{tab:optimized_acc_verbs}
+\end{figure}
 
     %`Pairs' indicates the fraction of pairs of morphemes occurring together in the same word that are ordered correctly. `Full' indicates the fraction of verb forms in the corpus that are ordered fully correctly. `Full (Types)' counts forms that occur multiple times only once, it thus down-weights the role of frequent forms.
 
@@ -1193,3 +1190,24 @@ ball/.style = {circle, draw, align=center, anchor=north, inner sep=0}]
     \caption{Comparing optimized orders of verb affixes with the universal order described by \citep{bybee-morphology-1985}. \mhahn{It might be possible to remove this figure and instead indicate the match by introducing color coding to Figure 8, so it would become visually obvious there. What do you think?}}
     \label{fig:optimized_and_universal_orders}
 \end{figure}
+
+
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{l|l|l|ll|ll|llllll}
+%    &     &    \multicolumn{2}{c|}{Pairs} & \multicolumn{2}{c|}{Full} & \multicolumn{2}{c}{Full (Types)} \\
+%      &   &     Optim. & Baseline & Quantile. & 95\% CI  & Optim. & Baseline \\ \hline
+%     &   &     Optim. & Baseline & Quantile  \\ \hline
+     &   &     Optim. & \multicolumn{2}{|c}{Baseline (Random)} & \multicolumn{2}{|c|}{Baseline (Universals)}  \\ 
+     &  &            & Accuracy & Quantile & Accuracy & Quantile \\
+     \hline
+     \input{figures/accuracies}
+    \end{tabular}
+    \caption{Accuracies in predicting morpheme ordering. `Optim.' indicates grammars optimized for AUC, `'Baseline' indicates randomly constructed weights.
+    In each cell, we provide the mean and the standard deviation over orderings.
+    We also show the fraction of baseline orderings with lower accuracy than the optimized order, with a 95\% binomial confidence interval.
+    \mhahn{could think about making this a set of small violin plots for each language, instead of providing numerical hard-to-think-about quantile information}
+    }
+    \label{tab:optimized_acc}
+\end{table}
