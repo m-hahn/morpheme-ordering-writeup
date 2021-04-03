@@ -257,71 +257,73 @@ The memory capacity is formalized as the average number of bits required to enco
     \operatorname{H}[m_t] := - \sum_m P(m_t = m) \log_2 P(m_t=m)
 \end{equation*}
 where $m$ runs over possible memory states.
-\citet{Hahn2020modeling} prove that there is a tradeoff between, on the one hand, the average surprisal $S\_M$, obtained by averaging $- \log P(w_t , m_t)$ across the words in a text, and the memory capacity $\operatorname{H}[m_t]$.
+\citet{Hahn2020modeling} prove that there is a tradeoff between, on the one hand, the average surprisal $S_M$, obtained by averaging $- \log P(w_t , m_t)$ across the words in a text, and the memory capacity $\operatorname{H}[m_t]$.
 
 %\mhahn{at this point illustrate with a figure?}
 
-Different orderings can lead to different tradeoffs that can differ in their efficiency (Figure~\ref{fig:tradeoff}).
-The efficiency of a tradeoff curve can be quantified using its Area under the Curve (AUC) \citet{Hahn2020modeling}. Lower values of AUC indicate a steeper decay of mutual information, and thus a more efficient tradeoff (Figure~\ref{fig:tradeoff}).
-Based on this notion, \citet{Hahn2020modeling} propose that human language orders elements in such a way that the memory-surprisal tradeoff curve has a particularly steep fall-off, compared to other possible orderings.
+Different orderings can lead to different tradeoffs that can differ in their efficiency (Figure~\ref{fig:tradeoff}): Tradeoffs are more efficient when comprehenders can achieve lower surprisal at the same amount of memoty.
+The efficiency of a tradeoff curve can be quantified using its Area under the Curve (AUC) \citet{Hahn2020modeling}: there is a smaller area under a more efficient tradeoff curve, such as that of Language A in Figure~\ref{fig:tradeoff}.
+%Lower values of AUC indicate a steeper decay of mutual information, and thus a more efficient tradeoff (Figure~\ref{fig:tradeoff}).
+\citet{Hahn2020modeling} propose that human language orders elements in such a way that the memory-surprisal tradeoff is particularly efficient, compared to other possible orderings.
 
 \begin{figure}
     \centering
-    \mhahn{TODO visualize the memory-surprisal tradeoff}
-    \caption{\mhahn{my plan for this figure is (i) curves for two languages A,B to show that tradeoffs can differ in their efficiency, (ii) a simple visualization of how AUC captures efficiency, (iii) a visualiation of MI $I_t$, (iv) a visualization of how the tradeoff curve is estimated based on $I_t$., (v) some kind of illustration of how locality leads to more efficient tradeoffs}}
+    \includegraphics[width=0.5\textwidth]{figures/tradeoff.pdf}
+    \caption{The memory-surprisal tradeoff in two hypothetical languages: In order to achieve a given level of surprisal, a comprehender has to invest a given amount of memory resources, which can be quantified information-theoretically in terms of bits. In this case, Language A provides a more efficient tradeoff because comprehenders can achieve lower surprisals at the same levels of memory load, compared to Language B.}
+    %\mhahn{my plan for this figure is (i) curves for two languages A,B to show that tradeoffs can differ in their efficiency, (ii) a simple visualization of how AUC captures efficiency, (iii) a visualiation of MI $I_t$, (iv) a visualization of how the tradeoff curve is estimated based on $I_t$., (v) some kind of illustration of how locality leads to more efficient tradeoffs}}
     \label{fig:tradeoff}
 \end{figure}
 
 
 To test this hypothesis, \citet{Hahn2020modeling} provide a method for estimating a bound on the memory-surprisal tradeoff from corpus data.
-This method is based on the notion of mutual information, which quantifies the amount of statistical association between two random variables.
-If $X, Z, Y$ are random variables, then the mutual information of $X$ and $Y$, conditioned on $Z$, is defined to be:
-\begin{align}
-\label{eq:mi}
-    \operatorname{I}[X:Y|Z] &\equiv \sum_{x,y,z} P(x,y,z) \log \frac{P(x,y,z)}{P(x,z)P(y,z)}. % \text{ bits} \\
-    %\nonumber
-    %&= \operatorname{H}[X,Z] - \operatorname{H}[X,Y,Z] \\
-    %\nonumber
-    %&= \operatorname{H}[Y,Z] - \operatorname{H}[Y,X,Z].
-\end{align}
-The key quantity derived from this is the mutual information between elements (such as morphemes) that are some distance $t$, conditioned on the intervening elements:
-\begin{equation*}
-    I_t \equiv \operatorname{I}[w_t : w_0 | w_1, \dots, w_{t-1}].
-\end{equation*}
-This is visualized in Figure~\ref{fig:tradeoff} (left): $I_t$ This quantifies how much predictive information the element $t$ steps into the past provides about the next element, on average across all sequences in the language.
-Based on this notion, \citet{Hahn2020modeling}  prove the following bound on the memory-surprisal tradeoff, visualized in Figure~\ref{fig:tradeoff} (center):
-\mhahn{QUESTION: I'm wondering whether it is necessary to explain the theorem formally, or whether there might be a benefit in being a bit less formal here and only doing a pictorial presentation, referring to the PsychReview paper for the formal detai;s.}
-\begin{thm}\label{prop:suboptimal}(Information locality bound, \citet{Hahn2020modeling})
-For any positive integer $T$, let $M$ be a memory encoding function such that
-\begin{equation}
-\label{eq:memory-bound}
-\operatorname{H}[m_t] \le \sum_{t=1}^T t I_t.
-\end{equation}
-Then we have a lower bound on the average surprisal $S_M$ under the memory encoding function $M$:
-\begin{equation}
-\label{eq:surprisal-bound}
-S_M \ge S_\infty + \sum_{t=T+1}^\infty I_t.
-\end{equation}
-where $S_\infty$ is the average surprisal that would be achieved with perfectly veridical memory representations.
-\end{thm}
-Figure~\ref{fig:tradeoff} (right) visualizes a key consequence of this theorem, namely an information-theoretic notion of locality called Information locality:
-Orderings optimize this tradeoff when elements with high mutual information are closer together.
-
-Information locality has had success as a predictor of word order \citep{futrell2019information}, in particular for universals of the order inside noun phrases \citep{culbertson2020from,hahn-information-theoretic-2018,DBLP:conf/acl/FutrellDS20}.
-
-
-
-\citet{Hahn2020modeling} argue that information locality derives a range of locality principles proposed in the linguistic literature.
-They provide evidence that it predicts closeness of syntactically related words.
-They also provide preliminary evidence that it accounts for some properties of morpheme ordering and formalizes \cite{bybee-morphology-1985}'s idea that morphemes are closer together when they are more relevant to each other, using data of verb inflection in two languages (Japanese and Sesotho).
-
-
+This method is based on the notion of mutual information \citep{cover2006elements}, which quantifies the amount of statistical association between two random variables.
+They show that tradeoffs are more efficient when elements are more strongly predicted by other nearby elements.
+They argue that this information-theoretic notion of locality derives a range of locality principles proposed in the linguistic literature.
+Beyond providing evidence that word orders provide efficient tradeoffs, they also provide preliminary evidence that it accounts for some properties of morpheme ordering and formalizes \cite{bybee-morphology-1985}'s idea that morphemes are closer together when they are more relevant to each other, using data of verb inflection in two languages (Japanese and Sesotho).
 
 In this work, we aim to test the Memory-Surprisal Tradeoff as a predictor of morpheme ordering more broadly, using data from more languages and from different parts of speech.
 
 
+%If $X, Z, Y$ are random variables, then the mutual information of $X$ and $Y$, conditioned on $Z$, is defined to be:
+%\begin{align}
+%\label{eq:mi}
+ %   \operatorname{I}[X:Y|Z] &\equiv \sum_{x,y,z} P(x,y,z) \log \frac{P(x,y,z)}{P(x,z)P(y,z)}. % \text{ bits} \\
+ %   %\nonumber
+ %   %&= \operatorname{H}[X,Z] - \operatorname{H}[X,Y,Z] \\
+ %   %\nonumber
+ %   %&= \operatorname{H}[Y,Z] - \operatorname{H}[Y,X,Z].
+%\end{align}
+%The key quantity derived from this is the mutual information between elements (such as morphemes) that are some distance $t$, conditioned on the intervening elements:
+%\begin{equation*}
+ %   I_t \equiv \operatorname{I}[w_t : w_0 | w_1, \dots, w_{t-1}].
+%\end{equation*}
+%This is visualized in Figure~\ref{fig:tradeoff} (left): $I_t$ This quantifies how much predictive information the element $t$ steps into the past provides about the next element, on average across all sequences in the language.
+%Based on this notion, \citet{Hahn2020modeling}  prove the following bound on the memory-surprisal tradeoff, visualized in Figure~\ref{fig:tradeoff} (center):
+%\mhahn{QUESTION: I'm wondering whether it is necessary to explain the theorem formally, or whether there might be a benefit in being a bit less formal here and only doing a pictorial presentation, referring to the PsychReview paper for the formal detai;s.}
+%\begin{thm}\label{prop:suboptimal}(Information locality bound, \citet{Hahn2020modeling})
+%For any positive integer $T$, let $M$ be a memory encoding function such that
+%\begin{equation}
+%\label{eq:memory-bound}
+%\operatorname{H}[m_t] \le \sum_{t=1}^T t I_t.
+%\end{equation}
+%Then we have a lower bound on the average surprisal $S_M$ under the memory encoding function $M$:
+%\begin{equation}
+%\label{eq:surprisal-bound}
+%S_M \ge S_\infty + \sum_{t=T+1}^\infty I_t.
+%\end{equation}
+%where $S_\infty$ is the average surprisal that would be achieved with perfectly veridical memory representations.
+%\end{thm}
+%Figure~\ref{fig:tradeoff} (right) visualizes a key consequence of this theorem, namely an information-theoretic notion of locality called Information locality:
+%Orderings optimize this tradeoff when elements with high mutual information are closer together.
 
-\section{Morpheme Ordering and Ordering Universals}
+%Information locality has had success as a predictor of word order \citep{futrell2019information}, in particular for universals of the order inside noun phrases \citep{culbertson2020from,hahn-information-theoretic-2018,DBLP:conf/acl/FutrellDS20}.
+
+
+\mhahn{I'm pondering to what extent it would be helpful to expound on the connection between the tradeoff and locality, to make the link to Bybee.}
+
+
+
+\section{Morpheme Ordering and Ordering Universals}\label{sec:univ}
 
 %\jd{give this section more structure}
 
@@ -358,31 +360,31 @@ This universal is supported by the example in Figure~\ref{fig:noun-inflection}.
 
 
 \begin{figure}
-\begin{tabular}{lllllllll}
-\textit{juttu-i-hi-si} \\
-Stem-Plural-Illative-2SgPoss \\
-`into your stories' (Finnish)
-\end{tabular}
-\begin{tabular}{lllllllll}
-	\textit{{\'e}rv-ei-k-et} \\
-Stem-Plural-3rdPlurPoss-Accusative \\
-`their arguments' (Hungarian)
-\end{tabular}
-\begin{tabular}{lllllllll}
-\textit{hareket-ler-im-den} \\
-Stem-Plural-1sgPoss-Ablative\\
-`from my actions' (Turkish) \\
-\end{tabular}
+\includegraphics[width=0.8\textwidth]{figures/noun-morphemes.pdf}
+%\begin{tabular}{lllllllll}
+%\textit{juttu-i-hi-si} \\
+%%Stem-Plural-Illative-2SgPoss \\
+%`into your stories' (Finnish)
+%\end{tabular}
+%\begin{tabular}{lllllllll}
+%	\textit{{\'e}rv-ei-k-et} \\
+%Stem-Plural-3rdPlurPoss-Accusative \\
+%`their arguments' (Hungarian)
+%\end{tabular}
+%\begin{tabular}{lllllllll}
+%\textit{hareket-ler-im-den} \\
+%Stem-Plural-1sgPoss-Ablative\\
+%`from my actions' (Turkish) \\
+%\end{tabular}
 
-%\mhahn{TODO make this a nice illustration of noun inflection appropriate for the audience}
 
-\caption{Noun inflection in the three languages in our sample. All three languages support Greenberg's Universal 39 by placing the case marker after the plural marker, but they differ in theplacement of the possessive marker. \mhahn{TODO make this look nicer, including color coding}}\label{fig:noun-inflection}
+\caption{Noun inflection in the three languages in our sample. All three languages support Greenberg's Universal 39 by placing the case marker after the plural marker, but they differ in theplacement of the possessive marker. \mhahn{TODO make this look nicer}}\label{fig:noun-inflection}
 \end{figure}
 
 
 
  \begin{figure}
-      \includegraphics[width=\textwidth]{figures/Screenshot from 2021-03-16 10-43-10.png}
+      \includegraphics[width=\textwidth]{figures/verb-morphemes.pdf}
  
 %     Valence:
 %\begin{tabular}{lllll}
@@ -431,8 +433,8 @@ Stem-Plural-1sgPoss-Ablative\\
 %& `I/you (sgd)/we/you (pl) open'
 %\end{tabular}
 
-\mhahn{TODO make this rough draft look nice, and make it cover all languages}
-\caption{Examples of verb inflection from the six languages in our sample.}\label{tab:examples-verbs}
+\mhahn{TODO make this rough draft look nice}
+\caption{Examples of verb inflection from the six languages in our sample. Colors indicate universal morpheme slots.}\label{tab:examples-verbs}
 \end{figure}
  
  
@@ -468,11 +470,11 @@ verb stem & valence & voice & TAM & subject agreement
 \end{adjustwidth}
 
 \textit{Valence} affixes (red in Figure~\ref{tab:examples-verbs}) change the number of arguments. A very common type of valence affix is a causative, which adds an argument indicating who causes an event or state to occur \citep{wals-111}.
-\textit{Voice} (green in Figure~\ref{tab:examples-verbs}) describes the distinction between active and passive (CITE). % An example is the Japanese passive suffix -\textit{(r)are}- (Figure~\ref{tab:examples-verbs}).
+\textit{Voice} (green in Figure~\ref{tab:examples-verbs}) describes the distinction between active and passive. % An example is the Japanese passive suffix -\textit{(r)are}- (Figure~\ref{tab:examples-verbs}).
 \textit{Tense-Aspect-Mood (TAM)} (blue in Figure~\ref{tab:examples-verbs}) comprises three types of categories.
 \textit{Aspect} describes how an event unfolds over time \citep{comrie1976aspect,dahl1985tense,binnick1991time}.
 %An example of aspect marking is the English progressive \textit{to be} ...-\textit{ing}, which indicates that an action is currently ongoing \citep{huddleston-cambridge-2002}.
-\textit{Tense} describes where an event is located in time (e.g. past or future, CITE).
+\textit{Tense} describes where an event is located in time (e.g. past or future).
 %Examples of tense and aspect marking are shown in Figure~\ref{tab:examples-verbs}.
 \textit{Mood} describes a relation between an event and the speaker, including an assessment of the event's reality \cite{palmer1986mood,portner2018mood}.
 %In analytical languages such as English, mood distinctions are often indicated using verbs such as \textit{might} or adverbs such as \textit{possibly}.
@@ -501,10 +503,10 @@ Figure~\ref{tab:examples-verbs} shows that the languages in our sample largely s
 
 
 While these are particularly common types of affixes, there are further types, some of which occur in the six languages of our sample.
-While agreement is most commonly established with the subject, \textit{agreement with the object} is found in Sesotho \citep{doke1967textbook} (in person and noun class) and in Hungarian \citep{rounds2001hungarian} (in definiteness); it is fused with subject agreement in the Hungarian and shares a slot with Valence in Sesotho (see SI Section TODO).
+While agreement is most commonly established with the subject, \textit{agreement with the object} is found in Sesotho \citep{doke1967textbook} (in person and noun class) and in Hungarian \citep{rounds2001hungarian} (in definiteness); it is fused with subject agreement in the Hungarian and shares a slot with Valence in Sesotho (see SI Sections S1).
 \textit{Polarity} refers to the opposition between affirmative (e.g. `she arrived') and negative  (e.g., `she did not arrive') statements \citep{wals-112}.
 \textit{Evidentiality} indicates on what evidence a speaker bases an assertion \citep{aikhenvald2003evidentiality}.
-\textit{Formality}, \text{honorifics}, and \text{politeness} are categories that index social relations between the speaker, the addressee, and the topic of the conversation (CITE).
+\textit{Formality}, \text{honorifics}, and \text{politeness} are categories that index social relations between the speaker, the addressee, and the topic of the conversation~\citep{hasegawa2014japanese, yeon2010korean}.
 In our sample, these are prominent in Korean and Japanese.
 The Japanese politeness marker -masu- and the Korean formality (-p) and politeness (-yo) suffixes index the social relation between the speaker and the addressee \citep{hasegawa2014japanese, yeon2010korean}; the Korean honorific suffix -si- indexes the social relation between the speaker and the topic of the conversation \citep{yeon2010korean}.
 Furthermore, verb forms can have affixes indicating the syntactic position of the verb within a sentence, in particular, affixes marking infinitives or other nonfinite forms.
@@ -545,7 +547,7 @@ We used all six languages for verbs.
 For each language, we selected nouns and verbs based on the part-of-speech annotation in each corpus.
 We treated adjectives together with nouns in Hungarian, Finnish, and Turkish, and together with verbs in Korean and Japanese.
 
-We used available corpus annotation together with the grammatical literature on each language to determine which morphemes each extracted word was composed of (see SI Appendix, Section X for details).
+We used available corpus annotation together with the grammatical literature on each language to determine which morphemes each extracted word was composed of (see SI Appendix, Section S1 for details).
 
 
 
@@ -559,7 +561,7 @@ For instance, we represent \textit{juttu-i-hi-si} `into your stories' (Figure \r
 For each language, we parameterize possible morpheme orderings through the $N!$ possible orderings of the $N$ morpheme slots.
 Applying any such ordering to the forms extracted from the corpus results in a set of counterfactual forms with some associated memory-surprisal tradeoff curve; in particular, applying the real orderings (Figure \ref{tab:examples-verbs}) results in the actual morpheme sequences as found in the corpus.
 
-We compare the real orderings (\textit{real}) to three different kinds of alternative orderings: randomized morpheme orderings (\textit{random}), the reversed real orderings (\textit{reverse}), and morpheme orderings that are optimized to minimize AUC under the tradeoff curve (\textit{optimized}). 
+We compare the real orderings (\textit{real}) to four different kinds of alternative orderings: randomized morpheme orderings (\textit{random}), random morpheme orderings that respect the universals discussed in Section \ref{sec:univ} (\textit{universals})\footnote{In addition to the two universals discussed there, they also respect the universal that derivational affixes are closer to the stem than inflectional affixes mentioned in the introduction.}, the reversed real orderings (\textit{reverse}), and morpheme orderings that are optimized to minimize AUC under the tradeoff curve (\textit{optimized}). 
 
 We estimated memory-surprisal tradeoffs and computationally optimized orderings for the AUC under the tradeoff curve using the method of \citet{Hahn2020modeling}.
 
@@ -578,22 +580,25 @@ We estimated memory-surprisal tradeoffs and computationally optimized orderings 
 %https://en.wiktionary.org/wiki/%EB%B0%94%EB%9D%BC%EB%8B%A4
 
 \section{Results}
-Figures \ref{fig:auc_verbs} and \ref{fig:auc_nouns} show area under the curve (AUC) plots for random orders as compared to the real, natural order of morphemes for verbs and nouns, respectively.
+
+Figures \ref{fig:auc_verbs} and \ref{fig:auc_nouns} show area under the curve (AUC) plots for random orders as compared to the real order of morphemes for verbs and nouns, respectively.
 %Here, AUC refers to the area under the curve for the memory-surprisal tradeoff for each order, where the lower the AUC is, the more efficient that memory-surprisal tradeoff is.
-In most languages, and for both nouns and verbs, real orderings have lower AUC than the vast majority of random baseline orderings, close to the computationally optimized orderings meaning that they enable more efficient memory-surprisal tradeoffs than most of the $N!$ possible orderings.
+In most languages, and for both nouns and verbs, real orderings have lower AUC than the vast majority of random baseline orderings, even compared to most orderings that satisfy the universals, and close to the computationally optimized orderings, meaning that they enable more efficient memory-surprisal tradeoffs than most of the $N!$ possible orderings.
 Finnish verbs form the only ecxception; AUCs of real orderings are similar to those of baseline orderings (see below for discussion).
 
 Second, we evaluated to what extent real and optimized orderings agree in the orderings that they define, compared to the agreement between real and random orderings.
-Table \ref{tab:optimized_acc} shows the agreement of optimized and random baseline orderings with real orderings.
-We defined three measures of agreement:
-\textit{Pairs} counts what fraction of all pairs of affixes within a single word from the corpus are ordered in the same relative order under both orderings.
-\textit{Full} counts what fraction of words from the corpus is ordered entirely identically under both orderings.
-Finally, \textit{Full (Types)} is analogous to \textit{Full} but only counts words that appear multiple times only once, in order to control for the possible effect of individual highly frequent forms.
+Figures \ref{tab:optimized_acc_nouns}--\ref{tab:optimized_acc_verbs} show the agreement of optimized and random baseline orderings with real orderings.
+We measured agreement by counting what fraction of all pairs of affixes within a single word from the corpus are ordered in the same relative order under both orderings (see SI Section X for other ways of quantifying agreement).
+%We defined three measures of agreement:
+%\textit{Pairs} counts what fraction of all pairs of affixes within a single word from the corpus are ordered in the same relative order under both orderings.
+%\textit{Full} counts what fraction of words from the corpus is ordered entirely identically under both orderings.
+%Finally, \textit{Full (Types)} is analogous to \textit{Full} but only counts words that appear multiple times only once, in order to control for the possible effect of individual highly frequent forms.
 
 
-For nouns, the agreement between real and optimized orderings is perfect, far above the agreement with baseline grammars. % (TODO stats. how many baseline grammars are outperformed by optimized?).
-For verbs, agreement between real and optimized orderings is above 90\% for Hungarian, Turkish, Korean, Japanese, and Sesotho prefixes, better than at least 80\% of the baseline grammars. % (TODO stats).
-For Sesotho suffixes, agreement is lower, though still better than 82\% of baselines.
+For nouns, the agreement between real and optimized orderings is perfect, far above the agreement with baseline grammars. 
+For verbs, agreement between real and optimized orderings is above 90\% for Hungarian, Turkish, Korean, Japanese, and Sesotho prefixes, better than at least 80\% of the baseline grammars.
+With the exception of Hungarian, agreement is also higher than in almost all other orderingds satisfying the universals.
+For Sesotho suffixes, agreement is lower, though still better than $\approx$ 85\% of baselines, even when restricting to those that already satisfy the universals.
 In Finnish, agreement between real and optimzed orderings is similar to agreement between real and baseline orderings (see below for discussion).
 
 Figures \ref{fig:real_and_optimized_nouns} and \ref{fig:real_and_optimized_verbs} directly compare real and optimized orderings for nouns and verbs respectively.
@@ -603,15 +608,33 @@ For verbs, real and verb optimized orders show some disagreement in each languag
 %Divergences in the real and optimized verbal morpheme orders will be analyzed more in the Discussion section. 
 Comparing the universal verb morpheme ordering to the optimized ordering for each language, Hungarian, Japanese, Korean, and Sesotho (suffixes and prefixes) match the universal ordering perfectly for the morphemes occurring in each of these languages. 
 Turkish matches the universal order except for the 3rd person plural agreement marker ``-lar-'', which is separated from the other agreement morphemes in both real and optimized orderings.
-For Finnish, the optimized order is the same as the universal order except for the fact that the agreement marker comes closest to the root instead of furthest, which accounts for the low quantitative agreement observed in Table~\ref{tab:optimized_acc}.
-This can be traced to a peculiarity of the Finnish passive, which uses a single agreement marker that is only used for passives, and which does not distinguish between person and number categories (referred to as impersonal by \citep[Section 69]{karlsson1999finnish}).
+For Finnish, the optimized order is the same as the universal order except for the fact that the agreement marker comes closest to the root instead of furthest, which accounts for the low quantitative agreement observed in Figure~\ref{tab:optimized_acc_verbs}.
+This can be traced to a peculiarity of the Finnish passive, which uses a single agreement marker that is only used for passives, and which does not distinguish between person and number categories (referred to as impersonal by \citet[Section 69]{karlsson1999finnish}).
 This means that the agreement marker has substantial mutual information with the voice morpheme, so that optimized orderings prefer agreement and voice morphemes to be adjacent.
 On active forms -- which, unlike the passive, are fully inflected for person and number -- optimized orderings place the agreement slot after the TAM slot, in agreement with the real ordering.
 
 %Taking a step back and looking at all of these languages at a whole, we see that the languages' optimized orders tend to closely mirror Bybee's universal ordering, which also means that these languages also have a high level of agreement between them on the relative ordering of verbal morphemes. As such, it's possible to predict Bybee's universal ordering from looking at commonalities between optimized orders of natural languages. 
 
 
+%\mhahn{TODO make clear that we are explaining the universals and language-specific patterns beyond those}
+
 %\becky{conclude}
+
+
+
+
+\begin{figure}
+\begin{tabular}{ccc}
+\textsc{Finnish} & \textsc{Turkish} & \textsc{Hungarian} \\
+    \includegraphics[width=0.3\textwidth]{figures/finnish_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+    &
+    \includegraphics[width=0.3\textwidth]{figures/turkish_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+    &
+    \includegraphics[width=0.3\textwidth]{figures/hungarian_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
+    \end{tabular}
+    \caption{AUC Histograms for Noun Suffixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for optimized (red), real (green), and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a Binomial confidence interval. Note that real and optimizesd orders and identical and thus indistinguishible in this figure. \mhahn{TODO i'll still make a color legend} }
+    \label{fig:auc_nouns}
+\end{figure}
 
 \begin{figure}
     \centering
@@ -635,41 +658,28 @@ On active forms -- which, unlike the passive, are fully inflected for person and
     \end{tabular}
 
     
-    \caption{AUC Histograms for Verb Affixes: We show a smoothed histogram of baseline orderings, and the AUC values for optimized, real, and reverse orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a Binomial confidence interval. }
+    \caption{AUC Histograms for Verb Affixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for optimized (red), real (green), and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a Binomial confidence interval. }
     \label{fig:auc_verbs}
 \end{figure}
 
 
-\begin{figure}
-\begin{tabular}{ccc}
-\textsc{Finnish} & \textsc{Turkish} & \textsc{Hungarian} \\
-    \includegraphics[width=0.3\textwidth]{figures/finnish_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
-    &
-    \includegraphics[width=0.3\textwidth]{figures/turkish_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
-    &
-    \includegraphics[width=0.3\textwidth]{figures/hungarian_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
-    \end{tabular}
-    \caption{AUC Histograms for Noun Suffixes: We show a smoothed histogram of baseline orderings, and the AUC values for optimized, real, and reverse orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a Binomial confidence interval. Note that real and optimizesd orders and identical and thus indistinguishible in this figure.}
-    \label{fig:auc_nouns}
+\begin{figure}[]
+    \centering
+\includegraphics[width=0.7\textwidth]{figures/accuracies_nouns.pdf}
+    \caption{\mhahn{TODO i'll still rename Baseline to Random throughout the paper, so that ``Random'' and ``Universals'' are two types of baselines.}Accuracies in predicting noun morpheme ordering.
+    For the baselines, we provide both a smoothed violin plot of the distribution of accuracies, and the mean accuracy. For the optimized order, we show the accuracy. Comparisons between optimized and baseline (both random and based on universals) orderings are significant at $p<0.001$.}
+    \label{tab:optimized_acc_nouns}
 \end{figure}
 
-\begin{table}[]
+\begin{figure}[]
     \centering
-    \begin{tabular}{l|l|ll|ll|lllllll}
-%    &     &    \multicolumn{2}{c|}{Pairs} & \multicolumn{2}{c|}{Full} & \multicolumn{2}{c}{Full (Types)} \\
-%      &   &     Optim. & Baseline & Quantile. & 95\% CI  & Optim. & Baseline \\ \hline
-     &   &     Optim. & Baseline & Quantile  \\ \hline
-     \input{figures/accuracies}
-    \end{tabular}
-    \caption{Accuracies in predicting morpheme ordering. `Optim.' indicates grammars optimized for AUC, `'Baseline' indicates randomly constructed weights.
-    In each cell, we provide the mean and the standard deviation over orderings.
-    We also show the fraction of baseline orderings with lower accuracy than the optimized order, with a 95\% binomial confidence interval.
+\includegraphics[width=0.8\textwidth]{figures/accuracies_verbs.pdf}
+    \caption{Accuracies in predicting verb morpheme ordering.
+    For the baselines, we provide both a smoothed violin plot of the distribution of accuracies, and the mean accuracy. For the optimized order, we show the accuracy. Except for Finnish, comparisons between optimized and random baseline orderings are significant at $p<0.001$.}
+    \label{tab:optimized_acc_verbs}
+\end{figure}
+
     %`Pairs' indicates the fraction of pairs of morphemes occurring together in the same word that are ordered correctly. `Full' indicates the fraction of verb forms in the corpus that are ordered fully correctly. `Full (Types)' counts forms that occur multiple times only once, it thus down-weights the role of frequent forms.
-    }
-    \label{tab:optimized_acc}
-\end{table}
-
-
 
 \begin{figure}[]
 \begin{tabular}{cccccccc}
@@ -882,7 +892,7 @@ Causative adds an argument indicating who makes an object freeze, and passive th
 A priori, semantic scope is different from mutual information.
 However, there are arguments that scope relations correlate with mutual information.
 \citet{culbertson2020from} made a related argument for the order of nominal modifiers as in ``the four green books'', where mutual information predicts the order of attachment of modifiers to the noun.
-Furthermore, if the semantic propositions that speakers communicate are modeled using a probabilistic language-of-thought grammar such as CITE, mutual information will also correlate with scope ordering (see SI Appendix Section X for a simulation study).
+%Furthermore, if the semantic propositions that speakers communicate are modeled using a probabilistic language-of-thought grammar such as mutual information will also correlate with scope ordering (see SI Appendix Section S4 for a simulation study).
 
 
 
@@ -901,7 +911,7 @@ This has an interesting relation to mutual information:
 If the compound form is very frequent, in relation to the baseline frequencies of the base and the affix, then there is high (pointwise) mutual information between them.
 
 Most closely related to our proposal, \citet{inkelas2016affix} proposed that morphemes are ordered together when they are informative about each other.
-They considered a notion of informativity introduced by \citet{priva2017informativity}, which is different from but related to the mutual information between adjacent morphemes $I_1$ (see SI Appendix Section TODO for details).
+They considered a notion of informativity introduced by \citet{priva2017informativity}, which is different from but related to the mutual information between adjacent morphemes $I_1$ (see SI Appendix Section S3 for details).
 %Formally (drawing on the notion of informativity defined by \citet{priva2017informativity}), they considered the informativity between a suffix $S_i$ and the preceding $S_{i-1}$ as 
 %\begin{equation}
 %    \sum_{S_{i-1}, S_{i}} \frac{P(S_{i-1} , S_i)}{P(S_i)} \log P(S_i | S_{i-1})
@@ -1018,7 +1028,7 @@ We have tested the recently proposed Efficient Tradeoff Hypothesis as a predicto
 We found that attested morpheme orders provide more efficient tradeoffs than most other possible orderings and that many properties of observed orderings are recovered by optimizing for tradeoff efficiency.
 With the exception of verb inflection in Finnish and Sesotho, we found that optimized orderings agree with the attested orderings in more than 90\% of forms found in corpora.
 Optimization also successfully predicts several universals of morpheme ordering, both for nouns and verbs.
-These results suggest that morpheme ordering reflects optimization pf processing efficiency across languages.
+These results suggest that morpheme ordering reflects optimization of processing efficiency across languages.
 %\jd{add concluding sentence tying all together}
 
 
@@ -1180,3 +1190,24 @@ ball/.style = {circle, draw, align=center, anchor=north, inner sep=0}]
     \caption{Comparing optimized orders of verb affixes with the universal order described by \citep{bybee-morphology-1985}. \mhahn{It might be possible to remove this figure and instead indicate the match by introducing color coding to Figure 8, so it would become visually obvious there. What do you think?}}
     \label{fig:optimized_and_universal_orders}
 \end{figure}
+
+
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{l|l|l|ll|ll|llllll}
+%    &     &    \multicolumn{2}{c|}{Pairs} & \multicolumn{2}{c|}{Full} & \multicolumn{2}{c}{Full (Types)} \\
+%      &   &     Optim. & Baseline & Quantile. & 95\% CI  & Optim. & Baseline \\ \hline
+%     &   &     Optim. & Baseline & Quantile  \\ \hline
+     &   &     Optim. & \multicolumn{2}{|c}{Baseline (Random)} & \multicolumn{2}{|c|}{Baseline (Universals)}  \\ 
+     &  &            & Accuracy & Quantile & Accuracy & Quantile \\
+     \hline
+     \input{figures/accuracies}
+    \end{tabular}
+    \caption{Accuracies in predicting morpheme ordering. `Optim.' indicates grammars optimized for AUC, `'Baseline' indicates randomly constructed weights.
+    In each cell, we provide the mean and the standard deviation over orderings.
+    We also show the fraction of baseline orderings with lower accuracy than the optimized order, with a 95\% binomial confidence interval.
+    \mhahn{could think about making this a set of small violin plots for each language, instead of providing numerical hard-to-think-about quantile information}
+    }
+    \label{tab:optimized_acc}
+\end{table}
