@@ -36,3 +36,4 @@ cp ../morpheme-ordering/utils/japanese/visualize/comparison.tex figures/japanese
 cp ../morpheme-ordering/utils/sesotho_prefixes/visualize/comparison.tex figures/sesotho_prefixes/
 cp ../morpheme-ordering/utils/sesotho_suffixes/visualize/comparison.tex figures/sesotho_suffixes/
 cp ../morpheme-ordering/utils/output/accuracies.tex figures/
+cp ../morpheme-ordering/utils/output/accuracies*pdf figures/
