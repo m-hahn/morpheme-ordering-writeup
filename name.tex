@@ -58,8 +58,6 @@
 \title{Morpheme Ordering across Languages reflects Optimization for Processing Efficiency}
 
 
-\author{Michael Hahn, Becky Mathew, Judith Degen}
-
 %\leftheader{Anonymous}
 
 
@@ -475,13 +473,12 @@ Under one kind of explanation, the order of morphemes reflects the order of form
 On the other hand, \citet{bybee-morphology-1985} points out that there are historically documented cases where morpheme ordering has been restructured in ways that do not reflect former independent words, but respect the universal tendencies documented in Section~\ref{sec:univ-verbs} (see also \citet{mithun2000the, haspelmath1993the, mithun1995affixation}; \citet[Section 15]{rice2000morpheme}).
 A related proposal postulates a correspondence between the order of words and morphemes on a purely synchronic basis as a constraint on possible human languages.
 \cite{baker1985the} proposed the Mirror Principle, which -- informally -- states that the order of elements (morphemes) in morphology reflects the order of elements (words) in syntax.
-However, this principle alone does not directly explain why elements are ordered the way they are in syntax and morphology. \mhahn{TODO think more about what to say here}
-
+However, this principle alone does not directly explain why elements are ordered the way they are in syntax and morphology.
 
 
 A prominent cognitively-motivated theory of morpheme ordering is the theory of Complexity-Based Ordering \citep{hay2002speech,plag2002the,hay2004what,hay2005shifting,plag2009suffix}.
 This theory holds that affixes are closer to the root when they are more likely to be processed together with the base in human lexical access  \citep{baayen1993on}.
-This theory has been applied to the order of derivational affixes in English, such as \mhahn{TODO}, but not to the affix ordering generalizations described in Sections~\ref{sec:univ-nouns}--\ref{sec:univ-verbs}.
+This theory has been applied to the order of derivational affixes in English,  but not to the affix ordering generalizations described in Sections~\ref{sec:univ-nouns}--\ref{sec:univ-verbs}.
 \citet{inkelas2016affix} proposed that morphemes are ordered together when they are informative about each other, using a notion of informativity introduced by \citet{priva2017informativity}. In a pilot study of Turkish, they found preliminary evidence that high-informativity suffixes are closer to the root.
 
 
@@ -536,15 +533,14 @@ where $m$ runs over possible memory states.
 %\mhahn{at this point illustrate with a figure?}
 
 Different orderings can lead to different tradeoffs that can differ in their efficiency (Figure~\ref{fig:tradeoff}): Tradeoffs are more efficient when comprehenders can achieve lower surprisal for the same amount of memory.
-The efficiency of a tradeoff curve can be quantified using its Area under the Curve (AUC) \citet{Hahn2020modeling}: there is a smaller area under a more efficient tradeoff curve, such as that of Language A in Figure~\ref{fig:tradeoff}.
-%Lower values of AUC indicate a steeper decay of mutual information, and thus a more efficient tradeoff (Figure~\ref{fig:tradeoff}).
+The efficiency of a tradeoff curve can be quantified using its Area under the Curve (AUC) \citep{Hahn2020modeling}: There is a smaller area under a more efficient tradeoff curve, such as that of Language A in Figure~\ref{fig:tradeoff}.
 \citet{Hahn2020modeling} propose the \textsc{Efficient Tradeoff Hyppthesis}: Human language orders elements in such a way that the memory-surprisal tradeoff is particularly efficient, compared to other possible orderings.
 
 \begin{figure}
     \centering
     \begin{tabular}{ccc}
     (A) & (B) \\
-    \includegraphics[width=0.5\textwidth]{figures/tradeoff.pdf} & TODO AUC
+    \includegraphics[width=0.5\textwidth]{figures/tradeoff.pdf} & \textcolor{red}{TODO visualize AUC here}
     \end{tabular}
     \caption{\textit{Left:} The memory-surprisal tradeoff in two hypothetical languages: In order to achieve a given level of surprisal, a comprehender has to invest a certain amount of memory resources, which can be quantified information-theoretically in terms of bits. In this case, Language A provides a more efficient tradeoff because comprehenders can achieve lower surprisal than Language B with the same  memory load.
     \textit{Right:} The Area under the Curve (AUC) for the two hypothetical languages. Language A has a lower AUC than Language B, corresponding to a more efficient memory-surprisal tradeoff.}
@@ -724,14 +720,11 @@ On active forms -- which, unlike the passive, are fully inflected for person and
 %\becky{conclude}
 
 
-\definecolor{baseline}{HTML}{F8766D}
-\definecolor{real}{HTML}{00BFC4}
-\definecolor{fitted}{HTML}{7CAE00}
-
-%RED = "#F8766D"
-%GREEN = "#7CAE00"
-%BLUE = "#00BFC4"
-%PURPLE = "#C77CFF"
+\definecolor{optimized}{HTML}{F8766D}
+\definecolor{random}{HTML}{A3A500}
+\definecolor{real}{HTML}{00BF7D}
+\definecolor{reverse}{HTML}{00B0F6}
+\definecolor{universals}{HTML}{E76BF3}
 
 
 \begin{figure}
@@ -745,19 +738,20 @@ On active forms -- which, unlike the passive, are fully inflected for person and
     \includegraphics[width=0.3\textwidth]{figures/hungarian_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     \end{tabular}
     
-    \begin{tabular}{llll}
-\textbf{\textcolor{fitted}{----}} Fitted&
+    \begin{tabular}{llllllll}
 \textbf{\textcolor{real}{----}} Real&
-\textbf{\textcolor{baseline}{----}} Baselines&
+\textbf{\textcolor{random}{----}} Random&
+\textbf{\textcolor{universals}{----}} Universals&
+\textbf{\textcolor{reverse}{----}} Reverse
 \end{tabular}
 \end{center}
     
-    \caption{AUC Histograms for Noun Suffixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for optimized (red), real (green), and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a binomial confidence interval. Note that real and optimizesd orders are identical and thus indistinguishible in this figure. \mhahn{TODO i'll still make a color legend} \mhahn{do something for the overlap. e.g. semitransparent, or change the colors, and make it clear in legend} }
+    \caption{AUC Histograms for Noun Suffixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for real (green) and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a binomial confidence interval. Optimizesd orderings are identical to real orderings in this figure, and thus not plotted.  }
     \label{fig:auc_nouns}
 \end{figure}
 
 \begin{figure}
-    \centering
+    \begin{center}
     \begin{tabular}{cccccc}
     \textsc{Finnish} & \textsc{Turkish} & \textsc{Hungarian} \\
         \includegraphics[width=0.3\textwidth]{figures/finnish_verbs/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
@@ -777,8 +771,15 @@ On active forms -- which, unlike the passive, are fully inflected for person and
             \includegraphics[width=0.3\textwidth]{figures/sesotho_suffixes/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     \end{tabular}
 
-    
-    \caption{AUC Histograms for Verb Affixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for optimized (red), real (green), and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a binomial confidence interval. \mhahn{TODO make a color legend} \mhahn{TODO figure out how to make those labels readblae}}
+    \begin{tabular}{llllllll}
+\textbf{\textcolor{real}{----}} Real&
+\textbf{\textcolor{optimized}{----}} Optimized&
+\textbf{\textcolor{random}{----}} Random&
+\textbf{\textcolor{universals}{----}} Universals&
+\textbf{\textcolor{reverse}{----}} Reverse
+\end{tabular}
+    \end{center}
+    \caption{AUC Histograms for Verb Affixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for optimized (red), real (green), and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a binomial confidence interval.}
     \label{fig:auc_verbs}
 \end{figure}
 
@@ -863,7 +864,7 @@ On active forms -- which, unlike the passive, are fully inflected for person and
   
     \caption{Real and optimized ordering for verb affixes. Colors indicate universal position slots as in Figure~\ref{tab:examples-verbs}.
     \mhahn{figure out how to make size of boxes large enough for text to fit in}%\mhahn{TODO make sure the language-specific morpheme slots such as ``Genitive'' and ``Clitic'' aren't confusing for the reader. One option is to color-code the slots here as in the figure(s) earlier.}
-    \mhahn{a possible further feature to consider might be a visual indication of the frequency of different morphemes. The idea being that the model's `errors' tend to concern low-frequency morphemes}
+    \mhahn{TODO make this look nicer}
     }
     \label{fig:real_and_optimized_verbs}
 \end{figure}
@@ -943,7 +944,7 @@ The idea that mutual information is an operationalization of semantic closeness 
 
 Other grammatical accounts explain morpheme order in terms of a parallelism to word order, either through diachronic fossilization of words into affixes or through synchronic constraints on language \citep{givon1971historical,venneman1973explanation,baker1985the}.
 As a theory of order at multiple levels, the Efficient Tradeoff Hypothesis is compatible with parallelism between morpheme and word order.
-\mhahn{TODO maybe say nore here}
+%\mhahn{TODO maybe say nore here}
 
 
 \paragraph{Relation to Previous Processing Accounts}
@@ -958,7 +959,7 @@ A statistical operationalization of separability is in terms of relative frequen
 affixes are more likely to be processed together with the root when the composite form has a higher frequency compared to the base form \citep{hay2001lexical}. % , lee2011ordering
 This has an interesting relation to mutual information: 
 If the compound form is very frequent, in relation to the baseline frequencies of the base and the affix, then there is high (pointwise) mutual information between them.
-\mhahn{Make clear that this theory hasn't been applied to the kinds of affix orderin generalizations that we look at in this paper.}
+%\mhahn{Make clear that this theory hasn't been applied to the kinds of affix orderin generalizations that we look at in this paper.}
 
 The Efficient Tradeoff Hypothesis is also related to the proposal of \citet{inkelas2016affix} that morphemes are ordered together when they are informative about each other.
 While their notion of informativity \citep{priva2017informativity} is different from mutual information, the two quantities are related (see SI Appendix Section X for details).
