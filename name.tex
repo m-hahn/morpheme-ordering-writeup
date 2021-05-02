@@ -164,16 +164,13 @@ Our work adds to a growing body of work suggesting that many properties of langu
 %\begin{abstract}
 %\end{abstract}
 
-
-\mhahn{major todos (i) make nicer visualizations, (ii) fill in missing citations, (iii) tie up loose ends here and in SI and get final results for all experiments}
-
 \section{Introduction}
 
 Human language encodes thoughts into linear strings of words, and ultimately sounds.
 Across languages, words are composed of morphemes, commonly defined as the smallest meaning-bearing units of language~\citep{courtenay1895attempt,bloomfield1926a,katamba2006morphology}.
 %In many cases, words can be segmented into a sequence of morphemes, as in
 For instance, the English word ``runners'' can be decomposed into three morphemes: the root \textit{run-} indicating an action, the suffix \textit{-er-} indicating someone performing an action, and plural \textit{-s} indicating a group of several referents.
-The order of morphemes within a word follows well-documented cross-linguistic tendencies. For instance, derivational morphemes (e.g., English \textit{-er} deriving nouns from verbs) are ordered closer to the root than inflectional morphemes (e.g., English plural \textit{-s}) \becky{citation for cross-linguistic tendencies?}.
+The order of morphemes within a word follows well-documented cross-linguistic tendencies \citep{greenberg-universals-1963, bybee-morphology-1985, baker1985the}. For instance, derivational morphemes (e.g., English \textit{-er} deriving nouns from verbs) are ordered closer to the root than inflectional morphemes (e.g., English plural \textit{-s}).
 %
 %Another well-documented universal applying to languages with richer morphology is Greenbergs' Universal 39:
 %Plural markers tend to be closer to noun stems than case markers \citep[112]{greenberg1963universals}. %(see Section~\ref{sec:univ-nouns} below).
@@ -182,26 +179,25 @@ In morphologically rich languages, nouns and verbs often have a string of two or
 
 Explaining these linguistic universals has been an important subject of study \citep{bybee-morphology-1985, spencer2006linguistic, manova2010modeling, bauer2010an, rice2011principles}.
 Explanations of morpheme ordering have been stated in terms of correspondences between morpheme order and morpheme meanings \citep{bybee-morphology-1985,rice2000morpheme}, parallelism between morphology and syntax \citep{givon1971historical,venneman1973explanation,baker1985the}, and human morphological processing and usage frequencies \citep{hay2002speech, plag2002the, inkelas2016affix}. %\jd{can a generalization be drawn about the high-level ways in which these accounts differ?}
-Explanations of the first kind state that morphemes are ordered based on differences in semantic scope \citep{rice2000morpheme} or relevance \citep{bybee-morphology-1985}, so that morphemes with higher relevance or narrower scope are closer to the root.
+Explanations of the first kind state that morphemes are ordered based on differences in semantic scope \citep{rice2000morpheme} or relevance \citep{bybee-morphology-1985}, so that morphemes are ordered in relation to the closeness of their semantic relationship with the root.
 Explanations of the second kind proposes that principles of morpheme ordering mirror principles of word order, due to either language history or synchronic constraints on language.
 Explanations of the third kind argue that affixes are closer to the root when they are more likely to be processed together with it.
 
 A recent theory proposes a cognitive explanation for word and morpheme order in language, arguing that ordering universals in language optimize processing effort under memory limitations \citep{Hahn2020modeling}.
 \citet{Hahn2020modeling} introduce the notion of a \emph{memory-surprisal tradeoff}: The more memory resources a comprehender invests in representing the context preceding the currently observed word, the lower the achievable surprisal that the comprehender must incur on that word. Conversely, the less memory is invested, the higher the surprisal.
 \citet{Hahn2020modeling} argue that order of words and morphemes in language optimizes this tradeoff.
-They show that ptimizing the memory-surprisal tradeoff amounts to placing elements close together when they predict each other strongly, as measured by mutual information.
-While focused on explaining word order across 54 languages, \citet{Hahn2020modeling} also test whether two languages optimize the memory-surprisal tradeoff at the morphological level. In particular, they find that optimizing the memory-surprisal tradeoff partly reproduces the morpheme order of Japanese and Sesotho. They also suggest that mutual information formalizes previous notions of strength of semantic association between morphemes \citep{bybee-morphology-1985}. %, such as \cite{bybee-morphology-1985}'s notion of \textit{relevance}.
+They show that optimizing the memory-surprisal tradeoff amounts to placing elements close together when they predict each other strongly, as measured by mutual information.
+%They also suggest that mutual information formalizes previous notions of strength of semantic association between morphemes \citep{bybee-morphology-1985}. %, such as \cite{bybee-morphology-1985}'s notion of \textit{relevance}.
+\citet{Hahn2020modeling} argue that this property of the memory-surprisal tradeoff generalizes previous processing theories which suggest that orderings tend to place together elements that are syntactically related \citep{rijkhoff-word-1986, hawkins-performance-1994}, conceptually related \citep{givon1985iconicity}, semantically relevant to each other \citep{bybee-morphology-1985}, or processed together in lexical access \citep{hay2004what}.
+While focused on explaining word order across 54 languages, \citet{Hahn2020modeling} also test whether two languages optimize the memory-surprisal tradeoff at the morphological level. In particular, they find that optimizing the memory-surprisal tradeoff partly reproduces the morpheme order of Japanese and Sesotho.
 
 
-
-\mhahn{TODO here say more about how the tradeoff differs from other processing theories.}
-
-
-relation to prior processing proposals:
-
-- surprisal
-
-- locality -- generalized to information locality
+%that the memory-surprisal tradeoff is more efficient when elements that are highly predictive of each other are placed together more closely.
+% \citep{Hahn2020modeling}
+%\mhahn{TODO here say more about how the tradeoff differs from other processing theories.}
+%relation to prior processing proposals:
+%- surprisal
+%- locality -- generalized to information locality
 
 
 Here, we test this theory on a broader basis.
@@ -431,17 +427,14 @@ Having introduced the two universal generalizations about noun and verb affixes,
 
 
 
-\subsection{Previous Accounts of Morpheme Ordering}
+\subsection{Previous Accounts of Morpheme Ordering}\label{sec:previous}
 
 Here, we review previous explanatory accounts for morpheme ordering and motivate our study.
-In a review of research on morpheme ordering, \citet{manova2010modeling} % https://homepage.univie.ac.at/stela.manova/modeling%20affix%20order.pdf
-categorize approaches to morpheme ordering into three classes (similarly \citet{rice2000morpheme, rice2011principles}): orderings that are motivated by properties of syntax, semantics or phonology; orderings that are motivated by human language processing responding to statistical properties of language; and orderings that are arbitrarily stipulated.
+%In a review of research on morpheme ordering, \citet{manova2010modeling} % https://homepage.univie.ac.at/stela.manova/modeling%20affix%20order.pdf
+%categorize approaches to morpheme ordering into three classes (similarly \citet{rice2000morpheme, rice2011principles}): orderings that are motivated by properties of syntax, semantics or phonology; orderings that are motivated by human language processing responding to statistical properties of language; and orderings that are arbitrarily stipulated.
 %Our approach falls into the second class, explaining morpheme ordering based on minimization of human processing effort.
 %In this section, we describe how our account relates to other accounts across these three \becky{four?} clusters, and show how the memory-surprisal tradeoff has tight connections with notions proposed across seemingly very different accounts.
-
-
-
-Prominent accounts are in terms of a correspondence between morpheme ordering and semantics~\citep{bybee-morphology-1985,rice2000morpheme}.
+Prominent accounts of morpheme ordering universals are in terms of a correspondence between morpheme ordering and semantics~\citep{bybee-morphology-1985,rice2000morpheme}.
 \citet{bybee-morphology-1985} argues ordering is determined by the semantic relevance of affixes to the root.
 For example, she argues that morphemes changing a verb's argument structure, such as passives and causatives, have a particularly strong relation to the verb's semantics, as they fundamentally alter the nature of the event described, whereas tense or agreement markers are much less tightly linked the the verb's meaning.
 In this account, \textit{relevance} is defined informally and no operationalization is provided.
@@ -456,9 +449,9 @@ The order of affixes corresponds to the order in which the meanings of these suf
 The causative affix adds an argument indicating who makes an object freeze, and the passive affix then removes that argument, yielding a verb describing something that is being frozen by someone.
 
 
-While this account is successful at predicting the order of valence and voice (with the exception of anti-scope orderings in some languages, \citep{...}), it is less straightforwardly evaluated for other affixes, and its predictions can depend on the specifics of how meaning is represented (see SI Section XXX for discussion).
+While this account is successful at predicting the order of valence and voice (with the exception of anti-scope orderings in some languages, \citep{...}), it is less straightforwardly evaluated for other affixes, and its predictions can depend on the specifics of how meaning is represented (see SI Section XXX for more on this).
 There are also cases where semantically equivalent affixes are ordered differently in different languages, e.g., possessive suffices are ordered differently in Finnish nouns than in Hungarian and Turkish nouns, seemingly without a motivating difference in semantic scope; the scope-based theory makes no prediction about how a given language will order the affixes.
-This even applies to elements that are clearly scope-bearing, for instance, negation appears closer to the root than TAM in Rukish and farther from it in Sesotho.
+This even applies to elements that are clearly scope-bearing, for instance, negation appears closer to the root than TAM in Turkish and farther from it in Sesotho.
 
 
 
@@ -489,26 +482,30 @@ However, this principle alone does not directly explain why elements are ordered
 A prominent cognitively-motivated theory of morpheme ordering is the theory of Complexity-Based Ordering \citep{hay2002speech,plag2002the,hay2004what,hay2005shifting,plag2009suffix}.
 This theory holds that affixes are closer to the root when they are more likely to be processed together with the base in human lexical access  \citep{baayen1993on}.
 This theory has been applied to the order of derivational affixes in English, such as \mhahn{TODO}, but not to the affix ordering generalizations described in Sections~\ref{sec:univ-nouns}--\ref{sec:univ-verbs}.
-
-
-
+\citet{inkelas2016affix} proposed that morphemes are ordered together when they are informative about each other, using a notion of informativity introduced by \citet{priva2017informativity}. In a pilot study of Turkish, they found preliminary evidence that high-informativity suffixes are closer to the root.
 
 
 \section{Locality and the Memory--Surprisal Tradeoff}
 
-Here, we review the memory-surprisal tradeoff and the Efficient Tradeoff Hypothesis as an explanatory principle of order in language.
+Here, we review the memory-surprisal tradeoff and the Efficient Tradeoff Hypothesis as an explanatory principle of order in language, before we then test the Efficient Tradeoff Hypothesis as a predictor of morpheme order in Section~\ref{seq:testing}.
 
-\jd{include more signposting in this section -- tell the reader why we're going through the memory-surprisal tradeoff}
+%\jd{include more signposting in this section -- tell the reader why we're going through the memory-surprisal tradeoff}
 
-\mhahn{TODO}
+%\mhahn{TODO}
 A long line of work in linguistics has proposed principles of locality to account for word order regularities within and across languages.
-An early example is \citet{behaghel1932deutsche}, who argued that elements that are closer together in meaning are closer together in form.
-In word order, the Head Adjacency or Proximity principles of \citet{frazier1985syntactic,rijkhoff-word-1986} state that words are close to their syntactic heads, and this generalization has since found strong empirical support from data in many languages~\citep[e.g.][]{hawkins-performance-1994,liu2008dependency, futrell-large-scale-2015-1, liu-dependency-2017}.
-In morpheme ordering, \citet{bybee-morphology-1985} argues that morphemes are closer to the root when they are more relevant to it; \citet{hay2002speech} \jd{are there multiple hays that are being cited, or why is the j. showing up here?} and \citet{plag2002the} argue that morphemes are closer to the root when they are more likely to be processed together with the root.
+%An early example is \citet{behaghel1932deutsche}, who argued that elements that are closer together in meaning are closer together in form.
+In word order, the Head Adjacency or Proximity principles of \citet{frazier1985syntactic,rijkhoff-word-1986} state that words are close to their syntactic heads, a generalization that has found strong empirical support from data in many languages~\citep[e.g.][]{hawkins-performance-1994,liu2008dependency, futrell-large-scale-2015-1, liu-dependency-2017}.
+Explanations of these principles suggest that placing syntactically related words closer together makes human syntactic parsing more efficient and less sensitive to limitations in human memory \citep{frazier1985syntactic, gibson1998linguistic, hawkins-efficiency-2003, futrell-noisy-context-2017}.
+Another group of theories holds holds that elements are closer together in linear order when they are semantically closer together in their meaning because this makes linear order iconically reflect relations between meanings \citep{givon1985iconicity}.
 
-Such locality principles have been explained in terms of iconicity in form-meaning correspondence \citep{givon1985iconicity}, and in terms of memory and efficiency in online processing \citep{frazier1985syntactic, gibson1998linguistic, hawkins-efficiency-2003, futrell-noisy-context-2017}. \jd{need to expand: what is the iconicity epxlanation? what is the processing explanation?}\mhahn{this now happens in S2}
+In morpheme ordering, \citet{bybee-morphology-1985} argues that morphemes are closer to the root when they are more relevant to it; \citet{hay2002speech} and \citet{plag2002the} argue that morphemes are closer to the root when they are more likely to be processed together with the root in human lexical access.
+
+%Such locality principles have been explained in terms of iconicity in form-meaning correspondence, and in terms of memory and efficiency in online processing , and lexical access.
+
+
 %Based on considerations of memory limitations, \citet{futrell-noisy-context-2017} derived an information-theoretic locality principle that states that words are close to each other when they are highly predictive of each other (see also \citet{culbertson2020from}).
 %This principle of information locality TODO
+
 \citet{Hahn2020modeling} proposed a cognitive principle that aims to unify and formalize these locality principles in the form of a Memory--Surprisal Tradeoff.
 This is a cognitive account of the order of words and morphemes in human language, based on a formalization of memory efficiency in incremental processing.
 The memory-surprisal tradeoff links information-theoretic models of memory limitations with surprisal theory.
@@ -545,8 +542,12 @@ The efficiency of a tradeoff curve can be quantified using its Area under the Cu
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/tradeoff.pdf}
-    \caption{The memory-surprisal tradeoff in two hypothetical languages: In order to achieve a given level of surprisal, a comprehender has to invest a certain amount of memory resources, which can be quantified information-theoretically in terms of bits. In this case, Language A provides a more efficient tradeoff because comprehenders can achieve lower surprisal than Language B with the same  memory load. This is also reflected in Language A's lower AUC than Language B. \mhahn{TODO add AUC}}
+    \begin{tabular}{ccc}
+    (A) & (B) \\
+    \includegraphics[width=0.5\textwidth]{figures/tradeoff.pdf} & TODO AUC
+    \end{tabular}
+    \caption{\textit{Left:} The memory-surprisal tradeoff in two hypothetical languages: In order to achieve a given level of surprisal, a comprehender has to invest a certain amount of memory resources, which can be quantified information-theoretically in terms of bits. In this case, Language A provides a more efficient tradeoff because comprehenders can achieve lower surprisal than Language B with the same  memory load.
+    \textit{Right:} The Area under the Curve (AUC) for the two hypothetical languages. Language A has a lower AUC than Language B, corresponding to a more efficient memory-surprisal tradeoff.}
     %\mhahn{my plan for this figure is (i) curves for two languages A,B to show that tradeoffs can differ in their efficiency, (ii) a simple visualization of how AUC captures efficiency, (iii) a visualiation of MI $I_t$, (iv) a visualization of how the tradeoff curve is estimated based on $I_t$., (v) some kind of illustration of how locality leads to more efficient tradeoffs}}
     \label{fig:tradeoff}
 \end{figure}
@@ -604,14 +605,14 @@ We review connections between the Efficient Tradeoff Hypothesis and previous the
 %Information locality has had success as a predictor of word order \citep{futrell2019information}, in particular for universals of the order inside noun phrases \citep{culbertson2020from,hahn-information-theoretic-2018,DBLP:conf/acl/FutrellDS20}.
 
 
-\becky{I think it's not 100\% clear to me how the memory-surprisal theory differs from previous work on locality that used memory and processing. Did they not use surprisal?} \jd{agreed that the intro (section 1) should include a little more info on similarities and differences in processing theories}
+%\becky{I think it's not 100\% clear to me how the memory-surprisal theory differs from previous work on locality that used memory and processing. Did they not use surprisal?} \jd{agreed that the intro (section 1) should include a little more info on similarities and differences in processing theories}
 
 
 
-\section{Testing the Efficient Tradeoff Hypothesis}
+\section{Testing the Efficient Tradeoff Hypothesis}\label{seq:testing}
 %\jd{...or modify the heading in a different way that clearly marks what's happening in the study (i think you don't set up the efficient tradeoff hypothesis in this paper)}
 
-\jd{include more signposting here: be clear about the overall research strategy (no more than 3 sentences telling reader what to expect), instead of making the reader reconstruct it by reading the next three sections}
+%\jd{include more signposting here: be clear about the overall research strategy (no more than 3 sentences telling reader what to expect), instead of making the reader reconstruct it by reading the next three sections}
 
 
 We test the Efficient Tradeoff Hypothesis as a predictor of morpheme ordering.
@@ -660,7 +661,7 @@ If the Efficient Tradeoff Hypothesis accounts for morpheme ordering, then we exp
 We also expect that optimized orderings largely match the real orderings, to a higher degree than most other possible orderings.
 If the Efficient Tradeoff Hypothesis predicts morpheme order even beyond the two universals, then real orderings should be more efficient even than most other orderings respecting the universals, and optimized orderings should resemble real orderings more than most other orderings respecting the universals.
 
-\jd{great, but why? why are we comparing real orderings to alternatives? and why these alternatives? ie, what will we learn by doing this? and/or what are the predictions? and do these predictions differ from those of alternative accounts put forth in the literature?}
+%\jd{great, but why? why are we comparing real orderings to alternatives? and why these alternatives? ie, what will we learn by doing this? and/or what are the predictions? and do these predictions differ from those of alternative accounts put forth in the literature?}
 
 
 
@@ -711,7 +712,7 @@ This can be traced to a crosslinguistically uncommon peculiarity of the Finnish 
 This means that the agreement marker has substantial mutual information with the voice morpheme, and optimized orderings prefer agreement and voice morphemes to be adjacent.
 On active forms -- which, unlike the passive, are fully inflected for person and number -- optimized orderings place the agreement slot after the TAM slot, in agreement with the real ordering.
 
-\mhahn{what would the random accuracy be in predicting?}
+%\mhahn{what would the random accuracy be in predicting?}
 
 
 
@@ -723,9 +724,18 @@ On active forms -- which, unlike the passive, are fully inflected for person and
 %\becky{conclude}
 
 
+\definecolor{baseline}{HTML}{F8766D}
+\definecolor{real}{HTML}{00BFC4}
+\definecolor{fitted}{HTML}{7CAE00}
+
+%RED = "#F8766D"
+%GREEN = "#7CAE00"
+%BLUE = "#00BFC4"
+%PURPLE = "#C77CFF"
 
 
 \begin{figure}
+\begin{center}
 \begin{tabular}{ccc}
 \textsc{Finnish} & \textsc{Turkish} & \textsc{Hungarian} \\
     \includegraphics[width=0.3\textwidth]{figures/finnish_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
@@ -734,7 +744,15 @@ On active forms -- which, unlike the passive, are fully inflected for person and
     &
     \includegraphics[width=0.3\textwidth]{figures/hungarian_nouns/suffixes-byMorphemes-auc-hist-heldout-Coarse-FineSurprisal-optimized.pdf}
     \end{tabular}
-    \caption{AUC Histograms for Noun Suffixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for optimized (red), real (green), and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a Binomial \becky{lowercase} confidence interval. Note that real and optimizesd orders are identical and thus indistinguishible in this figure. \mhahn{TODO i'll still make a color legend} \becky{Are histograms the same as density plots? I guess smoothed histograms are?} \becky{Possibly an issue with my eyes / color judgements, but the brown line doesn't look brown. Looks pretty yellow.} \mhahn{do something for the overlap. e.g. semitransparent, or change the colors, and make it clear in legend} \mhahn{TODO do this} \mhahn{TODO make a color legend} }
+    
+    \begin{tabular}{llll}
+\textbf{\textcolor{fitted}{----}} Fitted&
+\textbf{\textcolor{real}{----}} Real&
+\textbf{\textcolor{baseline}{----}} Baselines&
+\end{tabular}
+\end{center}
+    
+    \caption{AUC Histograms for Noun Suffixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for optimized (red), real (green), and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a binomial confidence interval. Note that real and optimizesd orders are identical and thus indistinguishible in this figure. \mhahn{TODO i'll still make a color legend} \mhahn{do something for the overlap. e.g. semitransparent, or change the colors, and make it clear in legend} }
     \label{fig:auc_nouns}
 \end{figure}
 
@@ -760,7 +778,7 @@ On active forms -- which, unlike the passive, are fully inflected for person and
     \end{tabular}
 
     
-    \caption{AUC Histograms for Verb Affixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for optimized (red), real (green), and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a Binomial confidence interval. \mhahn{TODO make a color legend} \mhahn{TODO figure out how to make those labels readblae}}
+    \caption{AUC Histograms for Verb Affixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for optimized (red), real (green), and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a binomial confidence interval. \mhahn{TODO make a color legend} \mhahn{TODO figure out how to make those labels readblae}}
     \label{fig:auc_verbs}
 \end{figure}
 
@@ -780,8 +798,8 @@ On active forms -- which, unlike the passive, are fully inflected for person and
     \centering
 \includegraphics[width=0.8\textwidth]{figures/accuracies_verbs.pdf}
     \caption{Accuracies in predicting verb morpheme ordering.
-    For the baselines, we provide both a smoothed violin plot of the distribution of accuracies, and the mean accuracy. For the optimized order, we show the accuracy.
-    In all languages, optimized orderings provide higher accuracy than the mean of the random baselines at $p<0.001$. \mhahn{perhaps also give the numerical quantiles, at least in the main text}}
+    For the baselines, we provide both a smoothed violin plot of the distribution of accuracies, and the mean accuracy as a horizontal line (green and blue). For the optimized order, we show the accuracy as a horizontal line (red).
+    In all languages, optimized orderings provide higher accuracy than the mean of the random baselines at $p<0.001$.}
     \label{tab:optimized_acc_verbs}
 \end{figure}
 
@@ -845,6 +863,7 @@ On active forms -- which, unlike the passive, are fully inflected for person and
   
     \caption{Real and optimized ordering for verb affixes. Colors indicate universal position slots as in Figure~\ref{tab:examples-verbs}.
     \mhahn{figure out how to make size of boxes large enough for text to fit in}%\mhahn{TODO make sure the language-specific morpheme slots such as ``Genitive'' and ``Clitic'' aren't confusing for the reader. One option is to color-code the slots here as in the figure(s) earlier.}
+    \mhahn{a possible further feature to consider might be a visual indication of the frequency of different morphemes. The idea being that the model's `errors' tend to concern low-frequency morphemes}
     }
     \label{fig:real_and_optimized_verbs}
 \end{figure}
@@ -859,8 +878,8 @@ On active forms -- which, unlike the passive, are fully inflected for person and
 We have examined morpheme order in nouns and verbs in six morphologically rich and agglutinating languages, testing the recently proposed Efficient Tradeoff Hypothesis \citep{Hahn2020modeling} as an explanatory account of morpheme ordering.
 We compared actual morpheme orderings to other possible orderings and to orderings optimized for efficiency of the memory-surprisal tradeoff.
 In most cases, we found that the real ordering provided more efficient tradeoffs than most alternative orderings.
-More importantly, we found that the real orderings match the optimal orderings in many respects.
-Ordering forms found in a corpus according to real or optimized orderings yields the same orders in the large majority of cases. \becky{A little hard to understand -- maybe just delete this previous sentence?}
+More importantly, we found that the real orderings match the optimal orderings with high accuracy.
+%Ordering forms found in a corpus according to real or optimized orderings yields the same orders in the large majority of cases. \becky{A little hard to understand -- maybe just delete this previous sentence?}
 In some cases, particularly for noun inflection, the match between real and optimized orderings is perfect.
 Beyond language-specific ordering patterns, optimization recovers previously-documented language universals of morpheme order.
 These results support the idea that optimization for processing effort can explain universals of morpheme ordering.
@@ -869,41 +888,33 @@ These results support the idea that optimization for processing effort can expla
 
 
 
+\subsection{Limitations}
+
+%- limitations of computational estimation of the memory-surprisal tradeoff. %However: As the set of all moprphological forms of a language is typically finite (CITE), we believe that these limitations play a smaller role in morpheme order, compared to word order.
+
+A limitation of this study is that memory-surprisal tradeoffs are estimated on finite datasets that do not cover all possible morphological forms of a language. However, to the extent that this limitation impacts the estimation of memory-surprisal tradeoffs, it should equally apply to real and counterfactual orderings. We thus do not expect the relative measured efficiencies of different orderings to be impacted by the finiteness of data.
+
+Due to limitations in data availability, this study builds on languages from Eurasia and Africa, not representing Australia and America.
+Among the languages, Hungarian and Finnish are genetically related, sharing a common ancestor about 5,000 years ago \citep{maurits2020best}.
+There is also some evidence for genetic relations beyond these (Japanese, Korean, Turkish), but such relations would have to be quite ancient.
+Importantly, the morphemes found in these languages as considered here are generally not cognate.
+Thus, the commonalities in languages found cannot be traced to inherited orderings of morphemes inherited from a common ancestor.
+Furthermore, we note that the optimality of different orderings crucially depend not on the morphemes themselves (which might be inherited), but on the frequencies of different forms (e.g., of singulars and plurals).
+
+
+%- genre of data: written. but Sesotho is spoken (child-directed)
+%A further limitation relates to the selection of languages.
+%The six languages considered in this study are spoken in Eurasia and Africa, not representing Australia and America.
+
+
 \subsection{Relation to previous accounts}
 
 
-
-\paragraph{Relation to Previous Theories} here explain link to bybee
-
-We suggest that mutual information provides an operational formalization of semantic relevance. \becky{Should this be explained earlier in the paper?}
-For instance, we expect that passive markers have a high mutual information with the verb stem, since only certain verbs (typically a subclass of the transitive verbs) can form a passive.
-The idea that mutual information is an operationalization of semantic closeness has also been suggested in other places; for instance, \citep{culbertson2020from} link mutual information to conceptual closeness as a driving factor of noun phrase modification.
-
-\mhahn{I'm pondering to what extent it would be helpful to expound on the connection between the tradeoff and locality, to make the link to Bybee.} \jd{i think it would be very helpful. currently the connection to bybee feels a little off the cuff and unmotivated. it would be worth being more explicit about bybee's notion of relevance, and why we think MI is a good formalization of it.}
-
-
-
-
-%\subsubsection{Semantic Scope; Syntactic Structure; Historical Development}
-%Morpheme ordering has been described from the perspective 
-%Besides the explanation of broad typological tendencies, which we are interested in here, the linguistic literature has also debated at which level of linguistic representation morpheme ordering should be described, proposing accounts located at different levels such as the syntax-phonology interface \citep{baker1985the} and an autonomous layer of morphological description \citep{hyman2003suffix}.
-%TODO also template vs scope vs...
-%We do not see the memory--surprisal tradeoff as competing with or contradicting these studies.
-%Rather, it specifies tendencies for ordering that could be implemented at different levels of linguistic description.
-
-%\paragraph{Revelance and Proximity}
-
-
-%A related family of explanations holds that those affixes are closest to the root that are most relevant to the root.
-%Our optimized orders of Turkish and Hungarian \becky{Are there other languages?} perfectly match Bybee's proposed universal verbal inflection order (Figure REF).
-%This suggests that high mutual information generally correlates with semantic relevance. 
-
-
-In this section, we relate our results to existing explanatory accounts of morpheme ordering.
+In this section, we relate our results to existing explanatory accounts of morpheme ordering reviewed in Section~\ref{sec:previous}.
 In a review of research on morpheme ordering, \citet{manova2010modeling} % https://homepage.univie.ac.at/stela.manova/modeling%20affix%20order.pdf
-categorize approaches to morpheme ordering into three classes (similarly \citet{rice2000morpheme, rice2011principles}): orderings that are motivated by properties of syntax, semantics or phonology; orderings that are motivated by human language processing responding to statistical properties of language; and orderings that are arbitrarily stipulated.
-%Our approach falls into the second class, explaining morpheme ordering based on minimization of human processing effort.
-In this section, we describe how our account relates to other accounts across these three \becky{four?} clusters, and show how the memory-surprisal tradeoff has tight connections with notions proposed across seemingly very different accounts.
+categorize approaches to morpheme ordering into three classes (similarly \citet{rice2000morpheme, rice2011principles}): orderings that are motivated by properties of syntax, semantics or phonology (\textit{grammatical theories}); orderings that are motivated by human language processing responding to statistical properties of language (\textit{processing theories}); and orderings that are arbitrarily stipulated  (\textit{arbitrary orderings}).
+Our approach falls into the second class, explaining morpheme ordering based on minimization of human processing effort.
+In this section, we describe how our account relates to other accounts across these three clusters, and show how the memory-surprisal tradeoff has tight connections with notions proposed across seemingly very different accounts.
 
 %\mhahn{One can debate whether this trichotony is right -- e.g. Bybee's approach could be thought of as cognitive. What the second class 
 
@@ -913,45 +924,32 @@ In this section, we describe how our account relates to other accounts across th
 %- extra-grammatical: frequency, productivity, parsability
 
 
-\paragraph{Relation to Syntactic Theories}
+\paragraph{Relation to Grammatical Theories}
 
-
-It has long been observed that the order of morphemes often parallels the order of independent words of corresponding meanings \citep{givon1971historical,venneman1973explanation,baker1985the}.
-One explanation for this is that the order of morphemes reflects the order of formerly independent elements that have been fossilized into bound morphemes, which can often be verified in languages where historical data is available \citep{givon1971historical,venneman1973explanation}.
-On the other hand, \citet{bybee-morphology-1985} points out that there are historically documented cases where morpheme ordering has been restructured in ways that do not reflect former independent words, but respect the universal tendencies proposed by her \becky{``that she proposed" instead of ``proposed by her" ?} (see also \citet{mithun2000the, haspelmath1993the, mithun1995affixation}; \citet[Section 15]{rice2000morpheme}).
-A correspondence between the order of words and morphemes has also been postulated on a purely synchronic basis as a constraint on possible human languages.
-\cite{baker1985the} proposed the Mirror Principle, which -- informally -- states that the order of elements (morphemes) in morphology reflects the order of elements (words) in syntax.
-A large body of work in theoretical syntax describes word and morpheme order using the same processes and principles \citep{halle1993distributed}.
-
-As a theory of order at multiple levels, the Efficient Tradeoff Hypothesis is compatible with these different historical paths and predicts these ordering patterns independently of the historical path leading to the morphemes found in a given language.
-
-
-
-\paragraph{Relation to Semantic Theories}
-
-\citet{bybee-morphology-1985} argues that semantic relevance determines ordering.
-For example, morphemes changing a verb's argument structure, such as passives and causatives, have a particularly strong relation to the verb's semantics, as they fundamentally alter the nature of the event described, whereas tense or agreement markers are much less tightly linked the the verb's meaning.
-We suggest that mutual information provides an operational formalization of semantic relevance. \becky{Should this be explained earlier in the paper?}
-For instance, we expect that passive markers have a high mutual information with the verb stem, since only certain verbs (typically a subclass of the transitive verbs) can form a passive.
+\citet{bybee-morphology-1985} argues that morphemes that are semantically more relevant to the root are ordered closer to it.
+We suggest that mutual information provides an operational formalization of semantic relevance.
+For instance, according to Bybee, passive markers are more relevant to the root than TAM markers, as they alter the verb's argument structure.
+We also expect that they have high mutual information with the verb stem, since only certain verbs (typically a subclass of the transitive verbs) can form a passive.
 The idea that mutual information is an operationalization of semantic closeness has also been suggested in other places; for instance, \citep{culbertson2020from} link mutual information to conceptual closeness as a driving factor of noun phrase modification.
 
 
-A second prominent semantic account is in terms of semantic scope \citep{rice2000morpheme}.
-This is the idea that morphemes are ordered in the order in which their meanings combine \citep[e.g.,][]{rice2000morpheme, caballero2010scope,  narrog2010the, korotkova2010deriving}.
-The relative ordering of valence and voice is a good example for the scope-based explanation.
-Valence affixes change the number of arguments, and passive (voice) promotes one argument to the subject position.
-
-A priori, semantic scope is different from mutual information.
-However, there are arguments that scope relations correlate with mutual information.
-\citet{culbertson2020from} made a related argument for the order of nominal modifiers as in ``the four green books'', where mutual information predicts the order of attachment of modifiers to the noun.
+%A similar argument can be made for the scope-based account, which holds that morphemes are ordered in the order in which their meanings combine to form the meaning of the full word \citep{rice2000morpheme}.
+%However, there are arguments that scope relations correlate with mutual information.
+%\citet{culbertson2020from} made a related argument for the order of nominal modifiers as in ``the four green books'', where mutual information predicts the order of attachment of modifiers to the noun.
 %Furthermore, if the semantic propositions that speakers communicate are modeled using a probabilistic language-of-thought grammar such as mutual information will also correlate with scope ordering (see SI Appendix Section S4 for a simulation study).
 
 
 
+
+Other grammatical accounts explain morpheme order in terms of a parallelism to word order, either through diachronic fossilization of words into affixes or through synchronic constraints on language \citep{givon1971historical,venneman1973explanation,baker1985the}.
+As a theory of order at multiple levels, the Efficient Tradeoff Hypothesis is compatible with parallelism between morpheme and word order.
+\mhahn{TODO maybe say nore here}
+
+
 \paragraph{Relation to Previous Processing Accounts}
 
-A prominent cognitively-motivated theory of morpheme ordering is the theory of Complexity-Based Ordering \citep{hay2002speech,plag2002the,hay2004what,hay2005shifting,plag2009suffix}.
-This theory holds that affixes are closer to the root when they are less ``separable'', where separability indicates the productivity of an affix and the likelihood that affixes are processed separately with the base in human lexical access  \citep{baayen1993on}.
+The theory of Complexity-Based Ordering \citep{hay2002speech,plag2002the,hay2004what,hay2005shifting,plag2009suffix}.
+holds that affixes are closer to the root when they are less ``separable'', where separability indicates the productivity of an affix and the likelihood that affixes are processed separately with the base in human lexical access  \citep{baayen1993on}.
 %In particular, affixes are less ``separable'' when they are processed holistically together with the base in human lexical access \citep{baayen1993on}. %, such as in the dual processing race model of morphological access, which asserts that morphological forms can be processed either separately in terms of its components or as a whole \citep{baayen1993on}.
 %Forms are more separable if they are less likely to be processed together with the root (Baayen \& Schreuder 1999, Baayen \& Moscoso del Prado Mart ́ın 2005).
 %also mention \cite{manova2010suffix}
@@ -962,13 +960,13 @@ This has an interesting relation to mutual information:
 If the compound form is very frequent, in relation to the baseline frequencies of the base and the affix, then there is high (pointwise) mutual information between them.
 \mhahn{Make clear that this theory hasn't been applied to the kinds of affix orderin generalizations that we look at in this paper.}
 
-Most closely related to our proposal, \citet{inkelas2016affix} proposed that morphemes are ordered together when they are informative about each other.
-They considered a notion of informativity introduced by \citet{priva2017informativity}, which is different from but related to the mutual information between adjacent morphemes $I_1$ (see SI Appendix Section S3 for details).
+The Efficient Tradeoff Hypothesis is also related to the proposal of \citet{inkelas2016affix} that morphemes are ordered together when they are informative about each other.
+While their notion of informativity \citep{priva2017informativity} is different from mutual information, the two quantities are related (see SI Appendix Section X for details).
 %Formally (drawing on the notion of informativity defined by \citet{priva2017informativity}), they considered the informativity between a suffix $S_i$ and the preceding $S_{i-1}$ as 
 %\begin{equation}
 %    \sum_{S_{i-1}, S_{i}} \frac{P(S_{i-1} , S_i)}{P(S_i)} \log P(S_i | S_{i-1})
 %\end{equation}
-They tested this idea in a pilot study of Turkish, finding that high-informativity suffixes are closer to the root.
+%They tested this idea in a pilot study of Turkish, finding preliminary evidence that high-informativity suffixes are closer to the root.
 %This notion of informativity is similar to $I_1$, only differing in whether the $P(S_i)$ term occurs inside the logarithm:
 %\begin{equation}
 %   I_1 = \sum_{S_{i-1}, S_{i}} P(S_{i-1} , S_i) \log \frac{P(S_i | S_{i-1})}{P(S_i)}
@@ -1042,35 +1040,15 @@ Ordering constraints operating on adjacent pairs of morphemes might provide rela
 
 Our study focused on agglutination, where a word carries multiple clearly separated morphemes with distinct functions.
 There are other types of morphological processes that deserve study.
-
-Many languages show fusion where different categories are fused into a single morpheme, or stem changes, such as English \textit{swim} $\rightarrow$ \textit{swam}.
-An extreme case is non-concatenative morphology (e.g., in Arabic, k-t-b `to write' forms katab- `wrote'. -aktub `write/be writing', -kutib- `was written').
+Many languages show fusion \citep{wals-20} where different categories are fused into a single morpheme, or stem changes, such as English \textit{swim} $\rightarrow$ \textit{swam}.
+An extreme case is non-concatenative morphology (e.g., in Arabic, k-t-b `to write' forms \textit{katab}- `wrote'. -\textit{aktub} `write/be writing', -\textit{kutib}- `was written').
 These types of morphological processes are not described in terms of the order of different morphemes.
 We leave it to future research to determine whether these processes are also constrained by cognitive considerations of processing efficiency.
 
 While we have focused on the relative distance from the root, we have not touched on the question of why a morpheme is realized as a prefix or a suffix in a given language.
-There are well-known correlations between suffixing or prefixing preference and word order \citep{greenberg1963universals}. \becky{This paragraph sounds unfinished.}
+There are well-known correlations between suffixing or prefixing preference and word order \citep{greenberg1963universals}.
+It is an interesting problem for future research to study whether these correlations might arise from processing efficiency optimization.
 
-
-
-
-\subsection{Limitations}
-
-%- limitations of computational estimation of the memory-surprisal tradeoff. %However: As the set of all moprphological forms of a language is typically finite (CITE), we believe that these limitations play a smaller role in morpheme order, compared to word order.
-
-A limitation of this study is that memory-surprisal tradeoffs are estimated on finite datasets that do not cover all possible morphological forms of a language. However, to the extent that this limitation impacts the estimation of memory-surprisal tradeoffs, it should equally apply to real and counterfactual orderings. We thus do not expect the relative measured efficiencies of different orderings to be impacted by the finiteness of data.
-
-Due to limitations in data availability, this study builds on languages from Eurasia and Africa, not representing Australia and America.
-Among the languages, Hungarian and Finnish are genetically related, sharing a common ancestor about 5,000 years ago \citep{maurits2020best}.
-There is also some evidence for genetic relations beyond these (Japanese, Korean, Turkish), but such relations would have to be quite ancient.
-Importantly, the morphemes found in these languages as considered here are generally not cognate.
-Thus, the commonalities in languages found cannot be traced to inherited orderings of morphemes inherited from a common ancestor.
-Furthermore, we note that the optimality of different orderings crucially depend not on the morphemes themselves (which might be inherited), but on the frequencies of different forms (e.g., of singulars and plurals).
-
-
-%- genre of data: written. but Sesotho is spoken (child-directed)
-%A further limitation relates to the selection of languages.
-%The six languages considered in this study are spoken in Eurasia and Africa, not representing Australia and America.
 
 
 
@@ -1516,3 +1494,19 @@ Ordering constraints operating on adjacent pairs of morphemes might provide rela
 %\cite{kanu2009suffix} morphotactics, not semantic scope
 
 
+
+
+
+%\subsubsection{Semantic Scope; Syntactic Structure; Historical Development}
+%Morpheme ordering has been described from the perspective 
+%Besides the explanation of broad typological tendencies, which we are interested in here, the linguistic literature has also debated at which level of linguistic representation morpheme ordering should be described, proposing accounts located at different levels such as the syntax-phonology interface \citep{baker1985the} and an autonomous layer of morphological description \citep{hyman2003suffix}.
+%TODO also template vs scope vs...
+%We do not see the memory--surprisal tradeoff as competing with or contradicting these studies.
+%Rather, it specifies tendencies for ordering that could be implemented at different levels of linguistic description.
+
+%\paragraph{Revelance and Proximity}
+
+
+%A related family of explanations holds that those affixes are closest to the root that are most relevant to the root.
+%Our optimized orders of Turkish and Hungarian \becky{Are there other languages?} perfectly match Bybee's proposed universal verbal inflection order (Figure REF).
+%This suggests that high mutual information generally correlates with semantic relevance. 
