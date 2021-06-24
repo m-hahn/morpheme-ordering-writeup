@@ -55,7 +55,7 @@
 
 
 
-\title{Morpheme Ordering across Languages reflects Optimization for Processing Efficiency}
+\title{Morpheme Ordering across Languages Reflects Optimization for Processing Efficiency}
 
 \author{Michael Hahn, Rebecca Mathew, Judith Degen}
 
@@ -152,7 +152,7 @@
 
 \begin{abstract}
     The ordering of morphemes in a word displays well-documented regularities across languages.
-Previous work has explained these in terms of notions such as semantic scope and relevance. 
+Previous work has explained these in terms of notions such as semantic scope, relevance, and productivity. 
 A recent theory argues that word and morpheme ordering in language optimizes a tradeoff between memory and surprisal, and provided initial evidence from two languages that morpheme ordering can partly be explained by optimization for this tradeoff.
 In this work, we test this idea more extensively using data from four additional agglutinative languages with significant amounts of morphology, in both verb and noun inflection.
 We find that the memory-surprisal tradeoff predicts ordering in most cases with high accuracy, and accounts for crosslinguistic regularities in noun and verb inflection.
@@ -181,7 +181,7 @@ Explanations of morpheme ordering have been stated in terms of correspondences b
 %\jd{can a generalization be drawn about the high-level ways in which these accounts differ?}
 Explanations of the first kind state that morphemes are ordered based on differences in semantic scope \citep{rice2000morpheme} or relevance \citep{bybee-morphology-1985}, such that morphemes that are more semantically similar to the root occur closer to it.
 Explanations of the second kind propose that the ordering of morpheme mirrors the order of independent words with corresponding meanings, due to either language history or synchronic constraints on language.
-Explanations of the third kind argue that affixes are closer to the root when they are more likely to be processed together with it in dual-route models of lexical access \citep{baayen-frequency-1993}.
+Explanations of the third kind argue that affixes are closer to the root when they are more likely to be processed together with it in dual-route models of lexical access \citep{baayen-frequency-1993}, which happens, for instance, when they are less productive.
 
 A recent theory proposes a cognitive explanation for word and morpheme order in language, arguing that ordering universals in language optimize processing effort under memory limitations \citep{Hahn2020modeling}.
 \citet{Hahn2020modeling} introduce the notion of a \emph{memory-surprisal tradeoff}: The more memory resources a comprehender invests in representing the context preceding the currently observed word, the lower the achievable surprisal that the comprehender must incur on that word. Conversely, the less memory is invested, the higher the surprisal.
@@ -288,12 +288,6 @@ This universal is supported by the example in Figure~\ref{fig:noun-inflection}.
 
 
 
- \begin{figure}
- a)
- \includegraphics[width=0.7\textwidth]{figures/slots.pdf}
- 
- b)     \includegraphics[width=\textwidth]{figures/verb-morphemes.pdf}
- 
 %     Valence:
 %\begin{tabular}{lllll}
 %	a) & {\c c}{\i}ld{\i}r-{\i}r-{\i}m \\
@@ -341,8 +335,21 @@ This universal is supported by the example in Figure~\ref{fig:noun-inflection}.
 %& `I/you (sgd)/we/you (pl) open'
 %\end{tabular}
 
-\mhahn{TODO make this rough draft look nice. also add derivational affixes as mentioned in the text}
-\caption{(A) Verb affix slots in the six languages, grouped into four universal slots where applicable. Affixes are listed outwards from the root. (B) Examples of verb inflection from the six languages.}\label{tab:examples-verbs}
+ \begin{figure}
+ \begin{center}
+ \includegraphics[width=0.7\textwidth]{figures/slots(3).pdf}
+ \end{center}
+\caption{Verb affix slots in the six languages, grouped into four universal slots where applicable. Affixes are listed outwards from the root. }\label{tab:slots-verbs}
+ 
+ \end{figure}
+
+\begin{figure} 
+\begin{center}
+\includegraphics[width=0.7\textwidth]{figures/examples-slots.png}
+\end{center}
+ 
+
+\caption{Examples of verb inflection from the six languages.}\label{tab:examples-verbs}
 \end{figure}
  
  
@@ -357,7 +364,7 @@ This universal is supported by the example in Figure~\ref{fig:noun-inflection}.
 
 \subsection{Universals of Verb Affix Ordering}\label{sec:univ-verbs}
 Verbs commonly mark a larger number of inflection categories.
-Figure~\ref{tab:examples-verbs} summarizes the affixes in the verbal morphologies of the six languages considered here (see SI Section S1 for details on how we arrived at these summaries).
+Figures~\ref{tab:slots-verbs}--~\ref{tab:examples-verbs} summarize the affixes in the verbal morphologies of the six languages considered here (see SI Section S1 for details on how we arrived at these summaries).
 Sesotho has both prefixes and suffixes; we treat these separately, as we only aim to explain the relative distance of affixes from the base, not which side of the verb they appear on.
 
 Verb affixes are typically grouped into derivational and inflectional affixes.
@@ -410,7 +417,7 @@ Figure~\ref{tab:examples-verbs} shows that the languages in our sample largely s
 
 
 While these are particularly common types of affixes, there are further types, some of which occur in the six languages of our sample.
-While agreement is most commonly established with the subject, \textit{agreement with the object} is found in Sesotho \citep{doke1967textbook} (in person and noun class) and in Hungarian \citep{rounds2001hungarian} (in definiteness); it is fused with subject agreement in the Hungarian and shares a slot with Valence in Sesotho (see SI Section S1.4).
+While agreement is most commonly established with the subject, \textit{agreement with the object} is found in Sesotho \citep{doke1967textbook} (in person and noun class) and in Hungarian \citep{rounds2001hungarian} (in definiteness); it is fused with subject agreement in the Hungarian and shares a slot with Valence in Sesotho (see SI Section S1).
 \textit{Polarity} refers to the opposition between affirmative (e.g. `she arrived') and negative  (e.g., `she did not arrive') statements \citep{wals-112}.
 \textit{Evidentiality} indicates on what evidence a speaker bases an assertion \citep{aikhenvald2003evidentiality}.
 \textit{Formality}, \text{honorifics}, and \text{politeness} are categories that index social relations between the speaker, the addressee, and the topic of the conversation~\citep{hasegawa2014japanese, yeon2010korean}.
@@ -459,15 +466,14 @@ The order of affixes corresponds to the order in which the meanings of these suf
 The causative affix adds an argument indicating who makes an object freeze, and the passive affix then removes that argument, yielding a verb describing something that is being frozen by someone.
 
 
-This account is successful at predicting the order of valence and voice and other morphemes \citep[e.g.,][]{rice2000morpheme, caballero2010scope,  narrog2010the, korotkova2010deriving}, (with the exception of anti-scope orderings in some languages, \citep{...}).
-However, it is not always straightforward to evaluate for other affixes, because its predictions can depend on the specifics of how meaning is represented (see SI Section TODO for further discussion).
-%\jd{example?} \mhahn{TODO I'd prefer to place this discussion in an SI section, with some formal semantics formulas, rather than discussing here.}
-There are also cases where semantically equivalent affixes are ordered differently in different languages, e.g., possessive suffixes are ordered differently in Finnish nouns than in Hungarian and Turkish nouns, seemingly without a motivating difference in semantic scope; the scope-based theory makes no prediction about how a given language's affixes are ordered.
+This account is highly successful at predicting the order of valence and voice, among other morphemes \citep[e.g.,][]{rice2000morpheme, caballero2010scope,  narrog2010the, korotkova2010deriving}, (with the exception of anti-scope orderings in some languages, \citep{Hyman2003}).
+However, it is not always straightforward to evaluate for other affixes, because its predictions depend on the specifics of how meaning is represented formally.
+There are also cases where semantically equivalent affixes are ordered differently in different languages, e.g., possessive suffixes are ordered differently in Finnish nouns than in Hungarian and Turkish nouns, seemingly without a motivating difference in semantic scope; the scope-based theory makes no prediction about how a given language's affixes are ordered in such cases.
 Furthermore, there are scope-bearing items whose order varies between languages without apparent difference in meaning, for instance, negation appears closer to the root than TAM in Turkish and farther from it in Sesotho.
 
 Relatedly, \citet{saldana2021cross} argue that Greenberg's Universal 39 reflects a cognitive bias favoring orderings that match conceptual structure.
 In an artificial language learning paradigm, they exposed participants to stimuli where nouns had a case or number makrer (but not both), and then had participants extrapolate to forms containing both types of affixes.
-Learners of an artificial language strongly preferred the ordering described in Greenberg's Universal 39, which \citet{saldana2021cross} interpret as evidence for a cogntivie bias favoring a match between linear ordering and conceptual structure.
+Learners of an artificial language strongly preferred the ordering described in Greenberg's Universal 39, which \citet{saldana2021cross} interpret as evidence for a cognitive bias favoring a match between linear ordering and conceptual structure.
 They also found that this preference could be reversed by making the form of the affix strongly dependent on the stem, which is not accounted for by conceptual structure, and which they interpret as reflecting a bias towards locality in dependencies.
 
 % BUT:
@@ -526,10 +532,9 @@ Here, we review the memory-surprisal tradeoff and a resulting hypothesis about t
 %\mhahn{TODO}
 A long line of work in linguistics has proposed principles of locality to account for word ordering regularities within and across languages.
 %An early example is \citet{behaghel1932deutsche}, who argued that elements that are closer together in meaning are closer together in form.
-In word order, the Head Adjacency or Proximity principles of \citet{frazier1985syntactic,rijkhoff-word-1986} state that words are close to their syntactic heads, a generalization that has found strong empirical support from data in many languages~\citep[e.g.][]{hawkins-performance-1994,liu2008dependency, futrell-large-scale-2015-1, liu-dependency-2017}.
+In word order, the Head Adjacency or Head Proximity principles of \citet{frazier1985syntactic} and \citet{rijkhoff-word-1986} state that words are close to their syntactic heads, a generalization that has found strong empirical support from data in many languages~\citep[e.g.][]{hawkins-performance-1994,liu2008dependency, futrell-large-scale-2015-1, liu-dependency-2017}.
 Explanations of these principles suggest that placing syntactically related words closer together makes human syntactic parsing more efficient and less sensitive to limitations in human memory \citep{frazier1985syntactic, gibson1998linguistic, hawkins-efficiency-2003, futrell-noisy-context-2017}.
 Another group of theories holds holds that elements are closer together in linear ordering when they are semantically closer together in their meaning because this makes linear ordering iconically reflect relations between meanings \citep{givon1985iconicity}.
-
 In morpheme ordering, \citet{bybee-morphology-1985} argues that morphemes are closer to the root when they are more relevant to it; \citet{hay2002speech} and \citet{plag2002the} argue that morphemes are closer to the root when they are more likely to be processed together with the root in human lexical access.
 
 %Such locality principles have been explained in terms of iconicity in form-meaning correspondence, and in terms of memory and efficiency in online processing , and lexical access.
@@ -573,12 +578,14 @@ The efficiency of a tradeoff curve can be quantified using its Area under the Cu
 
 \begin{figure}
     \centering
-    \begin{tabular}{ccc}
-    (A) & (B) \\
-    \includegraphics[width=0.5\textwidth]{figures/tradeoff.pdf} & \textcolor{red}{TODO visualize AUC here}
-    \end{tabular}
-    \caption{\textit{Left:} The memory-surprisal tradeoff in two hypothetical languages: In order to achieve a given level of surprisal, a comprehender has to invest a certain amount of memory resources, which can be quantified information-theoretically in terms of bits. In this case, Language A provides a more efficient tradeoff because comprehenders can achieve lower surprisal than Language B with the same  memory load.
-    \textit{Right:} The Area under the Curve (AUC) for the two hypothetical languages. Language A has a lower AUC than Language B, corresponding to a more efficient memory-surprisal tradeoff.}
+%    \begin{tabular}{ccc}
+ %   (A) & (B) \\
+    \includegraphics[width=0.5\textwidth]{figures/tradeoff.pdf} %&
+    
+    \includegraphics[width=0.5\textwidth]{figures/auc-viz.png}
+    %\end{tabular}
+    \caption{\textit{Top:} The memory-surprisal tradeoff in two hypothetical languages: In order to achieve a given level of surprisal, a comprehender has to invest a certain amount of memory resources, which can be quantified information-theoretically in terms of bits. In this case, Language A provides a more efficient tradeoff because comprehenders can achieve lower surprisal than Language B with the same  memory load.
+    \textit{Bottom:} The Area under the Curve (AUC) for the two hypothetical languages. Language A has a lower AUC than Language B, corresponding to a more efficient memory-surprisal tradeoff.}
     %\mhahn{my plan for this figure is (i) curves for two languages A,B to show that tradeoffs can differ in their efficiency, (ii) a simple visualization of how AUC captures efficiency, (iii) a visualiation of MI $I_t$, (iv) a visualization of how the tradeoff curve is estimated based on $I_t$., (v) some kind of illustration of how locality leads to more efficient tradeoffs}}
     \label{fig:tradeoff}
 \end{figure}
@@ -719,7 +726,7 @@ Finnish verbs form the only exception; AUCs of real orderings are similar to tho
 Second, we evaluated the accuracy of optimized orderings in predicting real orderings.
 If the Efficient Tradeoff Hypothesis predicts morpheme order, then optimized orderings should achueve a higher prediction accuracy than most other possible orderings.
 Figures \ref{tab:optimized_acc_nouns}--\ref{tab:optimized_acc_verbs} show the accuracy of optimized and random baseline orderings in predicting real orderings. 
-We measured accuracy by counting what fraction of all pairs of affixes within a single word from the corpus are ordered in the same relative ordering as under the real ordering (see SI Section X for other ways of quantifying accuracy).
+We measured accuracy by counting what fraction of all pairs of affixes within a single word from the corpus are ordered in the same relative ordering as under the real ordering (see SI Section S3 for other ways of quantifying accuracy).
 %We defined three measures of agreement:
 %\textit{Pairs} counts what fraction of all pairs of affixes within a single word from the corpus are ordered in the same relative ordering under both orderings.
 %\textit{Full} counts what fraction of words from the corpus is ordered entirely identically under both orderings.
@@ -866,9 +873,9 @@ On active forms -- which, unlike the passive, are fully inflected for person and
 \begin{figure}[]
 
 \begin{tabular}{cccccccc}
-\textsc{Turkish} & \textsc{Hungarian} & \textsc{Finnish} \\
+\textsc{Finnish} & \textsc{Hungarian} & \textsc{Japanese} \\
 \begin{minipage}{.3\textwidth}
-  \include{figures/turkish_verbs/comparison}
+  \include{figures/finnish_verbs/comparison}
   \end{minipage}
   &
   \begin{minipage}{.3\textwidth}
@@ -876,24 +883,25 @@ On active forms -- which, unlike the passive, are fully inflected for person and
   \end{minipage}
   &
     \begin{minipage}{.3\textwidth}
-  \include{figures/finnish_verbs/comparison}
+  \include{figures/japanese/comparison}
   \end{minipage}
   \\
-  \textsc{Korean}  & \textsc{Japanese} & \textsc{Sesotho Prefixes} \\
+  \textsc{Korean}  & \textsc{Sesotho Prefixes} &
+  \textsc{Sesotho Suffixes} \\
       \begin{minipage}{.3\textwidth}
   \include{figures/korean/comparison}
   \end{minipage}
   &
   \begin{minipage}{.3\textwidth}
-  \include{figures/japanese/comparison}
+  \include{figures/sesotho_prefixes/comparison}
   \end{minipage}
   &
   \begin{minipage}{.3\textwidth}
-  \include{figures/sesotho_prefixes/comparison}
-  \end{minipage} \\
-  \textsc{Sesotho Suffixes} \\
-  \begin{minipage}{.3\textwidth}
   \include{figures/sesotho_suffixes/comparison}
+  \end{minipage} \\
+  \textsc{Turkish} \\
+  \begin{minipage}{.3\textwidth}
+  \include{figures/turkish_verbs/comparison}
   \end{minipage}
   \end{tabular}
   
@@ -905,6 +913,21 @@ On active forms -- which, unlike the passive, are fully inflected for person and
     \label{fig:real_and_optimized_verbs}
 \end{figure}
 
+
+\begin{figure}
+    \centering
+    \begin{tabular}{lll}
+    (a) Nouns & (b) Verbs \\ 
+    \includegraphics[width=0.35\textwidth]{figures/visualizeCPMI.R_nouns.pdf} &
+    \includegraphics[width=0.55\textwidth]{figures/visualizeCPMI.R_verbs.pdf}
+    \end{tabular}
+    \caption{Conditional mutual information with the root for noun (left) and verb (right) affixes in optimized orderings across languages. Affixes that tend to be ordered closer to the root also tend to have higher mutual information with it.}
+    \label{fig:cmis}
+\end{figure}
+
+Finally, to elucidate the connection between ordering and mutual information, we computed the conditional mutual information (\ref{eq:mi}) between affixes and roots for nouns and verbs in the optimized orderings across languages.
+The results are shown in Figure~\ref{fig:cmis}.
+In accordance with the principle of information locality, affixes that are ordered closer to the root in the two typological universals and in optimized orderings have almost always higher mutual information with the root than affixes ordered farther away from the root.
 
 
 
@@ -1010,21 +1033,14 @@ A prominent operationalization of the separability of an affix is in terms of re
 affixes are more likely to be processed together with the root when the composite form has a higher frequency compared to the base form \citep{hay2001lexical}. % , lee2011ordering
 This has an interesting relation to mutual information: 
 If the compound form is very frequent, in relation to the baseline frequencies of the base and the affix, then there is high (pointwise) mutual information between them.
+In this case, the prediction of the theory of Complexity-Based Ordering is recovered by the Efficient Tradeoff Hypothesis.
 %\mhahn{Make clear that this theory hasn't been applied to the kinds of affix orderin generalizations that we look at in this paper.}
 
 %\mhahn{I'm pondering whether it would be beneficial to do some more explicit comparison using actual formulas both complexity-based ordering and perhaps the Inkelas 2016 idea, either here or in an SI section (the advantage of the latter would be that explanations can be more thorough without dominating the Discussion section) let me know what you think!}
 
-The Efficient Tradeoff Hypothesis is also related to the proposal of \citet{inkelas2016affix} that morphemes are ordered together when they are informative about each other.
-While their notion of informativity \citep{priva2017informativity} is different from mutual information, the two quantities are related (see SI Appendix Section X for details).
-%Formally (drawing on the notion of informativity defined by \citet{priva2017informativity}), they considered the informativity between a suffix $S_i$ and the preceding $S_{i-1}$ as 
-%\begin{equation}
-%    \sum_{S_{i-1}, S_{i}} \frac{P(S_{i-1} , S_i)}{P(S_i)} \log P(S_i | S_{i-1})
-%\end{equation}
-%They tested this idea in a pilot study of Turkish, finding preliminary evidence that high-informativity suffixes are closer to the root.
-%This notion of informativity is similar to $I_1$, only differing in whether the $P(S_i)$ term occurs inside the logarithm:
-%\begin{equation}
-%   I_1 = \sum_{S_{i-1}, S_{i}} P(S_{i-1} , S_i) \log \frac{P(S_i | S_{i-1})}{P(S_i)}
-%\end{equation}
+The Efficient Tradeoff Hypothesis is also related to the proposal of \citet{inkelas2016affix} that morphemes are ordered together when they are informative about each other, for which they found preliminary evidence in a pilot study of Turkish.
+While their notion of informativity \citep{priva2017informativity} is different from mutual information, the two quantities are related (see SI Appendix Section S4 for details).
+
 
 
 %Inkelas: informativity: they propose that bigram surprisal is minimized (not their terminology), test this in a pilot study of Turkish, with partially confirming results \citep{inkelas2015informativity}
@@ -1114,6 +1130,9 @@ Across languages, we found that optimized orderings predict real orderings bette
 Optimization also successfully predicts several universals of morpheme ordering, both for nouns and verbs.
 These results support the Efficient Tradeoff Hypothesis as a theory of order in language, and more broadly suggest that morpheme ordering reflects optimization of processing efficiency.
 
+
+%\section*{Acknowledgments}
+%anything to acknowledge regarding csli?
 
 \printbibliography
 
