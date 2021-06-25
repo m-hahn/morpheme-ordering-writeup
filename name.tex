@@ -426,6 +426,8 @@ The Japanese politeness marker -masu- and the Korean formality (-p) and politene
 Furthermore, verb forms can have affixes indicating the syntactic position of the verb within a sentence, in particular, affixes marking infinitives or other nonfinite forms.
 We use the term \textit{Syntactic} for this type of morpheme.
 
+%\mhahn{TODO the Finnish passive isn't really a Voice, instead, it is an Impersonal. The suffix could thus just as well be classified as Agreement.}
+
 Having introduced the two universal generalizations about noun and verb affixes, we now review existing accounts of morpheme ordering (Section~\ref{sec:previous}). 
 
 %\jd{add segue to next section}
@@ -662,7 +664,7 @@ To this end, we evaluate whether real orderings of morphemes lead to more effici
 
 \subsubsection{Data} 
 We selected data from languages that have rich agglutinative morphology, that is, languages in which (i) verbs and nouns often have more than two morphemes per words, as that allows us to test predictions about the relative ordering of different morphemes, and (ii) the morphemes within a word have clearly delimited boundaries, providing unambiguous information about the ordering of morphemes.
-Beyond the languages studied in \citet{Hahn2020modeling}, we obtained data from four such languages: the Universal Dependencies (UD) corpora for Korean \citep{chun2018building}, Turkish \citep{turkish-imst}, Hungarian \citep{hungarian-szeged}, and Finnish \citep{UDFinnish-TDT}.
+Beyond the languages studied in \citet{Hahn2020modeling}, we obtained data from four such languages from Universal Dependencies \citep[UD][]{DBLP:conf/lrec/NivreMGHMPSTZ20} 2.6: Korean \citep{chun2018building}, Turkish \citep{turkish-imst}, Hungarian \citep{hungarian-szeged}, and Finnish \citep{UDFinnish-TDT,UDFinnish-FTB}.
 In addition, we also reanalyze the data from \citet{Hahn2020modeling}, covering UD data for Japanese \citep{asahara2018universal} and the Child Language Data Exchange System (CHILDES) Sesotho corpus \citep{demuth1992acquisition} in a way consistent with our analysis of the other four languages.
 We obtained between 7,328 (Hungarian) and 50,691 (Finnish) inflected nouns and between 2,735 (Hungarian) and 109,323 (Korean) inflected verbs in each language.
 
@@ -790,7 +792,7 @@ On active forms -- which, unlike the passive, are fully inflected for person and
 \end{tabular}
 \end{center}
     
-    \caption{AUC Histograms for Noun Suffixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for real (green) and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a binomial confidence interval. Optimizesd orderings are identical to real orderings in this figure, and thus not plotted.  }
+    \caption{AUC Histograms for Noun Suffixes: We show smoothed histograms of baseline orderings (brown) and orderings satisfying the universals (purple), and the AUC values for real (green) and reverse (blue) orderings. For the real orderings, we also indicate what fraction of baseline grammars have higher AUC, with a binomial confidence interval. Optimized orderings are identical to real orderings in this figure, and thus not plotted.  }
     \label{fig:auc_nouns}
 \end{figure}
 
@@ -908,7 +910,6 @@ On active forms -- which, unlike the passive, are fully inflected for person and
   
   
     \caption{Real and optimized ordering for verb affixes. Colors indicate universal position slots as in Figure~\ref{tab:slots-verbs}.
-    \mhahn{TODO make this look nicer}
     }
     \label{fig:real_and_optimized_verbs}
 \end{figure}
@@ -1078,6 +1079,11 @@ While this approach does not make statements as to which affixes would go closer
 In a similar vein, \citet{ryan2010variable} propose a model based on weighted bigram constraints in Tagalog, for the (rather uncommon) case of flexible morpheme ordering.
 Ordering constraints operating on adjacent pairs of morphemes might provide relatively efficient memory-surprisal tradeoffs because the appearance of a morpheme is constrained only by its immediately adjacent morphemes.
 
+%\mhahn{Finnish is an interesting case: a priori, not clear in Finnish passives which marker marks 'Voice' and which one marks 'Agreement', other than ordering or etymology.}
+%\mhahn{would other theories get Finnish more accurately? the ``passive'' is an impersonal form, it does not actually change valency. from the perspective of semantic scope or semantic relevance, no reason it should be close to the root, or discontinuous around the TAM marker.} 
+% http://lup.lub.lu.se/search/ws/files/4731520/624538.pdf
+%https://www.jbe-platform.com/content/journals/10.1075/jhl.6.1.02des
+%https://www.tandfonline.com/doi/pdf/10.1080/00437956.1988.11435787
 
 
 
