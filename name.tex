@@ -1,5 +1,25 @@
-\documentclass[11pt,letterpaper]{article}
-% \documentclass[man]{apa7}
+%\documentclass[11pt,letterpaper]{article}
+ %\documentclass[man]{apa7}
+\documentclass[natbib,doc,nolmodern]{apa6}
+
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{txfonts}  %%% fixes problem with \boldsymbol
+\usepackage{graphicx}
+\usepackage{pgf}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\usepackage{linguex}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{rotating}
+\usepackage[colorinlistoftodos,prependcaption,textsize=scriptsize]{todonotes}
+
+\usepackage{colortbl}
+\usepackage{hyperref}
+
 
 \usepackage{showlabels}
 \usepackage{fullpage}
@@ -29,6 +49,17 @@
 %\usepackage{xeCJK}
 %\usepackage{natbib}
 
+
+% by default apa6.sty doesn't number sections
+\setcounter{secnumdepth}{3}
+
+
+\frenchspacing
+
+
+%% genitive citations
+\newcommand{\citegen}[1]{\citeauthor{#1}'s (\citeyear{#1})}
+
 \bibliographystyle{unsrtnat}
 
 %\usepackage{latexsym}
@@ -57,6 +88,8 @@
 
 \title{Morpheme Ordering across Languages Reflects Optimization for Processing Efficiency}
 
+\shorttitle{Morpheme Ordering Reflects Processing Efficiency}
+
 \author{Michael Hahn, Rebecca Mathew, Judith Degen}
 
 
@@ -65,8 +98,8 @@
 
 
 
-\newcommand{\citep}{\parencite}
-\newcommand{\citet}{\Textcite}
+%\newcommand{\citep}{\parencite}
+%\newcommand{\citet}{\Textcite}
 
 
 
@@ -137,12 +170,6 @@
 \usepackage{longtable}
 
 
-
-%\frenchspacing
-%\def\baselinestretch{0.975}
-
-%\emnlpfinalcopy
-%\def\emnlppaperid{496}
 
 
 \begin{document}
@@ -666,7 +693,7 @@ To this end, we evaluate whether real orderings of morphemes lead to more effici
 We selected data from languages that have rich agglutinative morphology, that is, languages in which (i) verbs and nouns often have more than two morphemes per words, as that allows us to test predictions about the relative ordering of different morphemes, and (ii) the morphemes within a word have clearly delimited boundaries, providing unambiguous information about the ordering of morphemes.
 Beyond the languages studied in \citet{Hahn2020modeling}, we obtained data from four such languages from Universal Dependencies \citep[UD][]{DBLP:conf/lrec/NivreMGHMPSTZ20} 2.6: Korean \citep{chun2018building}, Turkish \citep{turkish-imst}, Hungarian \citep{hungarian-szeged}, and Finnish \citep{UDFinnish-TDT,UDFinnish-FTB}.
 In addition, we also reanalyze the data from \citet{Hahn2020modeling}, covering UD data for Japanese \citep{asahara2018universal} and the Child Language Data Exchange System (CHILDES) Sesotho corpus \citep{demuth1992acquisition} in a way consistent with our analysis of the other four languages.
-We obtained between 7,328 (Hungarian) and 50,691 (Finnish) inflected nouns and between 2,735 (Hungarian) and 109,323 (Korean) inflected verbs in each language.
+We obtained between 7,328 (Hungarian) and 65,541 (Finnish) inflected nouns and between 2,735 (Hungarian) and 109,323 (Korean) inflected verbs in each language.
 
 
 % Mutual information depends on the frequencies at which different morphological forms are used. We thus selected agglutinative languages for which large-scale text corpora with morphological annotation was available.
@@ -749,10 +776,18 @@ Beyond this, optimized orderings also recover the language-specific ordering of 
 For verbs, real and verb optimized orders show some disagreement in each language.
 Comparing the universal verb morpheme ordering to the optimized ordering for each language, Hungarian, Japanese, Korean, and Sesotho (suffixes and prefixes) match the universal ordering perfectly for the morphemes occurring in each of these languages. 
 Turkish matches the universal ordering except for the 3rd person plural agreement marker ``-lar-'', which is separated from the other agreement morphemes in both real and optimized orderings.
-For Finnish, the optimized ordering is the same as the universal ordering except for the fact that the agreement marker comes closest to the root instead of furthest, which accounts for the reduced accuracy observed in Figure~\ref{tab:optimized_acc_verbs}.
-This can be traced to a crosslinguistically uncommon peculiarity of the Finnish passive, which uses a single agreement marker that is only used for passives, and which does not distinguish between person and number categories (referred to as impersonal by \citet[Section 69]{karlsson1999finnish}).
-This means that the agreement marker has substantial mutual information with the voice morpheme, and optimized orderings prefer agreement and voice morphemes to be adjacent.
-On active forms -- which, unlike the passive, are fully inflected for person and number -- optimized orderings place the agreement slot after the TAM slot, in agreement with the real ordering.
+
+Finnish is the only language where the optimized ordering underperforms the universal-constrained baselines: Optimized orderings place the voice marker further from the root than the TAM marker, in disagreement with the real order.
+This can be traced to the properties of the Finnish form commonly called ``passive'':
+The Finnish passive is marked by two morphemes, conventionally regarded as a voice marker (-\textit{t}-) and an agreement marker (-\textit{Vn}, \citet[Section 69]{karlsson1999finnish}); we followed this convention in Table~\ref{tab:slots-verbs}.
+Functionally, these two morphemes always appear together and have no distinct meanings.
+Both can equally well be regarded as markers of the passive; there is no reason other than the match with the \textsc{Verb Affix Ordering} universal to regard one as a voice marker and the other as an agreement marker.
+Furthermore, unlike the passive of most languages, the Finnish passive is insensitive to the verb's argument structure, simply denoting that an unspecified agent performed an action \citep{Shore1988OnTS,Blevins2003PassivesAI}.
+Therefore, the theories of semantic relevance and semantic scope discussed in Section~\ref{sec:previous} would arguably also predict the ``passive'' marker to pattern with agreement markers, unlike the actual Finnish ordering but in agreement with the Efficient Tradeoff Hypothesis.
+
+
+%This means that the agreement marker has substantial mutual information with the voice morpheme, and optimized orderings prefer agreement and voice morphemes to be adjacent.
+%On active forms -- which, unlike the passive, are fully inflected for person and number -- optimized orderings place the agreement slot after the TAM slot, in agreement with the real ordering.
 
 %\mhahn{what would the random accuracy be in predicting?}
 
