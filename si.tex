@@ -156,7 +156,7 @@ Here, we describe how we identified morphemes from corpus data and arrived at th
 
 \subsection{Finnish Verb Inflection}
 
-In the Finnish corpus, verb forms are annotated using collections of features, such as \texttt{Mood=Ind} and \texttt{Number=Sing}, which make it pssible to uniquely map the form to a cell of the paradigm in Table~\ref{tab:finnish} \footnote{From \url{https://en.wiktionary.org/wiki/tulla\#Conjugation}, retrieved January 10, 2021.}.
+In the Finnish corpus, verb forms are annotated using collections of features, such as \texttt{Mood=Ind} and \texttt{Number=Sing}, which make it pssible to uniquely map the form to a cell of the paradigm in Table~\ref{tab:finnish}.\footnote{For illustration, we provide forms of \textit{tulla} from \url{https://en.wiktionary.org/wiki/tulla\#Conjugation}, retrieved January 10, 2021.}.
 
 \begin{table}
 \begin{tabular}{l|llllll}
@@ -169,7 +169,7 @@ In the Finnish corpus, verb forms are annotated using collections of features, s
 	&	3rd plur. 	& 	tulevat  &-vat$_{\textsc{Agr}}$\\ 
 	&	passive 	& 	tullaan  &-t$_{\textsc{Passive}}$-Vn$_{\textsc{Agr}}$ \\  \hline
 past tense 	 	&	1st sing.& 	tulin & -i$_{\textsc{TAM}}$-n$_{\textsc{Agr}}$\\  
-	Karlsson section 60&	2nd sing. &	tulit  & -i$_{\textsc{TAM}}$-t$_{\textsc{Agr}}$\\ 
+\cite[Section 60]{karlsson1999finnish}&	2nd sing. &	tulit  & -i$_{\textsc{TAM}}$-t$_{\textsc{Agr}}$\\ 
 	&	3rd sing. &	tuli  & -i$_{\textsc{TAM}}$-V$_{\textsc{Agr}}$\\ 
 	&	1st plur. &	tulimme  &-i$_{\textsc{TAM}}$-mme$_{\textsc{Agr}}$\\ 
 	&	2nd plur. &	tulitte  &-i$_{\textsc{TAM}}$-tte$_{\textsc{Agr}}$\\ 
@@ -203,34 +203,8 @@ conditional mood  &1st sing. &	tulisin  & -isi$_{\textsc{TAM}}$-n$_{\textsc{Ag
 \subsection{Turkish Verb Suffixes}
 
 In Table~\ref{tab:turkish-suffixes}, we show the list of identified Turkish verb suffixes.
-In Figure~\ref{tab:turkish-yapmak}, we show how our segmentation corresponds to the paradigm of \textit{yapmak} as described by Wiktionary.\footnote{From https://en.wiktionary.org/wiki/yapmak\#Turkish, retrieved September 5, 2020.}
+In Figure~\ref{tab:turkish-yapmak}, we illustrate this using selected forms of \textit{yapmak}, covering TAM and agreement suffixes.\footnote{The selection of forms follows: \url{https://en.wiktionary.org/wiki/yapmak\#Turkish}, retrieved September 5, 2020.}
 
-
-
-\begin{table}
-\resizebox{\textwidth}{!}{
-\begin{tabular}{ll||lll|lllllllllll}
-         &        & 1 sg.      & 2   sg.     & 3  sg.      & 1  pl.    & 2 pl.     & 3 pl. \\ \hline\hline
- DNP & A & yaparım & yaparsın &  	yapar & yaparız & yaparsınız &  	yaparlar \\
-                    &  & -\textsc{ar}$_5$-\textsc{im}$_8$ & -\textsc{ar}$_5$-\textsc{sin}$_8$ &  	-\textsc{ar}$_5$ & -\textsc{ar}$_5$-\textsc{iz}$_8$ & -\textsc{ar}$_5$-\textsc{siniz}$_8$ &  	-\textsc{ar}$_5$-\textsc{lar}$_6$ \\ \hline
-                & I & yapıyorum & yapıyorsun & 	yapıyor &	yapıyoruz &	yapıyorsunuz &	yapıyorlar \\
-		&  & -\textsc{iyor}$_5$-\textsc{im}$_8$ & -\textsc{iyor}$_5$-\textsc{sin}$_8$ & 	-\textsc{iyor}$_5$ &	-\textsc{iyor}$_5$-\textsc{iz}$_8$ &	-\textsc{iyor}$_5$-\textsc{siniz}$_8$ &	-\textsc{iyor}$_5$-\textsc{lar}$_6$ \\ \hline
-                & Pr  & yapacağım &	yapacaksın 	& yapacak 	& yapacağız &	yapacaksınız &	yapacaklar \\ 
-                &   & -\textsc{acak}$_5$-\textsc{im}$_8$ &	-\textsc{acak}$_5$-\textsc{sin}$_8$ 	& -\textsc{acak}$_5$ 	& -\textsc{acak}$_5$-\textsc{iz}$_8$ &	-\textsc{acak}$_5$-\textsc{siniz}$_8$ &	-\textsc{acak}$_5$-\textsc{lar}$_6$ \\ \hline\hline
-        DP    & Pe &yaptım &	yaptın &	yaptı &	yaptık &	yaptınız &	yaptılar \\
-	      &  &-\textsc{ti}$_5$-\textsc{im}$_8$ &	-\textsc{ti}$_5$-\textsc{sin}$_8$ &	-\textsc{ti}$_5$ &	-\textsc{ti}$_5$-\textsc{k}$_8$ &	-\textsc{ti}$_5$-\textsc{siniz}$_8$ &	-\textsc{ti}$_5$-\textsc{lar}$_6$ \\ \hline
-                & I & yapıyordum &	yapıyordun &	yapıyordu &	yapıyorduk &	yapıyordunuz &	yapıyorlardı \\ 
-		&  & -\textsc{iyor}$_5$-\textsc{du}$_7$-\textsc{im}$_8$ &	-\textsc{iyor}$_5$-\textsc{du}$_7$-\textsc{sin}$_8$ &	-\textsc{iyor}$_5$-\textsc{du}$_7$ &	-\textsc{iyor}$_5$-\textsc{du}$_7$-\textsc{k}$_8$ &	-\textsc{iyor}$_5$-\textsc{du}$_7$-\textsc{siniz}$_8$ &	-\textsc{iyor}$_5$-\textsc{lar}$_6$-\textsc{du}$_7$ \\ \hline\hline
- I     & Pe & yapmışım &	yapmışsın &	yapmış &	yapmışız &	yapmışsınız &	yapmışlar \\
-       &  & -\textsc{mis}$_5$-\textsc{im}$_8$ &	-\textsc{mis}$_5$-\textsc{sin}$_8$ &	-\textsc{mis}$_5$ &	-\textsc{mis}$_5$-\textsc{iz}$_8$ &	-\textsc{mis}$_5$-\textsc{siniz}$_8$ &	-\textsc{mis}$_5$-\textsc{lar}$_6$ \\ \hline
-               & A & yaparmışım &	yaparmışsın &	yaparmış &	yaparmışız &	yaparmışsınız& 	yaparlarmış \\ 
-            &  & -\textsc{ar}$_5$-\textsc{mis}$_7$-\textsc{im}$_8$ &	-\textsc{ar}$_5$-\textsc{mis}$_7$-\textsc{sin}$_8$ &	-\textsc{ar}$_5$-\textsc{mis}$_7$ &	-\textsc{ar}$_5$-\textsc{mis}$_7$-\textsc{iz}$_8$ &	-\textsc{ar}$_5$-\textsc{mis}$_7$-\textsc{siniz}$_8$& 	-\textsc{ar}$_5$-\textsc{lar}$_6$-\textsc{mis}$_7$ \\ \hline
-               & I & yapıyormuşum &	yapıyormuşsun &	yapıyormuş &	yapıyormuşuz &	yapıyormuşsunuz &	yapıyorlarmuş \\
-	       &              & -\textsc{iyor}$_5$-\textsc{mis}$_7$-\textsc{im}$_8$ &	-\textsc{iyor}$_5$-\textsc{mis}$_7$-\textsc{sin}$_8$ &	-\textsc{iyor}$_5$-\textsc{mis}$_7$ &	-\textsc{iyor}$_5$-\textsc{mis}$_7$-\textsc{iz}$_8$ &	-\textsc{iyor}$_5$-\textsc{mis}$_7$-\textsc{sunuz}$_8$ &	-\textsc{iyor}$_5$-\textsc{lar}$_6$-\textsc{mis}$_7$ \\
-\end{tabular}
-}
-\caption{Paradigm of the Turkish verb \textit{yapmak}. This paradigm covers TAM and agreement suffixes.}\label{tab:turkish-yapmak}
-\end{table}
 
 \begin{table}
 \begin{tabular}{llllllll}
@@ -273,13 +247,39 @@ TAM2      & MUS2$_7$ & Aorist/Imperfective, indirect & -mIş & \cite{schaaik2020
 \end{table}
 
 
+\begin{table}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{ll||lll|lllllllllll}
+         &        & 1 sg.      & 2   sg.     & 3  sg.      & 1  pl.    & 2 pl.     & 3 pl. \\ \hline\hline
+ DNP & A & yaparım & yaparsın &  	yapar & yaparız & yaparsınız &  	yaparlar \\
+                    &  & -\textsc{ar}$_5$-\textsc{im}$_8$ & -\textsc{ar}$_5$-\textsc{sin}$_8$ &  	-\textsc{ar}$_5$ & -\textsc{ar}$_5$-\textsc{iz}$_8$ & -\textsc{ar}$_5$-\textsc{siniz}$_8$ &  	-\textsc{ar}$_5$-\textsc{lar}$_6$ \\ \hline
+                & I & yapıyorum & yapıyorsun & 	yapıyor &	yapıyoruz &	yapıyorsunuz &	yapıyorlar \\
+		&  & -\textsc{iyor}$_5$-\textsc{im}$_8$ & -\textsc{iyor}$_5$-\textsc{sin}$_8$ & 	-\textsc{iyor}$_5$ &	-\textsc{iyor}$_5$-\textsc{iz}$_8$ &	-\textsc{iyor}$_5$-\textsc{siniz}$_8$ &	-\textsc{iyor}$_5$-\textsc{lar}$_6$ \\ \hline
+                & Pr  & yapacağım &	yapacaksın 	& yapacak 	& yapacağız &	yapacaksınız &	yapacaklar \\ 
+                &   & -\textsc{acak}$_5$-\textsc{im}$_8$ &	-\textsc{acak}$_5$-\textsc{sin}$_8$ 	& -\textsc{acak}$_5$ 	& -\textsc{acak}$_5$-\textsc{iz}$_8$ &	-\textsc{acak}$_5$-\textsc{siniz}$_8$ &	-\textsc{acak}$_5$-\textsc{lar}$_6$ \\ \hline\hline
+        DP    & Pe &yaptım &	yaptın &	yaptı &	yaptık &	yaptınız &	yaptılar \\
+	      &  &-\textsc{ti}$_5$-\textsc{im}$_8$ &	-\textsc{ti}$_5$-\textsc{sin}$_8$ &	-\textsc{ti}$_5$ &	-\textsc{ti}$_5$-\textsc{k}$_8$ &	-\textsc{ti}$_5$-\textsc{siniz}$_8$ &	-\textsc{ti}$_5$-\textsc{lar}$_6$ \\ \hline
+                & I & yapıyordum &	yapıyordun &	yapıyordu &	yapıyorduk &	yapıyordunuz &	yapıyorlardı \\ 
+		&  & -\textsc{iyor}$_5$-\textsc{du}$_7$-\textsc{im}$_8$ &	-\textsc{iyor}$_5$-\textsc{du}$_7$-\textsc{sin}$_8$ &	-\textsc{iyor}$_5$-\textsc{du}$_7$ &	-\textsc{iyor}$_5$-\textsc{du}$_7$-\textsc{k}$_8$ &	-\textsc{iyor}$_5$-\textsc{du}$_7$-\textsc{siniz}$_8$ &	-\textsc{iyor}$_5$-\textsc{lar}$_6$-\textsc{du}$_7$ \\ \hline\hline
+ I     & Pe & yapmışım &	yapmışsın &	yapmış &	yapmışız &	yapmışsınız &	yapmışlar \\
+       &  & -\textsc{mis}$_5$-\textsc{im}$_8$ &	-\textsc{mis}$_5$-\textsc{sin}$_8$ &	-\textsc{mis}$_5$ &	-\textsc{mis}$_5$-\textsc{iz}$_8$ &	-\textsc{mis}$_5$-\textsc{siniz}$_8$ &	-\textsc{mis}$_5$-\textsc{lar}$_6$ \\ \hline
+               & A & yaparmışım &	yaparmışsın &	yaparmış &	yaparmışız &	yaparmışsınız& 	yaparlarmış \\ 
+            &  & -\textsc{ar}$_5$-\textsc{mis}$_7$-\textsc{im}$_8$ &	-\textsc{ar}$_5$-\textsc{mis}$_7$-\textsc{sin}$_8$ &	-\textsc{ar}$_5$-\textsc{mis}$_7$ &	-\textsc{ar}$_5$-\textsc{mis}$_7$-\textsc{iz}$_8$ &	-\textsc{ar}$_5$-\textsc{mis}$_7$-\textsc{siniz}$_8$& 	-\textsc{ar}$_5$-\textsc{lar}$_6$-\textsc{mis}$_7$ \\ \hline
+               & I & yapıyormuşum &	yapıyormuşsun &	yapıyormuş &	yapıyormuşuz &	yapıyormuşsunuz &	yapıyorlarmuş \\
+	       &              & -\textsc{iyor}$_5$-\textsc{mis}$_7$-\textsc{im}$_8$ &	-\textsc{iyor}$_5$-\textsc{mis}$_7$-\textsc{sin}$_8$ &	-\textsc{iyor}$_5$-\textsc{mis}$_7$ &	-\textsc{iyor}$_5$-\textsc{mis}$_7$-\textsc{iz}$_8$ &	-\textsc{iyor}$_5$-\textsc{mis}$_7$-\textsc{sunuz}$_8$ &	-\textsc{iyor}$_5$-\textsc{lar}$_6$-\textsc{mis}$_7$ \\
+\end{tabular}
+}
+\caption{Illustrating Turkish verb suffixes using selected forms of the verb \textit{yapmak}, covering TAM and agreement suffixes.}\label{tab:turkish-yapmak}
+\end{table}
+
+
 
 
 \subsection{Hungarian Verb Suffixes}
 
 
 In Table~\ref{tab:hungarian-suffixes}, we show the list of identified Hungarian verb suffixes.
-In Figure~\ref{tab:hungarian-paradigms}, we show how our segmentation corresponds to the paradigm of three verbs as described by Wiktionary.\footnote{From \texttt{https://en.wiktionary.org/wiki/tesz},
+In Figure~\ref{tab:hungarian-paradigms}, we illustrate these using selected forms of three verbs.\footnote{The selection of forms follows \texttt{https://en.wiktionary.org/wiki/tesz},
 \texttt{https://en.wiktionary.org/wiki/csinál},
 \texttt{https://en.wiktionary.org/wiki/ismer}, retrieved September 5, 2020.}
 
@@ -291,14 +291,14 @@ In Figure~\ref{tab:hungarian-paradigms}, we show how our segmentation correspond
     \centering
     \begin{tabular}{lllllllll}
     Slot & Morpheme & Function & Reference    \\ \hline\hline
-Valence	    & AT$_1$ & Causative &   \cite{rounds2001hungarian} 4.5.3 \\ \hline
-Mood	    & HET$_2$ & Potential &   \cite{rounds2001hungarian} 4.5.1  \\
-         & N$_2$ & conditional &   \cite{rounds2001hungarian} 4.3.7 \\
-         & J$_2$ & subjunctive &   \cite{rounds2001hungarian} 4.3.5 \\
+	    Valence	    & AT$_{\textsc{Val}}$ & Causative &   \cite{rounds2001hungarian} 4.5.3 \\ \hline
+Mood	    & HET$_{\textsc{Mood}}$ & Potential &   \cite{rounds2001hungarian} 4.5.1  \\
+         & NE$_{\textsc{Mood}}$ & conditional &   \cite{rounds2001hungarian} 4.3.7 \\
+         & J$_{\textsc{Mood}}$ & subjunctive &   \cite{rounds2001hungarian} 4.3.5 \\
 \hline
-	    Tense& T$_3$ & indicative past &  \cite{rounds2001hungarian} 4.3.3 \\
-         \hline
-Finiteness  & NI$_4$ & Infinitive  &  \cite{rounds2001hungarian} 4.4.4 \\
+	    Tense& T$_{\textsc{Tense}}$ & indicative past &  \cite{rounds2001hungarian} 4.3.3 \\
+ %        \hline
+%	    Finiteness  & NI$_{\textsc{Finiteness}}$ & Infinitive  &  \cite{rounds2001hungarian} 4.4.4 \\
 \hline
 %Definiteness & I & definite 2/3pl \\
 %         \hline
@@ -355,7 +355,7 @@ Cond  &Pres &   I    &tennék &	tennél &	tenne &	tennénk &	tennétek &	tennén
       &     &        & csinálnék &	csinálnál &	csinálna &	csinálnánk 	&csinálnátok &	csinálnának \\
   &&&    ismernék &	ismernél &	ismerne &	ismernénk &	ismernétek &	ismernének \\
   &&& -n{\'e}k & -n{\'e}l & -ne & -n{\'e}nk & -n{\'e}tek & -n{\'e}nek &  4.3.7.1\\
-	    & &   I    &-\textsc{ne}$_{\textsc{Mood}}$-\textsc{ek} &	-\textsc{ne}$_{\textsc{Mood}}$-\textsc{el} &	-\textsc{ne}$_{\textsc{Mood}}$ &	-\textsc{ne}$_{\textsc{Mood}}$-\textsc{enk} &	-\textsc{ne}$_{\textsc{Mood}}$-\textsc{etek} &	-\textsc{ne}$_{\textsc{Mood}}$-\textsc{enek}  \\
+	    & &   I    &-\textsc{ne}$_{\textsc{Mood}}$-\textsc{ek}$_{\textsc{Agr}}$ &	-\textsc{ne}$_{\textsc{Mood}}$-\textsc{el}$_{\textsc{Agr}}$ &	-\textsc{ne}$_{\textsc{Mood}}$ &	-\textsc{ne}$_{\textsc{Mood}}$-\textsc{enk}$_{\textsc{Agr}}$ &	-\textsc{ne}$_{\textsc{Mood}}$-\textsc{etek}$_{\textsc{Agr}}$ &	-\textsc{ne}$_{\textsc{Mood}}$-\textsc{enek}$_{\textsc{Agr}}$  \\
   \hline
    &&  D    &tenném &	tennéd &	tenné &	tennénk &	tennétek &	tennék \\
    &&       & csinálnám &	csinálnád &	csinálná &	csinálnánk &	csinálnátok &	csinálnák \\
@@ -372,7 +372,7 @@ csináljál &	csináljon &	csináljunk& 	csináljatok &	csináljanak \\
 &&&ismerjek &	ismerj or
 ismerjél &	ismerjen &	ismerjünk &	ismerjetek &	ismerjenek \\
  & &          & -j-ek & -j-({\'e}l) & -j-en & -j-{\"u}nk & -j-etek & -j-enek  &  4.3.5.1\\
-	    &  &          &-\textsc{j}$_{\textsc{Mood}}$-\textsc{ek} &	\textsc{j}$_{\textsc{Mood}}$-\textsc{eel} &	-\textsc{j}$_{\textsc{Mood}}$-\textsc{en} &	-\textsc{j}$_{\textsc{Mood}}$-\textsc{unk} &	-\textsc{j}$_{\textsc{Mood}}$-\textsc{etek} &	-\textsc{j}$_{\textsc{Mood}}$-\textsc{enek}\\
+	    &  &          &-\textsc{j}$_{\textsc{Mood}}$-\textsc{ek}$_{\textsc{Agr}}$ &	\textsc{j}$_{\textsc{Mood}}$-\textsc{eel}$_{\textsc{Agr}}$ &	-\textsc{j}$_{\textsc{Mood}}$-\textsc{en}$_{\textsc{Agr}}$ &	-\textsc{j}$_{\textsc{Mood}}$-\textsc{unk}$_{\textsc{Agr}}$ &	-\textsc{j}$_{\textsc{Mood}}$-\textsc{etek}$_{\textsc{Agr}}$ &	-\textsc{j}$_{\textsc{Mood}}$-\textsc{enek}$_{\textsc{Agr}}$\\
  \hline
 &&D         &tegyem &	tedd or tegyed &	tegye &	tegyük& 	tegyétek &	tegyék \\
 &&          & csináljam &	csináld or

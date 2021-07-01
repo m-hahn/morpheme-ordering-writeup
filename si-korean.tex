@@ -8,9 +8,10 @@ Furthermore, they can both be segmented into the formal marker \korean{ㅂ/습} 
 We therefore transform both segments into the abstract morpheme sequence \textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$ (see below for this notation).
 We then partitioned the resulting morphemes into slots that make it possible to consistently describe the ordering of all forms encountered in the corpus.
 We indexed morphemes by a small-caps representation of a stylized phonological representation (such as \textsc{p} for -\korean{ㅂ/습}  -\textit{p/seup}),\footnote{These transcriptions are purely conventional, we do not intend these to correspond to a theory of how underlying phonological forms are realized as surface phone strings.} with a subscript indicating their slot (such as \textsc{p}$_5$-\textsc{ni}$_6$-\textsc{da}$_7$).
-With this procedure, we identified the nine slots described below:
+With this procedure, we identified the slots described below:
 \begin{enumerate}
     %. The root may include a valency suffix, which is not separated frem the root in the dataset. We did not attempt to separate v
+	\item Root
     \item Derivation: The two derivational suffixes are \textit{ha} (\citep[4.1.2]{yeon2010korean}) and the predicative \textit{i}, whose function is similar to that of a copula \citep[4.1.4]{yeon2010korean}.
     
     \item Honorific \textsc{si}$_3$ \citep[4.3.2, 4.4.1]{yeon2010korean}
@@ -27,8 +28,7 @@ With this procedure, we identified the nine slots described below:
 
 We show morphemes occurring at least 50 times in slots 2-8 in Figure~\ref{tab:korean-frequent-morphemes}.
 We do not provide the list of the (very numerous) conjunctive and nominalizing suffixes as these are not the focus of the typological generalization that we are interested in.
-
-Additional morphemes that occur less than 50 times are placed into an UNKNOWN slot. %, this affects \textcolor{red}{TODO} \% of morpheme occurrences in the dataset.
+Additional morphemes that do not fit into any of the slots and occur less than 50 times are placed into an UNKNOWN slot. %, this affects \textcolor{red}{TODO} \% of morpheme occurrences in the dataset.
 
 
 %TODO 
@@ -69,7 +69,7 @@ Formality & \korean{ㅂ} &\textsc{p}$_5$ &	 formal-polite &\citep[4.3.2]{yeon201
 
 Next, we explain how our segmentation corresponds to commonly described paradigms.
 First, in Table~\ref{tab:korean-styles}, we describe the correspondence to the speech style system described by \citep[4.3.2]{yeon2010korean}.
-Second, in Tables~\ref{tab:korean-hada-1}--\ref{tab:korean-hada-3}, we show the paradigm for the verb \korean{하다} \textit{hada} `to do' as described in Wiktionary.\footnote{ \texttt{https://en.wiktionary.org/wiki/\korean{하다}} (retrieved Septemgber 16, 2020).}
+Second, in Tables~\ref{tab:korean-hada-1}--\ref{tab:korean-hada-3}, we show a paradigm for the verb \korean{하다} \textit{hada} `to do' as described in Wiktionary\footnote{Selection of forms and labeling of rows and columns in Tables ~\ref{tab:korean-hada-1}--\ref{tab:kroean-itda} are from \texttt{https://en.wiktionary.org/wiki/\korean{하다}} and \texttt{https://en.wiktionary.org/wiki/\korean{있다}} (retrieved September 16, 2020).}, which covers some of the affixes in slots 4--7.
 In Table~\ref{tab:kroean-itda}, we show the part of the paradigm of the verb \textit{ida} `to be' corresponding to Table~\ref{tab:korean-hada-1} (the other parts of the paradigm are analogous to those of \textit{hada}).
 Note that none of these paradigms constitute exhaustive lists of all forms of these verbs; instead, they represent commonly used forms in a systematic paradigmatic representation.
 
@@ -149,7 +149,7 @@ Assertive   && \korean{하겠다}  & \korean{하겠어}  & \korean{하겠어요}
 &&  px+ep+ef          & pvg+ep+ef   & pvg+ep+ef+jxf & pvg+ep+ef\\
 \hline
 \end{tabular}
-	\caption{Correspondence between our morpheme segmentation and the paradigm of \textit{hada} `to do' as described by Wiktionary and in the Kaist treebank. In each cell, we provide the Hangul  and transliterated (e.g., handa) forms given by Wiktionary, a representation in terms of underlying morphemes (e.g., -\textsc{n}$_6$-\textsc{da}$_7$), and -- where available -- how the form is segmented in the Kaist corpus (e.g., px+ef).}\label{tab:korean-hada-1} % (e.g., \korean{한다})\korean{하+ㄴ다} and 
+	\caption{Selected forms of \textit{hada} `to do' (see text for further information). In each cell, we provide Hangul  and transliterated (e.g., handa) forms, a representation in terms of underlying morphemes (e.g., -\textsc{n}$_6$-\textsc{da}$_7$), and -- where available -- how the form is segmented in the Kaist corpus (e.g., px+ef).}\label{tab:korean-hada-1} % (e.g., \korean{한다})\korean{하+ㄴ다} and 
 \end{table}
 
 \begin{table}
