@@ -153,9 +153,9 @@
 \begin{abstract}
 The ordering of morphemes in a word displays well-documented regularities across languages.
 Previous work has explained these in terms of notions such as semantic scope, relevance, and productivity. 
-The claim of a recent theory of the ordering of linguistic units (Hahn et al, 2020) is that morpheme ordering can partly be explained by optimization of a tradeoff between memory and surprisal. This claim has received initial empirical support from two languages.
+Here, we test a recently formulated processing theory of the ordering of linguistic units, the Efficient Tradeoff Hypothesis \citep{Hahn2020modeling}. The claim of the theory is that morpheme ordering can partly be explained by the optimization of a tradeoff between memory and surprisal. This claim has received initial empirical support from two languages.
 In this work, we test this idea more extensively using data from four additional agglutinative languages with significant amounts of morphology, and by considering nouns in addition to verbs.
-We find that the memory-surprisal tradeoff predicts ordering in most cases with high accuracy, and accounts for crosslinguistic regularities in noun and verb inflection.
+We find that the Efficient Tradeoff Hypothesis predicts ordering in most cases with high accuracy, and accounts for cross-linguistic regularities in noun and verb inflection.
 Our work adds to a growing body of work suggesting that many ordering properties of language arise from a pressure for efficient language processing.
 \end{abstract}
 
@@ -184,7 +184,7 @@ Explanations of the third kind argue that affixes are closer to the root when th
 
 A recent theory proposes a cognitive explanation for word and morpheme order in language, arguing that ordering universals in language optimize processing effort under memory limitations \citep{Hahn2020modeling}.
 \citet{Hahn2020modeling} introduce the notion of a \emph{memory-surprisal tradeoff}: The more memory resources a comprehender invests in representing the context preceding the currently observed word, the lower the achievable surprisal that the comprehender must incur on that word. Conversely, the less memory is invested, the higher the surprisal.
-\citet{Hahn2020modeling} argue for the \emph{Efficient Tradeoff Hypothesis}, the idea order of words and morphemes in language provides particularly efficient memory-surprisal tradeoffs.
+\citet{Hahn2020modeling} argue for the \emph{Efficient Tradeoff Hypothesis}, the idea that the order of words and morphemes in language provides particularly efficient memory-surprisal tradeoffs.
 They show that optimizing the memory-surprisal tradeoff amounts to placing elements close together that strongly predict each other, as measured by mutual information.
 \citet{Hahn2020modeling} argue that this property of the memory-surprisal tradeoff generalizes previous processing theories which suggest that orderings tend to place together elements that are syntactically related \citep{rijkhoff-word-1986, hawkins-performance-1994}, conceptually related \citep{givon1985iconicity}, semantically relevant to each other \citep{bybee-morphology-1985}, or processed together in lexical access \citep{hay2004what}.
 While focused on explaining word order across 54 languages, \citet{Hahn2020modeling} also test whether two languages optimize the memory-surprisal tradeoff at the morphological level. In particular, they find that optimizing the memory-surprisal tradeoff partly reproduces the ordering of morphemes in Japanese and Sesotho verbs.
@@ -199,10 +199,10 @@ While focused on explaining word order across 54 languages, \citet{Hahn2020model
 
 
 Here, we test this theory on a broader basis, considering both a larger set of languages and extending coverage from verbs to nouns.
-We consider data from four agglutinative languages -- i.e., languages with rich morphology where words tend to have multiple morphemes which are mostly realized separately (Korean, Turkish, Hungarian, and Finnish) -- in addition to the two language already considered by \citet{Hahn2020modeling} (Japanese and Sesotho).
+We consider data from four agglutinative languages -- i.e., languages with rich morphology where words tend to have multiple morphemes which are mostly realized separately (Korean, Turkish, Hungarian, and Finnish) -- in addition to the two languages already considered by \citet{Hahn2020modeling} (Japanese and Sesotho).
 These languages have very substantial verbal inflection, and three of these languages (Turkish, Hungarian, Finnish) also have substantial noun inflection. We test both whether the memory-surprisal tradeoff accounts for universals of verb affix ordering documented by \cite{bybee-morphology-1985}, but also extend the scope of the analysis to nouns, where we test whether the theory accounts for Greenberg's Universal 39 \citep{greenberg-universals-1963}. 
 
-The choice of the languages is guided by three factors: the presence of rich agglutinative morphology, the availability of corpus data with morphological annotation, and diversity in language families.
+The choice of the languages is guided and constrained by three factors: the presence of rich agglutinative morphology, the availability of corpus data with morphological annotation, and diversity in language families.
 The six languages under consideration represent five language families (Korean, Japonic, Uralic, Turkic, Niger-Congo).
 Finnish and Hungarian both belong to the Uralic family, sharing a common ancestor about 5,000 years ago \citep{maurits2020best}.
 The other languages in the sample are not genetically related according to their generally accepted classification \citep{glottolog}.
@@ -266,7 +266,7 @@ This universal is supported by the example in Figure~\ref{fig:noun-inflection}.
 
 \begin{figure}
 	\centering
-\includegraphics[width=0.5\textwidth]{figures/noun-slots.png}
+\includegraphics[width=0.6\textwidth]{figures/noun-slots.png}
 %\begin{tabular}{lllllllll}
 %\textit{juttu-i-hi-si} \\
 %%Stem-Plural-Illative-2SgPoss \\
@@ -684,7 +684,7 @@ We used available corpus annotation together with the grammatical literature on 
 
 In order to estimate memory-surprisal tradeoffs, we model words as strings of morphemes, following \citet{Hahn2020modeling}.
 For instance, we represent \textit{juttu-i-hi-si} `into your stories' (Figure \ref{fig:noun-inflection}) as juttu-\textsc{Plural}-\textsc{Illative}-\textsc{2sgPoss}.
-(See SI Appendix Section 2 for a study taking nonlocal morphophonological interactions between morphemes into account.)
+%(See SI Appendix Section 2 for a study taking non-local morphophonological interactions between morphemes into account.)
 
 For each language, we parameterize possible morpheme orderings through the $N!$ possible orderings of the $N$ affix slots.
 Applying any such ordering to the forms extracted from the corpus results in a set of counterfactual forms with some associated memory-surprisal tradeoff curve.
@@ -755,6 +755,7 @@ Functionally, these two morphemes always appear together and have no distinct me
 Both can equally well be regarded as markers of the passive; there is no reason other than the match with the \textsc{Verb Affix Ordering} universal for the conventional view that one is a voice marker and the other is an agreement marker.
 More interestingly, unlike the passive of most languages, the Finnish passive is insensitive to the verb's argument structure, simply denoting that an unspecified agent performed an action \citep{Shore1988OnTS,Blevins2003PassivesAI}.
 Therefore, the theories of semantic relevance and semantic scope discussed in Section~\ref{sec:previous} would arguably also predict the Finnish ``passive'' marker to pattern with agreement markers, unlike the actual Finnish ordering but in agreement with the Efficient Tradeoff Hypothesis.
+The Finnish ``passive'' may thus illustrate a language-specific idiosyncrasy not predicted by explanatory crosslinguistic accounts.
 
 
 %This means that the agreement marker has substantial mutual information with the voice morpheme, and optimized orderings prefer agreement and voice morphemes to be adjacent.
@@ -938,6 +939,9 @@ The accuracy of optimized orderings is indicated by the red bars at the top.
 Finally, to elucidate the connection between ordering and mutual information, we computed the conditional mutual information (\ref{eq:mi}) between affixes and roots for nouns and verbs in the optimized orderings across languages.
 The results are shown in Figure~\ref{fig:cmis}.
 In accordance with the principle of information locality, affixes that are ordered closer to the root in the two typological universals and in optimized orderings have almost always higher mutual information with the root than affixes ordered farther away from the root.
+For nouns, number has consistently higher mutual information with the root than case, i.e., the identity of the root constrains number more strongly than case.
+Similarly, for verbs, the identity of the verb constrains the applicability of derivational affixes most, followed by valence and voice.
+Agreement affixes tend to have the lowest mutual information, i.e., their identity is least constrained by the identity of the verb.
 
 
 
@@ -969,7 +973,6 @@ Thus, the commonalities across languages found cannot be traced to inherited ord
 %- limitations of computational estimation of the memory-surprisal tradeoff. %However: As the set of all moprphological forms of a language is typically finite (CITE), we believe that these limitations play a smaller role in morpheme order, compared to word order.
 
 A limitation of this study is that memory-surprisal tradeoffs are estimated on finite datasets that do not cover all possible morphological forms of a language. However, to the extent that this limitation impacts the estimation of memory-surprisal tradeoffs, it should equally apply to real and counterfactual orderings. We thus do not expect the relative measured efficiencies of different orderings to be impacted by the finiteness of data.
-
 
 
 %- genre of data: written. but Sesotho is spoken (child-directed)
@@ -1137,7 +1140,7 @@ It is an interesting problem for future research to study whether these correlat
 We have tested the recently proposed Efficient Tradeoff Hypothesis as a predictor of morpheme ordering with data from verbs and nouns across six languages.
 We found that attested morpheme orders provide more efficient tradeoffs than most other possible orderings and that many properties of observed orderings are recovered by optimizing for tradeoff efficiency.
 Across languages, we found that optimized orderings predict real orderings better than baselines, and in some languages almost perfectly.
-Optimization also successfully predicts several universals of morpheme ordering, both for nouns and verbs.
+Optimization also successfully predicts prominent universals of morpheme ordering, both for nouns and verbs.
 These results support the Efficient Tradeoff Hypothesis as a theory of order in language, and more broadly suggest that morpheme ordering reflects optimization of processing efficiency.
 
 
