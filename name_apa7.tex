@@ -232,15 +232,15 @@ This universal is supported by the example in Figure~\ref{fig:noun-inflection}.
 \subsection{Universals of Verb Affix Ordering}\label{sec:univ-verbs}
 Verbs commonly mark a larger number of inflection categories.
 Figure~\ref{tab:examples-verbs} summarizes the affixes in the verbal morphologies of the six languages considered here (see SI Section S1 for details on how we arrived at these summaries).
-Sesotho has both prefixes and suffixes; we treat these separately, as we only aim to explain the relative distance of affixes from the base, not which side of the verb they appear on.
+Sesotho has both prefixes and suffixes; we treat these separately, as the universals under consideration here only concern the relative distance of affixes from the base, not which side of the verb they appear on.
 
 Verb affixes are typically grouped into derivational and inflectional affixes.
 Derivational affixes derive new verb stems (e.g., 'do' $\rightarrow$ undo), whereas inflectional affixes derive inflected verb forms from verb stems (e.g., `do' $\rightarrow$ `does').
 Examples of derivational suffixes are Japanese -su- and Korean -ha-, which derive verbs from non-verbal stems \citep{hasegawa2014japanese, yeon2010korean}.
-Another example is the reversive suffix in Sesotho (corresponding to `un-' in English `do' $\rightarrow$ `undo', \citep{doke1967textbook}.
+Another example is the reversive suffix in Sesotho (corresponding to `un-' in English `do' $\rightarrow$ `undo', \citep{doke1967textbook}).
 Derivational affixes generally appear closer to the root than inflectional affixes \citep{greenberg1963universals}.
 
-Languages can have several inflectional affixes stacked (Figure Figures~\ref{tab:examples-verbs}); their ordering shows universal tendencies \citep{bybee-morphology-1985}, which we summarize as follows:
+Languages can have several inflectional affixes stacked (Figure~\ref{tab:examples-verbs}); their ordering shows universal tendencies \citep{bybee-morphology-1985}, which we summarize as follows:
 
 \begin{adjustwidth}{6em}{6em}
 \textsc{Verb Affix Ordering} \citep{bybee-morphology-1985}:
@@ -381,7 +381,7 @@ A prominent cognitively-motivated theory of morpheme ordering is the theory of C
 This theory holds that affixes are closer to the root when they are more likely to be processed together with the base in the dual-route model of human lexical access   \citep{baayen-frequency-1993}.
 For instance, this model argues that more productive affixes are more likely to be accessed separately from the root than less productive affixes  \citep{baayen-frequency-1993}.
 This theory has been applied to the ordering of derivational affixes in English,  but not to the affix ordering generalizations described in Sections~\ref{sec:univ-nouns}--\ref{sec:univ-verbs}.
-Relatedly, \citet{inkelas2016affix} proposed that morphemes are ordered together when they are informative about each other, using a notion of informativity introduced by \citet{priva2017informativity} . %that is formally very similar to the mutual information $I_1$ between two adjacent morphemes.
+Relatedly, \citet{inkelas2016affix} proposed that morphemes are ordered together when they are informative about each other, using a notion of informativity introduced by \citet{priva2017informativity}.
 In a pilot study of Turkish, they found preliminary evidence that high-informativity suffixes are closer to the root.
 
 
@@ -557,7 +557,10 @@ Applying any such ordering to the forms extracted from the corpus results in a s
 
 %in particular, applying the real orderings (Figure \ref{tab:examples-verbs}) results in the actual morpheme sequences as found in the corpus.\jd{isn't this redundant/trivially true? ie is this saying more than "the real order is the real order"?}
 
-We compare the real orderings (\textit{real}) to four different kinds of alternative orderings: randomized morpheme orderings (\textit{random}), random morpheme orderings that respect the universals discussed in Section \ref{sec:univ} (\textit{universals})\footnote{In addition to the two universals discussed there, they also respect the universal that derivational affixes are closer to the stem than inflectional affixes mentioned in the introduction.}, the reversed real orderings (\textit{reverse}), and morpheme orderings that are optimized to minimize AUC under the tradeoff curve (\textit{optimized}).  We estimated memory-surprisal tradeoffs and computationally optimized orderings for the AUC under the tradeoff curve using the method described in \citet{Hahn2020modeling}.
+We compare the real orderings (\textit{real}) to four different kinds of alternative orderings:
+First, we consider randomized morpheme orderings (\textit{random}); these represent the set of all $N!$ possible orderings of the $N$ affix slots.
+Second, we consider random morpheme orderings that respect the universals discussed in Section \ref{sec:univ} (\textit{universals})\footnote{In addition to the two universals discussed there, they also respect the universal that derivational affixes are closer to the stem than inflectional affixes mentioned in the introduction.}.
+Third, we consider the reversed real orderings (\textit{reverse}), and morpheme orderings that are optimized to minimize AUC under the tradeoff curve (\textit{optimized}).  We estimate memory-surprisal tradeoffs and computationally optimized orderings for the AUC under the tradeoff curve using the method described in \citet{Hahn2020modeling}.
 
 %\becky{I don't think the connection between MI and AUC was made super explicit earlier, so I guess that's why we're not saying ``optimized to maximize MI" ? I think the use of MI in this paper is not clear.}
 
@@ -587,28 +590,23 @@ In most languages, real orderings have lower AUC than the vast majority of rando
 Finnish verbs form the only exception; AUCs of real orderings are similar to those of baseline orderings (see below for discussion).
 
 Second, we evaluated the accuracy of optimized orderings in predicting real orderings.
-If the Efficient Tradeoff Hypothesis predicts morpheme order, then optimized orderings should achueve a higher prediction accuracy than most other possible orderings.
+If the Efficient Tradeoff Hypothesis predicts morpheme order, then optimized orderings should achieve a higher prediction accuracy than most other possible orderings.
 Figures \ref{tab:optimized_acc_nouns}--\ref{tab:optimized_acc_verbs} show the accuracy of optimized and random baseline orderings in predicting real orderings. 
-We measured accuracy by counting what fraction of all pairs of affixes within a single word from the corpus are ordered in the same relative ordering as under the real ordering (see SI Section S2 for other ways of quantifying accuracy, with very similar results)
-%We defined three measures of agreement:
-%\textit{Pairs} counts what fraction of all pairs of affixes within a single word from the corpus are ordered in the same relative ordering under both orderings.
-%\textit{Full} counts what fraction of words from the corpus is ordered entirely identically under both orderings.
-%Finally, \textit{Full (Types)} is analogous to \textit{Full} but only counts words that appear multiple times only once, in ordering to control for the possible effect of individual highly frequent forms.
-
+We measured accuracy by counting what fraction of all pairs of affixes within a single word from the corpus are ordered in the same relative ordering as under the real ordering (see SI Appendix, Section S2 for other ways of quantifying accuracy, with very similar results).
 
 For nouns, the accuracy of optimized orderings is above the agreement of most random grammars, outperforming 90\% or more of all possible orderings (Figure~\ref{tab:optimized_acc_nouns}).
 For verbs, accuracy of optimized orderings is above 90\% for Hungarian, Turkish, Korean, Japanese, and Sesotho prefixes, better than at least 80\% of all possible orderings. 
 For Finnish and Sesotho suffixes, agreement is lower, though still at 84\% (Finnish) and 78\% (Sesotho), outperforming 76\% (Finnish) and 97\% (Sesotho) of all possible orderings.
 
 
-In some languages (Finnish, Hungarian, Sesotho prefixes), the real ordering is already explained nearly entirely by the universal; here, optimized orderings do not outperform the universal-constrained orderings.
+In some languages (Finnish, Hungarian, Sesotho prefixes), the real ordering is already explained nearly entirely by the \textsc{Verb Affix Ordering} universal; here, optimized orderings do not outperform the universal-constrained orderings.
 However, in those languages where  there are significant language-specific regularities going beyond the universals, so that universal-constrained baselines do not all achieve near-perfect accuracy (Japanese, Korean, Sesotho suffixes, Turkish), optimized orderings again consistently outperform most universal-constrained orderings.
-This shows that the Efficient Tradeoff Hypothesis accounts for language-specific ordering patterns beyond those captured by the \textsc{Verb Affix Ordering} universal.
+This suggests that the Efficient Tradeoff Hypothesis accounts for language-specific ordering patterns beyond those captured by the \textsc{Verb Affix Ordering} universal.
 
 
 Figures \ref{fig:real_and_optimized_nouns} and \ref{fig:real_and_optimized_verbs} directly compare real and optimized orderings for nouns and verbs respectively.
 For the nouns, Greenberg's Universal 39 is recovered by all optimized orderings.
-While there is a mismatch in the language-specific ordering of possessive suffixes in Finnish, the AUC difference is imperceptible in Figure~\ref{fig:auc_nouns}.
+While there is a mismatch in the language-specific ordering of possessive suffixes in Finnish, the AUC difference between real and optimized orderings is imperceptible in Figure~\ref{fig:auc_nouns}.
 
 For verbs, real and optimized orders show some disagreement in each language.
 Comparing the universal verb morpheme ordering to the optimized ordering for each language, all languages except for Finnish match the universal ordering perfectly for the morphemes occurring in each of these languages.
@@ -712,7 +710,7 @@ The Finnish ``passive'' may thus illustrate a language-specific idiosyncrasy not
     \caption{Accuracies in predicting noun morpheme ordering.
 The accuracy of optimized orderings is indicated by the red bars at the top.
     For the baselines, we provide both smoothed violin plots of the distribution of accuracies, and horizontal lines indicating mean accuracies.
-    Random baselines have a mean accuracy of about 50\%; baselines respecting the universals tend to have higher accuracy, though mostly not as high as the optimized ordering.
+    Random baselines have a mean accuracy of about 50\%; baselines respecting the universals tend to have higher accuracies.
 	The numbers indicate what fraction of baselines (random or universal-constrained) have a lower accuracy than the optimized ordering.}
 %    Comparisons between optimized and baseline (both random and based on universals) orderings are significant at $p<0.001$.}
     \label{tab:optimized_acc_nouns}
@@ -724,7 +722,7 @@ The accuracy of optimized orderings is indicated by the red bars at the top.
     \caption{Accuracies in predicting verb morpheme ordering.
     For the baselines, we provide both a smoothed violin plot of the distribution of accuracies, and the mean accuracy as a horizontal line (green and blue). For the optimized order, we show the accuracy as a horizontal line (red).
 	The numbers indicate what fraction of baselines (random or universal-constrained) have a lower accuracy than the optimized ordering.
-	In all languages, optimized orderings provide higher accuracy than the majority of random baselines. In some languages, they additionally nave higher accuracy than most universal-constrained baselines.}
+	In all languages, optimized orderings provide higher accuracy than the majority of random baselines. In some languages, they additionally have higher accuracy than most universal-constrained baselines.}
     \label{tab:optimized_acc_verbs}
 \end{figure}
 
@@ -806,7 +804,7 @@ The accuracy of optimized orderings is indicated by the red bars at the top.
 
 Finally, to elucidate the connection between ordering and mutual information, we computed the conditional mutual information (\ref{eq:mi}) between affixes and roots for nouns and verbs in the optimized orderings across languages.
 The results are shown in Figure~\ref{fig:cmis}.
-In accordance with the principle of information locality, affixes that are ordered closer to the root in the two typological universals and in optimized orderings have almost always higher mutual information with the root than affixes ordered farther away from the root.
+In accordance with the principle of information locality, affixes that are ordered closer to the root in the two typological universals and in optimized orderings almost always have higher mutual information with the root than affixes ordered farther away from the root.
 For nouns, number has consistently higher mutual information with the root than case, i.e., the identity of the root constrains number more strongly than case.
 Similarly, for verbs, the identity of the verb constrains the applicability of derivational affixes most, followed by valence and voice.
 Agreement affixes tend to have the lowest mutual information, i.e., their identity is least constrained by the identity of the verb.
@@ -832,7 +830,7 @@ These results support the idea that optimization for processing effort can expla
 
 Due to limitations in the availability of large-scale annotated text, this study builds on languages from Eurasia and Africa, not representing Australia and America.
 Among the languages, Hungarian and Finnish are genetically related, sharing a common ancestor about 5,000 years ago \citep{maurits2020best}.
-There is also some evidence for genetic relations beyond these (Japanese, Korean, Turkish), but such relations would have to be quite ancient.
+Some linguists also propose genetic relations beyond these (Japanese, Korean, Turkish), but such relations would have to be substantially more ancient.
 Importantly, the morphemes found in these languages as considered here are generally not cognate.
 Thus, the commonalities across languages found cannot be traced to inherited orderings of morphemes that are inherited from a common ancestor.
 %Furthermore, we note that the predictions of the Efficient Tradeoff Hypothesis of different orderings crucially depend not on the morphemes themselves (which might be inherited), but on the usage frequencies of different forms (e.g., of singulars and plurals).
