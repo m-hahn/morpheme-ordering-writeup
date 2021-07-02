@@ -29,7 +29,7 @@
 %\usepackage{xeCJK}
 
 \usepackage{natbib}
-\bibliographystyle{unsrtnat}
+\bibliographystyle{plainnat}
 
 %\usepackage{latexsym}
 \usepackage[english]{babel}
@@ -124,7 +124,9 @@
 %\emnlpfinalcopy
 %\def\emnlppaperid{496}
 
-\title{Supplementary Information: Morpheme Ordering across Languages reflects optimization for Memory Efficiency}
+\title{Supplementary Information: Morpheme Ordering across Languages Reflects Optimization for Memory Efficiency}
+
+\author{Michael Hahn, Rebecca Mathew, Judith Degen}
 
 \begin{document}
 
@@ -197,12 +199,12 @@ conditional mood  &1st sing. &	tulisin  & -isi$_{\textsc{TAM}}$-n$_{\textsc{Ag
 	&	3rd plur. &	tullevat  & -ne$_{\textsc{TAM}}$-vat$_{\textsc{Agr}}$\\ 
 	&	passive &	tultaneen  & -t$_{\textsc{Passive}}$-ne$_{\textsc{TAM}}$-Vn$_{\textsc{Agr}}$ \\ \hline
 \end{tabular}
-	\caption{Finnish verb inflection}\label{tab:finnish}
+	\caption{Selected forms of Finnish verbs. See text for details.}\label{tab:finnish}
 \end{table}
 
 \subsection{Turkish Verb Suffixes}
 
-In Table~\ref{tab:turkish-suffixes}, we show the list of identified Turkish verb suffixes.
+In Table~\ref{tab:turkish-suffixes}, we show the list of identified Turkish verb suffixes \citep{schaaik2020turkish}.
 In Figure~\ref{tab:turkish-yapmak}, we illustrate this using selected forms of \textit{yapmak}, covering TAM and agreement suffixes.\footnote{The selection of forms follows: \url{https://en.wiktionary.org/wiki/yapmak\#Turkish}, retrieved September 5, 2020.}
 
 
@@ -210,9 +212,9 @@ In Figure~\ref{tab:turkish-yapmak}, we illustrate this using selected forms of \
 \begin{tabular}{llllllll}
 Slot & Label & Function & Morphs & Reference \\ \hline
 \hline
-	Valence & -TIR$_1$  & Causative & -tIr & \\
+	Valence & TIR$_1$  & Causative & -tIr & \\
 \hline
-	Voice &  -IL$_2$ & Passive & -Il\\
+	Voice &  IL$_2$ & Passive & -Il\\
 %\hline
 %Polite &   & \\
 \hline
@@ -229,7 +231,7 @@ TAM1      & AR$_5$ & Aorist, nonpast, direct & -(I/E)r, -z  & \cite{schaaik2020t
 %\hline
 %V Noun &  \\
 \hline
-	3rd Plural& \textsc{lar}$_{6}$  & 3rd Plural & -lAr & \\
+	3rd Plural& lar$_{6}$  & 3rd Plural & -lAr & \\
 \hline
 TAM2      & MUS2$_7$ & Aorist/Imperfective, indirect & -mIş & \cite{schaaik2020turkish}, section 24.2 \\
           & DU$_7$ & imperfective, past, direct & -dI & \cite{schaaik2020turkish}, section 24.1.3 \\
@@ -269,7 +271,7 @@ TAM2      & MUS2$_7$ & Aorist/Imperfective, indirect & -mIş & \cite{schaaik2020
 	       &              & -\textsc{iyor}$_5$-\textsc{mis}$_7$-\textsc{im}$_8$ &	-\textsc{iyor}$_5$-\textsc{mis}$_7$-\textsc{sin}$_8$ &	-\textsc{iyor}$_5$-\textsc{mis}$_7$ &	-\textsc{iyor}$_5$-\textsc{mis}$_7$-\textsc{iz}$_8$ &	-\textsc{iyor}$_5$-\textsc{mis}$_7$-\textsc{sunuz}$_8$ &	-\textsc{iyor}$_5$-\textsc{lar}$_6$-\textsc{mis}$_7$ \\
 \end{tabular}
 }
-\caption{Illustrating Turkish verb suffixes using selected forms of the verb \textit{yapmak}, covering TAM and agreement suffixes.}\label{tab:turkish-yapmak}
+	\caption{Illustrating Turkish verb suffixes using selected forms of the verb \textit{yapmak}, covering TAM and agreement suffixes (slots 5--8). See text for details.}\label{tab:turkish-yapmak}
 \end{table}
 
 
@@ -278,7 +280,7 @@ TAM2      & MUS2$_7$ & Aorist/Imperfective, indirect & -mIş & \cite{schaaik2020
 \subsection{Hungarian Verb Suffixes}
 
 
-In Table~\ref{tab:hungarian-suffixes}, we show the list of identified Hungarian verb suffixes.
+In Table~\ref{tab:hungarian-suffixes}, we show the list of identified Hungarian verb suffixes \citep{rounds2001hungarian}.
 In Figure~\ref{tab:hungarian-paradigms}, we illustrate these using selected forms of three verbs.\footnote{The selection of forms follows \texttt{https://en.wiktionary.org/wiki/tesz},
 \texttt{https://en.wiktionary.org/wiki/csinál},
 \texttt{https://en.wiktionary.org/wiki/ismer}, retrieved September 5, 2020.}
@@ -387,7 +389,7 @@ ismerjed &	ismerje &	ismerjük &	ismerjétek & ismerjék
 %	    &&& \textsc{j}-\textsc{elek} \\
     \end{tabular}
     }
-    \caption{Hungarian verb suffixes: Inflection by tense, mood, definitiness, and person/number. ``Ind'' = ``Indicative'', ``Cond'' = ``Conditional'', ``Subj'' = ``Subjunctive'', ``I'' = ``Indefinite'', ``D'' = ``Definite''.
+    \caption{Hungarian verb suffixes (see text for details): Inflection by tense, mood, definitiness, and person/number. ``Ind'' = ``Indicative'', ``Cond'' = ``Conditional'', ``Subj'' = ``Subjunctive'', ``I'' = ``Indefinite'', ``D'' = ``Definite''.
     For each form, we show the orthographic shape for three verbs, the suffix as identified by \citet{rounds2001hungarian}, and our representation as a string of morphemes as described in Table~\ref{tab:hungarian-suffixes}.}
     \label{tab:hungarian-paradigms}
 \end{table}
@@ -531,6 +533,7 @@ However, this is rare in the data, occurring only three times in the training se
 Here we report results using two alternative measures of accuracy.
 \textsc{FullAccuracy} measures the fraction of forms in the corpus that are ordered entirely correctly (Figure~\ref{tab:optimized_acc_verbs_full}).
 \textsc{FullTypeAccuracy} modifies this by disregarding repeated occurrences of the same form in the corpus (Figure~\ref{tab:optimized_acc_verbs_full_types}).
+For both measures, we only include forms that have at least two affixes; the other forms are ordered correctly under any ordering.
 Results across these two measures and the one reported in the main paper strongly agree both numerically and in the qualitative patterns of the comparison between optimized orderings and baselines.
 
 %
